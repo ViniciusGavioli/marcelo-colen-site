@@ -360,12 +360,18 @@ export default function HomePage() {
               <div className="w-8 h-px bg-bronze" />
             </div>
             
-            <h2 className="font-serif text-3xl md:text-4xl lg:text-5xl font-medium text-white mb-4 leading-tight">
+            <h2 
+              className="font-serif text-3xl md:text-4xl lg:text-5xl font-medium mb-4 leading-tight relative z-20"
+              style={{ color: '#FFFFFF' }}
+            >
               Precisa de orientação jurídica{" "}
-              <span className="italic text-bronze">especializada</span>?
+              <span style={{ color: '#C5A059' }}>especializada</span>?
             </h2>
             
-            <p className="text-white/70 mb-10 max-w-xl mx-auto">
+            <p 
+              className="mb-10 max-w-xl mx-auto relative z-20"
+              style={{ color: 'rgba(255, 255, 255, 0.85)' }}
+            >
               Agende uma consulta inicial para análise do seu caso.
               Atendimento sigiloso e sem compromisso.
             </p>
