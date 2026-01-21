@@ -102,7 +102,7 @@ export default function HomePage() {
               </div>
             </div>
             
-            {/* Portrait */}
+            {/* Portrait - Desktop */}
             <div className="lg:col-span-5 hidden lg:block">
               <PortraitCard
                 src="/images/marcelo/marcelo-hero.jpg"
@@ -110,6 +110,17 @@ export default function HomePage() {
                 priority
                 sizes="(max-width: 1024px) 100vw, 420px"
               />
+            </div>
+
+            {/* Portrait - Mobile (aparece primeiro) */}
+            <div className="lg:hidden order-first mb-8">
+              <div className="w-48 h-48 mx-auto rounded-full overflow-hidden border-4 border-bronze/30">
+                <img 
+                  src="/images/marcelo/marcelo-hero.jpg" 
+                  alt="Dr. Marcelo Colen"
+                  className="w-full h-full object-cover object-top"
+                />
+              </div>
             </div>
           </div>
         </Container>
