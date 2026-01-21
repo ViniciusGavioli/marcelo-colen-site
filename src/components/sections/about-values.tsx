@@ -3,7 +3,7 @@ import { MARCELO_PROFILE } from "@/lib/constants";
 
 export function AboutValues() {
   return (
-    <section className="py-20 md:py-28 bg-white">
+    <section className="py-20 md:py-28 bg-white bg-paper">
       <Container>
         {/* Section Header */}
         <div className="text-center mb-16">
@@ -28,7 +28,7 @@ export function AboutValues() {
           {MARCELO_PROFILE.values.map((value, index) => (
             <div
               key={value.title}
-              className="bg-white p-8 text-center group"
+              className="bg-white p-8 text-center group card-editorial"
             >
               <span className="font-serif text-4xl text-bronze/20 block mb-4">
                 0{index + 1}

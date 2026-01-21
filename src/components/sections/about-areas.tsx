@@ -5,7 +5,7 @@ import { MARCELO_PROFILE } from "@/lib/constants";
 
 export function AboutAreas() {
   return (
-    <section className="py-20 md:py-28 bg-white">
+    <section className="py-20 md:py-28 bg-white bg-paper">
       <Container>
         {/* Section Header */}
         <div className="text-center mb-16">
@@ -30,7 +30,7 @@ export function AboutAreas() {
           {MARCELO_PROFILE.areas.map((area, index) => (
             <article
               key={area.title}
-              className="relative bg-white border border-hairline p-8"
+              className="relative bg-white border border-hairline p-8 card-editorial"
             >
               {/* Number indicator */}
               <span className="font-serif text-5xl text-bronze/20 block mb-6">
@@ -50,7 +50,7 @@ export function AboutAreas() {
         <div className="text-center mt-12">
           <Link
             href="/atuacao"
-            className="inline-flex items-center gap-2 text-bronze font-medium border-b-2 border-bronze pb-1 hover:gap-3 transition-all"
+            className="link-editorial text-bronze"
           >
             Ver todas as áreas em detalhes
             <ArrowRight className="w-4 h-4" />

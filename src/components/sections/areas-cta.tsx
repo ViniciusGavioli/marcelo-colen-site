@@ -5,9 +5,9 @@ import { getWhatsAppLink } from "@/lib/whatsapp";
 
 export function AreasCta() {
   return (
-    <section className="py-20 md:py-28 bg-ice">
+    <section className="py-20 md:py-28 bg-ice bg-paper">
       <Container size="small">
-        <div className="bg-navy relative overflow-hidden">
+        <div className="bg-navy relative overflow-hidden bg-editorial">
           {/* Decorative line */}
           <div className="absolute top-0 left-0 right-0 h-px bg-bronze/40" />
           
@@ -37,13 +37,13 @@ export function AreasCta() {
                 href={getWhatsAppLink()}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-bronze text-white font-medium hover:bg-bronze-hover transition-colors"
+                className="btn-bronze"
               >
                 Falar no WhatsApp
               </a>
               <Link
                 href="/contato"
-                className="inline-flex items-center justify-center gap-2 px-8 py-4 border border-white/30 text-white font-medium hover:bg-white/5 transition-colors"
+                className="btn-ghost-white"
               >
                 Formulário de Contato
                 <ArrowRight className="w-4 h-4" />

@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Script from "next/script";
-import { ArrowRight, MessageCircle } from "lucide-react";
+import { ArrowRight, MessageCircle, Instagram } from "lucide-react";
 import { Container } from "@/components/layout";
 import { Button } from "@/components/ui/button";
 import { PortraitCard } from "@/components/ui/portrait";
@@ -31,7 +31,7 @@ export default function HomePage() {
       />
 
       {/* Hero Section - Editorial Premium */}
-      <section className="relative min-h-[85vh] flex items-center bg-navy overflow-hidden">
+      <section className="relative min-h-[85vh] flex items-center bg-navy overflow-hidden bg-editorial">
         {/* Subtle gradient overlay */}
         <div className="absolute inset-0 bg-linear-to-br from-navy-deep via-navy to-navy/95" />
         
@@ -51,20 +51,14 @@ export default function HomePage() {
               </div>
               
               {/* Main headline - Serif editorial */}
-              <h1 
-                className="font-serif text-4xl md:text-5xl lg:text-6xl font-medium tracking-tight mb-6 text-white leading-[1.1]"
-                style={{ color: '#FFFFFF' }}
-              >
-                <span style={{ color: '#FFFFFF' }}>Defesa técnica de</span>{" "}
-                <span className="italic text-bronze" style={{ color: '#C5A059' }}>alto nível</span>{" "}
-                <span style={{ color: '#FFFFFF' }}>em causas complexas</span>
+              <h1 className="font-serif text-4xl md:text-5xl lg:text-6xl font-medium tracking-tight mb-6 text-white leading-[1.1]">
+                Defesa técnica de{" "}
+                <span className="italic text-bronze">alto nível</span>{" "}
+                em causas complexas
               </h1>
               
               {/* Subheadline */}
-              <p 
-                className="text-lg md:text-xl text-white/70 mb-10 max-w-2xl leading-relaxed"
-                style={{ color: 'rgba(255, 255, 255, 0.7)' }}
-              >
+              <p className="text-lg md:text-xl text-white/70 mb-10 max-w-2xl leading-relaxed">
                 {MARCELO_PROFILE.yearsExperience}+ anos de experiência em defesas criminais,
                 estruturação de programas de integridade e litígios estratégicos.
                 Atuação em Belo Horizonte e todo o território nacional.
@@ -75,14 +69,13 @@ export default function HomePage() {
                 <Button
                   asChild
                   size="lg"
-                  className="bg-bronze hover:bg-bronze-hover text-navy font-medium px-8"
-                  style={{ backgroundColor: '#C5A059', color: '#0A192F' }}
+                  variant="bronze"
+                  className="font-medium px-8"
                 >
                   <a
                     href={getWhatsAppLink()}
                     target="_blank"
                     rel="noopener noreferrer"
-                    style={{ color: '#0A192F' }}
                   >
                     Agendar Consulta
                     <ArrowRight className="w-4 h-4 ml-2" />
@@ -91,11 +84,9 @@ export default function HomePage() {
                 <Button
                   asChild
                   size="lg"
-                  variant="outline"
-                  className="border-white/20 text-white hover:bg-white/5 hover:border-white/40"
-                  style={{ borderColor: 'rgba(255,255,255,0.2)', color: '#FFFFFF' }}
+                  variant="ghost-white"
                 >
-                  <Link href="/atuacao" style={{ color: '#FFFFFF' }}>
+                  <Link href="/atuacao">
                     Conhecer Áreas de Atuação
                   </Link>
                 </Button>
@@ -105,7 +96,7 @@ export default function HomePage() {
             {/* Portrait */}
             <div className="lg:col-span-5 hidden lg:block">
               <PortraitCard
-                src="/images/marcelo/hero.jpg"
+                src="/images/marcelo/marcelo-hero.jpg"
                 alt="Dr. Marcelo Colen - Advogado Criminalista"
                 priority
                 sizes="(max-width: 1024px) 100vw, 420px"
@@ -114,12 +105,15 @@ export default function HomePage() {
           </div>
         </Container>
         
-        {/* Bottom decorative element */}
-        <div className="absolute bottom-0 left-0 right-0 h-24 bg-linear-to-t from-ice to-transparent" />
+        {/* Bottom decorative element - transição elegante */}
+        <div className="absolute bottom-0 left-0 right-0 h-32 bg-linear-to-t from-ice via-ice/50 to-transparent" />
+        <div className="absolute bottom-0 left-0 right-0 flex justify-center">
+          <div className="w-px h-16 bg-linear-to-b from-bronze to-transparent" />
+        </div>
       </section>
 
       {/* Social Proof Bar - Editorial minimal */}
-      <section className="py-12 md:py-16 bg-ice border-b border-hairline">
+      <section className="py-12 md:py-16 bg-ice border-b border-hairline bg-paper">
         <Container>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-12">
             <div className="text-center">
@@ -143,7 +137,7 @@ export default function HomePage() {
       </section>
 
       {/* Practice Areas Section - Editorial Cards */}
-      <section className="py-20 md:py-28 bg-white">
+      <section className="py-20 md:py-28 bg-white bg-paper">
         <Container>
           <div className="text-center mb-16">
             <div className="flex items-center justify-center gap-3 mb-4">
@@ -213,7 +207,7 @@ export default function HomePage() {
       </section>
 
       {/* Why Choose Section - Editorial Grid */}
-      <section className="py-20 md:py-28 bg-ice">
+      <section className="py-20 md:py-28 bg-ice bg-paper">
         <Container>
           <div className="grid lg:grid-cols-12 gap-12">
             {/* Left column - Header */}
@@ -234,9 +228,9 @@ export default function HomePage() {
               </div>
             </div>
             
-            {/* Right column - Features grid */}
+            {/* Right column - Features grid - 6 cards */}
             <div className="lg:col-span-8">
-              <div className="grid sm:grid-cols-2 gap-px bg-hairline">
+              <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-px bg-hairline">
                 {[
                   {
                     title: "Expertise Comprovada",
@@ -244,22 +238,30 @@ export default function HomePage() {
                   },
                   {
                     title: "Atendimento Direto",
-                    desc: "O advogado responsável acompanha pessoalmente cada etapa do processo. Comunicação clara e acessível.",
+                    desc: "O advogado responsável acompanha pessoalmente cada etapa do processo com comunicação transparente.",
                   },
                   {
                     title: "Visão Estratégica",
-                    desc: "Análise criteriosa de riscos e oportunidades. Planejamento processual focado em resultados concretos.",
+                    desc: "Análise criteriosa de riscos e oportunidades. Planejamento processual focado em resultados.",
                   },
                   {
                     title: "Sigilo Absoluto",
-                    desc: "Confidencialidade garantida em todas as tratativas. Compromisso ético inegociável com a privacidade.",
+                    desc: "Confidencialidade garantida em todas as tratativas. Compromisso ético inegociável.",
+                  },
+                  {
+                    title: "Atuação Nacional",
+                    desc: "Atendimento em Belo Horizonte e em todo o território brasileiro em causas complexas.",
+                  },
+                  {
+                    title: "Linguagem Acessível",
+                    desc: "Explicação clara sobre cada fase processual, sem juridiquês. Você entende seu caso.",
                   },
                 ].map((item, i) => (
-                  <div key={i} className="bg-white p-8 group">
-                    <span className="font-serif text-3xl text-bronze/30 block mb-4">
+                  <div key={i} className="bg-white p-6 group card-editorial">
+                    <span className="font-serif text-3xl text-bronze/30 block mb-3">
                       0{i + 1}
                     </span>
-                    <h3 className="font-serif text-xl text-navy mb-3">
+                    <h3 className="font-serif text-lg text-navy mb-2">
                       {item.title}
                     </h3>
                     <p className="text-muted-foreground text-sm leading-relaxed">
@@ -274,7 +276,7 @@ export default function HomePage() {
       </section>
 
       {/* About Preview Section - Editorial */}
-      <section className="py-20 md:py-28 bg-white">
+      <section className="py-20 md:py-28 bg-white bg-paper">
         <Container>
           <div className="grid lg:grid-cols-12 gap-12 items-center">
             <div className="lg:col-span-7 order-2 lg:order-1">
@@ -311,7 +313,7 @@ export default function HomePage() {
               
               <Link
                 href="/sobre"
-                className="inline-flex items-center gap-2 text-navy font-medium border-b-2 border-bronze pb-1 hover:gap-3 transition-all"
+                className="link-editorial"
               >
                 Conheça a trajetória profissional
                 <ArrowRight className="w-4 h-4" />
@@ -322,9 +324,11 @@ export default function HomePage() {
               <div className="relative">
                 {/* Decorative frame */}
                 <div className="absolute -top-4 -right-4 w-full h-full border border-bronze/30" />
-                <div className="bg-navy aspect-4/5 flex items-center justify-center relative">
-                  <p className="text-white/50 text-sm">Foto Profissional</p>
-                </div>
+                <PortraitCard
+                  src="/images/marcelo/marcelo-bio.jpg"
+                  alt="Dr. Marcelo Colen"
+                  sizes="(max-width: 1024px) 100vw, 400px"
+                />
               </div>
             </div>
           </div>
@@ -332,7 +336,7 @@ export default function HomePage() {
       </section>
 
       {/* CTA Section - Editorial */}
-      <section className="py-20 md:py-28 bg-navy relative overflow-hidden">
+      <section className="py-20 md:py-28 bg-navy relative overflow-hidden bg-editorial">
         {/* Decorative elements */}
         <div className="absolute top-0 left-0 right-0 h-px bg-bronze/40" />
         <div className="absolute inset-0 bg-linear-to-br from-navy-deep via-navy to-navy" />
@@ -357,22 +361,35 @@ export default function HomePage() {
               Atendimento sigiloso e sem compromisso.
             </p>
             
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <div className="flex flex-col sm:flex-row gap-4 justify-center mb-8">
               <a
                 href={getWhatsAppLink()}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-bronze text-white font-medium hover:bg-bronze-hover transition-colors"
+                className="btn-bronze"
               >
                 <MessageCircle className="w-5 h-5" />
                 WhatsApp Direto
               </a>
               <Link
                 href="/contato"
-                className="inline-flex items-center justify-center gap-2 px-8 py-4 border border-white/30 text-white font-medium hover:bg-white/5 transition-colors"
+                className="btn-ghost-white"
               >
                 Enviar Mensagem
               </Link>
+            </div>
+
+            {/* Instagram CTA */}
+            <div className="pt-6 border-t border-white/10">
+              <a
+                href="https://instagram.com/marcelocolen.adv"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 text-white/60 hover:text-bronze transition-colors text-sm"
+              >
+                <Instagram className="w-4 h-4" />
+                @marcelocolen.adv
+              </a>
             </div>
           </div>
         </Container>

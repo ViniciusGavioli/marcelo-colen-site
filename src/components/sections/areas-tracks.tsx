@@ -5,7 +5,7 @@ import { AREAS_DATA } from "@/lib/constants";
 
 export function AreasTracks() {
   return (
-    <section className="py-20 md:py-28 bg-white">
+    <section className="py-20 md:py-28 bg-white bg-paper">
       <Container>
         {/* Section Header */}
         <div className="text-center mb-16">
@@ -33,7 +33,7 @@ export function AreasTracks() {
               href={`/atuacao/${track.slug}`}
               className="group block"
             >
-              <article className="relative bg-white border border-hairline hover:border-bronze/40 transition-all duration-300 h-full">
+              <article className="relative bg-white border border-hairline hover:border-bronze/40 transition-all duration-300 h-full card-editorial">
                 {/* Top decorative line */}
                 <div className="absolute top-0 left-0 right-0 h-px bg-bronze transform origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-500" />
                 

@@ -3,7 +3,7 @@ import { MARCELO_PROFILE } from "@/lib/constants";
 
 export function AboutTimeline() {
   return (
-    <section className="py-20 md:py-28 bg-ice">
+    <section className="py-20 md:py-28 bg-ice bg-paper">
       <Container size="small">
         {/* Section Header */}
         <div className="text-center mb-16">
@@ -48,7 +48,7 @@ export function AboutTimeline() {
                       isEven ? "md:pr-16 md:text-right" : "md:pl-16"
                     }`}
                   >
-                    <div className="bg-white border border-hairline p-6">
+                    <div className="bg-white border border-hairline p-6 card-editorial">
                       <span className="font-serif text-xl text-bronze block mb-2">
                         {item.year}
                       </span>

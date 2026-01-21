@@ -5,7 +5,7 @@ import { MARCELO_PROFILE } from "@/lib/constants";
 
 export function AboutInstitutional() {
   return (
-    <section className="py-20 md:py-28 bg-white">
+    <section className="py-20 md:py-28 bg-white bg-paper">
       <Container>
         {/* Section Header */}
         <div className="text-center mb-16">

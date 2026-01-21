@@ -6,7 +6,7 @@ import { getWhatsAppLink } from "@/lib/whatsapp";
 
 export function AreasHero() {
   return (
-    <section className="relative min-h-[60vh] flex items-center bg-navy overflow-hidden">
+    <section className="relative min-h-[60vh] flex items-center bg-navy overflow-hidden bg-editorial">
       {/* Gradient overlay */}
       <div className="absolute inset-0 bg-linear-to-br from-navy-deep via-navy to-navy/95" />
       

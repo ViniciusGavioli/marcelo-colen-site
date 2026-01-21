@@ -9,7 +9,7 @@ import { MARCELO_PROFILE } from "@/lib/constants";
 
 export function AboutFaq() {
   return (
-    <section className="py-20 md:py-28 bg-ice">
+    <section className="py-20 md:py-28 bg-ice bg-paper">
       <Container size="small">
         {/* Section Header */}
         <div className="text-center mb-16">
