@@ -1,0 +1,382 @@
+import Link from "next/link";
+import Script from "next/script";
+import { ArrowRight, MessageCircle } from "lucide-react";
+import { Container } from "@/components/layout";
+import { Button } from "@/components/ui/button";
+import { PortraitCard } from "@/components/ui/portrait";
+import { SITE_CONFIG, MARCELO_PROFILE, AREAS_TRACKS } from "@/lib/constants";
+import { getWhatsAppLink } from "@/lib/whatsapp";
+import {
+  getLegalServiceSchema,
+  getPersonSchema,
+  getWebsiteSchema,
+} from "@/lib/schema";
+
+export default function HomePage() {
+  const structuredData = [
+    getLegalServiceSchema(),
+    getPersonSchema(),
+    getWebsiteSchema(),
+  ];
+
+  return (
+    <>
+      {/* JSON-LD Structured Data for SEO */}
+      <Script
+        id="structured-data-home"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(structuredData),
+        }}
+      />
+
+      {/* Hero Section - Editorial Premium */}
+      <section className="relative min-h-[85vh] flex items-center bg-navy overflow-hidden">
+        {/* Subtle gradient overlay */}
+        <div className="absolute inset-0 bg-linear-to-br from-navy-deep via-navy to-navy/95" />
+        
+        {/* Decorative line */}
+        <div className="absolute top-0 left-0 right-0 h-1 bg-linear-to-r from-transparent via-bronze to-transparent opacity-60" />
+        
+        <Container className="relative z-10 py-20 md:py-32">
+          <div className="grid lg:grid-cols-12 gap-12 items-center">
+            {/* Content */}
+            <div className="lg:col-span-7">
+              {/* Editorial label */}
+              <div className="flex items-center gap-3 mb-6">
+                <div className="w-12 h-px bg-bronze" />
+                <p className="text-bronze font-medium tracking-widest uppercase text-xs">
+                  Advocacia Criminal • Compliance • Direitos Humanos
+                </p>
+              </div>
+              
+              {/* Main headline - Serif editorial */}
+              <h1 
+                className="font-serif text-4xl md:text-5xl lg:text-6xl font-medium tracking-tight mb-6 text-white leading-[1.1]"
+                style={{ color: '#FFFFFF' }}
+              >
+                <span style={{ color: '#FFFFFF' }}>Defesa técnica de</span>{" "}
+                <span className="italic text-bronze" style={{ color: '#C5A059' }}>alto nível</span>{" "}
+                <span style={{ color: '#FFFFFF' }}>em causas complexas</span>
+              </h1>
+              
+              {/* Subheadline */}
+              <p 
+                className="text-lg md:text-xl text-white/70 mb-10 max-w-2xl leading-relaxed"
+                style={{ color: 'rgba(255, 255, 255, 0.7)' }}
+              >
+                {MARCELO_PROFILE.yearsExperience}+ anos de experiência em defesas criminais,
+                estruturação de programas de integridade e litígios estratégicos.
+                Atuação em Belo Horizonte e todo o território nacional.
+              </p>
+              
+              {/* CTAs */}
+              <div className="flex flex-col sm:flex-row gap-4">
+                <Button
+                  asChild
+                  size="lg"
+                  className="bg-bronze hover:bg-bronze-hover text-navy font-medium px-8"
+                  style={{ backgroundColor: '#C5A059', color: '#0A192F' }}
+                >
+                  <a
+                    href={getWhatsAppLink()}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    style={{ color: '#0A192F' }}
+                  >
+                    Agendar Consulta
+                    <ArrowRight className="w-4 h-4 ml-2" />
+                  </a>
+                </Button>
+                <Button
+                  asChild
+                  size="lg"
+                  variant="outline"
+                  className="border-white/20 text-white hover:bg-white/5 hover:border-white/40"
+                  style={{ borderColor: 'rgba(255,255,255,0.2)', color: '#FFFFFF' }}
+                >
+                  <Link href="/atuacao" style={{ color: '#FFFFFF' }}>
+                    Conhecer Áreas de Atuação
+                  </Link>
+                </Button>
+              </div>
+            </div>
+            
+            {/* Portrait */}
+            <div className="lg:col-span-5 hidden lg:block">
+              <PortraitCard
+                src="/images/marcelo/hero.jpg"
+                alt="Dr. Marcelo Colen - Advogado Criminalista"
+                priority
+                sizes="(max-width: 1024px) 100vw, 420px"
+              />
+            </div>
+          </div>
+        </Container>
+        
+        {/* Bottom decorative element */}
+        <div className="absolute bottom-0 left-0 right-0 h-24 bg-linear-to-t from-ice to-transparent" />
+      </section>
+
+      {/* Social Proof Bar - Editorial minimal */}
+      <section className="py-12 md:py-16 bg-ice border-b border-hairline">
+        <Container>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-12">
+            <div className="text-center">
+              <p className="font-serif text-4xl md:text-5xl font-medium text-navy">{MARCELO_PROFILE.yearsExperience}+</p>
+              <p className="text-sm text-muted-foreground mt-1 tracking-wide">Anos de Experiência</p>
+            </div>
+            <div className="text-center">
+              <p className="font-serif text-4xl md:text-5xl font-medium text-navy">4</p>
+              <p className="text-sm text-muted-foreground mt-1 tracking-wide">Áreas de Especialização</p>
+            </div>
+            <div className="text-center">
+              <p className="font-serif text-4xl md:text-5xl font-medium text-bronze">OAB</p>
+              <p className="text-sm text-muted-foreground mt-1 tracking-wide">{MARCELO_PROFILE.oab}</p>
+            </div>
+            <div className="text-center">
+              <p className="font-serif text-4xl md:text-5xl font-medium text-navy">BR</p>
+              <p className="text-sm text-muted-foreground mt-1 tracking-wide">Atuação Nacional</p>
+            </div>
+          </div>
+        </Container>
+      </section>
+
+      {/* Practice Areas Section - Editorial Cards */}
+      <section className="py-20 md:py-28 bg-white">
+        <Container>
+          <div className="text-center mb-16">
+            <div className="flex items-center justify-center gap-3 mb-4">
+              <div className="w-8 h-px bg-bronze" />
+              <p className="text-bronze font-medium tracking-widest uppercase text-xs">
+                Expertise
+              </p>
+              <div className="w-8 h-px bg-bronze" />
+            </div>
+            <h2 className="font-serif text-3xl md:text-4xl lg:text-5xl font-medium text-navy mb-4">
+              Áreas de Atuação
+            </h2>
+            <p className="text-muted-foreground max-w-2xl mx-auto">
+              Atuação concentrada em frentes complementares que demandam
+              conhecimento técnico aprofundado e visão estratégica
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-8">
+            {AREAS_TRACKS.map((area, index) => (
+              <Link
+                key={area.slug}
+                href={`/atuacao/${area.slug}`}
+                className="group block"
+              >
+                <article className="relative bg-white border border-hairline hover:border-bronze/40 transition-all duration-300 h-full">
+                  {/* Top decorative line */}
+                  <div className="absolute top-0 left-0 right-0 h-px bg-bronze transform origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-500" />
+                  
+                  <div className="p-8">
+                    {/* Number indicator - editorial style */}
+                    <div className="mb-6">
+                      <span className="font-serif text-5xl text-bronze/20 group-hover:text-bronze/40 transition-colors">
+                        0{index + 1}
+                      </span>
+                    </div>
+                    
+                    <h3 className="font-serif text-2xl text-navy mb-4 group-hover:text-bronze transition-colors">
+                      {area.title}
+                    </h3>
+                    
+                    <p className="text-muted-foreground text-sm mb-6 leading-relaxed">
+                      {area.shortDescription}
+                    </p>
+                    
+                    {/* Highlights with minimal markers */}
+                    <ul className="text-sm text-muted-foreground space-y-2 mb-6 border-l border-hairline pl-4">
+                      {area.highlights.slice(0, 3).map((highlight) => (
+                        <li key={highlight} className="relative">
+                          <span className="absolute -left-4 top-2 w-1.5 h-1.5 bg-bronze/40 rounded-full" />
+                          {highlight}
+                        </li>
+                      ))}
+                    </ul>
+                    
+                    {/* Editorial link */}
+                    <div className="flex items-center gap-2 text-bronze text-sm font-medium group-hover:gap-3 transition-all">
+                      <span>Explorar área</span>
+                      <ArrowRight className="w-4 h-4" />
+                    </div>
+                  </div>
+                </article>
+              </Link>
+            ))}
+          </div>
+        </Container>
+      </section>
+
+      {/* Why Choose Section - Editorial Grid */}
+      <section className="py-20 md:py-28 bg-ice">
+        <Container>
+          <div className="grid lg:grid-cols-12 gap-12">
+            {/* Left column - Header */}
+            <div className="lg:col-span-4">
+              <div className="sticky top-24">
+                <div className="flex items-center gap-3 mb-4">
+                  <div className="w-8 h-px bg-bronze" />
+                  <p className="text-bronze font-medium tracking-widest uppercase text-xs">
+                    Diferenciais
+                  </p>
+                </div>
+                <h2 className="font-serif text-3xl md:text-4xl font-medium text-navy mb-4">
+                  Por que confiar no escritório
+                </h2>
+                <p className="text-muted-foreground">
+                  Compromisso com excelência técnica e atendimento humanizado em cada caso.
+                </p>
+              </div>
+            </div>
+            
+            {/* Right column - Features grid */}
+            <div className="lg:col-span-8">
+              <div className="grid sm:grid-cols-2 gap-px bg-hairline">
+                {[
+                  {
+                    title: "Expertise Comprovada",
+                    desc: "Formação acadêmica sólida com especialização e mestrado em Direito. Atuação em tribunais superiores.",
+                  },
+                  {
+                    title: "Atendimento Direto",
+                    desc: "O advogado responsável acompanha pessoalmente cada etapa do processo. Comunicação clara e acessível.",
+                  },
+                  {
+                    title: "Visão Estratégica",
+                    desc: "Análise criteriosa de riscos e oportunidades. Planejamento processual focado em resultados concretos.",
+                  },
+                  {
+                    title: "Sigilo Absoluto",
+                    desc: "Confidencialidade garantida em todas as tratativas. Compromisso ético inegociável com a privacidade.",
+                  },
+                ].map((item, i) => (
+                  <div key={i} className="bg-white p-8 group">
+                    <span className="font-serif text-3xl text-bronze/30 block mb-4">
+                      0{i + 1}
+                    </span>
+                    <h3 className="font-serif text-xl text-navy mb-3">
+                      {item.title}
+                    </h3>
+                    <p className="text-muted-foreground text-sm leading-relaxed">
+                      {item.desc}
+                    </p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </Container>
+      </section>
+
+      {/* About Preview Section - Editorial */}
+      <section className="py-20 md:py-28 bg-white">
+        <Container>
+          <div className="grid lg:grid-cols-12 gap-12 items-center">
+            <div className="lg:col-span-7 order-2 lg:order-1">
+              <div className="flex items-center gap-3 mb-4">
+                <div className="w-8 h-px bg-bronze" />
+                <p className="text-bronze font-medium tracking-widest uppercase text-xs">
+                  Dr. {MARCELO_PROFILE.name}
+                </p>
+              </div>
+              
+              <h2 className="font-serif text-3xl md:text-4xl lg:text-5xl font-medium text-navy mb-6 leading-tight">
+                Advocacia com{" "}
+                <span className="italic text-bronze">propósito</span>{" "}
+                e técnica
+              </h2>
+              
+              <div className="space-y-4 text-muted-foreground mb-8">
+                <p>
+                  Advogado criminalista com {MARCELO_PROFILE.yearsExperience}+ anos de experiência,
+                  atuando na defesa de pessoas físicas e jurídicas em processos
+                  criminais, inquéritos policiais e procedimentos administrativos.
+                </p>
+                <p>
+                  Especializado em Direito Penal Econômico, Compliance e Direitos Humanos,
+                  com formação acadêmica em instituições de referência e atuação
+                  perante tribunais de todo o país.
+                </p>
+                <p>
+                  Cada caso recebe atenção individualizada, com estratégia processual
+                  definida a partir de análise técnica rigorosa e comunicação
+                  transparente com o cliente em todas as etapas.
+                </p>
+              </div>
+              
+              <Link
+                href="/sobre"
+                className="inline-flex items-center gap-2 text-navy font-medium border-b-2 border-bronze pb-1 hover:gap-3 transition-all"
+              >
+                Conheça a trajetória profissional
+                <ArrowRight className="w-4 h-4" />
+              </Link>
+            </div>
+            
+            <div className="lg:col-span-5 order-1 lg:order-2">
+              <div className="relative">
+                {/* Decorative frame */}
+                <div className="absolute -top-4 -right-4 w-full h-full border border-bronze/30" />
+                <div className="bg-navy aspect-4/5 flex items-center justify-center relative">
+                  <p className="text-white/50 text-sm">Foto Profissional</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </Container>
+      </section>
+
+      {/* CTA Section - Editorial */}
+      <section className="py-20 md:py-28 bg-navy relative overflow-hidden">
+        {/* Decorative elements */}
+        <div className="absolute top-0 left-0 right-0 h-px bg-bronze/40" />
+        <div className="absolute inset-0 bg-linear-to-br from-navy-deep via-navy to-navy" />
+        
+        <Container className="relative z-10">
+          <div className="max-w-3xl mx-auto text-center">
+            <div className="flex items-center justify-center gap-3 mb-6">
+              <div className="w-8 h-px bg-bronze" />
+              <p className="text-bronze font-medium tracking-widest uppercase text-xs">
+                Consultoria Inicial
+              </p>
+              <div className="w-8 h-px bg-bronze" />
+            </div>
+            
+            <h2 className="font-serif text-3xl md:text-4xl lg:text-5xl font-medium text-white mb-4 leading-tight">
+              Precisa de orientação jurídica{" "}
+              <span className="italic text-bronze">especializada</span>?
+            </h2>
+            
+            <p className="text-white/70 mb-10 max-w-xl mx-auto">
+              Agende uma consulta inicial para análise do seu caso.
+              Atendimento sigiloso e sem compromisso.
+            </p>
+            
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <a
+                href={getWhatsAppLink()}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-bronze text-white font-medium hover:bg-bronze-hover transition-colors"
+              >
+                <MessageCircle className="w-5 h-5" />
+                WhatsApp Direto
+              </a>
+              <Link
+                href="/contato"
+                className="inline-flex items-center justify-center gap-2 px-8 py-4 border border-white/30 text-white font-medium hover:bg-white/5 transition-colors"
+              >
+                Enviar Mensagem
+              </Link>
+            </div>
+          </div>
+        </Container>
+      </section>
+    </>
+  );
+}
