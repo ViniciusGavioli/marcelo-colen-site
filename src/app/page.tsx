@@ -53,14 +53,21 @@ export default function HomePage() {
               </div>
               
               {/* Main headline - Serif editorial */}
-              <h1 className="font-serif text-4xl md:text-5xl lg:text-6xl font-medium tracking-tight mb-6 text-white leading-[1.1]">
+              <h1 
+                className="uppercase font-serif text-4xl md:text-5xl lg:text-6xl font-medium tracking-wide mb-6 leading-[1.1] relative z-20"
+                style={{ color: '#FFFFFF' }}
+              >
                 Defesa técnica{" "}
-                <span className="italic text-bronze">estratégica</span>{" "}
+                <span style={{ color: '#C5A059' }}>estratégica</span>
+                <br />
                 em causas complexas
               </h1>
               
               {/* Subheadline */}
-              <p className="text-lg md:text-xl text-white/70 mb-10 max-w-2xl leading-relaxed">
+              <p 
+                className="text-lg md:text-xl mb-10 max-w-2xl leading-relaxed relative z-20"
+                style={{ color: 'rgba(255, 255, 255, 0.85)' }}
+              >
                 {MARCELO_PROFILE.yearsExperience}+ anos de experiência em defesas criminais,
                 estruturação de programas de integridade e litígios estratégicos.
                 Atuação em Belo Horizonte e todo o território nacional.
@@ -158,7 +165,7 @@ export default function HomePage() {
             </p>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
             {AREAS_TRACKS.map((area, index) => (
               <Link
                 key={area.slug}

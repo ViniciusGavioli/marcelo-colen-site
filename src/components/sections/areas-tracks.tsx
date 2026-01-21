@@ -26,7 +26,7 @@ export function AreasTracks() {
         </div>
 
         {/* Tracks Grid - Editorial Cards */}
-        <div className="grid lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
           {AREAS_DATA.tracks.map((track, index) => (
             <Link
               key={track.slug}
