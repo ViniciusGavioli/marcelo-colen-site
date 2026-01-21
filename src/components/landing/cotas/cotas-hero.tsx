@@ -94,22 +94,6 @@ export function CotasHero() {
               {hero.subheadline}
             </p>
 
-            {/* Bullets - O que eu faço */}
-            {hero.bullets && (
-              <ul className="space-y-3 pt-2">
-                {hero.bullets.map((bullet: string, index: number) => {
-                  const icons = [FileCheck, Scale, Gavel];
-                  const Icon = icons[index % icons.length];
-                  return (
-                    <li key={index} className="flex items-start gap-3">
-                      <Icon className="w-5 h-5 mt-0.5 shrink-0" style={{ color: '#C5A059' }} />
-                      <span className="text-white/90">{bullet}</span>
-                    </li>
-                  );
-                })}
-              </ul>
-            )}
-
             {/* Social Proof - Institucional */}
             <div className="flex items-center gap-3 py-3 border-l-2 pl-4" style={{ borderColor: '#C5A059' }}>
               <CheckCircle className="w-5 h-5 shrink-0" style={{ color: '#C5A059' }} />
@@ -155,13 +139,6 @@ export function CotasHero() {
                 <ArrowRight className="w-4 h-4" />
               </button>
             </div>
-
-            {/* Disclaimer ético */}
-            {hero.disclaimer && (
-              <p className="text-xs pt-2" style={{ color: 'rgba(255,255,255,0.5)' }}>
-                {hero.disclaimer}
-              </p>
-            )}
           </div>
 
           {/* ============================================ */}
