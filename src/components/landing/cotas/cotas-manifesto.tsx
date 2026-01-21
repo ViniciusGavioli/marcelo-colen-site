@@ -15,8 +15,9 @@ export function CotasManifesto() {
           <div 
             className="text-6xl font-serif mb-8"
             style={{ color: 'rgba(197, 160, 89, 0.3)' }}
+            aria-hidden="true"
           >
-            "
+            &ldquo;
           </div>
 
           {/* Headline */}

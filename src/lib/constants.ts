@@ -14,13 +14,13 @@ export const SITE_CONFIG = {
   
   // Informações de contato (use ENV em produção)
   contact: {
-    email: process.env.NEXT_PUBLIC_EMAIL || "contato@marcelocolen.adv.br",
-    phone: process.env.NEXT_PUBLIC_PHONE || "(31) 99999-9999",
-    whatsapp: process.env.NEXT_PUBLIC_WHATSAPP || "5531999999999",
+    email: process.env.NEXT_PUBLIC_EMAIL || "marcelo@cardosocolen.com.br",
+    phone: process.env.NEXT_PUBLIC_PHONE || "(31) 99798-0268",
+    whatsapp: process.env.NEXT_PUBLIC_WHATSAPP || "5531997980268",
   },
   
-  // OAB - Número real deve ser configurado via ENV
-  oab: process.env.NEXT_PUBLIC_OAB || "OAB/MG 123.456",
+  // OAB
+  oab: process.env.NEXT_PUBLIC_OAB || "OAB/MG 167.463",
   
   // Endereço
   address: {

@@ -64,7 +64,7 @@ export function CotasBio() {
 
               <p className="leading-relaxed">
                 É autor do Manual Antirracismo no Esporte, adotado pela Amstel® na campanha 
-                "Barulho Contra o Racismo" – Copa Libertadores 2022.
+                &ldquo;Barulho Contra o Racismo&rdquo; – Copa Libertadores 2022.
               </p>
             </div>
 

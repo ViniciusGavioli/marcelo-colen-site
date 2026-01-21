@@ -77,7 +77,7 @@ export function Portrait({
         />
       )}
       {/* Editorial overlay gradient */}
-      <div className="absolute inset-0 bg-gradient-to-t from-navy/60 via-transparent to-transparent pointer-events-none" />
+      <div className="absolute inset-0 bg-linear-to-t from-navy/60 via-transparent to-transparent pointer-events-none" />
     </div>
   );
 }
@@ -87,7 +87,7 @@ export function Portrait({
  */
 function MonogramFallback() {
   return (
-    <div className="absolute inset-0 flex flex-col items-center justify-center bg-gradient-to-br from-navy to-navy-deep">
+    <div className="absolute inset-0 flex flex-col items-center justify-center bg-linear-to-br from-navy to-navy-deep">
       {/* Decorative frame */}
       <div className="absolute inset-4 border border-bronze/20 pointer-events-none" />
       

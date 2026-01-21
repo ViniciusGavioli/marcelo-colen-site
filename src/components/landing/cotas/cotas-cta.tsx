@@ -24,10 +24,10 @@ export function CotasCta() {
             className="font-serif text-xl md:text-2xl lg:text-3xl font-medium leading-relaxed italic"
             style={{ color: '#FFFFFF' }}
           >
-            "A presença de pessoas negras no serviço público é fundamental para a 
+            &ldquo;A presença de pessoas negras no serviço público é fundamental para a 
             promoção da <span style={{ color: '#C5A059' }}>igualdade racial</span>, 
             da <span style={{ color: '#C5A059' }}>justiça social</span> e da 
-            <span style={{ color: '#C5A059' }}> representatividade institucional</span> no Brasil."
+            <span style={{ color: '#C5A059' }}> representatividade institucional</span> no Brasil.&rdquo;
           </blockquote>
         </div>
 

@@ -9,9 +9,9 @@ import { getWhatsAppLink } from "@/lib/whatsapp";
 export function CotasHero() {
   const { hero } = COTAS_PAGE;
 
-  const scrollToForm = () => {
-    const form = document.getElementById("formulario");
-    form?.scrollIntoView({ behavior: "smooth" });
+  const scrollToSection = () => {
+    const section = document.getElementById("como-funciona");
+    section?.scrollIntoView({ behavior: "smooth" });
   };
 
   return (
@@ -117,7 +117,7 @@ export function CotasHero() {
                 {hero.ctaPrimary}
               </a>
               <button
-                onClick={scrollToForm}
+                onClick={scrollToSection}
                 className="inline-flex items-center justify-center gap-2 px-8 py-4 font-medium transition-colors duration-300"
                 style={{ 
                   border: '1px solid rgba(255, 255, 255, 0.3)',
