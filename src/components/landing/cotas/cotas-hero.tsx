@@ -165,7 +165,46 @@ export function CotasHero() {
           </div>
 
           {/* ============================================ */}
-          {/* IMAGE SIDE */}
+          {/* MOBILE PHOTO - Circular */}
+          {/* ============================================ */}
+          <div className="lg:hidden flex justify-center order-first mb-4">
+            <div className="relative">
+              {/* Decorative ring */}
+              <div 
+                className="absolute -inset-2 rounded-full"
+                style={{ 
+                  border: '2px solid rgba(197, 160, 89, 0.3)',
+                  background: 'linear-gradient(135deg, rgba(197, 160, 89, 0.1) 0%, transparent 50%)'
+                }}
+              />
+              {/* Photo container */}
+              <div 
+                className="relative w-40 h-40 sm:w-48 sm:h-48 rounded-full overflow-hidden"
+                style={{ border: '3px solid #C5A059' }}
+              >
+                <Image
+                  src="/images/marcelo/marcelo-hero.jpg"
+                  alt="Dr. Marcelo Colen - Advogado especialista em cotas raciais"
+                  fill
+                  priority
+                  className="object-cover object-top"
+                />
+              </div>
+              {/* OAB badge */}
+              <div 
+                className="absolute -bottom-2 left-1/2 -translate-x-1/2 px-3 py-1 rounded-full text-xs font-medium whitespace-nowrap"
+                style={{ 
+                  backgroundColor: '#C5A059', 
+                  color: '#0A192F' 
+                }}
+              >
+                OAB/MG 167.463
+              </div>
+            </div>
+          </div>
+
+          {/* ============================================ */}
+          {/* IMAGE SIDE - Desktop */}
           {/* ============================================ */}
           <div className="relative hidden lg:block">
             {/* Decorative frames */}
