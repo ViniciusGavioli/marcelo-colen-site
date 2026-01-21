@@ -1,10 +1,10 @@
 "use client";
 
-import { AlertTriangle, Play, Clock } from "lucide-react";
+import { AlertTriangle, Clock, MessageCircle } from "lucide-react";
 import { Container } from "@/components/layout";
+import { getWhatsAppLink } from "@/lib/whatsapp";
 
-// TODO: Substituir pelo URL real do vídeo do Marcelo
-const VIDEO_URL = ""; // Ex: "https://www.youtube.com/embed/VIDEO_ID"
+const WHATSAPP_MESSAGE = "Olá, Marcelo. Fui indeferido(a) na heteroidentificação e preciso entender prazos e como funciona o recurso. Posso te passar meu caso?";
 
 export function CotasNaoEOFim() {
   return (
@@ -92,75 +92,66 @@ export function CotasNaoEOFim() {
             </div>
           </div>
 
-          {/* Video Section */}
+          {/* Manifesto Block - Substitui vídeo placeholder */}
           <div className="relative">
-            {VIDEO_URL ? (
-              /* Video embed */
-              <div 
-                className="relative aspect-video overflow-hidden shadow-xl"
-                style={{ borderRadius: '4px' }}
-              >
-                <iframe
-                  src={VIDEO_URL}
-                  title="Explicação sobre heteroidentificação - Marcelo Colen"
-                  className="absolute inset-0 w-full h-full"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                  allowFullScreen
-                />
-              </div>
-            ) : (
-              /* Placeholder quando não há vídeo */
-              <div 
-                className="relative aspect-video overflow-hidden shadow-xl flex items-center justify-center"
-                style={{ 
-                  backgroundColor: '#0A192F',
-                  borderRadius: '4px',
-                  border: '1px solid rgba(197,160,89,0.2)'
-                }}
-              >
-                {/* Play button placeholder */}
-                <div className="text-center">
-                  <div 
-                    className="w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-4"
-                    style={{ 
-                      backgroundColor: 'rgba(197,160,89,0.2)',
-                      border: '2px solid #C5A059'
-                    }}
-                  >
-                    <Play className="w-8 h-8 ml-1" style={{ color: '#C5A059' }} />
-                  </div>
-                  <p 
-                    className="text-sm font-medium"
-                    style={{ color: '#C5A059' }}
-                  >
-                    Vídeo explicativo em breve
-                  </p>
-                  <p 
-                    className="text-xs mt-1"
-                    style={{ color: 'rgba(255,255,255,0.5)' }}
-                  >
-                    Entenda como funciona a heteroidentificação
-                  </p>
-                </div>
-
-                {/* Decorative frame */}
-                <div 
-                  className="absolute inset-4 pointer-events-none"
-                  style={{ border: '1px solid rgba(197,160,89,0.15)' }}
-                />
-              </div>
-            )}
-
-            {/* Caption */}
-            <p 
-              className="text-sm mt-4 text-center"
-              style={{ color: '#666' }}
+            <div 
+              className="p-8 lg:p-10"
+              style={{ 
+                backgroundColor: '#0A192F',
+                borderRadius: '4px',
+                border: '1px solid rgba(197,160,89,0.2)'
+              }}
             >
-              {VIDEO_URL 
-                ? "Assista à explicação completa sobre seus direitos"
-                : "TODO: Adicionar URL do vídeo explicativo"
-              }
-            </p>
+              {/* Quote icon */}
+              <div 
+                className="text-5xl font-serif mb-4"
+                style={{ color: 'rgba(197, 160, 89, 0.4)' }}
+                aria-hidden="true"
+              >
+                &ldquo;
+              </div>
+
+              <h3 
+                className="font-serif text-2xl lg:text-3xl font-medium leading-tight mb-6"
+                style={{ color: '#FFFFFF' }}
+              >
+                O direito à inclusão{" "}
+                <span className="italic" style={{ color: '#C5A059' }}>
+                  não é favor.
+                </span>
+              </h3>
+
+              <p 
+                className="leading-relaxed mb-6"
+                style={{ color: 'rgba(255,255,255,0.85)' }}
+              >
+                A heteroidentificação existe para proteger a política de cotas — mas decisões 
+                equivocadas podem acontecer. Meu trabalho é organizar o recurso com técnica, 
+                respeito e estratégia, para que seu caso seja analisado com seriedade.
+              </p>
+
+              <div className="pt-4 border-t" style={{ borderColor: 'rgba(197,160,89,0.2)' }}>
+                <a
+                  href={getWhatsAppLink(WHATSAPP_MESSAGE)}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 font-medium transition-colors"
+                  style={{ color: '#C5A059' }}
+                >
+                  <MessageCircle className="w-5 h-5" />
+                  Quero entender meu caso
+                </a>
+              </div>
+
+              {/* Decorative frame */}
+              <div 
+                className="absolute -top-3 -right-3 w-full h-full pointer-events-none hidden lg:block"
+                style={{ 
+                  border: '1px solid rgba(197,160,89,0.15)',
+                  borderRadius: '4px'
+                }}
+              />
+            </div>
           </div>
         </div>
       </Container>

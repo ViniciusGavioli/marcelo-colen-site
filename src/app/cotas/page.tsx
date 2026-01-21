@@ -3,10 +3,11 @@ import { COTAS_PAGE } from "@/lib/cotas-data";
 import { SITE_CONFIG } from "@/lib/constants";
 import { getFAQSchema, getServiceSchema } from "@/lib/schema";
 
-// New Components - Refactored LP
+// Components LP /cotas
 import { CotasHero } from "@/components/landing/cotas/cotas-hero";
 import { CotasNaoEOFim } from "@/components/landing/cotas/cotas-nao-e-o-fim";
 import { CotasBio } from "@/components/landing/cotas/cotas-bio";
+import { CotasProvaSocial } from "@/components/landing/cotas/cotas-prova-social";
 import { CotasNoBrasil } from "@/components/landing/cotas/cotas-no-brasil";
 import { CotasHeteroidentificacao } from "@/components/landing/cotas/cotas-heteroidentificacao";
 import { CotasPorQueRecorrer } from "@/components/landing/cotas/cotas-por-que-recorrer";
@@ -91,40 +92,43 @@ export default function CotasPage() {
       />
 
       {/* 
-        NOVA ESTRUTURA DA LP - Baseada no site antigo (marcelocolen.com.br)
-        Ordem otimizada para conversão:
-        1. Hero com pergunta forte
-        2. "Não é o fim" + Vídeo (empatia + prova)
-        3. Bio do Marcelo (autoridade)
-        4. Cotas no Brasil (contexto)
-        5. O que é Heteroidentificação (educação)
-        6. Por que Recorrer + Como funciona (processo)
-        7. FAQ (objeções)
-        8. CTA Final (conversão)
+        ESTRUTURA LP /cotas - Otimizada para conversão
+        1. Hero (H1 keyword + CTA WhatsApp)
+        2. Manifesto "Não é o fim" (empatia)
+        3. Bio Marcelo (autoridade pessoal)
+        4. Prova Social (institucional + mídia + produção)
+        5. Cotas no Brasil (contexto)
+        6. Heteroidentificação (educação)
+        7. Por que Recorrer (processo)
+        8. FAQ (objeções)
+        9. CTA Final (conversão)
       */}
       <main>
-        {/* 1. HERO - Pergunta forte igual ao antigo */}
+        {/* 1. HERO - H1 com keyword forte */}
         <CotasHero />
         
-        {/* 2. NÃO É O FIM - Empatia + Vídeo */}
+        {/* 2. MANIFESTO - Empatia + "O direito não é favor" */}
         <CotasNaoEOFim />
         
-        {/* 3. BIO MARCELO - Autoridade + Credenciais */}
+        {/* 3. BIO MARCELO - Autoridade pessoal */}
         <CotasBio />
+
+        {/* 4. PROVA SOCIAL - Institucional + Mídia + Produção */}
+        <CotasProvaSocial />
         
-        {/* 4. COTAS NO BRASIL - Contexto legal */}
+        {/* 5. COTAS NO BRASIL - Contexto legal */}
         <CotasNoBrasil />
         
-        {/* 5. HETEROIDENTIFICAÇÃO - O que é */}
+        {/* 6. HETEROIDENTIFICAÇÃO - O que é */}
         <CotasHeteroidentificacao />
         
-        {/* 6. POR QUE RECORRER + PROCESSO */}
+        {/* 7. POR QUE RECORRER + PROCESSO (id=como-funciona) */}
         <CotasPorQueRecorrer />
         
-        {/* 7. FAQ - Quebra objeções */}
+        {/* 8. FAQ - Quebra objeções */}
         <CotasFaq />
         
-        {/* 8. CTA FINAL - Conversão */}
+        {/* 9. CTA FINAL - Conversão */}
         <CotasCta />
       </main>
 

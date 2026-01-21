@@ -6,7 +6,7 @@ import { Portrait } from "@/components/ui/portrait";
 import { getWhatsAppLink } from "@/lib/whatsapp";
 
 const WHATSAPP_MESSAGE =
-  "Olá, Marcelo. Minha cota foi questionada na heteroidentificação e preciso de orientação urgente. Posso te explicar meu caso?";
+  "Olá, Marcelo. Fui indeferido(a) na heteroidentificação e preciso entender prazos e como funciona o recurso. Posso te passar meu caso?";
 
 export function CotasCta() {
   return (

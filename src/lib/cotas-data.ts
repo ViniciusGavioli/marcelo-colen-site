@@ -31,14 +31,20 @@ export const COTAS_PAGE = {
   hero: {
     badge: "⚖️ DEFESA ESPECIALIZADA",
     eyebrow: "Heteroidentificação • Cotas Raciais • Recursos",
-    headline: "Foi vítima de injustiça na banca de heteroidentificação?",
-    headlineHighlight: "Você tem direito à inclusão!",
+    headline: "Advogado Especialista em Heteroidentificação e Cotas Raciais",
+    headlineHighlight: "Defesa técnica para seu recurso.",
     subheadline:
-      "E nós temos a estratégia jurídica para garantir isso. Atuamos com excelência em recursos administrativos e ações judiciais para reverter indeferimentos indevidos em concursos públicos e vestibulares.",
-    ctaPrimary: "REALIZAR UMA CONSULTA",
-    ctaSecondary: "Entender meu caso",
-    urgencyBadge: "⏰ Prazos curtos - Atendimento prioritário",
-    socialProof: "+150 casos analisados em 2024",
+      "Se você foi indeferido na banca de heteroidentificação, eu avalio seu caso e estruturo a estratégia de recurso — com linguagem clara, prazos e próximos passos.",
+    bullets: [
+      "Análise do indeferimento e do edital (prazos e critérios)",
+      "Recurso administrativo completo (com fundamentação e provas)",
+      "Medidas judiciais quando cabíveis (avaliação caso a caso)",
+    ],
+    ctaPrimary: "Falar com Marcelo no WhatsApp",
+    ctaSecondary: "Ver como funciona",
+    urgencyBadge: "Prazos podem ser curtos. Se o seu está correndo, fale agora.",
+    socialProof: "OAB/MG 167.463 • Atuação nacional • Direitos Humanos & Antidiscriminação",
+    disclaimer: "Cada caso é analisado individualmente. Não há garantia de resultado.",
   },
 
   // ============================================================================

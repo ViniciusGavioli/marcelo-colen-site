@@ -96,7 +96,7 @@ export function CotasBio() {
             {/* CTA */}
             <div className="pt-6">
               <a
-                href={getWhatsAppLink("Olá, Marcelo. Vi seu perfil e gostaria de falar sobre meu caso.")}
+                href={getWhatsAppLink("Olá, Marcelo. Fui indeferido(a) na heteroidentificação e preciso entender prazos e como funciona o recurso. Posso te passar meu caso?")}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center justify-center gap-3 px-8 py-4 font-semibold transition-all duration-200 hover:scale-[1.02]"
@@ -107,7 +107,7 @@ export function CotasBio() {
                 }}
               >
                 <MessageCircle className="w-5 h-5" />
-                Entre em contato
+                Falar com Marcelo
               </a>
             </div>
           </div>

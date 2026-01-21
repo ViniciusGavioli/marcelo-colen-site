@@ -1,10 +1,12 @@
 "use client";
 
 import Image from "next/image";
-import { ArrowRight, Clock, Shield, CheckCircle } from "lucide-react";
+import { ArrowRight, Clock, Shield, CheckCircle, FileCheck, Scale, Gavel } from "lucide-react";
 import { Container } from "@/components/layout";
 import { COTAS_PAGE } from "@/lib/cotas-data";
 import { getWhatsAppLink } from "@/lib/whatsapp";
+
+const WHATSAPP_MESSAGE = "Olá, Marcelo. Fui indeferido(a) na heteroidentificação e preciso entender prazos e como funciona o recurso. Posso te passar meu caso?";
 
 export function CotasHero() {
   const { hero } = COTAS_PAGE;
@@ -47,7 +49,7 @@ export function CotasHero() {
           {/* ============================================ */}
           {/* CONTENT SIDE */}
           {/* ============================================ */}
-          <div className="space-y-8">
+          <div className="space-y-6">
             
             {/* Urgency Badge */}
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border" style={{ borderColor: 'rgba(197, 160, 89, 0.4)', backgroundColor: 'rgba(197, 160, 89, 0.1)' }}>
@@ -68,16 +70,15 @@ export function CotasHero() {
               </p>
             </div>
 
-            {/* Main Headline */}
-            <div className="space-y-4">
+            {/* Main Headline - H1 com keyword forte */}
+            <div className="space-y-3">
               <h1 
-                className="font-serif text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-medium leading-tight"
-                style={{ color: '#FFFFFF' }}
+                className="font-serif text-3xl sm:text-4xl lg:text-5xl xl:text-5xl font-semibold leading-tight text-white"
               >
                 {hero.headline}
               </h1>
               <p 
-                className="font-serif text-2xl sm:text-3xl lg:text-4xl italic"
+                className="font-serif text-xl sm:text-2xl lg:text-3xl italic"
                 style={{ color: '#C5A059' }}
               >
                 {hero.headlineHighlight}
@@ -86,27 +87,43 @@ export function CotasHero() {
 
             {/* Subheadline */}
             <p 
-              className="text-lg lg:text-xl leading-relaxed max-w-xl"
-              style={{ color: 'rgba(255, 255, 255, 0.85)' }}
+              className="text-lg leading-relaxed max-w-xl"
+              style={{ color: 'rgba(255, 255, 255, 0.9)' }}
             >
               {hero.subheadline}
             </p>
 
-            {/* Social Proof */}
-            <div className="flex items-center gap-3 py-4 border-l-2 pl-4" style={{ borderColor: '#C5A059' }}>
-              <CheckCircle className="w-5 h-5" style={{ color: '#C5A059' }} />
-              <span className="font-medium" style={{ color: 'rgba(255, 255, 255, 0.9)' }}>
+            {/* Bullets - O que eu faço */}
+            {hero.bullets && (
+              <ul className="space-y-3 pt-2">
+                {hero.bullets.map((bullet: string, index: number) => {
+                  const icons = [FileCheck, Scale, Gavel];
+                  const Icon = icons[index % icons.length];
+                  return (
+                    <li key={index} className="flex items-start gap-3">
+                      <Icon className="w-5 h-5 mt-0.5 shrink-0" style={{ color: '#C5A059' }} />
+                      <span className="text-white/90">{bullet}</span>
+                    </li>
+                  );
+                })}
+              </ul>
+            )}
+
+            {/* Social Proof - Institucional */}
+            <div className="flex items-center gap-3 py-3 border-l-2 pl-4" style={{ borderColor: '#C5A059' }}>
+              <CheckCircle className="w-5 h-5 shrink-0" style={{ color: '#C5A059' }} />
+              <span className="font-medium text-sm" style={{ color: 'rgba(255, 255, 255, 0.9)' }}>
                 {hero.socialProof}
               </span>
             </div>
 
             {/* CTAs */}
-            <div className="flex flex-col sm:flex-row gap-4 pt-4">
+            <div className="flex flex-col sm:flex-row gap-4 pt-2">
               <a
-                href={getWhatsAppLink("Olá! Preciso de orientação urgente sobre heteroidentificação/cotas raciais.")}
+                href={getWhatsAppLink(WHATSAPP_MESSAGE)}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center justify-center gap-3 px-8 py-4 font-semibold text-lg transition-all duration-300 hover:scale-105 hover:shadow-2xl"
+                className="inline-flex items-center justify-center gap-3 px-8 py-4 font-semibold text-lg transition-all duration-300 hover:scale-105 hover:shadow-2xl rounded"
                 style={{ 
                   backgroundColor: '#C5A059', 
                   color: '#0A192F',
@@ -118,7 +135,7 @@ export function CotasHero() {
               </a>
               <button
                 onClick={scrollToSection}
-                className="inline-flex items-center justify-center gap-2 px-8 py-4 font-medium transition-colors duration-300"
+                className="inline-flex items-center justify-center gap-2 px-8 py-4 font-medium transition-colors duration-300 rounded"
                 style={{ 
                   border: '1px solid rgba(255, 255, 255, 0.3)',
                   color: '#FFFFFF',
@@ -137,6 +154,13 @@ export function CotasHero() {
                 <ArrowRight className="w-4 h-4" />
               </button>
             </div>
+
+            {/* Disclaimer ético */}
+            {hero.disclaimer && (
+              <p className="text-xs pt-2" style={{ color: 'rgba(255,255,255,0.5)' }}>
+                {hero.disclaimer}
+              </p>
+            )}
           </div>
 
           {/* ============================================ */}
