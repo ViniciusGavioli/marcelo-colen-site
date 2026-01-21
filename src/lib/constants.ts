@@ -72,7 +72,7 @@ export const FOOTER_LINKS = {
 // Mensagens padrão
 export const DEFAULT_MESSAGES = {
   whatsapp: "Olá! Gostaria de mais informações sobre os serviços jurídicos.",
-  formSuccess: "Mensagem enviada com sucesso! Entraremos em contato em breve.",
+  formSuccess: "Mensagem enviada com sucesso! Retornaremos em até 24 horas úteis.",
   formError: "Erro ao enviar mensagem. Por favor, tente novamente.",
 } as const;
 

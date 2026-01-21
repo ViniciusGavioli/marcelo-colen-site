@@ -32,6 +32,8 @@ export default function HomePage() {
 
       {/* Hero Section - Editorial Premium */}
       <section className="relative min-h-[85vh] flex items-center bg-navy overflow-hidden bg-editorial">
+        {/* Dark overlay for better text readability */}
+        <div className="absolute inset-0 bg-black/30" />
         {/* Subtle gradient overlay */}
         <div className="absolute inset-0 bg-linear-to-br from-navy-deep via-navy to-navy/95" />
         
@@ -52,8 +54,8 @@ export default function HomePage() {
               
               {/* Main headline - Serif editorial */}
               <h1 className="font-serif text-4xl md:text-5xl lg:text-6xl font-medium tracking-tight mb-6 text-white leading-[1.1]">
-                Defesa técnica de{" "}
-                <span className="italic text-bronze">alto nível</span>{" "}
+                Defesa técnica{" "}
+                <span className="italic text-bronze">estratégica</span>{" "}
                 em causas complexas
               </h1>
               

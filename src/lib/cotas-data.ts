@@ -332,7 +332,7 @@ export const FORM_OPTIONS = {
     { value: "outro", label: "Outro" },
   ],
   situation: [
-    { value: "banca", label: "Vou passar pela banca em breve" },
+    { value: "banca", label: "Ainda vou passar pela banca (preparação prévia)" },
     { value: "indeferido", label: "Fui indeferido na banca" },
     { value: "recurso_negado", label: "Meu recurso foi negado" },
     { value: "outro", label: "Outra situação" },
