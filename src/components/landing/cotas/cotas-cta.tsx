@@ -128,8 +128,8 @@ export function CotasCta() {
             />
             
             <Portrait
-              src="/images/marcelo/painel.jpg"
-              alt="Painel sobre cotas raciais"
+              src="/images/marcelo/marcelo-cta.jpg"
+              alt="Dr. Marcelo Colen - Advogado especialista"
               sizes="(max-width: 1024px) 100vw, 520px"
               containerClassName="aspect-[4/5] w-full"
             />

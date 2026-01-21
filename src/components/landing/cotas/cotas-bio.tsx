@@ -127,8 +127,8 @@ export function CotasBio() {
               }}
             >
               <Portrait
-                src="/images/marcelo/biblioteca.jpg"
-                alt="Estudante de direito na biblioteca"
+                src="/images/marcelo/marcelo-bio.jpg"
+                alt="Dr. Marcelo Colen - Advogado"
                 sizes="(max-width: 1024px) 100vw, 560px"
                 containerClassName="aspect-[4/5] w-full"
               />

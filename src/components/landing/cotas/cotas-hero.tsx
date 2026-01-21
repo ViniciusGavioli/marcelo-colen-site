@@ -156,8 +156,8 @@ export function CotasHero() {
             {/* Main image container */}
             <div className="relative overflow-hidden" style={{ backgroundColor: '#0D1F38' }}>
               <Image
-                src="/images/marcelo/primeira-imagem.jpg"
-                alt="Cotas Raciais - Heteroidentificação"
+                src="/images/marcelo/marcelo-hero.jpg"
+                alt="Dr. Marcelo Colen - Advogado especialista em cotas raciais e heteroidentificação"
                 width={600}
                 height={700}
                 priority
