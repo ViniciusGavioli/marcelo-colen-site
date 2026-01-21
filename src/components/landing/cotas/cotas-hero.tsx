@@ -73,12 +73,13 @@ export function CotasHero() {
             {/* Main Headline - H1 com keyword forte */}
             <div className="space-y-3">
               <h1 
-                className="font-serif text-3xl sm:text-4xl lg:text-5xl xl:text-5xl font-semibold leading-tight text-white"
+                className="font-serif text-3xl sm:text-4xl lg:text-5xl xl:text-5xl font-semibold leading-tight relative z-20"
+                style={{ color: '#FFFFFF' }}
               >
                 {hero.headline}
               </h1>
               <p 
-                className="font-serif text-xl sm:text-2xl lg:text-3xl italic"
+                className="font-serif text-xl sm:text-2xl lg:text-3xl italic relative z-20"
                 style={{ color: '#C5A059' }}
               >
                 {hero.headlineHighlight}
