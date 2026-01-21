@@ -15,8 +15,8 @@ export const SITE_CONFIG = {
   // Informações de contato (use ENV em produção)
   contact: {
     email: process.env.NEXT_PUBLIC_EMAIL || "marcelo@cardosocolen.com.br",
-    phone: process.env.NEXT_PUBLIC_PHONE || "(31) 99798-0268",
-    whatsapp: process.env.NEXT_PUBLIC_WHATSAPP || "5531997980268",
+    phone: process.env.NEXT_PUBLIC_PHONE || "(31) 98201-0660",
+    whatsapp: process.env.NEXT_PUBLIC_WHATSAPP || "5531982010660",
   },
   
   // OAB
