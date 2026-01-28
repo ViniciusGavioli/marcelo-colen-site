@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { MessageCircle } from "lucide-react";
 import { Container } from "@/components/layout";
 import { getWhatsAppLink } from "@/lib/whatsapp";
@@ -9,11 +10,27 @@ const WHATSAPP_MESSAGE = "Olá, Dr. Marcelo. Gostaria de conversar sobre meu cas
 export function CotasCtaWordpress() {
   return (
     <section 
-      className="py-16 lg:py-24"
-      style={{ backgroundColor: '#2D2D2D' }}
+      className="relative py-16 lg:py-24 overflow-hidden"
+      style={{ backgroundColor: '#3D2314' }}
     >
-      <Container>
-        <div className="max-w-4xl mx-auto space-y-8 text-center">
+      {/* Background Image */}
+      <div className="absolute right-0 top-0 bottom-0 w-1/2 hidden lg:block">
+        <Image
+          src="/images/wordpress/marcelo-cta.jpg"
+          alt="Dr. Marcelo Colen"
+          fill
+          className="object-cover object-center opacity-40"
+        />
+        <div 
+          className="absolute inset-0"
+          style={{ 
+            background: 'linear-gradient(90deg, rgba(61,35,20,1) 0%, rgba(61,35,20,0.5) 50%, rgba(61,35,20,0.3) 100%)' 
+          }}
+        />
+      </div>
+
+      <Container className="relative z-10">
+        <div className="max-w-4xl mx-auto space-y-8 text-center lg:text-left">
           <p 
             className="text-base lg:text-lg leading-relaxed"
             style={{ color: 'rgba(255, 255, 255, 0.9)' }}

@@ -15,24 +15,92 @@ export function CotasHeroWordpress() {
     <section 
       className="relative min-h-screen flex items-center overflow-hidden"
       style={{ 
-        backgroundColor: '#2D2D2D',
+        backgroundColor: '#3D2314',
       }}
     >
-      {/* Background overlay with leaves/nature pattern */}
+      {/* Grid de fotos no fundo - lado direito */}
+      <div className="absolute right-0 top-0 bottom-0 w-full lg:w-3/5 hidden lg:block">
+        <div className="grid grid-cols-3 h-full">
+          {/* Coluna 1 */}
+          <div className="flex flex-col">
+            <div className="flex-1 relative overflow-hidden">
+              <Image
+                src="/images/wordpress/biblioteca.jpg"
+                alt="Estudante na biblioteca"
+                fill
+                className="object-cover opacity-70"
+              />
+            </div>
+            <div className="flex-1 relative overflow-hidden">
+              <Image
+                src="/images/wordpress/painel.jpg"
+                alt="Painel de discussão"
+                fill
+                className="object-cover opacity-70"
+              />
+            </div>
+            <div className="flex-1 relative overflow-hidden">
+              <Image
+                src="/images/wordpress/estudantes.jpg"
+                alt="Estudantes universitários"
+                fill
+                className="object-cover opacity-70"
+              />
+            </div>
+          </div>
+          
+          {/* Coluna 2 - Marcelo no centro */}
+          <div className="relative overflow-hidden">
+            <Image
+              src="/images/wordpress/marcelo-hero.jpg"
+              alt="Dr. Marcelo Colen"
+              fill
+              className="object-cover object-top"
+              priority
+            />
+          </div>
+          
+          {/* Coluna 3 */}
+          <div className="flex flex-col">
+            <div className="flex-1 relative overflow-hidden">
+              <Image
+                src="/images/wordpress/cotas.jpg"
+                alt="Marcelo sorrindo"
+                fill
+                className="object-cover opacity-70"
+              />
+            </div>
+            <div className="flex-1 relative overflow-hidden">
+              <Image
+                src="/images/wordpress/marcelo-bio.jpg"
+                alt="Marcelo perfil"
+                fill
+                className="object-cover opacity-70"
+              />
+            </div>
+            <div className="flex-1 relative overflow-hidden">
+              <Image
+                src="/images/wordpress/marcelo-cta.jpg"
+                alt="Marcelo no escritório"
+                fill
+                className="object-cover opacity-70"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Gradiente marrom para o texto */}
       <div 
-        className="absolute inset-0 opacity-30"
-        style={{
-          backgroundImage: 'url("/images/wordpress/hero-bg-overlay.jpg")',
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
+        className="absolute inset-0 lg:hidden"
+        style={{ 
+          background: 'linear-gradient(180deg, rgba(61,35,20,0.95) 0%, rgba(61,35,20,0.9) 100%)' 
         }}
       />
-
-      {/* Gradient overlay */}
       <div 
-        className="absolute inset-0"
+        className="absolute left-0 top-0 bottom-0 w-full lg:w-1/2 hidden lg:block"
         style={{ 
-          background: 'linear-gradient(90deg, rgba(45,45,45,0.95) 0%, rgba(45,45,45,0.8) 50%, rgba(45,45,45,0.6) 100%)' 
+          background: 'linear-gradient(90deg, rgba(61,35,20,1) 0%, rgba(61,35,20,0.98) 60%, rgba(61,35,20,0.7) 85%, rgba(61,35,20,0) 100%)' 
         }}
       />
 
@@ -97,100 +165,18 @@ export function CotasHeroWordpress() {
             </div>
           </div>
 
-          {/* ============================================ */}
-          {/* IMAGE SIDE - Right (Mosaic) */}
-          {/* ============================================ */}
-          <div className="relative hidden lg:block">
-            {/* Mosaic Grid of People */}
-            <div className="grid grid-cols-3 gap-1">
-              {/* Row 1 */}
-              <div className="aspect-square relative overflow-hidden">
-                <Image
-                  src="/images/wordpress/mosaic-1.jpg"
-                  alt="Pessoa negra sorrindo"
-                  fill
-                  className="object-cover"
-                />
-              </div>
-              <div className="aspect-square relative overflow-hidden">
-                <Image
-                  src="/images/wordpress/mosaic-2.jpg"
-                  alt="Pessoa negra sorrindo"
-                  fill
-                  className="object-cover"
-                />
-              </div>
-              <div className="aspect-square relative overflow-hidden">
-                <Image
-                  src="/images/wordpress/mosaic-3.jpg"
-                  alt="Pessoa negra sorrindo"
-                  fill
-                  className="object-cover"
-                />
-              </div>
-              
-              {/* Row 2 */}
-              <div className="aspect-square relative overflow-hidden">
-                <Image
-                  src="/images/wordpress/mosaic-4.jpg"
-                  alt="Pessoa negra sorrindo"
-                  fill
-                  className="object-cover"
-                />
-              </div>
-              <div className="aspect-square relative overflow-hidden">
-                <Image
-                  src="/images/wordpress/mosaic-5.jpg"
-                  alt="Dr. Marcelo Colen"
-                  fill
-                  className="object-cover"
-                />
-              </div>
-              <div className="aspect-square relative overflow-hidden">
-                <Image
-                  src="/images/wordpress/mosaic-6.jpg"
-                  alt="Pessoa negra sorrindo"
-                  fill
-                  className="object-cover"
-                />
-              </div>
-              
-              {/* Row 3 */}
-              <div className="aspect-square relative overflow-hidden">
-                <Image
-                  src="/images/wordpress/mosaic-7.jpg"
-                  alt="Pessoa negra sorrindo"
-                  fill
-                  className="object-cover"
-                />
-              </div>
-              <div className="aspect-square relative overflow-hidden">
-                <Image
-                  src="/images/wordpress/mosaic-8.jpg"
-                  alt="Pessoa negra sorrindo"
-                  fill
-                  className="object-cover"
-                />
-              </div>
-              <div className="aspect-square relative overflow-hidden">
-                <Image
-                  src="/images/wordpress/mosaic-9.jpg"
-                  alt="Pessoa negra sorrindo"
-                  fill
-                  className="object-cover"
-                />
-              </div>
-            </div>
-          </div>
+          {/* Espaço vazio no desktop (as fotos estão no fundo) */}
+          <div className="hidden lg:block" />
 
-          {/* Mobile: Single image instead of mosaic */}
+          {/* Mobile: Imagem do Marcelo */}
           <div className="lg:hidden">
-            <div className="relative w-full aspect-video rounded-lg overflow-hidden">
+            <div className="relative w-full aspect-[3/4] rounded-lg overflow-hidden">
               <Image
-                src="/images/wordpress/hero-mosaic.jpg"
-                alt="Pessoas negras sorrindo"
+                src="/images/wordpress/marcelo-hero.jpg"
+                alt="Dr. Marcelo Colen"
                 fill
-                className="object-cover"
+                className="object-cover object-top"
+                priority
               />
             </div>
           </div>

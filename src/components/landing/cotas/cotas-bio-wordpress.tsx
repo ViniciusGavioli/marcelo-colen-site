@@ -19,7 +19,7 @@ export function CotasBioWordpress() {
   return (
     <section 
       className="py-16 lg:py-24"
-      style={{ backgroundColor: '#2D2D2D' }}
+      style={{ backgroundColor: '#3D2314' }}
     >
       <Container>
         <div className="grid lg:grid-cols-2 gap-12 items-center">
@@ -30,7 +30,7 @@ export function CotasBioWordpress() {
           <div className="relative flex justify-center lg:justify-start">
             <div className="relative w-80 h-96 lg:w-96 lg:h-[500px]">
               <Image
-                src="/images/marcelo/marcelo-hero.jpg"
+                src="/images/wordpress/marcelo-bio.jpg"
                 alt="Dr. Marcelo Ladeia Colen Guterres"
                 fill
                 className="object-cover object-top rounded-lg"
