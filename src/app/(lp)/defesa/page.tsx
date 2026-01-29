@@ -6,6 +6,9 @@ import { MessageCircle, ChevronDown } from "lucide-react";
 import { Container } from "@/components/layout";
 import { SITE_CONFIG } from "@/lib/constants";
 import { getWhatsAppLink } from "@/lib/whatsapp";
+import { metadata } from "./metadata";
+
+export { metadata };
 
 const FAQ_ITEMS = [
   {
