@@ -94,11 +94,11 @@ export default function ConsultaPage() {
   const montarMensagem = (): string => {
     const linhas = [
       "Olá Dr. Marcelo! Preciso de ajuda com meu caso de heteroidentificação.\n",
-      `📋 *Concurso/Vestibular:* ${respostas.concurso}`,
-      `❌ *Motivo do Indeferimento:* ${respostas.motivo}`,
-      `⏰ *Prazo para Recorrer:* ${respostas.prazo}`,
-      `📄 *Documentação Disponível:* ${respostas.documentacao}`,
-      `📊 *Estágio do Processo:* ${respostas.estagio}`,
+      `*Concurso/Vestibular:* ${respostas.concurso}`,
+      `*Motivo do Indeferimento:* ${respostas.motivo}`,
+      `*Prazo para Recorrer:* ${respostas.prazo}`,
+      `*Documentação Disponível:* ${respostas.documentacao}`,
+      `*Estágio do Processo:* ${respostas.estagio}`,
       "\nPreciso de orientação sobre os próximos passos."
     ];
     return linhas.join("\n");
