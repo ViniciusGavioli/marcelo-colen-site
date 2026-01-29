@@ -7,8 +7,11 @@ import { DefesaHero } from "@/components/landing/defesa/defesa-hero";
 import { DefesaIdentificacao } from "@/components/landing/defesa/defesa-identificacao";
 import { DefesaSolucao } from "@/components/landing/defesa/defesa-solucao";
 import { DefesaAutoridade } from "@/components/landing/defesa/defesa-autoridade";
+import { DefesaEducacional } from "@/components/landing/defesa/defesa-educacional";
 import { DefesaProvas } from "@/components/landing/defesa/defesa-provas";
 import { DefesaFaq } from "@/components/landing/defesa/defesa-faq";
+import { DefesaInstagram } from "@/components/landing/defesa/defesa-instagram";
+import { DefesaFooter } from "@/components/landing/defesa/defesa-footer";
 import { FloatingWhatsApp } from "@/components/landing/cotas";
 
 // SEO Metadata
@@ -49,12 +52,21 @@ export default function DefesaPage() {
         {/* DOBRA 4: Autoridade - Quem é Dr. Marcelo */}
         <DefesaAutoridade />
 
+        {/* Conteúdo Educacional - Lei do Racismo + Lei 14.532 */}
+        <DefesaEducacional />
+
         {/* DOBRA 5: Provas - Filtro de Qualidade */}
         <DefesaProvas />
 
-        {/* FAQ (bônus) */}
+        {/* FAQ */}
         <DefesaFaq />
+
+        {/* Instagram + CTA */}
+        <DefesaInstagram />
       </main>
+
+      {/* Rodapé de fechamento */}
+      <DefesaFooter />
 
       {/* Floating WhatsApp Button - Sticky no mobile */}
       <FloatingWhatsApp />

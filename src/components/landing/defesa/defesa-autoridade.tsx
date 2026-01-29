@@ -29,7 +29,7 @@ export function DefesaAutoridade() {
                         </h2>
 
                         <p style={{ color: '#333' }}>
-                            Dr. Marcelo Colen é advogado especialista em Compliance Antidiscriminatório, com forte atuação na defesa dos direitos da população negra em Minas Gerais.
+                            Dr. Marcelo Colen é advogado especialista em Compliance Antidiscriminatório, com forte atuação na defesa dos direitos da população negra em todo Brasil.
                         </p>
 
                         <p style={{ color: '#666' }}>
@@ -54,13 +54,10 @@ export function DefesaAutoridade() {
                                 >
                                     <Scale className="w-5 h-5" style={{ color: '#c9a227' }} />
                                 </div>
-                                <span style={{ color: '#333' }}>Estratégia personalizada para cada tipo de prova</span>
+                                <span style={{ color: '#333' }}>Estratégia personalizada para cada caso</span>
                             </div>
                         </div>
 
-                        <p className="text-sm pt-2" style={{ color: '#999' }}>
-                            OAB/MG 167.463
-                        </p>
                     </div>
                 </div>
             </Container>

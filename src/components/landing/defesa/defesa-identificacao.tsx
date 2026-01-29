@@ -64,8 +64,14 @@ export function DefesaIdentificacao() {
                         className="p-6 rounded-lg border-l-4"
                         style={{ backgroundColor: '#f8f8f8', borderColor: '#c9a227' }}
                     >
-                        <p className="text-base" style={{ color: '#333' }}>
-                            <strong>Muitas vítimas não sabem, mas a legislação mudou.</strong> Hoje, a injúria racial é equiparada ao racismo, <strong>inafiançável e imprescritível</strong>. A lei está do seu lado, e nós também.
+                        <p className="text-base mb-4" style={{ color: '#333' }}>
+                            <strong>Muitas vítimas não sabem, mas a legislação mudou.</strong> Hoje, a injúria racial é equiparada ao racismo, <strong>inafiançável e imprescritível</strong>.
+                        </p>
+                        <p
+                            className="text-xl lg:text-2xl font-bold"
+                            style={{ color: '#c9a227', fontFamily: 'Georgia, serif' }}
+                        >
+                            A lei está do seu lado, e nós também.
                         </p>
                     </div>
                 </div>

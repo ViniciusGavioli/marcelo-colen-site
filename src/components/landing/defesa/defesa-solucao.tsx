@@ -1,24 +1,24 @@
 import { Container } from "@/components/layout";
-import { Gavel, Banknote, Shield } from "lucide-react";
+import { FileSearch, Shield, Scale } from "lucide-react";
 
 const PASSOS = [
     {
-        icon: Gavel,
+        icon: FileSearch,
         numero: "1",
-        titulo: "Esfera Criminal (Punição)",
-        descricao: "Atuamos como Assistente de Acusação para garantir que o inquérito policial ande e o agressor responda criminalmente. Não deixamos seu B.O. virar 'apenas estatística'."
-    },
-    {
-        icon: Banknote,
-        numero: "2",
-        titulo: "Esfera Cível (Indenização)",
-        descricao: "Buscamos a reparação financeira pelos danos morais sofridos. O bolso é onde o racista mais sente o peso da lei."
+        titulo: "Preparativos",
+        descricao: "Fazemos o levantamento de provas, testemunhas, vídeos e fotos. Organizamos os fatos e orientamos a melhor forma de fazer o registro do Boletim de Ocorrência ou outras providências jurídicas cabíveis."
     },
     {
         icon: Shield,
+        numero: "2",
+        titulo: "Providências Criminais",
+        descricao: "Participamos do registro perante a Polícia, garantindo que todas as informações e provas necessárias sejam apresentadas, bem como todos os esforços sejam realizados para investigar a autoria do crime ou, caso já seja conhecida, para que sejam tomadas as providências legais cabíveis."
+    },
+    {
+        icon: Scale,
         numero: "3",
-        titulo: "Sigilo e Proteção",
-        descricao: "Sabemos que é difícil denunciar. Todo o atendimento é sigiloso e focado na sua proteção jurídica e emocional."
+        titulo: "Providências Cíveis",
+        descricao: "Fazemos todos os atos necessários para responsabilizar quem praticou o racismo: no âmbito administrativo (se for funcionário público), trabalhista (comunicação ao RH e/ou Compliance) e cível, buscando a indenização que é devida."
     }
 ];
 

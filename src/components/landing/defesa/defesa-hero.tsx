@@ -3,8 +3,6 @@
 import Image from "next/image";
 import { MessageCircle } from "lucide-react";
 import { Container } from "@/components/layout";
-import { getWhatsAppLink } from "@/lib/whatsapp";
-import { trackWhatsAppClick } from "@/lib/analytics";
 
 export function DefesaHero() {
     return (
@@ -49,10 +47,18 @@ export function DefesaHero() {
 
                         {/* H2 */}
                         <p
-                            className="text-lg lg:text-xl leading-relaxed mb-8"
+                            className="text-lg lg:text-xl leading-relaxed mb-6"
                             style={{ color: 'rgba(255, 255, 255, 0.9)' }}
                         >
                             Transforme sua indignação em justiça. Somos especialistas em defender vítimas de racismo e injúria racial em Minas Gerais, buscando a <strong style={{ color: '#ffffff' }}>punição do agressor</strong> e a sua devida <strong style={{ color: '#ffffff' }}>indenização</strong>.
+                        </p>
+
+                        {/* Frase de impacto */}
+                        <p
+                            className="text-2xl lg:text-3xl font-bold mb-8"
+                            style={{ color: '#c9a227', fontFamily: 'Georgia, serif' }}
+                        >
+                            A lei está do seu lado, e nós também.
                         </p>
 
                         {/* CTA */}
@@ -73,27 +79,27 @@ export function DefesaHero() {
                             </p>
                         </div>
 
-                        {/* Credibilidade */}
+                        {/* Credibilidade - sem OAB */}
                         <div
                             className="flex flex-wrap items-center gap-4"
                             style={{ color: 'rgba(255, 255, 255, 0.5)' }}
                         >
                             <span className="text-sm">Dr. Marcelo Colen</span>
                             <span>•</span>
-                            <span className="text-sm">OAB/MG 167.463</span>
+                            <span className="text-sm">Advogado Especialista</span>
                             <span>•</span>
-                            <span className="text-sm">Todo Brasil</span>
+                            <span className="text-sm">Atendimento em Todo Brasil</span>
                         </div>
                     </div>
 
                     {/* Foto do Dr. Marcelo */}
-                    <div className="hidden lg:flex justify-center items-end">
+                    <div className="hidden lg:flex justify-center items-end h-[90vh] relative mt-auto">
                         <Image
-                            src="/images/marcelo/marcelo-hero.jpg"
+                            src="/images/defesa/marcelo-final-v4.png"
                             alt="Dr. Marcelo Colen"
-                            width={380}
-                            height={500}
-                            className="object-contain"
+                            width={550}
+                            height={750}
+                            className="object-contain object-bottom scale-110 origin-bottom translate-y-4"
                             priority
                         />
                     </div>

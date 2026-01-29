@@ -82,7 +82,7 @@ export const DEFESA_PAGE = {
         {
             question: "Qual a diferença entre racismo e injúria racial?",
             answer:
-                "O racismo atinge um grupo ou coletividade (ex: impedir acesso a estabelecimento por cor). A injúria racial ofende a honra de pessoa específica usando elementos raciais. Desde 2023, ambos têm a mesma pena.",
+                "O racismo é o crime praticado contra um grupo ou coletivo de pessoas e pode ser praticado de diversas formas como, por exemplo, negar emprego, recusar entrada em estabelecimento comercial, recusar inscrição de aluno em estabelecimento de ensino público, recusar hospedagem em hotel, atendimento em bares e restaurantes, dentre várias outras formas previstas em lei. Já a injúria racial é o crime praticado contra uma pessoa específica, com o objetivo de ofender sua honra e dignidade, por meio de xingamentos utilizando elementos raciais, como a comparação com animais ou utilizando adjetivos relacionados à sua condição étnica/racial. Desde 2023, ambos têm a mesma pena.",
         },
         {
             question: "Posso processar por danos morais?",
@@ -92,7 +92,7 @@ export const DEFESA_PAGE = {
         {
             question: "Você atende casos de todo o Brasil?",
             answer:
-                "Sim! Atendo presencialmente em Belo Horizonte e de forma online para todo o território nacional. A maioria das orientações pode ser feita remotamente.",
+                "Sim! Temos escritório físico sediado em Belo Horizonte/MG, mas atuamos em todo o território nacional. Hoje em dia, é possível, por meio da internet, realizar os atos remotamente ou, se necessário, acionamos escritórios parceiros para nos auxiliar em diligências locais.",
         },
     ],
 
