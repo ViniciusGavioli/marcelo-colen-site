@@ -1,6 +1,6 @@
 // Analytics IDs - CONECTADO
 export const GTM_ID = "GTM-P4XVVVQM";
-export const GA_ID = ""; // Preencher com seu GA4 ID quando disponível
+export const GA_ID = "G-XHC2DVLZES";
 export const ADS_CONVERSION_ID = ""; // Preencher com seu Google Ads ID quando disponível
 export const FB_PIXEL_ID = ""; // Preencher com seu Facebook Pixel ID quando disponível
 

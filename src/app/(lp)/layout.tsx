@@ -1,6 +1,6 @@
 import { Raleway } from "next/font/google";
 import Script from "next/script";
-import { GTM_ID } from "@/lib/analytics";
+import { GTM_ID, GA_ID } from "@/lib/analytics";
 
 const raleway = Raleway({
   subsets: ["latin"],
@@ -45,6 +45,31 @@ export default function LandingPageLayout({
             `,
           }}
         />
+      )}
+
+      {/* Google Analytics 4 */}
+      {GA_ID && (
+        <>
+          <Script
+            src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`}
+            strategy="afterInteractive"
+          />
+          <Script
+            id="ga-script"
+            strategy="afterInteractive"
+            dangerouslySetInnerHTML={{
+              __html: `
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){dataLayer.push(arguments);}
+                gtag('js', new Date());
+                gtag('config', '${GA_ID}', {
+                  page_path: window.location.pathname,
+                  send_page_view: true,
+                });
+              `,
+            }}
+          />
+        </>
       )}
 
       {children}
