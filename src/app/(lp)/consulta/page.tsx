@@ -2,11 +2,10 @@
 
 import { useState } from "react";
 import Image from "next/image";
-import { MessageCircle, Clock, ChevronDown } from "lucide-react";
+import { MessageCircle, ChevronDown, CheckCircle2 } from "lucide-react";
 import { Container } from "@/components/layout";
 import { SITE_CONFIG } from "@/lib/constants";
-
-const WHATSAPP_NUMBER = SITE_CONFIG.contact.whatsapp;
+import { getWhatsAppLink } from "@/lib/whatsapp";
 
 const FAQ_ITEMS = [
   {
@@ -23,214 +22,335 @@ const FAQ_ITEMS = [
   }
 ];
 
+const FORM_QUESTIONS = [
+  {
+    id: "concurso",
+    label: "Em qual concurso/vestibular isso aconteceu?",
+    type: "text",
+    placeholder: "Ex: UFMG 2024, ENEM, Concurso Público Prefeitura...",
+    required: true
+  },
+  {
+    id: "motivo",
+    label: "O que a banca alegou para te eliminar?",
+    type: "textarea",
+    placeholder: "Ex: Disseram que não tenho fenótipo, questionaram minha autodeclaração, problemas na documentação...",
+    required: true
+  },
+  {
+    id: "prazo",
+    label: "Quanto tempo você tem para recorrer?",
+    type: "text",
+    placeholder: "Ex: 48 horas, 5 dias, já venceu o prazo...",
+    required: true
+  },
+  {
+    id: "documentacao",
+    label: "Você tem documentação que comprove sua identidade racial?",
+    type: "textarea",
+    placeholder: "Ex: Tenho autodeclaração, certidão de nascimento de parentes, fotos, documentação indígena...",
+    required: true
+  },
+  {
+    id: "estagio",
+    label: "Como você quer agir agora?",
+    type: "textarea",
+    placeholder: "Ex: Quero fazer recurso administrativo rápido, quero ação judicial, já tentei recurso e fui negado...",
+    required: true
+  }
+];
+
 export default function ConsultaPage() {
-  const [texto, setTexto] = useState("");
+  const [respostas, setRespostas] = useState<Record<string, string>>({});
+  const [passoAtual, setPassoAtual] = useState(0);
   const [erro, setErro] = useState("");
   const [faqAberto, setFaqAberto] = useState<number | null>(0);
 
-  const handleSubmit = () => {
-    if (!texto.trim()) {
-      setErro("Por favor, descreva seu caso antes de continuar.");
-      return;
-    }
-
-    if (texto.trim().length < 20) {
-      setErro("Descreva com mais detalhes para que possamos ajudar melhor.");
-      return;
-    }
-
+  const handleInputChange = (id: string, valor: string) => {
+    setRespostas(prev => ({ ...prev, [id]: valor }));
     setErro("");
+  };
+
+  const handleProximo = () => {
+    const perguntaAtual = FORM_QUESTIONS[passoAtual];
+    if (!respostas[perguntaAtual.id]?.trim()) {
+      setErro("Por favor, responda a pergunta antes de continuar.");
+      return;
+    }
     
-    const mensagem = `Olá Dr. Marcelo. Vim pelo site de Cotas. Meu caso é:\n\n${texto.trim()}`;
+    if (passoAtual < FORM_QUESTIONS.length - 1) {
+      setPassoAtual(passoAtual + 1);
+      setErro("");
+    }
+  };
+
+  const handleVoltar = () => {
+    if (passoAtual > 0) {
+      setPassoAtual(passoAtual - 1);
+      setErro("");
+    }
+  };
+
+  const montarMensagem = (): string => {
+    const linhas = [
+      "Olá Dr. Marcelo! Preciso de ajuda com meu caso de heteroidentificação.\n",
+      `📋 *Concurso/Vestibular:* ${respostas.concurso}`,
+      `❌ *Motivo do Indeferimento:* ${respostas.motivo}`,
+      `⏰ *Prazo para Recorrer:* ${respostas.prazo}`,
+      `📄 *Documentação Disponível:* ${respostas.documentacao}`,
+      `📊 *Estágio do Processo:* ${respostas.estagio}`,
+      "\nPreciso de orientação sobre os próximos passos."
+    ];
+    return linhas.join("\n");
+  };
+
+  const handleEnviar = () => {
+    const mensagem = montarMensagem();
+    const WHATSAPP_NUMBER = SITE_CONFIG.contact.whatsapp;
     const mensagemCodificada = encodeURIComponent(mensagem);
     const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${mensagemCodificada}`;
-    
+    console.log("Abrindo WhatsApp:", url);
     window.open(url, "_blank");
   };
 
+  const todoPreenchido = FORM_QUESTIONS.every(q => respostas[q.id]?.trim());
+
   return (
-    <main className="min-h-screen text-white" style={{ backgroundColor: '#401A0C' }}>
-      {/* Background com grafismo */}
-      <div className="fixed inset-0 opacity-[0.06] pointer-events-none z-0">
-        <div className="flex">
-          {[...Array(5)].map((_, i) => (
-            <div key={`g1-${i}`} className="relative h-12" style={{ width: '20%' }}>
-              <Image src="/images/wordpress/grafismo-sabedoria.png" alt="" fill className="object-cover" style={{ filter: 'invert(1)' }} />
-            </div>
-          ))}
-        </div>
-        <div className="flex">
-          {[...Array(5)].map((_, i) => (
-            <div key={`g2-${i}`} className="relative h-12" style={{ width: '20%' }}>
-              <Image src="/images/wordpress/grafismo-sabedoria.png" alt="" fill className="object-cover" style={{ filter: 'invert(1)' }} />
-            </div>
-          ))}
-        </div>
-      </div>
-
-      {/* Header */}
-      <header className="relative z-10 py-6 px-4 border-b border-white/10">
-        <Container>
-          <div className="flex items-center justify-center">
-            <span className="text-xl font-bold tracking-tight" style={{ fontFamily: 'Georgia, serif' }}>MARCELO COLEN</span>
-            <span className="ml-3 text-sm text-white/60">ADVOCACIA</span>
+    <main>
+      {/* ========== SEÇÃO HERO - Fundo Escuro ========== */}
+      <section className="relative overflow-hidden" style={{ backgroundColor: '#3D2817' }}>
+        {/* Grafismo decorativo */}
+        <div className="absolute top-0 left-0 right-0 opacity-[0.06] z-0">
+          <div className="flex">
+            {[...Array(5)].map((_, i) => (
+              <div key={`g1-${i}`} className="relative h-12" style={{ width: '20%' }}>
+                <Image src="/images/wordpress/grafismo-sabedoria.png" alt="" fill className="object-cover" style={{ filter: 'invert(1)' }} />
+              </div>
+            ))}
           </div>
-        </Container>
-      </header>
+        </div>
 
-      {/* Hero Section */}
-      <section className="relative z-10 px-4 pt-12 pb-8">
-        <Container>
-          <div className="max-w-2xl mx-auto text-center">
-            {/* Headline */}
+        {/* Background com imagem */}
+        <div className="absolute inset-0 opacity-20">
+          <Image
+            src="/images/wordpress/movimento.png"
+            alt="Pessoas diversas"
+            fill
+            className="object-cover object-center"
+          />
+          <div 
+            className="absolute inset-0"
+            style={{ background: 'linear-gradient(90deg, rgba(61,40,23,0.95) 0%, rgba(61,40,23,0.7) 40%, rgba(61,40,23,0.3) 70%, transparent 100%)' }}
+          />
+        </div>
+
+        <Container className="relative z-10 py-8">
+          <div className="max-w-3xl">
             <h1 
-              className="text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight mb-6"
-              style={{ fontFamily: 'Georgia, "Times New Roman", serif' }}
+              style={{ color: '#FFFFFF', fontFamily: 'Georgia, serif', fontStyle: 'normal', fontSize: '3.5rem', fontWeight: '600', lineHeight: '1.1', marginBottom: '0.5rem', letterSpacing: '-0.02em' }}
             >
-              Reprovado na Banca de<br />Heteroidentificação?
+              Precisa de ajuda?
             </h1>
             
-            <p className="text-xl sm:text-2xl font-bold mb-6" style={{ color: '#FFFFFF' }}>
-              Não se desespere. A defesa começa agora.
+            <p style={{ fontSize: '1.5rem', fontWeight: '600', marginBottom: '0.5rem', color: '#FFFFFF', lineHeight: '1.2' }}>
+              Me deixe entender melhor o que você sofreu...
             </p>
 
-            {/* Subtítulo */}
-            <p className="text-base sm:text-lg leading-relaxed mb-8" style={{ color: 'rgba(255, 255, 255, 0.85)' }}>
-              Atuação especializada em recursos administrativos e judiciais para reverter indeferimentos indevidos em concursos públicos e vestibulares.
+            <p style={{ fontSize: '1.125rem', lineHeight: '1.5', color: 'rgba(255, 255, 255, 0.9)', marginBottom: '2rem' }}>
+              Você não foi apenas reprovado. Você foi injustiçado. E vamos lutar juntos para reverter isso.
             </p>
           </div>
         </Container>
       </section>
 
-      {/* FAQ Section */}
-      <section className="relative z-10 px-4 py-10" style={{ backgroundColor: 'rgba(255, 255, 255, 0.03)' }}>
+      {/* ========== SEÇÃO FORMULÁRIO INTERATIVO - Fundo Claro ========== */}
+      <section className="relative px-4 py-20" style={{ backgroundColor: '#F8F9FA' }}>
         <Container>
           <div className="max-w-2xl mx-auto">
-            <h2 
-              className="text-2xl sm:text-3xl font-light mb-8 text-center"
-              style={{ fontFamily: 'Georgia, serif' }}
-            >
-              Dúvidas Frequentes
-            </h2>
-            
-            <div className="space-y-3">
-              {FAQ_ITEMS.map((item, index) => (
-                <div 
-                  key={index}
-                  className="border border-white/20 rounded-lg overflow-hidden"
-                  style={{ backgroundColor: 'rgba(255, 255, 255, 0.05)' }}
-                >
-                  <button
-                    onClick={() => setFaqAberto(faqAberto === index ? null : index)}
-                    className="w-full flex items-center justify-between p-5 text-left hover:bg-white/5 transition-colors"
+            <div className="space-y-8">
+              {/* Heading da seção */}
+              <div className="space-y-2">
+                <div className="flex items-center justify-between">
+                  <h2 
+                    className="text-3xl font-bold"
+                    style={{ color: '#0A192F', fontFamily: 'Georgia, serif' }}
                   >
-                    <span className="font-medium text-base pr-4">{item.question}</span>
-                    <ChevronDown 
-                      className={`w-5 h-5 text-white/50 transition-transform flex-shrink-0 ${
-                        faqAberto === index ? "rotate-180" : ""
-                      }`} 
+                    Formulário de Análise
+                  </h2>
+                  <span className="text-sm font-semibold" style={{ color: '#5B6676' }}>
+                    Passo {passoAtual + 1} de {FORM_QUESTIONS.length}
+                  </span>
+                </div>
+                <div className="w-full bg-gray-200 rounded-full h-2">
+                  <div 
+                    className="bg-[#25D366] h-2 rounded-full transition-all duration-300"
+                    style={{ width: `${((passoAtual + 1) / FORM_QUESTIONS.length) * 100}%` }}
+                  />
+                </div>
+              </div>
+
+              {/* Card do formulário */}
+              <div 
+                className="rounded-xl p-8 border"
+                style={{ backgroundColor: '#FFFFFF', border: '1px solid #D9E0E8' }}
+              >
+                {/* Pergunta */}
+                <div className="mb-8">
+                  <label className="block text-lg font-semibold mb-4" style={{ color: '#0A192F' }}>
+                    {FORM_QUESTIONS[passoAtual].label}
+                  </label>
+
+                  {FORM_QUESTIONS[passoAtual].type === "text" ? (
+                    <input
+                      type="text"
+                      value={respostas[FORM_QUESTIONS[passoAtual].id] || ""}
+                      onChange={(e) => handleInputChange(FORM_QUESTIONS[passoAtual].id, e.target.value)}
+                      placeholder={FORM_QUESTIONS[passoAtual].placeholder}
+                      className="w-full p-4 rounded-lg text-base border focus:outline-none"
+                      style={{ 
+                        backgroundColor: '#F3F6F9',
+                        borderColor: erro ? '#ef4444' : '#D9E0E8',
+                        color: '#0A192F'
+                      }}
                     />
-                  </button>
-                  
-                  {faqAberto === index && (
-                    <div className="px-5 pb-5 text-base leading-relaxed" style={{ color: 'rgba(255, 255, 255, 0.75)' }}>
-                      {item.answer}
-                    </div>
+                  ) : (
+                    <textarea
+                      value={respostas[FORM_QUESTIONS[passoAtual].id] || ""}
+                      onChange={(e) => handleInputChange(FORM_QUESTIONS[passoAtual].id, e.target.value)}
+                      placeholder={FORM_QUESTIONS[passoAtual].placeholder}
+                      className="w-full h-32 p-4 rounded-lg text-base resize-none focus:outline-none border"
+                      style={{ 
+                        backgroundColor: '#F3F6F9',
+                        borderColor: erro ? '#ef4444' : '#D9E0E8',
+                        color: '#0A192F'
+                      }}
+                    />
                   )}
                 </div>
-              ))}
-            </div>
-          </div>
-        </Container>
-      </section>
 
-      {/* Formulário */}
-      <section className="relative z-10 px-4 py-12">
-        <Container>
-          <div className="max-w-2xl mx-auto">
-            <div 
-              className="rounded-xl p-6 sm:p-8"
-              style={{ backgroundColor: 'rgba(255, 255, 255, 0.08)', border: '1px solid rgba(255, 255, 255, 0.15)' }}
-            >
-              {/* Título do Formulário */}
-              <div className="flex items-center gap-4 mb-6">
-                <div 
-                  className="w-12 h-12 rounded-full flex items-center justify-center"
-                  style={{ backgroundColor: 'rgba(37, 211, 102, 0.2)' }}
-                >
-                  <Clock className="w-6 h-6 text-[#25D366]" />
-                </div>
-                <div>
-                  <h3 className="text-xl font-semibold" style={{ fontFamily: 'Georgia, serif' }}>Análise Gratuita</h3>
-                  <p className="text-sm" style={{ color: 'rgba(255, 255, 255, 0.6)' }}>Resposta em até 2 horas</p>
+                {/* Erro */}
+                {erro && (
+                  <div 
+                    className="mb-6 p-4 rounded-lg text-base"
+                    style={{ backgroundColor: 'rgba(239, 68, 68, 0.1)', borderLeft: '4px solid #ef4444', color: '#dc2626' }}
+                  >
+                    {erro}
+                  </div>
+                )}
+
+                {/* Botões de navegação */}
+                <div className="flex gap-4 justify-between">
+                  <button
+                    onClick={handleVoltar}
+                    disabled={passoAtual === 0}
+                    className="px-8 py-3 font-semibold text-base rounded-md transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+                    style={{ backgroundColor: passoAtual === 0 ? '#E5E7EB' : '#D9E0E8', color: '#0A192F' }}
+                  >
+                    ← Voltar
+                  </button>
+
+                  {passoAtual < FORM_QUESTIONS.length - 1 ? (
+                    <button
+                      onClick={handleProximo}
+                      className="px-8 py-3 font-semibold text-base rounded-md transition-all hover:scale-[1.02] active:scale-[0.98]"
+                      style={{ backgroundColor: '#25D366', color: '#FFFFFF' }}
+                    >
+                      Próximo →
+                    </button>
+                  ) : (
+                    <button
+                      onClick={handleEnviar}
+                      className="inline-flex items-center justify-center gap-3 px-10 py-3 font-semibold text-base rounded-md transition-all hover:scale-[1.02] active:scale-[0.98]"
+                      style={{ backgroundColor: '#4A9B4A', color: '#FFFFFF' }}
+                    >
+                      <MessageCircle className="w-5 h-5" />
+                      Enviar Caso
+                    </button>
+                  )}
                 </div>
               </div>
 
-              {/* Instruções */}
-              <p className="text-base mb-6" style={{ color: 'rgba(255, 255, 255, 0.8)' }}>
-                Descreva brevemente seu caso abaixo. Quanto mais detalhes, melhor conseguiremos orientar você.
-              </p>
-
-              {/* Textarea */}
-              <textarea
-                value={texto}
-                onChange={(e) => {
-                  setTexto(e.target.value);
-                  if (erro) setErro("");
-                }}
-                placeholder="Ex: Fui reprovado na banca da UFMG ontem, alegaram que não tenho fenótipo. O edital do vestibular diz que tenho 48h para recorrer..."
-                className="w-full h-36 p-4 rounded-lg text-white text-base resize-none focus:outline-none transition-all"
-                style={{ 
-                  backgroundColor: 'rgba(255, 255, 255, 0.08)', 
-                  border: '1px solid rgba(255, 255, 255, 0.2)',
-                }}
-              />
-
-              {/* Contador de caracteres */}
-              <div className="flex justify-between items-center mt-3 mb-5">
-                <span className="text-sm" style={{ color: 'rgba(255, 255, 255, 0.5)' }}>
-                  {texto.length < 20 ? `Mínimo 20 caracteres (${texto.length}/20)` : "✓ Descrição adequada"}
-                </span>
-              </div>
-
-              {/* Erro */}
-              {erro && (
+              {/* Preview da mensagem */}
+              {todoPreenchido && (
                 <div 
-                  className="mb-5 p-4 rounded-lg text-base"
-                  style={{ backgroundColor: 'rgba(239, 68, 68, 0.15)', border: '1px solid rgba(239, 68, 68, 0.3)', color: '#f87171' }}
+                  className="rounded-xl p-6 border"
+                  style={{ backgroundColor: '#E8F5E9', borderColor: '#25D366' }}
                 >
-                  {erro}
+                  <div className="flex items-center gap-2 mb-3">
+                    <CheckCircle2 className="w-5 h-5" style={{ color: '#25D366' }} />
+                    <span className="font-semibold" style={{ color: '#1B5E20' }}>
+                      Sua mensagem está pronta!
+                    </span>
+                  </div>
+                  <p className="text-sm whitespace-pre-wrap" style={{ color: '#2E7D32' }}>
+                    {montarMensagem()}
+                  </p>
                 </div>
               )}
-
-              {/* Botão CTA */}
-              <button
-                onClick={handleSubmit}
-                className="w-full flex items-center justify-center gap-3 py-5 px-8 font-semibold text-lg rounded-md transition-all hover:scale-[1.02] active:scale-[0.98]"
-                style={{ backgroundColor: '#25D366', color: '#FFFFFF' }}
-              >
-                <MessageCircle className="w-6 h-6" />
-                ANALISAR MEU CASO NO WHATSAPP
-              </button>
-
-              {/* Disclaimer */}
-              <p className="text-sm text-center mt-5" style={{ color: 'rgba(255, 255, 255, 0.5)' }}>
-                Ao clicar, você será redirecionado para o WhatsApp do escritório. Seus dados são tratados com sigilo.
-              </p>
             </div>
           </div>
         </Container>
       </section>
 
-      {/* Footer */}
-      <footer className="relative z-10 px-4 py-8 border-t border-white/10">
+      {/* ========== SEÇÃO FAQ - Fundo Branco ========== */}
+      <section className="relative px-4 py-20" style={{ backgroundColor: '#FFFFFF' }}>
         <Container>
-          <div className="max-w-2xl mx-auto text-center text-sm" style={{ color: 'rgba(255, 255, 255, 0.5)' }}>
-            <p>Marcelo Colen Neves Soares • {SITE_CONFIG.oab}</p>
-            <p className="mt-1">Especialista em Direito Antidiscriminatório</p>
+          <div className="max-w-3xl mx-auto">
+            <div className="space-y-12">
+              {/* Heading */}
+              <div className="space-y-3">
+                <h2 
+                  className="text-3xl sm:text-4xl font-bold text-center"
+                  style={{ color: '#0A192F', fontFamily: 'Georgia, serif' }}
+                >
+                  Dúvidas Frequentes
+                </h2>
+                <p className="text-base text-center" style={{ color: '#5B6676' }}>
+                  Perguntas mais comuns sobre recursos administrativos e ações judiciais
+                </p>
+              </div>
+
+              {/* FAQ Accordion */}
+              <div className="space-y-3">
+                {FAQ_ITEMS.map((item, index) => (
+                  <div 
+                    key={index}
+                    className="border rounded-lg overflow-hidden transition-all"
+                    style={{ 
+                      borderColor: '#D9E0E8',
+                      backgroundColor: faqAberto === index ? '#F8F9FA' : '#FFFFFF'
+                    }}
+                  >
+                    <button
+                      onClick={() => setFaqAberto(faqAberto === index ? null : index)}
+                      className="w-full flex items-center justify-between p-5 text-left hover:bg-gray-50 transition-colors"
+                    >
+                      <span className="font-semibold text-base pr-4" style={{ color: '#0A192F' }}>
+                        {item.question}
+                      </span>
+                      <ChevronDown 
+                        className={`w-5 h-5 transition-transform flex-shrink-0 ${
+                          faqAberto === index ? "rotate-180" : ""
+                        }`} 
+                        style={{ color: '#5B6676' }}
+                      />
+                    </button>
+                    
+                    {faqAberto === index && (
+                      <div 
+                        className="px-5 pb-5 text-base leading-relaxed border-t"
+                        style={{ color: '#333333', borderColor: '#D9E0E8' }}
+                      >
+                        {item.answer}
+                      </div>
+                    )}
+                  </div>
+                ))}
+              </div>
+            </div>
           </div>
         </Container>
-      </footer>
+      </section>
     </main>
   );
 }

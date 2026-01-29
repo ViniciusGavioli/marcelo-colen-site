@@ -536,6 +536,14 @@ a {
   transform: scaleX(1);
 }
 
+/* Página de Consulta - Cotas */
+[style*="backgroundColor: '#3D2817'"] h1,
+[style*="backgroundColor: '#3D2817'"] h2 {
+  color: #FFFFFF !important;
+  font-style: normal !important;
+  font-family: Georgia, serif !important;
+}
+
 @layer base {
   * {
     @apply border-border outline-ring/50;
