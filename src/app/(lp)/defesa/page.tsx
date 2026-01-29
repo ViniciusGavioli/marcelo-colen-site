@@ -6,6 +6,7 @@ import { MessageCircle, ChevronDown } from "lucide-react";
 import { Container } from "@/components/layout";
 import { SITE_CONFIG } from "@/lib/constants";
 import { getWhatsAppLink } from "@/lib/whatsapp";
+import { trackWhatsAppClick } from "@/lib/analytics";
 import { metadata } from "./metadata";
 
 export { metadata };
@@ -129,6 +130,7 @@ export default function DefesaPage() {
                 href={getWhatsAppLink("Olá, Dr. Marcelo. Sofri racismo e gostaria de orientação sobre como proceder.")}
                 target="_blank"
                 rel="noopener noreferrer"
+                onClick={trackWhatsAppClick}
                 className="inline-flex items-center justify-center gap-3 px-10 py-5 font-semibold text-base rounded-md transition-all hover:scale-[1.05] active:scale-[0.95]"
                 style={{ backgroundColor: '#25D366', color: '#FFFFFF' }}
               >
@@ -370,6 +372,7 @@ export default function DefesaPage() {
                 href={getWhatsAppLink("Olá, Dr. Marcelo. Sofri racismo e gostaria de orientação jurídica.")}
                 target="_blank"
                 rel="noopener noreferrer"
+                onClick={trackWhatsAppClick}
                 className="inline-flex items-center justify-center gap-3 px-10 py-5 font-semibold text-base rounded-md transition-all hover:scale-105 active:scale-95"
                 style={{ 
                   backgroundColor: '#25D366', 

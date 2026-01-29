@@ -1,12 +1,10 @@
-// Analytics IDs - DESCONECTADO
-// Quando conectar, adicione os IDs reais aqui
+// Analytics IDs - CONECTADO
+export const GTM_ID = "GTM-P4XVVVQM";
+export const GA_ID = ""; // Preencher com seu GA4 ID quando disponível
+export const ADS_CONVERSION_ID = ""; // Preencher com seu Google Ads ID quando disponível
+export const FB_PIXEL_ID = ""; // Preencher com seu Facebook Pixel ID quando disponível
 
-export const GTM_ID = "";
-export const GA_ID = "";
-export const ADS_CONVERSION_ID = "";
-export const FB_PIXEL_ID = "";
-
-// Event tracking functions (preparadas para quando GTM/GA estiverem ativos)
+// Event tracking functions
 export const trackEvent = (eventName: string, eventData?: Record<string, any>) => {
   if (typeof window !== "undefined" && (window as any).gtag) {
     (window as any).gtag("event", eventName, eventData);
