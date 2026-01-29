@@ -29,34 +29,6 @@ const FORM_QUESTIONS = [
     type: "text",
     placeholder: "Ex: UFMG 2024, ENEM, Concurso Público Prefeitura...",
     required: true
-  },
-  {
-    id: "motivo",
-    label: "O que a banca alegou para te eliminar?",
-    type: "textarea",
-    placeholder: "Ex: Disseram que não tenho fenótipo, questionaram minha autodeclaração, problemas na documentação...",
-    required: true
-  },
-  {
-    id: "prazo",
-    label: "Quanto tempo você tem para recorrer?",
-    type: "text",
-    placeholder: "Ex: 48 horas, 5 dias, já venceu o prazo...",
-    required: true
-  },
-  {
-    id: "documentacao",
-    label: "Você tem documentação que comprove sua identidade racial?",
-    type: "textarea",
-    placeholder: "Ex: Tenho autodeclaração, certidão de nascimento de parentes, fotos, documentação indígena...",
-    required: true
-  },
-  {
-    id: "estagio",
-    label: "Como você quer agir agora?",
-    type: "textarea",
-    placeholder: "Ex: Quero fazer recurso administrativo rápido, quero ação judicial, já tentei recurso e fui negado...",
-    required: true
   }
 ];
 
@@ -95,10 +67,6 @@ export default function ConsultaPage() {
     const linhas = [
       "Olá Dr. Marcelo! Preciso de ajuda com meu caso de heteroidentificação.\n",
       `*Concurso/Vestibular:* ${respostas.concurso}`,
-      `*Motivo do Indeferimento:* ${respostas.motivo}`,
-      `*Prazo para Recorrer:* ${respostas.prazo}`,
-      `*Documentação Disponível:* ${respostas.documentacao}`,
-      `*Estágio do Processo:* ${respostas.estagio}`,
       "\nPreciso de orientação sobre os próximos passos."
     ];
     return linhas.join("\n");
