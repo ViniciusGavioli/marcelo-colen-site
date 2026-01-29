@@ -1,12 +1,8 @@
-"use client";
-
-import { useState } from "react";
 import Image from "next/image";
-import { MessageCircle, ChevronDown } from "lucide-react";
+import { MessageCircle } from "lucide-react";
 import { Container } from "@/components/layout";
-import { SITE_CONFIG } from "@/lib/constants";
 import { getWhatsAppLink } from "@/lib/whatsapp";
-import { trackWhatsAppClick } from "@/lib/analytics";
+import { DefesaFAQ } from "@/components/landing/defesa-faq";
 import { metadata } from "./metadata";
 
 export { metadata };
@@ -78,8 +74,6 @@ const STEPS = [
 ];
 
 export default function DefesaPage() {
-  const [faqAberto, setFaqAberto] = useState<number | null>(0);
-
   return (
     <main>
       {/* ========== SEÇÃO HERO ========== */}
@@ -103,7 +97,7 @@ export default function DefesaPage() {
             fill
             className="object-cover object-center"
           />
-          <div 
+          <div
             className="absolute inset-0"
             style={{ background: 'linear-gradient(90deg, rgba(64,26,12,0.95) 0%, rgba(64,26,12,0.7) 40%, rgba(64,26,12,0.3) 70%, transparent 100%)' }}
           />
@@ -111,12 +105,12 @@ export default function DefesaPage() {
 
         <Container className="relative z-10 py-20">
           <div className="max-w-3xl">
-            <h1 
+            <h1
               style={{ color: '#FFFFFF', fontFamily: 'Georgia, serif', fontStyle: 'normal', fontSize: '3.5rem', fontWeight: '600', lineHeight: '1.2', marginBottom: '1.5rem', letterSpacing: '-0.02em' }}
             >
               Você sofreu racismo.
             </h1>
-            
+
             <p style={{ fontSize: '1.5rem', fontWeight: '600', marginBottom: '1.5rem', color: '#FFFFFF', lineHeight: '1.4' }}>
               A culpa não é sua. Você não está sozinho(a).
             </p>
@@ -130,7 +124,6 @@ export default function DefesaPage() {
                 href={getWhatsAppLink("Olá, Dr. Marcelo. Sofri racismo e gostaria de orientação sobre como proceder.")}
                 target="_blank"
                 rel="noopener noreferrer"
-                onClick={trackWhatsAppClick}
                 className="inline-flex items-center justify-center gap-3 px-10 py-5 font-semibold text-base rounded-md transition-all hover:scale-[1.05] active:scale-[0.95]"
                 style={{ backgroundColor: '#25D366', color: '#FFFFFF' }}
               >
@@ -148,7 +141,7 @@ export default function DefesaPage() {
           <div className="max-w-4xl mx-auto">
             <div className="space-y-12">
               <div className="space-y-4">
-                <h2 
+                <h2
                   className="text-3xl sm:text-4xl font-bold text-center"
                   style={{ color: '#0A192F', fontFamily: 'Georgia, serif' }}
                 >
@@ -188,7 +181,7 @@ export default function DefesaPage() {
           <div className="max-w-4xl mx-auto">
             <div className="space-y-12">
               <div className="space-y-4">
-                <h2 
+                <h2
                   className="text-3xl sm:text-4xl font-bold text-center"
                   style={{ color: '#0A192F', fontFamily: 'Georgia, serif' }}
                 >
@@ -225,7 +218,7 @@ export default function DefesaPage() {
           <div className="max-w-4xl mx-auto">
             <div className="space-y-12">
               <div className="space-y-4">
-                <h2 
+                <h2
                   className="text-3xl sm:text-4xl font-bold text-center"
                   style={{ color: '#0A192F', fontFamily: 'Georgia, serif' }}
                 >
@@ -239,12 +232,12 @@ export default function DefesaPage() {
               <div className="space-y-4">
                 {STEPS.map((step, idx) => (
                   <div key={idx} className="flex gap-4 p-6 rounded-lg" style={{ backgroundColor: '#FFFFFF', border: '1px solid #D9E0E8' }}>
-                    <div 
-                      style={{ 
-                        width: '3rem', 
-                        height: '3rem', 
-                        borderRadius: '50%', 
-                        backgroundColor: '#401A0C', 
+                    <div
+                      style={{
+                        width: '3rem',
+                        height: '3rem',
+                        borderRadius: '50%',
+                        backgroundColor: '#401A0C',
                         color: '#FFFFFF',
                         display: 'flex',
                         alignItems: 'center',
@@ -278,7 +271,7 @@ export default function DefesaPage() {
           <div className="max-w-3xl mx-auto">
             <div className="space-y-12">
               <div className="space-y-3">
-                <h2 
+                <h2
                   className="text-3xl sm:text-4xl font-bold text-center"
                   style={{ color: '#0A192F', fontFamily: 'Georgia, serif' }}
                 >
@@ -289,49 +282,14 @@ export default function DefesaPage() {
                 </p>
               </div>
 
-              <div className="space-y-3">
-                {FAQ_ITEMS.map((item, index) => (
-                  <div 
-                    key={index}
-                    className="border rounded-lg overflow-hidden transition-all"
-                    style={{ 
-                      borderColor: '#D9E0E8',
-                      backgroundColor: faqAberto === index ? '#F8F9FA' : '#FFFFFF'
-                    }}
-                  >
-                    <button
-                      onClick={() => setFaqAberto(faqAberto === index ? null : index)}
-                      className="w-full flex items-center justify-between p-5 text-left hover:bg-gray-50 transition-colors"
-                    >
-                      <span className="font-semibold text-base pr-4" style={{ color: '#0A192F' }}>
-                        {item.question}
-                      </span>
-                      <ChevronDown 
-                        className={`w-5 h-5 transition-transform flex-shrink-0 ${
-                          faqAberto === index ? "rotate-180" : ""
-                        }`} 
-                        style={{ color: '#5B6676' }}
-                      />
-                    </button>
-                    
-                    {faqAberto === index && (
-                      <div 
-                        className="px-5 pb-5 text-base leading-relaxed border-t"
-                        style={{ color: '#333333', borderColor: '#D9E0E8' }}
-                      >
-                        {item.answer}
-                      </div>
-                    )}
-                  </div>
-                ))}
-              </div>
+              <DefesaFAQ items={FAQ_ITEMS} />
             </div>
           </div>
         </Container>
       </section>
 
       {/* ========== SEÇÃO CTA FINAL ========== */}
-      <section 
+      <section
         className="relative py-20 overflow-hidden"
         style={{ backgroundColor: '#401A0C' }}
       >
@@ -343,24 +301,24 @@ export default function DefesaPage() {
             fill
             className="object-cover object-center"
           />
-          <div 
+          <div
             className="absolute inset-0"
-            style={{ 
-              background: 'linear-gradient(90deg, rgba(64,26,12,1) 0%, rgba(64,26,12,0.5) 50%, rgba(64,26,12,0.3) 100%)' 
+            style={{
+              background: 'linear-gradient(90deg, rgba(64,26,12,1) 0%, rgba(64,26,12,0.5) 50%, rgba(64,26,12,0.3) 100%)'
             }}
           />
         </div>
 
         <Container className="relative z-10">
           <div className="max-w-3xl mx-auto space-y-8 text-center">
-            <h2 
+            <h2
               className="text-2xl sm:text-3xl lg:text-4xl font-bold leading-tight"
               style={{ color: '#FFFFFF', fontFamily: 'Georgia, serif' }}
             >
               Dê o Primeiro Passo Rumo à Justiça
             </h2>
 
-            <p 
+            <p
               className="text-base lg:text-lg leading-relaxed"
               style={{ color: 'rgba(255, 255, 255, 0.85)' }}
             >
@@ -372,10 +330,9 @@ export default function DefesaPage() {
                 href={getWhatsAppLink("Olá, Dr. Marcelo. Sofri racismo e gostaria de orientação jurídica.")}
                 target="_blank"
                 rel="noopener noreferrer"
-                onClick={trackWhatsAppClick}
                 className="inline-flex items-center justify-center gap-3 px-10 py-5 font-semibold text-base rounded-md transition-all hover:scale-105 active:scale-95"
-                style={{ 
-                  backgroundColor: '#25D366', 
+                style={{
+                  backgroundColor: '#25D366',
                   color: '#FFFFFF',
                 }}
               >
