@@ -14,7 +14,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Reprovado na Banca de Heteroidentificação?",
     description: "Não se desespere. A defesa começa agora. Análise gratuita do seu caso.",
-    url: `${SITE_CONFIG.url}/qualificacao`,
+    url: `${SITE_CONFIG.url}/consulta`,
     siteName: SITE_CONFIG.fullName,
     locale: "pt_BR",
     type: "website",

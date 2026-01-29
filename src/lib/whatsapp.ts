@@ -9,7 +9,7 @@ export function getWhatsAppLink(
   _message?: string,
   _phone?: string
 ): string {
-  return "/qualificacao";
+  return "/consulta";
 }
 
 /**
@@ -18,5 +18,5 @@ export function getWhatsAppLink(
  * @returns URL da página de qualificação
  */
 export function getWhatsAppLinkWithContext(_context: string): string {
-  return "/qualificacao";
+  return "/consulta";
 }
