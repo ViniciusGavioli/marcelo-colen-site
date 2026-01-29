@@ -6,7 +6,7 @@ export function CotasImpedidoWordpress() {
   return (
     <section 
       className="py-16 lg:py-24"
-      style={{ backgroundColor: '#FFFFFF' }}
+      style={{ backgroundColor: '#D9D9D9' }}
     >
       <Container>
         <div className="grid lg:grid-cols-2 gap-12 items-center">

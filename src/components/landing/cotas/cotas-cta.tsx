@@ -2,7 +2,7 @@
 
 import { MessageCircle, Clock, MapPin, CheckCircle } from "lucide-react";
 import { Container } from "@/components/layout";
-import { Portrait } from "@/components/ui/portrait";
+import Image from "next/image";
 import { getWhatsAppLink } from "@/lib/whatsapp";
 
 const WHATSAPP_MESSAGE =
@@ -12,47 +12,36 @@ export function CotasCta() {
   return (
     <section 
       className="py-16 md:py-24"
-      style={{ backgroundColor: '#0A192F' }}
+      style={{ backgroundColor: '#FFFFFF' }}
     >
       <Container>
-        {/* Manifesto quote */}
-        <div 
-          className="max-w-4xl mx-auto text-center mb-16 pb-16"
-          style={{ borderBottom: '1px solid rgba(197,160,89,0.2)' }}
-        >
-          <blockquote 
-            className="font-serif text-xl md:text-2xl lg:text-3xl font-medium leading-relaxed italic"
-            style={{ color: '#FFFFFF' }}
-          >
-            &ldquo;A presença de pessoas negras no serviço público é fundamental para a 
-            promoção da <span style={{ color: '#C5A059' }}>igualdade racial</span>, 
-            da <span style={{ color: '#C5A059' }}>justiça social</span> e da 
-            <span style={{ color: '#C5A059' }}> representatividade institucional</span> no Brasil.&rdquo;
-          </blockquote>
-        </div>
-
         {/* Main CTA */}
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+          {/* Portrait */}
+          <div className="relative">
+            <div 
+              className="absolute top-4 left-4 w-24 h-32"
+              style={{ backgroundColor: '#E5A853' }}
+            />
+            <Image
+              src="/images/marcelo/marcelo-cta.jpg"
+              alt="Dr. Marcelo Colen - Advogado especialista"
+              width={500}
+              height={600}
+              className="relative w-full h-auto object-cover"
+              style={{ aspectRatio: '4/5' }}
+            />
+          </div>
+
           {/* Content */}
           <div className="space-y-6">
-            {/* Eyebrow */}
-            <div className="flex items-center gap-3">
-              <div className="w-12 h-px" style={{ backgroundColor: '#C5A059' }} />
-              <p 
-                className="font-medium tracking-widest uppercase text-xs"
-                style={{ color: '#C5A059' }}
-              >
-                Não deixe seu sonho escapar
-              </p>
-            </div>
-
             {/* Headline */}
             <h2 
-              className="font-serif text-3xl md:text-4xl lg:text-5xl font-medium leading-tight"
-              style={{ color: '#FFFFFF' }}
+              className="text-3xl md:text-4xl font-bold leading-tight"
+              style={{ color: '#3D2A1E' }}
             >
               O prazo está correndo.{" "}
-              <span className="italic" style={{ color: '#C5A059' }}>
+              <span style={{ color: '#4A9B4A' }}>
                 Sua vaga está em risco.
               </span>
             </h2>
@@ -60,7 +49,7 @@ export function CotasCta() {
             {/* Subheadline */}
             <p 
               className="text-lg leading-relaxed"
-              style={{ color: 'rgba(255,255,255,0.85)' }}
+              style={{ color: '#666666' }}
             >
               Cada hora que passa diminui suas chances de reverter a decisão. 
               Entre em contato agora e vamos lutar juntos pelo que é seu por direito.
@@ -79,8 +68,8 @@ export function CotasCta() {
                     key={index}
                     className="flex items-center gap-3"
                   >
-                    <Icon className="w-5 h-5" style={{ color: '#C5A059' }} />
-                    <span style={{ color: 'rgba(255,255,255,0.9)' }}>
+                    <Icon className="w-5 h-5" style={{ color: '#4A9B4A' }} />
+                    <span style={{ color: '#3D2A1E' }}>
                       {item.text}
                     </span>
                   </div>
@@ -94,12 +83,10 @@ export function CotasCta() {
                 href={getWhatsAppLink(WHATSAPP_MESSAGE)}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center justify-center gap-3 px-10 py-5 font-bold text-lg transition-all duration-200 hover:scale-[1.02] hover:shadow-2xl w-full sm:w-auto"
+                className="inline-flex items-center justify-center gap-3 px-10 py-5 font-bold text-lg transition-all duration-200 hover:opacity-90 w-full sm:w-auto rounded-lg"
                 style={{ 
-                  backgroundColor: '#25D366',
+                  backgroundColor: '#4A9B4A',
                   color: '#FFFFFF',
-                  borderRadius: '4px',
-                  boxShadow: '0 4px 20px rgba(37,211,102,0.3)'
                 }}
               >
                 <MessageCircle className="w-6 h-6" />
@@ -110,104 +97,14 @@ export function CotasCta() {
             {/* Urgency text */}
             <p 
               className="text-sm flex items-center gap-2"
-              style={{ color: 'rgba(255,255,255,0.6)' }}
+              style={{ color: '#666666' }}
             >
               <span 
                 className="w-2 h-2 rounded-full animate-pulse"
-                style={{ backgroundColor: '#25D366' }}
+                style={{ backgroundColor: '#4A9B4A' }}
               />
               Atendimento prioritário para casos urgentes
             </p>
-          </div>
-
-          {/* Portrait */}
-          <div className="relative hidden lg:block">
-            <div 
-              className="absolute -top-4 -right-4 w-full h-full"
-              style={{ border: '1px solid rgba(197,160,89,0.2)' }}
-            />
-            
-            <Portrait
-              src="/images/marcelo/marcelo-cta.jpg"
-              alt="Dr. Marcelo Colen - Advogado especialista"
-              sizes="(max-width: 1024px) 100vw, 520px"
-              containerClassName="aspect-[4/5] w-full"
-            />
-
-            {/* Badge */}
-            <div 
-              className="absolute -bottom-4 -left-4 py-4 px-6"
-              style={{ 
-                backgroundColor: '#C5A059',
-              }}
-            >
-              <p 
-                className="font-medium"
-                style={{ color: '#0A192F' }}
-              >
-                Marcelo Colen
-              </p>
-              <p 
-                className="text-sm"
-                style={{ color: 'rgba(10,25,47,0.7)' }}
-              >
-                OAB/MG 167.463
-              </p>
-            </div>
-          </div>
-        </div>
-
-        {/* Instagram + Contact */}
-        <div 
-          className="mt-16 pt-12 text-center"
-          style={{ borderTop: '1px solid rgba(197,160,89,0.2)' }}
-        >
-          <p 
-            className="font-serif text-xl mb-4"
-            style={{ color: '#FFFFFF' }}
-          >
-            Acompanhe meu trabalho
-          </p>
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <a 
-              href="https://www.instagram.com/marcelocolen.adv/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-6 py-3 transition-colors"
-              style={{ 
-                border: '1px solid rgba(197,160,89,0.4)',
-                color: '#C5A059',
-                borderRadius: '4px'
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.backgroundColor = 'rgba(197,160,89,0.1)';
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.backgroundColor = 'transparent';
-              }}
-            >
-              @marcelocolen.adv
-            </a>
-            <a 
-              href={getWhatsAppLink()}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-6 py-3 transition-colors"
-              style={{ 
-                border: '1px solid rgba(255,255,255,0.2)',
-                color: '#FFFFFF',
-                borderRadius: '4px'
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.backgroundColor = 'rgba(255,255,255,0.05)';
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.backgroundColor = 'transparent';
-              }}
-            >
-              <MessageCircle className="w-4 h-4" />
-              Falar com advogado
-            </a>
           </div>
         </div>
       </Container>

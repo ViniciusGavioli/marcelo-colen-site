@@ -1,159 +1,120 @@
 "use client";
 
+import Image from "next/image";
 import { MessageCircle } from "lucide-react";
 import { Container } from "@/components/layout";
-import { Portrait } from "@/components/ui/portrait";
 import { getWhatsAppLink } from "@/lib/whatsapp";
 
 const CREDENTIALS = [
-  "OAB/MG 167.463",
   "Diretor de Diversidade e Inclusão da OAB/MG (2025–2027)",
-  "Presidente da Comissão de Igualdade Racial da OAB/MG (2022–2024)",
+  "Presidente da Comissão Estadual de Promoção da Igualdade Racial da OAB/MG (2022–2024)",
   "Conselheiro Seccional da OAB/MG (2022–2024)",
-  "Diretor do Núcleo de Igualdade Racial da ESA OAB/MG",
-  "Conselheiro Municipal de Igualdade Racial de Belo Horizonte",
-  "Mestrando em Direito pela UFMG",
-  "Autor do Manual Antirracismo no Esporte (Amstel®)",
+  "Diretor do Núcleo de Promoção da Igualdade Racial da ESA OAB/MG (2022–2024)",
+  "Conselheiro Municipal de Promoção da Igualdade Racial de Belo Horizonte (2022–2024)",
 ];
 
 export function CotasBio() {
   return (
     <section 
       id="quem-sou"
-      className="py-16 md:py-24"
-      style={{ backgroundColor: '#0A192F' }}
+      className="py-16 md:py-24 relative overflow-hidden"
+      style={{ backgroundColor: '#FFFFFF' }}
     >
-      <Container>
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-          {/* Content */}
-          <div className="space-y-6 order-2 lg:order-1">
-            {/* Eyebrow */}
-            <div className="flex items-center gap-3">
-              <div className="w-12 h-px" style={{ backgroundColor: '#C5A059' }} />
-              <p 
-                className="font-medium tracking-widest uppercase text-xs"
-                style={{ color: '#C5A059' }}
-              >
-                Sobre
-              </p>
-            </div>
+      {/* Background pattern sutil */}
+      <div 
+        className="absolute inset-0 opacity-[0.03] pointer-events-none"
+        style={{
+          backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23000000' fill-opacity='1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
+        }}
+      />
 
+      <Container>
+        <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center relative">
+          {/* Content */}
+          <div className="space-y-6">
             {/* Headline */}
             <h2 
-              className="font-serif text-3xl md:text-4xl font-medium leading-tight"
-              style={{ color: '#FFFFFF' }}
+              className="text-3xl md:text-4xl font-bold leading-tight"
+              style={{ color: '#6B21A8' }}
             >
-              Quem é{" "}
-              <span className="italic" style={{ color: '#C5A059' }}>
-                Marcelo Colen
-              </span>
+              Olá, sou Dr. Marcelo Ladeia Colen Guterres!
             </h2>
 
             {/* Bio text */}
-            <div className="space-y-4" style={{ color: 'rgba(255,255,255,0.85)' }}>
-              <p className="text-lg leading-relaxed">
-                Advogado, professor, palestrante e consultor em{" "}
-                <strong style={{ color: '#FFFFFF' }}>Compliance Antidiscriminatório</strong>.
+            <div className="space-y-4" style={{ color: '#333' }}>
+              <p className="leading-relaxed">
+                <strong>Advogado, professor, palestrante e consultor em Compliance Antidiscriminatório.</strong>
+              </p>
+              <p className="leading-relaxed">
+                <strong>Mestrando em Direito pela UFMG e pós-graduado em Gestão Estratégica na Advocacia.</strong>
               </p>
               
               <p className="leading-relaxed">
-                Mestrando em Direito pela UFMG e pós-graduado em Gestão Estratégica na Advocacia. 
-                Atua com ênfase em <strong style={{ color: '#FFFFFF' }}>igualdade racial, diversidade institucional 
-                e direitos humanos</strong>.
-              </p>
-
-              <p className="leading-relaxed">
-                É autor do Manual Antirracismo no Esporte, adotado pela Amstel® na campanha 
-                &ldquo;Barulho Contra o Racismo&rdquo; – Copa Libertadores 2022.
+                Atua com ênfase em igualdade racial, diversidade institucional e direitos 
+                humanos. É autor do <em>Manual Antirracismo no Esporte</em>, adotado pela 
+                Amstel® na campanha "Barulho Contra o Racismo" – Copa Libertadores 2022.
               </p>
             </div>
 
             {/* Credentials list */}
-            <div className="pt-4">
+            <div className="pt-2">
               <p 
-                className="text-sm font-medium uppercase tracking-wider mb-4"
-                style={{ color: '#C5A059' }}
+                className="font-bold mb-3"
+                style={{ color: '#1a1a1a' }}
               >
-                Atuação Institucional
+                Atuação institucional destacada:
               </p>
-              <ul className="grid sm:grid-cols-2 gap-x-6 gap-y-2">
+              <ul className="space-y-1">
                 {CREDENTIALS.map((credential, index) => (
                   <li
                     key={index}
                     className="text-sm flex items-start gap-2"
-                    style={{ color: 'rgba(255,255,255,0.8)' }}
+                    style={{ color: '#333' }}
                   >
-                    <span 
-                      className="w-1.5 h-1.5 mt-1.5 shrink-0"
-                      style={{ backgroundColor: '#C5A059' }}
-                    />
+                    <span className="mt-1">•</span>
                     {credential}
                   </li>
                 ))}
               </ul>
             </div>
 
-            {/* CTA */}
-            <div className="pt-6">
+            {/* CTA - Botão Marrom */}
+            <div className="pt-4">
               <a
                 href={getWhatsAppLink("Olá, Marcelo. Fui indeferido(a) na heteroidentificação e preciso entender prazos e como funciona o recurso. Posso te passar meu caso?")}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center justify-center gap-3 px-8 py-4 font-semibold transition-all duration-200 hover:scale-[1.02]"
+                className="inline-flex items-center justify-center gap-3 px-8 py-4 font-bold text-sm uppercase tracking-wider transition-all duration-200 hover:brightness-110"
                 style={{ 
-                  backgroundColor: '#C5A059',
-                  color: '#0A192F',
+                  backgroundColor: '#8B4513',
+                  color: '#FFFFFF',
                   borderRadius: '4px'
                 }}
               >
                 <MessageCircle className="w-5 h-5" />
-                Falar com Marcelo
+                Entre em Contato
               </a>
             </div>
           </div>
 
-          {/* Portrait */}
-          <div className="relative order-1 lg:order-2">
-            {/* Decorative frame */}
+          {/* Photo com bloco amarelo */}
+          <div className="relative">
+            {/* Bloco amarelo atrás */}
             <div 
-              className="absolute -top-4 -left-4 w-full h-full hidden lg:block"
-              style={{ border: '1px solid rgba(197,160,89,0.3)' }}
+              className="absolute top-0 right-0 w-3/4 h-1/2 hidden lg:block"
+              style={{ backgroundColor: '#E5A853' }}
             />
             
-            <div 
-              className="relative overflow-hidden"
-              style={{ 
-                border: '1px solid rgba(255,255,255,0.1)'
-              }}
-            >
-              <Portrait
+            {/* Foto */}
+            <div className="relative z-10 lg:mr-8">
+              <Image
                 src="/images/marcelo/marcelo-bio.jpg"
                 alt="Dr. Marcelo Colen - Advogado"
-                sizes="(max-width: 1024px) 100vw, 560px"
-                containerClassName="aspect-[4/5] w-full"
+                width={500}
+                height={625}
+                className="w-full h-auto object-cover shadow-xl"
+                style={{ aspectRatio: '4/5' }}
               />
-            </div>
-
-            {/* Name badge */}
-            <div 
-              className="absolute -bottom-4 -right-4 py-4 px-6 hidden lg:block"
-              style={{ 
-                backgroundColor: '#0A192F',
-                border: '1px solid #C5A059'
-              }}
-            >
-              <p 
-                className="font-serif text-lg"
-                style={{ color: '#FFFFFF' }}
-              >
-                Marcelo Ladeia Colen Guterres
-              </p>
-              <p 
-                className="text-xs mt-1"
-                style={{ color: '#C5A059' }}
-              >
-                Advogado • OAB/MG 167.463
-              </p>
             </div>
           </div>
         </div>

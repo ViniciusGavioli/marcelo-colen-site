@@ -1,6 +1,5 @@
 import type { Metadata, Viewport } from "next";
 import "./globals.css";
-import { Header, Footer } from "@/components/layout";
 import { SITE_CONFIG, DEFAULT_SEO } from "@/lib/constants";
 
 export const viewport: Viewport = {
@@ -49,6 +48,8 @@ export const metadata: Metadata = {
   },
 };
 
+// Root Layout - apenas HTML/Body
+// Header/Footer são adicionados no (main)/layout.tsx
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -57,9 +58,7 @@ export default function RootLayout({
   return (
     <html lang="pt-BR">
       <body className="min-h-screen flex flex-col antialiased">
-        <Header />
-        <main className="flex-1 pt-16 md:pt-20">{children}</main>
-        <Footer />
+        {children}
       </body>
     </html>
   );

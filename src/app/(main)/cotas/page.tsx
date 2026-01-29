@@ -4,7 +4,7 @@ import { SITE_CONFIG } from "@/lib/constants";
 import { getFAQSchema, getServiceSchema } from "@/lib/schema";
 
 // Components LP /cotas
-import { CotasHero } from "@/components/landing/cotas/cotas-hero";
+import { CotasHeroV2 } from "@/components/landing/cotas/cotas-hero-v2";
 import { CotasNaoEOFim } from "@/components/landing/cotas/cotas-nao-e-o-fim";
 import { CotasBio } from "@/components/landing/cotas/cotas-bio";
 import { CotasProvaSocial } from "@/components/landing/cotas/cotas-prova-social";
@@ -104,8 +104,8 @@ export default function CotasPage() {
         9. CTA Final (conversão)
       */}
       <main>
-        {/* 1. HERO - H1 com keyword forte */}
-        <CotasHero />
+        {/* 1. HERO - Layout marrom premium */}
+        <CotasHeroV2 />
         
         {/* 2. MANIFESTO - Empatia + "O direito não é favor" */}
         <CotasNaoEOFim />

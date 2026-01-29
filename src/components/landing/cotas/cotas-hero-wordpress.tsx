@@ -12,176 +12,134 @@ export function CotasHeroWordpress() {
   const { hero } = COTAS_PAGE;
 
   return (
-    <section 
-      className="relative min-h-screen flex items-center overflow-hidden"
-      style={{ 
-        backgroundColor: '#3D2314',
-      }}
-    >
-      {/* Grid de fotos no fundo - lado direito */}
-      <div className="absolute right-0 top-0 bottom-0 w-full lg:w-3/5 hidden lg:block">
-        <div className="grid grid-cols-3 h-full">
-          {/* Coluna 1 */}
-          <div className="flex flex-col">
-            <div className="flex-1 relative overflow-hidden">
-              <Image
-                src="/images/wordpress/biblioteca.jpg"
-                alt="Estudante na biblioteca"
-                fill
-                className="object-cover opacity-70"
-              />
+    <section className="relative overflow-hidden" style={{ backgroundColor: '#401A0C' }}>
+      
+      {/* Grafismo - atrás de tudo, só no topo */}
+      <div className="absolute top-0 left-0 right-0 opacity-[0.06] z-0">
+        <div className="flex">
+          {[...Array(5)].map((_, i) => (
+            <div key={`g1-${i}`} className="relative h-12" style={{ width: '20%' }}>
+              <Image src="/images/wordpress/grafismo-sabedoria.png" alt="" fill className="object-cover" style={{ filter: 'invert(1)' }} />
             </div>
-            <div className="flex-1 relative overflow-hidden">
-              <Image
-                src="/images/wordpress/painel.jpg"
-                alt="Painel de discussão"
-                fill
-                className="object-cover opacity-70"
-              />
+          ))}
+        </div>
+        <div className="flex">
+          {[...Array(5)].map((_, i) => (
+            <div key={`g2-${i}`} className="relative h-12" style={{ width: '20%' }}>
+              <Image src="/images/wordpress/grafismo-sabedoria.png" alt="" fill className="object-cover" style={{ filter: 'invert(1)' }} />
             </div>
-            <div className="flex-1 relative overflow-hidden">
-              <Image
-                src="/images/wordpress/estudantes.jpg"
-                alt="Estudantes universitários"
-                fill
-                className="object-cover opacity-70"
-              />
+          ))}
+        </div>
+        <div className="flex">
+          {[...Array(5)].map((_, i) => (
+            <div key={`g3-${i}`} className="relative h-12" style={{ width: '20%' }}>
+              <Image src="/images/wordpress/grafismo-sabedoria.png" alt="" fill className="object-cover" style={{ filter: 'invert(1)' }} />
             </div>
-          </div>
-          
-          {/* Coluna 2 - Marcelo no centro */}
-          <div className="relative overflow-hidden">
-            <Image
-              src="/images/wordpress/marcelo-hero.jpg"
-              alt="Dr. Marcelo Colen"
-              fill
-              className="object-cover object-top"
-              priority
-            />
-          </div>
-          
-          {/* Coluna 3 */}
-          <div className="flex flex-col">
-            <div className="flex-1 relative overflow-hidden">
-              <Image
-                src="/images/wordpress/cotas.jpg"
-                alt="Marcelo sorrindo"
-                fill
-                className="object-cover opacity-70"
-              />
-            </div>
-            <div className="flex-1 relative overflow-hidden">
-              <Image
-                src="/images/wordpress/marcelo-bio.jpg"
-                alt="Marcelo perfil"
-                fill
-                className="object-cover opacity-70"
-              />
-            </div>
-            <div className="flex-1 relative overflow-hidden">
-              <Image
-                src="/images/wordpress/marcelo-cta.jpg"
-                alt="Marcelo no escritório"
-                fill
-                className="object-cover opacity-70"
-              />
-            </div>
-          </div>
+          ))}
         </div>
       </div>
 
-      {/* Gradiente marrom para o texto */}
-      <div 
-        className="absolute inset-0 lg:hidden"
-        style={{ 
-          background: 'linear-gradient(180deg, rgba(61,35,20,0.95) 0%, rgba(61,35,20,0.9) 100%)' 
-        }}
-      />
-      <div 
-        className="absolute left-0 top-0 bottom-0 w-full lg:w-1/2 hidden lg:block"
-        style={{ 
-          background: 'linear-gradient(90deg, rgba(61,35,20,1) 0%, rgba(61,35,20,0.98) 60%, rgba(61,35,20,0.7) 85%, rgba(61,35,20,0) 100%)' 
-        }}
-      />
+      {/* Pessoas de fundo */}
+      <div className="absolute inset-0">
+        <Image
+          src="/images/wordpress/movimento.png"
+          alt="Pessoas diversas"
+          fill
+          className="object-cover object-center opacity-50"
+        />
+        <div 
+          className="absolute inset-0"
+          style={{ background: 'linear-gradient(90deg, rgba(61,35,20,0.95) 0%, rgba(61,35,20,0.7) 40%, rgba(61,35,20,0.3) 70%, transparent 100%)' }}
+        />
+      </div>
 
-      <Container className="relative z-10 py-16 lg:py-24">
-        <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
-          
-          {/* ============================================ */}
-          {/* CONTENT SIDE - Left */}
-          {/* ============================================ */}
-          <div className="space-y-6">
-            
-            {/* Main Headline */}
-            <h1 
-              className="text-3xl sm:text-4xl lg:text-5xl font-light leading-tight"
-              style={{ 
-                color: '#FFFFFF',
-                fontFamily: 'system-ui, -apple-system, sans-serif'
-              }}
-            >
-              {hero.headline}
+      {/* MOBILE: Layout em coluna */}
+      <div className="lg:hidden relative z-10">
+        <Container className="pt-16 pb-8">
+          <div className="space-y-5">
+            <h1 className="text-[1.75rem] sm:text-4xl font-bold leading-[1.2] tracking-tight" style={{ color: '#FFFFFF', fontFamily: 'Georgia, "Times New Roman", serif' }}>
+              Foi vítima de injustiça<br />na banca de heteroidentificação?
             </h1>
-
-            {/* Highlight */}
-            <p 
-              className="text-xl sm:text-2xl font-bold"
-              style={{ color: '#FFFFFF' }}
-            >
+            <p className="text-xl sm:text-2xl font-bold" style={{ color: '#FFFFFF' }}>
               {hero.headlineHighlight}
             </p>
-
-            {/* Subheadline */}
-            <p 
-              className="text-base lg:text-lg leading-relaxed"
-              style={{ color: 'rgba(255, 255, 255, 0.9)' }}
-            >
+            <p className="text-base leading-relaxed" style={{ color: 'rgba(255, 255, 255, 0.9)' }}>
               E nós temos a estratégia jurídica para garantir isso.
             </p>
-
-            <p 
-              className="text-base lg:text-lg leading-relaxed"
-              style={{ color: 'rgba(255, 255, 255, 0.85)' }}
-            >
+            <p className="text-base leading-relaxed" style={{ color: 'rgba(255, 255, 255, 0.85)' }}>
               Atuamos com excelência em recursos administrativos e ações judiciais para reverter indeferimentos indevidos em concursos públicos e vestibulares.
             </p>
-
-            {/* CTA Button - WhatsApp Green */}
-            <div className="pt-4">
+            <div className="pt-2">
               <a
                 href={getWhatsAppLink(WHATSAPP_MESSAGE)}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center justify-center gap-3 px-8 py-4 font-semibold text-base transition-all duration-300 hover:scale-105 hover:shadow-2xl rounded-md"
-                style={{ 
-                  backgroundColor: '#25D366', 
-                  color: '#FFFFFF',
-                  boxShadow: '0 4px 20px rgba(37, 211, 102, 0.3)'
-                }}
+                className="inline-flex items-center justify-center gap-3 px-8 py-4 font-semibold text-base rounded-md"
+                style={{ backgroundColor: '#25D366', color: '#FFFFFF' }}
               >
                 <MessageCircle className="w-5 h-5" />
                 REALIZE UMA CONSULTA
               </a>
             </div>
           </div>
+        </Container>
+        
+        {/* Imagem do Marcelo - abaixo do conteúdo no mobile */}
+        <div className="relative w-full flex justify-center">
+          <Image
+            src="/images/wordpress/marcelo-terno.png"
+            alt="Dr. Marcelo Colen"
+            width={400}
+            height={520}
+            className="object-contain w-[80%] max-w-[350px] h-auto"
+            priority
+          />
+        </div>
+      </div>
 
-          {/* Espaço vazio no desktop (as fotos estão no fundo) */}
-          <div className="hidden lg:block" />
-
-          {/* Mobile: Imagem do Marcelo */}
-          <div className="lg:hidden">
-            <div className="relative w-full aspect-[3/4] rounded-lg overflow-hidden">
-              <Image
-                src="/images/wordpress/marcelo-hero.jpg"
-                alt="Dr. Marcelo Colen"
-                fill
-                className="object-cover object-top"
-                priority
-              />
+      {/* DESKTOP: Layout original com imagem absoluta */}
+      <div className="hidden lg:block relative min-h-screen">
+        <Container className="relative z-10 pt-32">
+          <div className="max-w-xl space-y-6 pt-16">
+            <h1 className="text-5xl font-semibold leading-tight" style={{ color: '#FFFFFF', fontFamily: 'Georgia, Times New Roman, serif' }}>
+              {hero.headline}
+            </h1>
+            <p className="text-2xl font-bold" style={{ color: '#FFFFFF' }}>
+              {hero.headlineHighlight}
+            </p>
+            <p className="text-lg leading-relaxed" style={{ color: 'rgba(255, 255, 255, 0.9)' }}>
+              E nós temos a estratégia jurídica para garantir isso.
+            </p>
+            <p className="text-lg leading-relaxed" style={{ color: 'rgba(255, 255, 255, 0.85)' }}>
+              Atuamos com excelência em recursos administrativos e ações judiciais para reverter indeferimentos indevidos em concursos públicos e vestibulares.
+            </p>
+            <div className="pt-4">
+              <a
+                href={getWhatsAppLink(WHATSAPP_MESSAGE)}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center justify-center gap-3 px-8 py-4 font-semibold text-base rounded-md"
+                style={{ backgroundColor: '#25D366', color: '#FFFFFF' }}
+              >
+                <MessageCircle className="w-5 h-5" />
+                REALIZE UMA CONSULTA
+              </a>
             </div>
           </div>
+        </Container>
+
+        {/* Marcelo - posição absoluta no desktop */}
+        <div className="absolute bottom-0 right-[5%] w-[35%] max-h-[80vh]">
+          <Image
+            src="/images/wordpress/marcelo-terno.png"
+            alt="Dr. Marcelo Colen"
+            width={500}
+            height={650}
+            className="object-contain object-bottom w-full h-auto max-h-[80vh]"
+            priority
+          />
         </div>
-      </Container>
+      </div>
     </section>
   );
 }

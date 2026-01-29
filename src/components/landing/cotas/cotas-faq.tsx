@@ -14,27 +14,14 @@ export function CotasFaq() {
   };
 
   return (
-    <section className="py-20 lg:py-28" style={{ backgroundColor: '#F5EEE0' }}>
+    <section className="py-20 lg:py-28" style={{ backgroundColor: '#8B4513' }}>
       <Container>
         {/* Header */}
         <div className="max-w-3xl mx-auto text-center mb-16">
-          
-          {/* Eyebrow */}
-          <div className="flex items-center justify-center gap-4 mb-8">
-            <div className="w-12 h-px" style={{ backgroundColor: '#C5A059' }} />
-            <p 
-              className="font-medium tracking-widest uppercase text-xs"
-              style={{ color: '#C5A059' }}
-            >
-              Tire suas duvidas
-            </p>
-            <div className="w-12 h-px" style={{ backgroundColor: '#C5A059' }} />
-          </div>
-
           {/* Headline */}
           <h2 
-            className="font-serif text-3xl sm:text-4xl lg:text-5xl font-medium leading-tight"
-            style={{ color: '#0A192F' }}
+            className="text-3xl sm:text-4xl font-bold leading-tight"
+            style={{ color: '#FFFFFF' }}
           >
             FAQ - Perguntas Frequentes
           </h2>
@@ -45,11 +32,10 @@ export function CotasFaq() {
           {faq.map((item, index) => (
             <div 
               key={index}
-              className="overflow-hidden transition-all duration-300"
+              className="overflow-hidden transition-all duration-300 rounded-lg"
               style={{ 
-                backgroundColor: '#FFFFFF',
-                border: openIndex === index ? '1px solid rgba(197, 160, 89, 0.3)' : '1px solid rgba(10, 25, 47, 0.1)',
-                boxShadow: openIndex === index ? '0 4px 20px rgba(197, 160, 89, 0.1)' : 'none'
+                backgroundColor: 'rgba(255,255,255,0.1)',
+                border: openIndex === index ? '1px solid rgba(255,255,255,0.3)' : '1px solid rgba(255,255,255,0.1)',
               }}
             >
               {/* Question */}
@@ -57,20 +43,20 @@ export function CotasFaq() {
                 onClick={() => toggleQuestion(index)}
                 className="w-full flex items-center justify-between p-6 text-left transition-colors"
                 style={{ 
-                  backgroundColor: openIndex === index ? 'rgba(197, 160, 89, 0.05)' : 'transparent'
+                  backgroundColor: openIndex === index ? 'rgba(255,255,255,0.05)' : 'transparent'
                 }}
               >
                 <span 
-                  className="font-serif text-lg font-medium pr-4"
-                  style={{ color: '#0A192F' }}
+                  className="text-lg font-semibold pr-4"
+                  style={{ color: '#FFFFFF' }}
                 >
                   {item.question}
                 </span>
                 <span 
                   className="shrink-0 w-8 h-8 flex items-center justify-center rounded-full transition-colors"
                   style={{ 
-                    backgroundColor: openIndex === index ? '#C5A059' : 'rgba(10, 25, 47, 0.05)',
-                    color: openIndex === index ? '#FFFFFF' : '#0A192F'
+                    backgroundColor: openIndex === index ? '#4A9B4A' : 'rgba(255,255,255,0.1)',
+                    color: '#FFFFFF'
                   }}
                 >
                   {openIndex === index ? (
@@ -92,7 +78,7 @@ export function CotasFaq() {
                 <div className="px-6 pb-6">
                   <p 
                     className="leading-relaxed"
-                    style={{ color: 'rgba(10, 25, 47, 0.8)' }}
+                    style={{ color: 'rgba(255,255,255,0.85)' }}
                   >
                     {item.answer}
                   </p>
@@ -106,16 +92,16 @@ export function CotasFaq() {
         <div className="text-center mt-12">
           <p 
             className="text-lg mb-4"
-            style={{ color: 'rgba(10, 25, 47, 0.7)' }}
+            style={{ color: 'rgba(255,255,255,0.7)' }}
           >
-            Ainda tem duvidas? Fale diretamente comigo.
+            Ainda tem dúvidas? Fale diretamente comigo.
           </p>
           <a
             href="https://api.whatsapp.com/send/?phone=5531972206996&text=Ol%C3%A1%21+Tenho+uma+d%C3%BAvida+sobre+heteroidentifica%C3%A7%C3%A3o."
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 text-lg font-medium transition-colors hover:underline"
-            style={{ color: '#C5A059' }}
+            className="inline-flex items-center gap-2 px-8 py-4 rounded-lg font-semibold text-white transition-all duration-300 hover:opacity-90"
+            style={{ backgroundColor: '#4A9B4A' }}
           >
             Falar no WhatsApp
             <span>→</span>

@@ -10,6 +10,7 @@ import { CotasBioWordpress } from "@/components/landing/cotas/cotas-bio-wordpres
 import { CotasBrasilWordpress } from "@/components/landing/cotas/cotas-brasil-wordpress";
 import { CotasHeteroWordpress } from "@/components/landing/cotas/cotas-hetero-wordpress";
 import { CotasPorqueWordpress } from "@/components/landing/cotas/cotas-porque-wordpress";
+import { CotasInstagramWordpress } from "@/components/landing/cotas/cotas-instagram-wordpress";
 import { CotasFaqWordpress } from "@/components/landing/cotas/cotas-faq-wordpress";
 import { CotasCtaWordpress } from "@/components/landing/cotas/cotas-cta-wordpress";
 import { FloatingWhatsApp } from "@/components/landing/cotas";
@@ -110,8 +111,11 @@ export default function CotasWordpressPage() {
         
         {/* 6. POR QUE RECORRER - Fundo claro */}
         <CotasPorqueWordpress />
+
+        {/* 7. INSTAGRAM / AUTORIDADE - Fundo branco */}
+        <CotasInstagramWordpress />
         
-        {/* 7. FAQ - Fundo branco */}
+        {/* 8. FAQ - Fundo branco */}
         <CotasFaqWordpress />
         
         {/* 8. CTA FINAL - Fundo escuro */}
