@@ -24,10 +24,24 @@ const FAQ_ITEMS = [
 
 const FORM_QUESTIONS = [
   {
-    id: "concurso",
-    label: "Em qual concurso/vestibular isso aconteceu?",
+    id: "vestibular",
+    label: "Qual vestibular / concurso você está participando?",
     type: "text",
-    placeholder: "Ex: UFMG 2024, ENEM, Concurso Público Prefeitura...",
+    placeholder: "Ex: UFMG 2024, ENEM, Concurso Público...",
+    required: true
+  },
+  {
+    id: "dataResultado",
+    label: "Quando recebeu o resultado da comissão de heteroidentificação?",
+    type: "text",
+    placeholder: "Ex: 15/01/2025",
+    required: true
+  },
+  {
+    id: "recurso",
+    label: "Apresentou recurso administrativo?",
+    type: "text",
+    placeholder: "Ex: Sim ou Não",
     required: true
   }
 ];
@@ -66,7 +80,9 @@ export default function ConsultaPage() {
   const montarMensagem = (): string => {
     const linhas = [
       "Olá Dr. Marcelo! Preciso de ajuda com meu caso de heteroidentificação.\n",
-      `*Concurso/Vestibular:* ${respostas.concurso}`,
+      `*Vestibular/Concurso:* ${respostas.vestibular}`,
+      `*Data do Resultado:* ${respostas.dataResultado}`,
+      `*Apresentou Recurso:* ${respostas.recurso}`,
       "\nPreciso de orientação sobre os próximos passos."
     ];
     return linhas.join("\n");
