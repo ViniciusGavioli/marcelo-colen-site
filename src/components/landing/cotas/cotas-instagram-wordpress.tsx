@@ -81,11 +81,6 @@ export function CotasInstagramWordpress() {
                     <p>Diretor da OAB/MG ⚠️</p>
                     <p>Atendimento 📲</p>
                   </div>
-
-                  {/* Followed by */}
-                  <p className="mt-2 text-xs text-gray-500">
-                    Seguido(a) por <span className="font-semibold">drathais.bh</span>, <span className="font-semibold">marinacolenfotografia</span> e outras 9 pessoas
-                  </p>
                 </div>
               </div>
             </div>
