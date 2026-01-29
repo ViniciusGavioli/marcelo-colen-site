@@ -1,27 +1,22 @@
-import { SITE_CONFIG, DEFAULT_MESSAGES } from "./constants";
+import { DEFAULT_MESSAGES } from "./constants";
 
 /**
- * Gera um link de WhatsApp com mensagem pré-definida
- * @param message - Mensagem customizada (opcional)
- * @param phone - Número do WhatsApp (opcional, usa padrão do site)
- * @returns URL do WhatsApp formatada
+ * Retorna o link para a página de qualificação (Bridge Page)
+ * Todos os CTAs de WhatsApp agora passam pela página de qualificação
+ * para filtrar leads antes de ir pro WhatsApp
  */
 export function getWhatsAppLink(
-  message?: string,
-  phone?: string
+  _message?: string,
+  _phone?: string
 ): string {
-  const phoneNumber = phone || SITE_CONFIG.contact.whatsapp;
-  const text = encodeURIComponent(message || DEFAULT_MESSAGES.whatsapp);
-  
-  return `https://wa.me/${phoneNumber}?text=${text}`;
+  return "/qualificacao";
 }
 
 /**
- * Gera link de WhatsApp para contexto específico
- * @param context - Contexto da mensagem (ex: página de origem)
- * @returns URL do WhatsApp formatada
+ * Gera link para a página de qualificação
+ * @param _context - Contexto da mensagem (não usado mais, mas mantido por compatibilidade)
+ * @returns URL da página de qualificação
  */
-export function getWhatsAppLinkWithContext(context: string): string {
-  const message = `Olá! Vim pelo site (${context}) e gostaria de mais informações.`;
-  return getWhatsAppLink(message);
+export function getWhatsAppLinkWithContext(_context: string): string {
+  return "/qualificacao";
 }
