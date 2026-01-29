@@ -5,6 +5,7 @@ import { MessageCircle } from "lucide-react";
 import { Container } from "@/components/layout";
 import { COTAS_PAGE } from "@/lib/cotas-data";
 import { getWhatsAppLink } from "@/lib/whatsapp";
+import { trackWhatsAppClick } from "@/lib/analytics";
 
 const WHATSAPP_MESSAGE = "Olá, Marcelo. Fui indeferido(a) na heteroidentificação e preciso entender prazos e como funciona o recurso. Posso te passar meu caso?";
 
@@ -74,6 +75,7 @@ export function CotasHeroWordpress() {
                 href={getWhatsAppLink(WHATSAPP_MESSAGE)}
                 target="_blank"
                 rel="noopener noreferrer"
+                onClick={trackWhatsAppClick}
                 className="inline-flex items-center justify-center gap-3 px-8 py-4 font-semibold text-base rounded-md"
                 style={{ backgroundColor: '#25D366', color: '#FFFFFF' }}
               >
@@ -118,6 +120,7 @@ export function CotasHeroWordpress() {
                 href={getWhatsAppLink(WHATSAPP_MESSAGE)}
                 target="_blank"
                 rel="noopener noreferrer"
+                onClick={trackWhatsAppClick}
                 className="inline-flex items-center justify-center gap-3 px-8 py-4 font-semibold text-base rounded-md"
                 style={{ backgroundColor: '#25D366', color: '#FFFFFF' }}
               >

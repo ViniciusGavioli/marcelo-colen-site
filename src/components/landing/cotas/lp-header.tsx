@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import { Menu, X } from "lucide-react";
 import { getWhatsAppLink } from "@/lib/whatsapp";
+import { trackWhatsAppClick } from "@/lib/analytics";
 
 const NAV_LINKS = [
   { label: "Home", href: "#" },
@@ -72,6 +73,7 @@ export function LPHeader() {
               href={getWhatsAppLink(WHATSAPP_MESSAGE)}
               target="_blank"
               rel="noopener noreferrer"
+              onClick={trackWhatsAppClick}
               className="hidden sm:inline-flex items-center px-6 py-3 rounded-md font-semibold text-sm text-white transition-all duration-300 hover:opacity-90 hover:scale-105"
               style={{
                 background: 'linear-gradient(135deg, rgb(255,105,0) 0%, rgb(207,46,46) 100%)',
@@ -108,6 +110,7 @@ export function LPHeader() {
               href={getWhatsAppLink(WHATSAPP_MESSAGE)}
               target="_blank"
               rel="noopener noreferrer"
+              onClick={trackWhatsAppClick}
               className="inline-flex items-center px-6 py-3 rounded-md font-semibold text-sm text-white mt-4"
               style={{
                 background: 'linear-gradient(135deg, rgb(255,105,0) 0%, rgb(207,46,46) 100%)',

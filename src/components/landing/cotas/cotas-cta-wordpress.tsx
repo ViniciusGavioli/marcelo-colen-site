@@ -4,6 +4,7 @@ import Image from "next/image";
 import { MessageCircle } from "lucide-react";
 import { Container } from "@/components/layout";
 import { getWhatsAppLink } from "@/lib/whatsapp";
+import { trackWhatsAppClick } from "@/lib/analytics";
 
 const WHATSAPP_MESSAGE = "Olá, Dr. Marcelo. Gostaria de conversar sobre meu caso de heteroidentificação.";
 
@@ -51,6 +52,7 @@ export function CotasCtaWordpress() {
               href={getWhatsAppLink(WHATSAPP_MESSAGE)}
               target="_blank"
               rel="noopener noreferrer"
+              onClick={trackWhatsAppClick}
               className="inline-flex items-center justify-center gap-3 px-10 py-5 font-semibold text-base transition-all duration-300 hover:scale-105 hover:shadow-2xl rounded-md"
               style={{ 
                 backgroundColor: '#4A9B4A', 

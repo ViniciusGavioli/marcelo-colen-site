@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import { MessageCircle, X } from "lucide-react";
 import { getWhatsAppLink } from "@/lib/whatsapp";
+import { trackWhatsAppClick } from "@/lib/analytics";
 
 export function FloatingWhatsApp() {
   const [isVisible, setIsVisible] = useState(false);
@@ -56,6 +57,7 @@ export function FloatingWhatsApp() {
         href={getWhatsAppLink("Olá! Vi a página sobre cotas raciais e gostaria de tirar algumas dúvidas.")}
         target="_blank"
         rel="noopener noreferrer"
+        onClick={trackWhatsAppClick}
         className="relative flex items-center justify-center w-14 h-14 bg-[#25D366] text-white rounded-full shadow-lg hover:bg-[#20BA5C] transition-all hover:scale-110"
         aria-label="Falar no WhatsApp"
       >
