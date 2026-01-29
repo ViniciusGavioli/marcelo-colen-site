@@ -95,7 +95,7 @@ export function DefesaHero() {
                     {/* Foto do Dr. Marcelo */}
                     <div className="hidden lg:flex justify-center items-end h-[90vh] relative mt-auto">
                         <Image
-                            src="/images/defesa/marcelo-final-v4.png"
+                            src="/images/defesa/marcelo-sem-fundo02-v2.png"
                             alt="Dr. Marcelo Colen"
                             width={550}
                             height={750}
