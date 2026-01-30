@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import "./globals.css";
 import { SITE_CONFIG, DEFAULT_SEO } from "@/lib/constants";
+import FacebookPixel from "@/components/FacebookPixel";
 
 export const viewport: Viewport = {
   width: "device-width",
@@ -58,6 +59,7 @@ export default function RootLayout({
   return (
     <html lang="pt-BR">
       <body className="min-h-screen flex flex-col antialiased">
+        <FacebookPixel />
         {children}
       </body>
     </html>
