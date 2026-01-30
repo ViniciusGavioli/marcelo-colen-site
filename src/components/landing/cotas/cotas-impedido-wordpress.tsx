@@ -62,13 +62,12 @@ export function CotasImpedidoWordpress() {
           {/* ============================================ */}
           <div className="relative">
             <div className="relative w-full aspect-video rounded-lg overflow-hidden shadow-xl">
-              <video
-                src="/videos/marcelo-colen.mp4"
+              <iframe
+                src="https://www.youtube.com/embed/jAiQi4CgMN0"
                 title="Dr. Marcelo Colen - Heteroidentificação"
-                className="absolute inset-0 w-full h-full bg-black"
-                controls
-                playsInline
-                preload="metadata"
+                className="absolute inset-0 w-full h-full"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
               />
 
               {/* Fallback image if no video */}
