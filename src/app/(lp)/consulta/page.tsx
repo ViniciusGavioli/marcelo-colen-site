@@ -24,6 +24,13 @@ const FAQ_ITEMS = [
 
 const FORM_QUESTIONS = [
   {
+    id: "nome",
+    label: "Qual o seu nome?",
+    type: "text",
+    placeholder: "Seu nome completo",
+    required: true
+  },
+  {
     id: "vestibular",
     label: "Qual vestibular / concurso você está participando?",
     type: "text",
@@ -79,7 +86,7 @@ export default function ConsultaPage() {
 
   const montarMensagem = (): string => {
     const linhas = [
-      "Olá Dr. Marcelo! Preciso de ajuda com meu caso de heteroidentificação.\n",
+      `Olá Dr. Marcelo! Meu nome é ${respostas.nome}. Preciso de ajuda com meu caso de heteroidentificação.\n`,
       `*Vestibular/Concurso:* ${respostas.vestibular}`,
       `*Data do Resultado:* ${respostas.dataResultado}`,
       `*Apresentou Recurso:* ${respostas.recurso}`,

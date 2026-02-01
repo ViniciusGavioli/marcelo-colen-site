@@ -23,6 +23,13 @@ const FAQ_ITEMS = [
 
 const FORM_QUESTIONS = [
     {
+        id: "nome",
+        label: "Qual o seu nome?",
+        type: "text",
+        placeholder: "Seu nome completo",
+        required: true
+    },
+    {
         id: "ondeAconteceu",
         label: "Onde aconteceu a discriminação?",
         type: "text",
@@ -71,7 +78,7 @@ export default function ConsultaRacismoPage() {
 
     const montarMensagem = (): string => {
         const linhas = [
-            "Olá Dr. Marcelo! Sofri racismo e preciso de ajuda.\n",
+            `Olá Dr. Marcelo! Meu nome é ${respostas.nome}. Sofri racismo e preciso de ajuda.\n`,
             `*Onde aconteceu:* ${respostas.ondeAconteceu}`,
             `*O que aconteceu:* ${respostas.oqueAconteceu}`,
             "\nGostaria de saber quais são minhas opções."
