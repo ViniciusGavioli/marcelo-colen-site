@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { MessageCircle } from "lucide-react";
+import { MessageCircle, Clock, CheckCircle } from "lucide-react";
 import { Container } from "@/components/layout";
 import { HETERO_PAGE } from "@/lib/hetero-data";
 import { getWhatsAppLink } from "@/lib/whatsapp";
@@ -12,16 +12,13 @@ export function HeteroHero() {
 
     return (
         <section className="relative overflow-hidden" style={{ backgroundColor: '#1a1a1a' }}>
-            {/* Background Pattern */}
-            <div className="absolute inset-0 opacity-5">
-                <div
-                    className="absolute inset-0"
-                    style={{
-                        backgroundImage: 'radial-gradient(circle at 2px 2px, white 1px, transparent 0)',
-                        backgroundSize: '32px 32px'
-                    }}
-                />
-            </div>
+            {/* Background com gradiente sutil */}
+            <div
+                className="absolute inset-0"
+                style={{
+                    background: 'radial-gradient(ellipse at 70% 50%, rgba(201, 162, 39, 0.08) 0%, transparent 60%)'
+                }}
+            />
 
             {/* Linha dourada no topo */}
             <div
@@ -31,56 +28,64 @@ export function HeteroHero() {
 
             {/* MOBILE */}
             <div className="lg:hidden relative z-10">
-                <Container className="pt-16 pb-8">
-                    <div className="space-y-5">
-                        {/* Eyebrow */}
-                        <p
-                            className="text-xs uppercase tracking-widest"
-                            style={{ color: '#c9a227' }}
+                <Container className="pt-12 pb-6">
+                    <div className="space-y-4">
+                        {/* Badge de Urgência */}
+                        <div
+                            className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-medium"
+                            style={{ backgroundColor: 'rgba(239, 68, 68, 0.15)', color: '#ef4444' }}
                         >
-                            {hero.eyebrow}
-                        </p>
+                            <Clock className="w-3.5 h-3.5" />
+                            Prazo curto? Atendimento prioritário
+                        </div>
 
-                        {/* Headline */}
+                        {/* Headline + Subheadline mais emocional */}
                         <h1
                             className="text-2xl sm:text-3xl font-bold leading-tight"
                             style={{ color: '#ffffff', fontFamily: 'Georgia, serif' }}
                         >
-                            {hero.headline}
+                            Indeferido na Heteroidentificação?
                             <br />
-                            <span style={{ color: '#c9a227' }}>{hero.headlineHighlight}</span>
+                            <span style={{ color: '#c9a227' }}>Você não está sozinho.</span>
                         </h1>
 
-                        {/* Subheadline */}
                         <p
                             className="text-base leading-relaxed"
-                            style={{ color: 'rgba(255, 255, 255, 0.85)' }}
+                            style={{ color: 'rgba(255, 255, 255, 0.9)' }}
                         >
-                            {hero.subheadline}
+                            A negativa da banca <strong style={{ color: '#ffffff' }}>não define quem você é</strong>.
+                            Muitos candidatos legítimos são reprovados por critérios subjetivos ou mal aplicados.
                         </p>
 
-                        {/* CTA */}
-                        <div className="pt-2">
+                        {/* Prova Social Rápida */}
+                        <div className="flex flex-wrap items-center gap-3 text-xs" style={{ color: 'rgba(255, 255, 255, 0.6)' }}>
+                            <span className="flex items-center gap-1">
+                                <CheckCircle className="w-3.5 h-3.5" style={{ color: '#c9a227' }} />
+                                Análise técnica fenotípica
+                            </span>
+                            <span className="flex items-center gap-1">
+                                <CheckCircle className="w-3.5 h-3.5" style={{ color: '#c9a227' }} />
+                                Atendimento em todo Brasil
+                            </span>
+                        </div>
+
+                        {/* CTA Principal */}
+                        <div className="pt-2 space-y-2">
                             <a
                                 href={getWhatsAppLink(whatsapp.hero)}
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 onClick={trackWhatsAppClick}
-                                className="inline-flex items-center justify-center gap-3 px-6 py-4 font-semibold text-base rounded transition-all duration-200 hover:brightness-110"
+                                className="w-full inline-flex items-center justify-center gap-3 px-6 py-4 font-bold text-base rounded-lg transition-all duration-200 hover:brightness-110 shadow-lg"
                                 style={{ backgroundColor: '#25D366', color: '#FFFFFF' }}
                             >
                                 <MessageCircle className="w-5 h-5" />
-                                {hero.ctaPrimary}
+                                Falar com Especialista Agora
                             </a>
+                            <p className="text-center text-xs" style={{ color: 'rgba(255, 255, 255, 0.5)' }}>
+                                🟢 Resposta em até 2 horas • Sigilo garantido
+                            </p>
                         </div>
-
-                        {/* Credibility */}
-                        <p
-                            className="text-xs"
-                            style={{ color: 'rgba(255, 255, 255, 0.5)' }}
-                        >
-                            {hero.credibility}
-                        </p>
                     </div>
                 </Container>
 
@@ -88,7 +93,7 @@ export function HeteroHero() {
                 <div className="relative w-full flex justify-center">
                     <Image
                         src="/images/wordpress/marcelo-terno.png"
-                        alt="Dr. Marcelo Colen"
+                        alt="Dr. Marcelo Colen - Advogado Especialista"
                         width={350}
                         height={450}
                         className="object-contain w-[75%] max-w-[320px] h-auto"
@@ -98,74 +103,123 @@ export function HeteroHero() {
             </div>
 
             {/* DESKTOP */}
-            <div className="hidden lg:block relative min-h-[85vh]">
-                <Container className="relative z-10 pt-24 pb-16">
+            <div className="hidden lg:block relative min-h-[90vh]">
+                <Container className="relative z-10 pt-20 pb-16">
                     <div className="grid lg:grid-cols-2 gap-8 items-center">
                         {/* Conteúdo */}
-                        <div className="max-w-xl space-y-6">
-                            {/* Eyebrow */}
-                            <p
-                                className="text-sm uppercase tracking-widest"
-                                style={{ color: '#c9a227' }}
+                        <div className="max-w-xl space-y-5">
+                            {/* Badge de Urgência */}
+                            <div
+                                className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium animate-pulse"
+                                style={{ backgroundColor: 'rgba(239, 68, 68, 0.15)', color: '#ef4444' }}
                             >
-                                {hero.eyebrow}
-                            </p>
+                                <Clock className="w-4 h-4" />
+                                Prazo de recurso aberto? Atendimento prioritário
+                            </div>
 
-                            {/* Headline */}
+                            {/* Headline emocional */}
                             <h1
-                                className="text-4xl lg:text-5xl font-bold leading-tight"
+                                className="text-4xl lg:text-5xl font-bold leading-[1.15]"
                                 style={{ color: '#ffffff', fontFamily: 'Georgia, serif' }}
                             >
-                                {hero.headline}
+                                Indeferido na Heteroidentificação?
                                 <br />
-                                <span style={{ color: '#c9a227' }}>{hero.headlineHighlight}</span>
+                                <span style={{ color: '#c9a227' }}>Você não está sozinho.</span>
                             </h1>
 
-                            {/* Subheadline */}
+                            {/* Subheadline acolhedor */}
                             <p
                                 className="text-lg leading-relaxed"
-                                style={{ color: 'rgba(255, 255, 255, 0.85)' }}
+                                style={{ color: 'rgba(255, 255, 255, 0.9)' }}
                             >
-                                {hero.subheadline}
+                                A negativa da banca <strong style={{ color: '#ffffff' }}>não define quem você é</strong>.
+                                Muitos candidatos legítimos são reprovados por critérios subjetivos ou mal aplicados.
+                                Entenda suas possibilidades jurídicas.
                             </p>
 
-                            {/* CTA */}
-                            <div className="pt-4">
+                            {/* Prova Social */}
+                            <div className="flex flex-wrap items-center gap-4 text-sm" style={{ color: 'rgba(255, 255, 255, 0.7)' }}>
+                                <span className="flex items-center gap-2">
+                                    <CheckCircle className="w-4 h-4" style={{ color: '#c9a227' }} />
+                                    Análise técnica fenotípica
+                                </span>
+                                <span className="flex items-center gap-2">
+                                    <CheckCircle className="w-4 h-4" style={{ color: '#c9a227' }} />
+                                    Pareceres especializados
+                                </span>
+                                <span className="flex items-center gap-2">
+                                    <CheckCircle className="w-4 h-4" style={{ color: '#c9a227' }} />
+                                    Atendimento Brasil
+                                </span>
+                            </div>
+
+                            {/* CTA Principal */}
+                            <div className="pt-2 space-y-3">
                                 <a
                                     href={getWhatsAppLink(whatsapp.hero)}
                                     target="_blank"
                                     rel="noopener noreferrer"
                                     onClick={trackWhatsAppClick}
-                                    className="inline-flex items-center justify-center gap-3 px-8 py-4 font-semibold text-base rounded transition-all duration-200 hover:brightness-110 hover:scale-[1.02]"
+                                    className="inline-flex items-center justify-center gap-3 px-10 py-5 font-bold text-lg rounded-lg transition-all duration-200 hover:brightness-110 hover:scale-[1.02] shadow-xl"
                                     style={{ backgroundColor: '#25D366', color: '#FFFFFF' }}
                                 >
-                                    <MessageCircle className="w-5 h-5" />
-                                    {hero.ctaPrimary}
+                                    <MessageCircle className="w-6 h-6" />
+                                    Falar com Especialista Agora
                                 </a>
+                                <p className="text-sm" style={{ color: 'rgba(255, 255, 255, 0.5)' }}>
+                                    🟢 Resposta em até 2 horas • Análise individualizada • Sigilo garantido
+                                </p>
                             </div>
 
-                            {/* Credibility */}
-                            <p
-                                className="text-sm"
-                                style={{ color: 'rgba(255, 255, 255, 0.5)' }}
+                            {/* Credenciais */}
+                            <div
+                                className="flex items-center gap-4 pt-4 border-t"
+                                style={{ borderColor: 'rgba(255, 255, 255, 0.1)' }}
                             >
-                                {hero.credibility}
-                            </p>
+                                <span className="text-sm" style={{ color: 'rgba(255, 255, 255, 0.5)' }}>
+                                    Dr. Marcelo Colen • Diretor OAB/MG • Especialista em Igualdade Racial
+                                </span>
+                            </div>
                         </div>
 
                         {/* Foto do Dr. Marcelo */}
                         <div className="flex justify-end items-end">
                             <Image
                                 src="/images/wordpress/marcelo-terno.png"
-                                alt="Dr. Marcelo Colen"
-                                width={450}
-                                height={580}
-                                className="object-contain"
+                                alt="Dr. Marcelo Colen - Advogado Especialista em Heteroidentificação"
+                                width={480}
+                                height={620}
+                                className="object-contain drop-shadow-2xl"
                                 priority
                             />
                         </div>
                     </div>
                 </Container>
+
+                {/* Logos das Bancas - Prova Social */}
+                <div
+                    className="absolute bottom-0 left-0 right-0 py-4 z-10"
+                    style={{ backgroundColor: 'rgba(0, 0, 0, 0.3)' }}
+                >
+                    <Container>
+                        <div className="flex items-center justify-center gap-8">
+                            <span className="text-xs uppercase tracking-wider" style={{ color: 'rgba(255, 255, 255, 0.4)' }}>
+                                Atuação em bancas:
+                            </span>
+                            <div className="flex items-center gap-6">
+                                {['Cebraspe', 'FGV', 'Vunesp', 'IBFC', 'UFMG'].map((banca) => (
+                                    <span
+                                        key={banca}
+                                        className="text-sm font-medium px-3 py-1 rounded"
+                                        style={{ backgroundColor: 'rgba(255, 255, 255, 0.1)', color: 'rgba(255, 255, 255, 0.7)' }}
+                                    >
+                                        {banca}
+                                    </span>
+                                ))}
+                            </div>
+                        </div>
+                    </Container>
+                </div>
             </div>
         </section>
     );

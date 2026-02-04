@@ -2,7 +2,9 @@
 
 import { Container } from "@/components/layout";
 import { HETERO_PAGE } from "@/lib/hetero-data";
-import { Palette, Waves, Circle, Smile } from "lucide-react";
+import { Palette, Waves, Circle, Smile, MessageCircle, Info } from "lucide-react";
+import { getWhatsAppLink } from "@/lib/whatsapp";
+import { trackWhatsAppClick } from "@/lib/analytics";
 
 const ICONS = {
     palette: Palette,
@@ -12,10 +14,10 @@ const ICONS = {
 };
 
 export function HeteroPilares() {
-    const { pilares } = HETERO_PAGE;
+    const { pilares, whatsapp } = HETERO_PAGE;
 
     return (
-        <section className="py-16 lg:py-20" style={{ backgroundColor: '#1a1a1a' }}>
+        <section className="py-16 lg:py-24" style={{ backgroundColor: '#1a1a1a' }}>
             <Container>
                 <div className="max-w-5xl mx-auto">
                     {/* Header */}
@@ -30,41 +32,48 @@ export function HeteroPilares() {
                             className="text-2xl sm:text-3xl lg:text-4xl font-bold mb-4"
                             style={{ color: '#ffffff', fontFamily: 'Georgia, serif' }}
                         >
-                            {pilares.headline}
+                            O que a banca realmente avalia?
                         </h2>
                         <p
-                            className="max-w-3xl mx-auto text-base lg:text-lg"
+                            className="max-w-3xl mx-auto text-lg"
                             style={{ color: 'rgba(255, 255, 255, 0.7)' }}
                         >
-                            {pilares.intro}
+                            Entenda os <strong style={{ color: '#ffffff' }}>4 critérios fenotípicos</strong> que
+                            fundamentam a decisão da comissão — e como eles devem ser interpretados corretamente.
                         </p>
                     </div>
 
                     {/* Grid dos 4 Pilares */}
-                    <div className="grid sm:grid-cols-2 gap-6 mb-10">
+                    <div className="grid sm:grid-cols-2 gap-5 mb-10">
                         {pilares.itens.map((item, idx) => {
                             const IconComponent = ICONS[item.icon as keyof typeof ICONS];
                             return (
                                 <div
                                     key={idx}
-                                    className="p-6 rounded-lg"
-                                    style={{ backgroundColor: 'rgba(255, 255, 255, 0.05)' }}
+                                    className="group p-6 rounded-xl transition-all duration-300 hover:scale-[1.02]"
+                                    style={{
+                                        backgroundColor: 'rgba(255, 255, 255, 0.03)',
+                                        border: '1px solid rgba(255, 255, 255, 0.1)'
+                                    }}
                                 >
                                     <div className="flex items-start gap-4">
                                         <div
-                                            className="w-12 h-12 rounded-lg flex items-center justify-center flex-shrink-0"
+                                            className="w-14 h-14 rounded-xl flex items-center justify-center flex-shrink-0 transition-all duration-300 group-hover:scale-110"
                                             style={{ backgroundColor: '#c9a227' }}
                                         >
-                                            <IconComponent className="w-6 h-6 text-white" />
+                                            <IconComponent className="w-7 h-7 text-white" />
                                         </div>
                                         <div>
                                             <h3
-                                                className="font-bold text-lg mb-2"
+                                                className="font-bold text-xl mb-2"
                                                 style={{ color: '#ffffff' }}
                                             >
                                                 {item.titulo}
                                             </h3>
-                                            <p style={{ color: 'rgba(255, 255, 255, 0.7)' }}>
+                                            <p
+                                                className="text-sm leading-relaxed"
+                                                style={{ color: 'rgba(255, 255, 255, 0.7)' }}
+                                            >
                                                 {item.descricao}
                                             </p>
                                         </div>
@@ -74,20 +83,38 @@ export function HeteroPilares() {
                         })}
                     </div>
 
-                    {/* Destaque */}
+                    {/* Box informativo */}
                     <div
-                        className="p-6 rounded-lg border"
+                        className="p-6 rounded-xl flex flex-col md:flex-row items-center gap-4 mb-8"
                         style={{
                             backgroundColor: 'rgba(201, 162, 39, 0.1)',
-                            borderColor: 'rgba(201, 162, 39, 0.3)'
+                            border: '1px solid rgba(201, 162, 39, 0.3)'
                         }}
                     >
+                        <Info className="w-8 h-8 flex-shrink-0" style={{ color: '#c9a227' }} />
                         <p
-                            className="text-center text-base lg:text-lg"
-                            style={{ color: '#c9a227' }}
+                            className="text-center md:text-left"
+                            style={{ color: 'rgba(255, 255, 255, 0.9)' }}
                         >
-                            {pilares.destaque}
+                            <strong style={{ color: '#c9a227' }}>Importante:</strong> A análise deve considerar
+                            o conjunto das características. Um único critério isolado não é determinante.
+                            Muitas bancas erro ao avaliar elementos de forma fragmentada.
                         </p>
+                    </div>
+
+                    {/* CTA */}
+                    <div className="text-center">
+                        <a
+                            href={getWhatsAppLink(whatsapp.hero)}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            onClick={trackWhatsAppClick}
+                            className="inline-flex items-center justify-center gap-3 px-8 py-4 font-bold text-base rounded-lg transition-all duration-200 hover:brightness-110"
+                            style={{ backgroundColor: '#25D366', color: '#FFFFFF' }}
+                        >
+                            <MessageCircle className="w-5 h-5" />
+                            Analisar meus critérios fenotípicos
+                        </a>
                     </div>
                 </div>
             </Container>
