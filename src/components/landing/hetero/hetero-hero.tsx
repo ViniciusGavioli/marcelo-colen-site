@@ -12,14 +12,31 @@ export function HeteroHero() {
 
     return (
         <section className="relative overflow-hidden" style={{ backgroundColor: '#1a1a1a' }}>
-            {/* Background com gradiente sutil */}
-            <div
-                className="absolute inset-0"
-                style={{
-                    background: 'radial-gradient(ellipse at 70% 50%, rgba(201, 162, 39, 0.08) 0%, transparent 60%)'
-                }}
-            />
-
+            {/* Background Image + Overlay */}
+            <div className="absolute inset-0 z-0">
+                <div className="absolute inset-0 bg-[#1a1a1a]" /> {/* Cor base para garantir fundo escuro */}
+                <Image
+                    src="/images/hero-scales.png"
+                    alt="Background Justiça"
+                    fill
+                    className="object-cover opacity-20"
+                    priority
+                />
+                {/* Gradiente Overlay para garantir leitura e suavidade */}
+                <div
+                    className="absolute inset-0"
+                    style={{
+                        background: 'linear-gradient(to right, #1a1a1a 30%, rgba(26, 26, 26, 0.85) 60%, rgba(26, 26, 26, 0.7) 100%)'
+                    }}
+                />
+                {/* Ponto de luz dourado sutil */}
+                <div
+                    className="absolute inset-0"
+                    style={{
+                        background: 'radial-gradient(circle at 80% 20%, rgba(201, 162, 39, 0.15) 0%, transparent 50%)'
+                    }}
+                />
+            </div>
             {/* Linha dourada no topo */}
             <div
                 className="absolute top-0 left-0 right-0 h-1 z-20"
