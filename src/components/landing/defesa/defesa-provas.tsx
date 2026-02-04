@@ -51,6 +51,7 @@ export function DefesaProvas() {
                     {/* CTA Final */}
                     <a
                         href="/consulta-racismo"
+                        onClick={trackWhatsAppClick}
                         className="inline-flex items-center justify-center gap-3 px-10 py-5 font-semibold text-lg rounded transition-all duration-200 hover:brightness-110"
                         style={{
                             backgroundColor: '#25D366',

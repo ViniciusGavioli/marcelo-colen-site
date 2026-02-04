@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { Instagram, MessageCircle, CheckCircle2 } from "lucide-react";
 import { Container } from "@/components/layout";
+import { trackWhatsAppClick } from "@/lib/analytics";
 
 const WHATSAPP_MESSAGE = "Olá, Dr. Marcelo. Sofri racismo e gostaria de orientação sobre meu caso.";
 
@@ -110,6 +111,7 @@ export function DefesaInstagram() {
                         {/* WhatsApp Button - Green */}
                         <a
                             href="/consulta-racismo"
+                            onClick={trackWhatsAppClick}
                             className="w-full lg:w-auto inline-flex items-center justify-center gap-3 px-8 py-4 font-bold text-lg text-white transition-all duration-300 hover:scale-105 hover:shadow-xl rounded-lg"
                             style={{
                                 backgroundColor: '#25D366',

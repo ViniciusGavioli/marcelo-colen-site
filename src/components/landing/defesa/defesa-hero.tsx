@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { MessageCircle } from "lucide-react";
 import { Container } from "@/components/layout";
+import { trackWhatsAppClick } from "@/lib/analytics";
 
 export function DefesaHero() {
     return (
@@ -65,6 +66,7 @@ export function DefesaHero() {
                         <div className="mb-6">
                             <a
                                 href="/consulta-racismo"
+                                onClick={trackWhatsAppClick}
                                 className="inline-flex items-center justify-center gap-3 px-8 py-4 font-semibold text-base rounded transition-all duration-200 hover:brightness-110"
                                 style={{
                                     backgroundColor: '#25D366',
