@@ -26,7 +26,7 @@ export const metadata: Metadata = {
     openGraph: {
         title: HETERO_PAGE.title,
         description: HETERO_PAGE.description,
-        url: `${SITE_CONFIG.url}/hetero`,
+        url: `${SITE_CONFIG.url}/recurso-heteroidentificacao`,
         siteName: SITE_CONFIG.fullName,
         locale: "pt_BR",
         type: "website",
@@ -46,7 +46,7 @@ export const metadata: Metadata = {
         images: [`${SITE_CONFIG.url}/og-hetero.jpg`],
     },
     alternates: {
-        canonical: `${SITE_CONFIG.url}/hetero`,
+        canonical: `${SITE_CONFIG.url}/recurso-heteroidentificacao`,
     },
     robots: {
         index: true,
@@ -66,7 +66,7 @@ function getPageSchemas() {
     const serviceSchema = getServiceSchema(
         "Defesa Técnica em Heteroidentificação",
         "Fundamentação técnica especializada para recursos administrativos e judiciais em casos de heteroidentificação. Análise de viabilidade, pareceres técnicos e estratégia processual.",
-        `${SITE_CONFIG.url}/hetero`
+        `${SITE_CONFIG.url}/recurso-heteroidentificacao`
     );
 
     const faqSchema = getFAQSchema(
