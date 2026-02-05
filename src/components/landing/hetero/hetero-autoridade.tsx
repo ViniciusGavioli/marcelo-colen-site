@@ -48,7 +48,7 @@ export function HeteroAutoridade() {
                                     className="absolute -bottom-4 left-1/2 -translate-x-1/2 px-4 py-2 rounded-full whitespace-nowrap"
                                     style={{ backgroundColor: '#1a1a1a', color: '#c9a227' }}
                                 >
-                                    <span className="text-sm font-bold">Diretor OAB/MG 2025-2027</span>
+                                    <span className="text-sm font-bold">Advogado Especialista</span>
                                 </div>
                             </div>
                         </div>
