@@ -100,9 +100,14 @@ function PortalHero() {
                         Portal de Defesa • triagem do escritório • sigilo
                     </p>
 
-                    <h1 className="text-3xl font-extrabold leading-tight sm:text-5xl">
+                    <h1
+                        className="text-3xl font-extrabold leading-tight text-white sm:text-5xl"
+                        style={{ color: "#FFFFFF" }}
+                    >
                         Reprovado ou indeferido na heteroidentificação?
-                        <span className="block text-white/90">Veja o que fazer agora — sem enrolação.</span>
+                        <span className="block text-white/90" style={{ color: "rgba(255,255,255,0.92)" }}>
+                            Veja o que fazer agora — sem enrolação.
+                        </span>
                     </h1>
 
                     <p className="mt-4 text-base leading-relaxed text-white/80 sm:text-lg">
