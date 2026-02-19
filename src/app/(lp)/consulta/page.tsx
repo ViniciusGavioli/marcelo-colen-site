@@ -97,9 +97,7 @@ export default function ConsultaPage() {
 
   const handleEnviar = () => {
     const mensagem = montarMensagem();
-    const WHATSAPP_NUMBER = SITE_CONFIG.contact.whatsapp;
-    const mensagemCodificada = encodeURIComponent(mensagem);
-    const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${mensagemCodificada}`;
+    const url = getWhatsAppLink(mensagem);
     console.log("Abrindo WhatsApp:", url);
     window.open(url, "_blank");
   };
@@ -144,12 +142,38 @@ export default function ConsultaPage() {
             </h1>
             
             <p style={{ fontSize: '1.5rem', fontWeight: '600', marginBottom: '0.5rem', color: '#FFFFFF', lineHeight: '1.2' }}>
-              Me deixe entender melhor o que você sofreu...
+              Me conte o essencial (em 4 perguntas) ou fale direto no WhatsApp.
             </p>
 
-            <p style={{ fontSize: '1.125rem', lineHeight: '1.5', color: 'rgba(255, 255, 255, 0.9)', marginBottom: '2rem' }}>
+            <p style={{ fontSize: '1.125rem', lineHeight: '1.5', color: 'rgba(255, 255, 255, 0.9)', marginBottom: '1rem' }}>
               Vou entender seu caso e te orientar sobre os próximos passos (recurso administrativo e, quando cabível, medidas judiciais).
             </p>
+
+            <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap', marginBottom: '2rem' }}>
+              <a
+                href={getWhatsAppLink("Olá! Quero falar direto no WhatsApp sobre meu caso de heteroidentificação.")}
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: '10px',
+                  padding: '12px 16px',
+                  borderRadius: '10px',
+                  backgroundColor: '#25D366',
+                  color: '#0B1220',
+                  fontWeight: 700,
+                  textDecoration: 'none'
+                }}
+              >
+                <MessageCircle className="w-5 h-5" />
+                WhatsApp direto (sem formulário)
+              </a>
+
+              <span style={{ color: 'rgba(255,255,255,0.75)', fontSize: '0.95rem', lineHeight: 1.2 }}>
+                Prefere agilizar? Responda as 4 perguntas abaixo.
+              </span>
+            </div>
           </div>
         </Container>
       </section>
