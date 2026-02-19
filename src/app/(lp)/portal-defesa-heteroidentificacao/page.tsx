@@ -97,48 +97,37 @@ function PortalHero() {
                 <div className="max-w-3xl">
                     <p className="mb-3 inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-3 py-1 text-xs text-white/90">
                         <span className="h-2 w-2 rounded-full bg-green-400" />
-                        Portal de Defesa • análise inicial do caso • sigilo profissional
+                        Portal de Defesa
                     </p>
 
-                    <h1
-                        className="text-3xl font-extrabold leading-tight text-white sm:text-5xl"
-                        style={{ color: "#FFFFFF" }}
-                    >
+                    <h1 className="text-3xl font-extrabold leading-tight text-white sm:text-5xl">
                         Indeferimento na heteroidentificação
-                        <span className="block text-white/90" style={{ color: "rgba(255,255,255,0.92)" }}>
-                            Solicite análise inicial do caso e verificação de viabilidade do recurso.
-                        </span>
                     </h1>
 
-                    <p className="mt-4 text-base leading-relaxed text-white/80 sm:text-lg">
-                        Este canal é destinado ao primeiro contato e à análise inicial do caso.
-                        Após essa análise, a equipe do escritório orienta os próximos passos, conforme o edital e a fase do procedimento.
-                        <span className="block mt-2 text-white/70">
-                            Conteúdo informativo. Sigilo profissional. Não há promessa de resultado.
-                        </span>
+                    <p className="mt-3 text-base text-white/85 sm:text-lg">
+                        Análise inicial do caso e orientação do próximo passo.
                     </p>
 
-                    <div className="mt-7 flex flex-col gap-3 sm:flex-row sm:items-center">
+                    <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:items-center">
                         <Link
                             href="/consulta"
                             className="inline-flex items-center justify-center rounded-xl bg-[#25D366] px-6 py-3 text-base font-bold text-[#0B1220] hover:opacity-95"
                         >
                             Solicitar análise inicial
                         </Link>
-                        <div className="text-sm text-white/70">
-                            Atendimento do <b>escritório</b> • retorno em horário comercial • 100% online
+                        <div className="text-sm text-white/75">
+                            Sigilo profissional • atendimento do escritório • retorno em horário comercial
                         </div>
                     </div>
 
-                    <div className="mt-8 grid gap-3 sm:grid-cols-3">
+                    <div className="mt-6 grid gap-2 sm:grid-cols-3">
                         {[
-                            { t: "1. Triagem", d: "Você descreve o essencial e informa o prazo." },
-                            { t: "2. Análise inicial", d: "O escritório verifica a viabilidade e orienta o próximo passo." },
-                            { t: "3. Continuidade", d: "Se necessário, seguimos com a estratégia adequada ao seu caso." },
-                        ].map((c) => (
-                            <div key={c.t} className="rounded-2xl border border-white/10 bg-white/5 p-4">
-                                <div className="text-sm font-extrabold">{c.t}</div>
-                                <div className="mt-1 text-sm text-white/75">{c.d}</div>
+                            "Conteúdo informativo",
+                            "Não há promessa de resultado",
+                            "Atendimento 100% online",
+                        ].map((t) => (
+                            <div key={t} className="rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-sm text-white/85">
+                                {t}
                             </div>
                         ))}
                     </div>
