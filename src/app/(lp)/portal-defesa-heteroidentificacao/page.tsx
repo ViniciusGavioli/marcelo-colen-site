@@ -97,24 +97,24 @@ function PortalHero() {
                 <div className="max-w-3xl">
                     <p className="mb-3 inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-3 py-1 text-xs text-white/90">
                         <span className="h-2 w-2 rounded-full bg-green-400" />
-                        Portal de Defesa • triagem do escritório • sigilo
+                        Portal de Defesa • triagem do escritório • sigilo profissional
                     </p>
 
                     <h1
                         className="text-3xl font-extrabold leading-tight text-white sm:text-5xl"
                         style={{ color: "#FFFFFF" }}
                     >
-                        Reprovado ou indeferido na heteroidentificação?
+                        Indeferimento na heteroidentificação
                         <span className="block text-white/90" style={{ color: "rgba(255,255,255,0.92)" }}>
-                            Veja o que fazer agora — sem enrolação.
+                            Solicite triagem e análise de viabilidade do recurso.
                         </span>
                     </h1>
 
                     <p className="mt-4 text-base leading-relaxed text-white/80 sm:text-lg">
-                        Em geral, o primeiro passo é o <b>recurso administrativo</b>. Aqui você entende o
-                        processo, organiza as provas e segue para uma <b>verificação de viabilidade</b>.
+                        Este canal é destinado ao primeiro contato e à triagem do caso.
+                        Após a triagem, a equipe do escritório orienta os próximos passos, conforme o edital e a fase do procedimento.
                         <span className="block mt-2 text-white/70">
-                            Conteúdo informativo. Não há promessa de resultado.
+                            Conteúdo informativo. Sigilo profissional. Não há promessa de resultado.
                         </span>
                     </p>
 
@@ -123,18 +123,18 @@ function PortalHero() {
                             href="/consulta"
                             className="inline-flex items-center justify-center rounded-xl bg-[#25D366] px-6 py-3 text-base font-bold text-[#0B1220] hover:opacity-95"
                         >
-                            Triagem do caso (2 min)
+                            Iniciar triagem
                         </Link>
                         <div className="text-sm text-white/70">
-                            Atendimento do <b>escritório</b> • resposta em até <b>2h</b> (horário comercial) • 100% online
+                            Atendimento do <b>escritório</b> • retorno em horário comercial • 100% online
                         </div>
                     </div>
 
                     <div className="mt-8 grid gap-3 sm:grid-cols-3">
                         {[
-                            { t: "1. Prazos", d: "Entenda o prazo do edital e o que priorizar." },
-                            { t: "2. Provas", d: "Checklist do que juntar antes de enviar." },
-                            { t: "3. Próximo passo", d: "Você sabe exatamente o que acontece depois." },
+                            { t: "1. Triagem", d: "Você descreve o essencial e informa o prazo." },
+                            { t: "2. Análise inicial", d: "O escritório verifica a viabilidade e orienta o próximo passo." },
+                            { t: "3. Continuidade", d: "Se necessário, seguimos com a estratégia adequada ao seu caso." },
                         ].map((c) => (
                             <div key={c.t} className="rounded-2xl border border-white/10 bg-white/5 p-4">
                                 <div className="text-sm font-extrabold">{c.t}</div>
@@ -148,41 +148,44 @@ function PortalHero() {
     );
 }
 
-function ChecklistSection() {
+function NextStepsSection() {
     return (
         <section className="bg-white">
             <Container className="py-14">
                 <div className="max-w-4xl">
                     <h2 className="text-2xl font-extrabold text-slate-900 sm:text-3xl">
-                        Checklist rápido (o que separar antes de pedir orientação)
+                        O que acontece após iniciar a triagem
                     </h2>
                     <p className="mt-3 text-slate-600">
-                        Quanto mais claro você traz o contexto, mais rápido dá pra orientar o próximo passo.
+                        O objetivo desta página é encaminhar seu caso para a triagem do escritório, de forma simples e segura.
                     </p>
 
-                    <div className="mt-6 grid gap-3 sm:grid-cols-2">
+                    <div className="mt-6 grid gap-3 sm:grid-cols-3">
                         {[
-                            "Edital/aviso da banca (link ou PDF)",
-                            "Motivo do indeferimento (se houver)",
-                            "Prazo final do recurso (data/hora)",
-                            "Registro do procedimento (vídeo/ata, se disponível)",
-                            "Seu histórico no certame (fase atual)",
-                            "Documentos que já enviou (se enviou)",
-                        ].map((item) => (
-                            <div
-                                key={item}
-                                className="rounded-xl border border-slate-200 bg-slate-50 p-4 text-slate-800"
-                            >
-                                {item}
+                            {
+                                t: "Envio",
+                                d: "Você informa o essencial e o prazo do edital.",
+                            },
+                            {
+                                t: "Retorno",
+                                d: "A equipe do escritório retorna em horário comercial com a orientação inicial.",
+                            },
+                            {
+                                t: "Documentos",
+                                d: "Se necessário, solicitamos documentos específicos para o seu caso.",
+                            },
+                        ].map((x) => (
+                            <div key={x.t} className="rounded-2xl border border-slate-200 bg-slate-50 p-5">
+                                <div className="text-sm font-extrabold text-slate-900">{x.t}</div>
+                                <div className="mt-2 text-sm text-slate-700">{x.d}</div>
                             </div>
                         ))}
                     </div>
 
                     <div className="mt-8 rounded-2xl border border-slate-200 bg-white p-5">
-                        <div className="text-sm font-bold text-slate-900">Importante</div>
+                        <div className="text-sm font-bold text-slate-900">Aviso</div>
                         <div className="mt-1 text-sm text-slate-600">
-                            Não é necessário expor sua vida pessoal. O foco do recurso costuma ser a
-                            <b> análise fenotípica</b> e os critérios do edital.
+                            Conteúdo informativo. A análise e a estratégia dependem do edital, do procedimento e das informações fornecidas.
                         </div>
                     </div>
                 </div>
@@ -208,8 +211,8 @@ export default function PortalDefesaHeteroidentificacaoPage() {
                 {/* Situações comuns (mantém) */}
                 <HeteroIdentificacao />
 
-                {/* Checklist (novo) */}
-                <ChecklistSection />
+                {/* Próximos passos (conversão) */}
+                <NextStepsSection />
 
                 {/* Diferencial técnico + Zona cinzenta */}
                 <HeteroPilares />
