@@ -97,7 +97,7 @@ function PortalHero() {
                 <div className="max-w-3xl">
                     <p className="mb-3 inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-3 py-1 text-xs text-white/90">
                         <span className="h-2 w-2 rounded-full bg-green-400" />
-                        Portal de Defesa • triagem do escritório • sigilo profissional
+                        Portal de Defesa • análise inicial do caso • sigilo profissional
                     </p>
 
                     <h1
@@ -106,13 +106,13 @@ function PortalHero() {
                     >
                         Indeferimento na heteroidentificação
                         <span className="block text-white/90" style={{ color: "rgba(255,255,255,0.92)" }}>
-                            Solicite triagem e análise de viabilidade do recurso.
+                            Solicite análise inicial do caso e verificação de viabilidade do recurso.
                         </span>
                     </h1>
 
                     <p className="mt-4 text-base leading-relaxed text-white/80 sm:text-lg">
-                        Este canal é destinado ao primeiro contato e à triagem do caso.
-                        Após a triagem, a equipe do escritório orienta os próximos passos, conforme o edital e a fase do procedimento.
+                        Este canal é destinado ao primeiro contato e à análise inicial do caso.
+                        Após essa análise, a equipe do escritório orienta os próximos passos, conforme o edital e a fase do procedimento.
                         <span className="block mt-2 text-white/70">
                             Conteúdo informativo. Sigilo profissional. Não há promessa de resultado.
                         </span>
@@ -123,7 +123,7 @@ function PortalHero() {
                             href="/consulta"
                             className="inline-flex items-center justify-center rounded-xl bg-[#25D366] px-6 py-3 text-base font-bold text-[#0B1220] hover:opacity-95"
                         >
-                            Iniciar triagem
+                            Solicitar análise inicial
                         </Link>
                         <div className="text-sm text-white/70">
                             Atendimento do <b>escritório</b> • retorno em horário comercial • 100% online
@@ -154,10 +154,10 @@ function NextStepsSection() {
             <Container className="py-14">
                 <div className="max-w-4xl">
                     <h2 className="text-2xl font-extrabold text-slate-900 sm:text-3xl">
-                        O que acontece após iniciar a triagem
+                        O que acontece após solicitar a análise inicial
                     </h2>
                     <p className="mt-3 text-slate-600">
-                        O objetivo desta página é encaminhar seu caso para a triagem do escritório, de forma simples e segura.
+                        O objetivo desta página é encaminhar seu caso para análise inicial do escritório, de forma simples e segura.
                     </p>
 
                     <div className="mt-6 grid gap-3 sm:grid-cols-3">
