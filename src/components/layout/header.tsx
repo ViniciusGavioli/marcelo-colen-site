@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { Menu, X, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { NAV_ITEMS, SITE_CONFIG } from "@/lib/constants";
@@ -10,9 +11,19 @@ import { cn } from "@/lib/utils";
 
 export function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const pathname = usePathname();
+
+  const isPortal = pathname?.startsWith("/portal-defesa-heteroidentificacao");
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-white/98 backdrop-blur-md border-b border-hairline">
+    <header
+      className={cn(
+        "fixed top-0 left-0 right-0 z-50 backdrop-blur-md border-b",
+        isPortal
+          ? "bg-[#0B1220]/90 border-white/10"
+          : "bg-white/98 border-hairline"
+      )}
+    >
       <div className="container mx-auto px-4 lg:px-8">
         <div className="flex items-center justify-between h-16 md:h-20">
           {/* Logo - Editorial Typography */}
@@ -20,11 +31,21 @@ export function Header() {
             href="/"
             className="group flex items-center gap-3"
           >
-            <span className="font-serif text-xl md:text-2xl font-medium tracking-tight text-navy">
+            <span
+              className={cn(
+                "font-serif text-xl md:text-2xl font-medium tracking-tight",
+                isPortal ? "text-white" : "text-navy"
+              )}
+            >
               {SITE_CONFIG.name}
             </span>
             <span className="hidden md:block w-px h-5 bg-hairline" />
-            <span className="hidden md:block text-xs text-muted-foreground font-normal tracking-wide uppercase">
+            <span
+              className={cn(
+                "hidden md:block text-xs font-normal tracking-wide uppercase",
+                isPortal ? "text-white/70" : "text-muted-foreground"
+              )}
+            >
               Advocacia
             </span>
           </Link>
@@ -35,7 +56,12 @@ export function Header() {
               <Link
                 key={item.href}
                 href={item.href}
-                className="px-4 py-2 text-sm font-medium text-muted-foreground hover:text-navy transition-colors relative group"
+                className={cn(
+                  "px-4 py-2 text-sm font-medium transition-colors relative group",
+                  isPortal
+                    ? "text-white/75 hover:text-white"
+                    : "text-muted-foreground hover:text-navy"
+                )}
               >
                 {item.label}
                 <span className="absolute bottom-0 left-4 right-4 h-px bg-bronze scale-x-0 group-hover:scale-x-100 transition-transform origin-left" />
@@ -49,7 +75,12 @@ export function Header() {
             <Button
               asChild
               size="sm"
-              className="hidden sm:inline-flex bg-navy hover:bg-navy-deep text-white font-medium"
+              className={cn(
+                "hidden sm:inline-flex font-medium",
+                isPortal
+                  ? "bg-white text-[#0B1220] hover:bg-white/90"
+                  : "bg-navy hover:bg-navy-deep text-white"
+              )}
             >
               <a
                 href={getWhatsAppLink()}
@@ -65,7 +96,7 @@ export function Header() {
             <Button
               variant="ghost"
               size="icon"
-              className="lg:hidden text-navy"
+              className={cn("lg:hidden", isPortal ? "text-white" : "text-navy")}
               onClick={() => setIsMenuOpen(!isMenuOpen)}
               aria-label={isMenuOpen ? "Fechar menu" : "Abrir menu"}
             >
@@ -91,7 +122,12 @@ export function Header() {
                 key={item.href}
                 href={item.href}
                 onClick={() => setIsMenuOpen(false)}
-                className="px-2 py-3 text-base font-medium text-navy hover:text-bronze transition-colors border-b border-hairline/50 last:border-0"
+                className={cn(
+                  "px-2 py-3 text-base font-medium transition-colors border-b last:border-0",
+                  isPortal
+                    ? "text-white hover:text-white/90 border-white/10"
+                    : "text-navy hover:text-bronze border-hairline/50"
+                )}
               >
                 {item.label}
               </Link>
@@ -100,7 +136,12 @@ export function Header() {
             <Button
               asChild
               size="lg"
-              className="mt-4 bg-bronze hover:bg-bronze-hover text-navy font-medium"
+              className={cn(
+                "mt-4 font-medium",
+                isPortal
+                  ? "bg-white text-[#0B1220] hover:bg-white/90"
+                  : "bg-bronze hover:bg-bronze-hover text-navy"
+              )}
             >
               <a
                 href={getWhatsAppLink()}
