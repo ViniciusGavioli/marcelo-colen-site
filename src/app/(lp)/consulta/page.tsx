@@ -86,7 +86,8 @@ export default function ConsultaPage() {
 
   const montarMensagem = (): string => {
     const linhas = [
-      `Olá Dr. Marcelo! Meu nome é ${respostas.nome}. Preciso de ajuda com meu caso de heteroidentificação.\n`,
+      `Olá! Meu nome é ${respostas.nome}. Preciso de orientação sobre meu caso de heteroidentificação.\n`,
+
       `*Vestibular/Concurso:* ${respostas.vestibular}`,
       `*Data do Resultado:* ${respostas.dataResultado}`,
       `*Apresentou Recurso:* ${respostas.recurso}`,
@@ -167,7 +168,7 @@ export default function ConsultaPage() {
                 }}
               >
                 <MessageCircle className="w-5 h-5" />
-                WhatsApp direto (sem formulário)
+                WhatsApp do escritório (sem formulário)
               </a>
 
               <span style={{ color: 'rgba(255,255,255,0.75)', fontSize: '0.95rem', lineHeight: 1.2 }}>
@@ -279,7 +280,7 @@ export default function ConsultaPage() {
                       style={{ backgroundColor: '#4A9B4A', color: '#FFFFFF' }}
                     >
                       <MessageCircle className="w-5 h-5" />
-                      Enviar Caso
+                      Enviar para triagem
                     </button>
                   )}
                 </div>

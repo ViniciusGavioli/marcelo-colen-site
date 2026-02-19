@@ -97,7 +97,7 @@ function PortalHero() {
                 <div className="max-w-3xl">
                     <p className="mb-3 inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-3 py-1 text-xs text-white/90">
                         <span className="h-2 w-2 rounded-full bg-green-400" />
-                        Portal de Defesa • orientação objetiva • sigilo
+                        Portal de Defesa • triagem do escritório • sigilo
                     </p>
 
                     <h1 className="text-3xl font-extrabold leading-tight sm:text-5xl">
@@ -118,10 +118,10 @@ function PortalHero() {
                             href="/consulta"
                             className="inline-flex items-center justify-center rounded-xl bg-[#25D366] px-6 py-3 text-base font-bold text-[#0B1220] hover:opacity-95"
                         >
-                            Verificar viabilidade (2 min)
+                            Triagem do caso (2 min)
                         </Link>
                         <div className="text-sm text-white/70">
-                            Resposta em até <b>2h</b> (horário comercial) • atendimento 100% online
+                            Atendimento do <b>escritório</b> • resposta em até <b>2h</b> (horário comercial) • 100% online
                         </div>
                     </div>
 
