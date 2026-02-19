@@ -89,7 +89,7 @@ export function HeteroHero() {
                         {/* CTA Principal */}
                         <div className="pt-2 space-y-2">
                             <a
-                                href={getWhatsAppLink(whatsapp.hero)}
+                                href={getWhatsAppLink()}
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 onClick={trackWhatsAppClick}
@@ -173,7 +173,7 @@ export function HeteroHero() {
                             {/* CTA Principal */}
                             <div className="pt-2 space-y-3">
                                 <a
-                                    href={getWhatsAppLink(whatsapp.hero)}
+                                    href={getWhatsAppLink()}
                                     target="_blank"
                                     rel="noopener noreferrer"
                                     onClick={trackWhatsAppClick}

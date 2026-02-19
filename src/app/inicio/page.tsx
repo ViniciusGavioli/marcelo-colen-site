@@ -209,7 +209,7 @@ export default function HomePage() {
                             {/* CTA Principal */}
                             <div className="flex flex-col sm:flex-row gap-4">
                                 <a
-                                    href={getWhatsAppLink(WHATSAPP_MESSAGES.geral)}
+                                    href={getWhatsAppLink()}
                                     target="_blank"
                                     rel="noopener noreferrer"
                                     className="inline-flex items-center justify-center gap-3 px-8 py-4 font-bold text-base rounded-lg transition-all duration-200 hover:brightness-110 hover:scale-[1.02]"
@@ -353,7 +353,7 @@ export default function HomePage() {
 
                                         {/* CTA */}
                                         <a
-                                            href={getWhatsAppLink(pilar.whatsapp)}
+                                            href={getWhatsAppLink()}
                                             target="_blank"
                                             rel="noopener noreferrer"
                                             className="inline-flex items-center gap-2 font-bold text-sm transition-all duration-200 group-hover:gap-3"
@@ -446,7 +446,7 @@ export default function HomePage() {
                             {/* CTA */}
                             <div className="pt-4">
                                 <a
-                                    href={getWhatsAppLink(WHATSAPP_MESSAGES.geral)}
+                                    href={getWhatsAppLink()}
                                     target="_blank"
                                     rel="noopener noreferrer"
                                     className="inline-flex items-center justify-center gap-3 px-8 py-4 font-bold text-base rounded-lg transition-all duration-200 hover:brightness-110"
@@ -518,7 +518,7 @@ export default function HomePage() {
                         {/* CTA */}
                         <div className="text-center pt-12">
                             <a
-                                href={getWhatsAppLink(WHATSAPP_MESSAGES.hetero)}
+                                href={getWhatsAppLink()}
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 className="inline-flex items-center justify-center gap-3 px-8 py-4 font-bold text-base rounded-lg transition-all duration-200 hover:brightness-110"
@@ -597,7 +597,7 @@ export default function HomePage() {
                             {/* CTA */}
                             <div className="pt-4">
                                 <a
-                                    href={getWhatsAppLink(WHATSAPP_MESSAGES.compliance)}
+                                    href={getWhatsAppLink()}
                                     target="_blank"
                                     rel="noopener noreferrer"
                                     className="inline-flex items-center justify-center gap-3 px-8 py-4 font-bold text-base rounded-lg transition-all duration-200 hover:brightness-110"
@@ -718,7 +718,7 @@ export default function HomePage() {
 
                         <div className="flex flex-col sm:flex-row gap-4 justify-center mb-10">
                             <a
-                                href={getWhatsAppLink(WHATSAPP_MESSAGES.geral)}
+                                href={getWhatsAppLink()}
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 className="inline-flex items-center justify-center gap-3 px-10 py-5 font-bold text-lg rounded-lg transition-all duration-200 hover:brightness-110 hover:scale-[1.02] shadow-xl"

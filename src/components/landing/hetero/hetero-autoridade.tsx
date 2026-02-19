@@ -107,7 +107,7 @@ export function HeteroAutoridade() {
                             {/* CTA */}
                             <div className="pt-2">
                                 <a
-                                    href={getWhatsAppLink(whatsapp.autoridade)}
+                                    href={getWhatsAppLink()}
                                     target="_blank"
                                     rel="noopener noreferrer"
                                     onClick={trackWhatsAppClick}

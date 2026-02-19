@@ -149,7 +149,7 @@ export function CotasPorQueRecorrer() {
           {/* CTA */}
           <div className="text-center mt-10">
             <a
-              href={getWhatsAppLink("Olá, Marcelo. Quero entender como funciona o recurso para meu caso de heteroidentificação.")}
+              href={getWhatsAppLink()}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center justify-center gap-3 px-8 py-4 font-semibold text-lg transition-all duration-200 hover:scale-[1.02]"

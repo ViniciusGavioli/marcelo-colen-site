@@ -53,7 +53,7 @@ export function CotasHeroV2() {
             {/* CTA Button - Verde */}
             <div className="pt-4">
               <a
-                href={getWhatsAppLink(WHATSAPP_MESSAGE)}
+                href={getWhatsAppLink()}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-3 px-8 py-4 font-bold text-sm uppercase tracking-wider transition-all duration-300 hover:brightness-110"

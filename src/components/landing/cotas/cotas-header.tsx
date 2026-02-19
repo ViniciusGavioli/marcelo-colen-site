@@ -104,7 +104,7 @@ export function CotasHeader() {
           {/* WhatsApp CTA */}
           <div className="flex items-center gap-4">
             <a
-              href={getWhatsAppLink(WHATSAPP_MESSAGE)}
+              href={getWhatsAppLink()}
               target="_blank"
               rel="noopener noreferrer"
               className="hidden sm:inline-flex items-center gap-2 px-5 py-2.5 font-semibold text-sm transition-all duration-300 hover:brightness-110"
@@ -155,7 +155,7 @@ export function CotasHeader() {
             ))}
             <div className="pt-4">
               <a
-                href={getWhatsAppLink(WHATSAPP_MESSAGE)}
+                href={getWhatsAppLink()}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center justify-center gap-2 w-full px-6 py-4 font-semibold text-sm"

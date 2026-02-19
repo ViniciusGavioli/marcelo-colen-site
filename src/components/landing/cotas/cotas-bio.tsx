@@ -81,7 +81,7 @@ export function CotasBio() {
             {/* CTA - Botão Marrom */}
             <div className="pt-4">
               <a
-                href={getWhatsAppLink("Olá, Marcelo. Fui indeferido(a) na heteroidentificação e preciso entender prazos e como funciona o recurso. Posso te passar meu caso?")}
+                href={getWhatsAppLink()}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center justify-center gap-3 px-8 py-4 font-bold text-sm uppercase tracking-wider transition-all duration-200 hover:brightness-110"

@@ -124,7 +124,7 @@ export function CotasAuthorBio() {
 
                 {/* CTA */}
                 <a
-                  href={getWhatsAppLink(WHATSAPP_MESSAGE)}
+                  href={getWhatsAppLink()}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="group hidden sm:inline-flex items-center gap-2 text-sm font-medium transition-colors duration-300"

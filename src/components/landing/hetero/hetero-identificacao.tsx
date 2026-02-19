@@ -70,7 +70,7 @@ export function HeteroIdentificacao() {
                             Pode ser apenas um erro de critério que você tem direito de contestar.
                         </p>
                         <a
-                            href={getWhatsAppLink(whatsapp.hero)}
+                            href={getWhatsAppLink()}
                             target="_blank"
                             rel="noopener noreferrer"
                             onClick={trackWhatsAppClick}

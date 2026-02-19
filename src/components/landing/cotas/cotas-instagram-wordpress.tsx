@@ -111,7 +111,7 @@ export function CotasInstagramWordpress() {
 
             {/* WhatsApp Button - Green */}
             <a
-              href={getWhatsAppLink(WHATSAPP_MESSAGE)}
+              href={getWhatsAppLink()}
               target="_blank"
               rel="noopener noreferrer"
               onClick={trackWhatsAppClick}

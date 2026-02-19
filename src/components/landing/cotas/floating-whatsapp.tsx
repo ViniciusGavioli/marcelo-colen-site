@@ -54,7 +54,7 @@ export function FloatingWhatsApp() {
 
       {/* WhatsApp Button */}
       <a
-        href={getWhatsAppLink("Olá! Vi a página sobre cotas raciais e gostaria de tirar algumas dúvidas.")}
+        href={getWhatsAppLink()}
         target="_blank"
         rel="noopener noreferrer"
         onClick={trackWhatsAppClick}

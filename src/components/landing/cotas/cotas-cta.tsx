@@ -80,7 +80,7 @@ export function CotasCta() {
             {/* CTA Button */}
             <div className="pt-4">
               <a
-                href={getWhatsAppLink(WHATSAPP_MESSAGE)}
+                href={getWhatsAppLink()}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center justify-center gap-3 px-10 py-5 font-bold text-lg transition-all duration-200 hover:opacity-90 w-full sm:w-auto rounded-lg"

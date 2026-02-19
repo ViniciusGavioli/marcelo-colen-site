@@ -87,7 +87,7 @@ export function HeteroVideo() {
                             </div>
 
                             <a
-                                href={getWhatsAppLink(whatsapp.video)}
+                                href={getWhatsAppLink()}
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 onClick={trackWhatsAppClick}

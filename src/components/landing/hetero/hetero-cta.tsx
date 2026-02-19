@@ -54,7 +54,7 @@ export function HeteroCta() {
 
                     {/* CTA Principal */}
                     <a
-                        href={getWhatsAppLink(whatsapp.cta)}
+                        href={getWhatsAppLink()}
                         target="_blank"
                         rel="noopener noreferrer"
                         onClick={trackWhatsAppClick}

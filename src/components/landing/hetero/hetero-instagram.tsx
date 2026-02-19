@@ -82,7 +82,7 @@ export function HeteroInstagram() {
                         <div className="flex flex-col sm:flex-row gap-4">
                             {/* WhatsApp primeiro */}
                             <a
-                                href={getWhatsAppLink(whatsapp.cta)}
+                                href={getWhatsAppLink()}
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 onClick={trackWhatsAppClick}

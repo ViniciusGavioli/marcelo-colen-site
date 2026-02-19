@@ -67,7 +67,7 @@ export function HeteroFaq() {
                             Ainda tem dúvidas sobre o seu caso específico?
                         </p>
                         <a
-                            href={getWhatsAppLink(whatsapp.faq)}
+                            href={getWhatsAppLink()}
                             target="_blank"
                             rel="noopener noreferrer"
                             onClick={trackWhatsAppClick}

@@ -49,7 +49,7 @@ export function CotasCtaWordpress() {
 
           <div className="pt-6">
             <a
-              href={getWhatsAppLink(WHATSAPP_MESSAGE)}
+              href={getWhatsAppLink()}
               target="_blank"
               rel="noopener noreferrer"
               onClick={trackWhatsAppClick}

@@ -94,7 +94,7 @@ export function CotasBioWordpress() {
             {/* CTA Button - Roxo */}
             <div className="pt-4">
               <a
-                href={getWhatsAppLink(WHATSAPP_MESSAGE)}
+                href={getWhatsAppLink()}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center justify-center gap-2 px-8 py-4 font-semibold text-base transition-all duration-300 hover:scale-105 rounded-md"

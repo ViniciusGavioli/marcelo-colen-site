@@ -70,7 +70,7 @@ export function LPHeader() {
           {/* CTA Button */}
           <div className="flex items-center gap-4">
             <a
-              href={getWhatsAppLink(WHATSAPP_MESSAGE)}
+              href={getWhatsAppLink()}
               target="_blank"
               rel="noopener noreferrer"
               onClick={trackWhatsAppClick}
@@ -107,7 +107,7 @@ export function LPHeader() {
               </button>
             ))}
             <a
-              href={getWhatsAppLink(WHATSAPP_MESSAGE)}
+              href={getWhatsAppLink()}
               target="_blank"
               rel="noopener noreferrer"
               onClick={trackWhatsAppClick}

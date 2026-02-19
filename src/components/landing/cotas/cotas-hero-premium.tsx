@@ -140,7 +140,7 @@ export function CotasHeroPremium() {
             <div className="flex flex-col sm:flex-row gap-4 pt-4">
               {/* Primary CTA - Pulsing gold button */}
               <a
-                href={getWhatsAppLink(WHATSAPP_MESSAGE)}
+                href={getWhatsAppLink()}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="group relative inline-flex items-center justify-center gap-3 px-8 py-4 rounded-lg font-bold text-lg transition-all duration-300 hover:scale-105 overflow-hidden"

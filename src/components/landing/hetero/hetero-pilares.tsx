@@ -105,7 +105,7 @@ export function HeteroPilares() {
                     {/* CTA */}
                     <div className="text-center">
                         <a
-                            href={getWhatsAppLink(whatsapp.hero)}
+                            href={getWhatsAppLink()}
                             target="_blank"
                             rel="noopener noreferrer"
                             onClick={trackWhatsAppClick}

@@ -5,7 +5,7 @@ import Image from "next/image";
 import { MessageCircle, ChevronDown, CheckCircle2 } from "lucide-react";
 import { Container } from "@/components/layout";
 import { SITE_CONFIG } from "@/lib/constants";
-import { getWhatsAppLink } from "@/lib/whatsapp";
+import { getDirectWhatsAppLink } from "@/lib/whatsapp";
 
 const FAQ_ITEMS = [
   {
@@ -97,7 +97,7 @@ export default function ConsultaPage() {
 
   const handleEnviar = () => {
     const mensagem = montarMensagem();
-    const url = getWhatsAppLink(mensagem);
+    const url = getDirectWhatsAppLink(mensagem);
     console.log("Abrindo WhatsApp:", url);
     window.open(url, "_blank");
   };
@@ -151,7 +151,7 @@ export default function ConsultaPage() {
 
             <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap', marginBottom: '2rem' }}>
               <a
-                href={getWhatsAppLink("Olá! Quero falar direto no WhatsApp sobre meu caso de heteroidentificação.")}
+                href={getDirectWhatsAppLink("Olá! Quero falar direto no WhatsApp sobre meu caso de heteroidentificação.")}
                 target="_blank"
                 rel="noopener noreferrer"
                 style={{

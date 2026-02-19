@@ -72,7 +72,7 @@ export function CotasHeroWordpress() {
             </p>
             <div className="pt-2">
               <a
-                href={getWhatsAppLink(WHATSAPP_MESSAGE)}
+                href={getWhatsAppLink()}
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={trackWhatsAppClick}
@@ -117,7 +117,7 @@ export function CotasHeroWordpress() {
             </p>
             <div className="pt-4">
               <a
-                href={getWhatsAppLink(WHATSAPP_MESSAGE)}
+                href={getWhatsAppLink()}
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={trackWhatsAppClick}
