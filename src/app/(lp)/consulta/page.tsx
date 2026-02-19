@@ -148,7 +148,7 @@ export default function ConsultaPage() {
             </p>
 
             <p style={{ fontSize: '1.125rem', lineHeight: '1.5', color: 'rgba(255, 255, 255, 0.9)', marginBottom: '2rem' }}>
-              Você não foi apenas reprovado. Você foi injustiçado. E vamos lutar juntos para reverter isso.
+              Vou entender seu caso e te orientar sobre os próximos passos (recurso administrativo e, quando cabível, medidas judiciais).
             </p>
           </div>
         </Container>
