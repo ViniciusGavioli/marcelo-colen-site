@@ -87,11 +87,11 @@ function getPageSchemas() {
 
 function PortalHero() {
     return (
-        <section className="relative overflow-hidden bg-white">
-            {/* Fundo com imagem leve e sobria para evitar "branco chapado" */}
+        <section className="relative overflow-hidden bg-[#0B1220] text-white">
+            {/* Fundo com imagem e presença (sem branco chapado) */}
             <div className="absolute inset-0">
                 <div
-                    className="absolute inset-0 opacity-[0.14]"
+                    className="absolute inset-0 opacity-[0.35]"
                     style={{
                         backgroundImage: "url(/images/marcelo/estudantes.jpg)",
                         backgroundSize: "cover",
@@ -99,37 +99,34 @@ function PortalHero() {
                         filter: "grayscale(100%)",
                     }}
                 />
-                <div className="absolute inset-0 bg-gradient-to-b from-white/70 via-white/85 to-white" />
-                <div className="absolute -top-24 -left-24 h-72 w-72 rounded-full bg-slate-100 blur-3xl" />
-                <div className="absolute -bottom-24 -right-24 h-72 w-72 rounded-full bg-slate-100 blur-3xl" />
+                <div className="absolute inset-0 bg-gradient-to-b from-[#0B1220]/35 via-[#0B1220]/70 to-[#0B1220]" />
+                <div className="absolute -top-24 -left-24 h-72 w-72 rounded-full bg-red-600/30 blur-3xl" />
+                <div className="absolute -bottom-24 -right-24 h-72 w-72 rounded-full bg-orange-400/20 blur-3xl" />
             </div>
 
             <Container className="relative z-10 py-14">
                 <div className="max-w-3xl">
-                    <p className="mb-3 inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white px-3 py-1 text-xs text-slate-700">
-                        <span className="h-2 w-2 rounded-full bg-emerald-500" />
+                    <p className="mb-3 inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-3 py-1 text-xs text-white/90">
+                        <span className="h-2 w-2 rounded-full bg-emerald-400" />
                         Portal de Defesa
                     </p>
 
-                    <h1
-                        className="text-3xl font-extrabold leading-tight sm:text-5xl"
-                        style={{ color: "#0B1220" }}
-                    >
+                    <h1 className="text-3xl font-extrabold leading-tight text-white sm:text-5xl">
                         Indeferimento na heteroidentificação
                     </h1>
 
-                    <p className="mt-3 text-base text-slate-700 sm:text-lg">
+                    <p className="mt-3 text-base text-white/85 sm:text-lg">
                         Análise inicial do caso e orientação do próximo passo.
                     </p>
 
                     <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:items-center">
                         <Link
                             href="/consulta"
-                            className="inline-flex items-center justify-center rounded-xl bg-emerald-600 px-6 py-3 text-base font-bold text-white hover:bg-emerald-700"
+                            className="inline-flex items-center justify-center rounded-xl bg-[#25D366] px-6 py-3 text-base font-bold text-[#0B1220] hover:opacity-95"
                         >
                             Solicitar análise inicial
                         </Link>
-                        <div className="text-sm text-slate-600">
+                        <div className="text-sm text-white/75">
                             Sigilo profissional • atendimento do escritório • retorno em horário comercial
                         </div>
                     </div>
@@ -142,7 +139,7 @@ function PortalHero() {
                         ].map((t) => (
                             <div
                                 key={t}
-                                className="rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-700"
+                                className="rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-sm text-white/85"
                             >
                                 {t}
                             </div>
