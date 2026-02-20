@@ -88,7 +88,18 @@ function getPageSchemas() {
 function PortalHero() {
     return (
         <section className="relative overflow-hidden bg-white">
+            {/* Fundo com imagem leve e sobria para evitar "branco chapado" */}
             <div className="absolute inset-0">
+                <div
+                    className="absolute inset-0 opacity-[0.14]"
+                    style={{
+                        backgroundImage: "url(/images/marcelo/estudantes.jpg)",
+                        backgroundSize: "cover",
+                        backgroundPosition: "center",
+                        filter: "grayscale(100%)",
+                    }}
+                />
+                <div className="absolute inset-0 bg-gradient-to-b from-white/70 via-white/85 to-white" />
                 <div className="absolute -top-24 -left-24 h-72 w-72 rounded-full bg-slate-100 blur-3xl" />
                 <div className="absolute -bottom-24 -right-24 h-72 w-72 rounded-full bg-slate-100 blur-3xl" />
             </div>
