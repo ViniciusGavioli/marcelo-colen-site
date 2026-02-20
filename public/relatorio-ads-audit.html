@@ -1,0 +1,1090 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Relatório de Tráfego — Marcelo Colen | Google Ads</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap"
+        rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box
+        }
+
+        :root {
+            --bg: #0a0a0f;
+            --surface: #12121a;
+            --surface2: #1a1a26;
+            --border: #2a2a3a;
+            --accent: #6c5ce7;
+            --accent2: #a855f7;
+            --green: #00d68f;
+            --red: #ff6b6b;
+            --yellow: #ffd93d;
+            --orange: #ff9f43;
+            --blue: #4ecdc4;
+            --text: #e8e8f0;
+            --text2: #9999aa;
+            --text3: #666680;
+            --glow: rgba(108, 92, 231, 0.15)
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            overflow-x: hidden
+        }
+
+        .grain {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: .03;
+            pointer-events: none;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+            z-index: 9999
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px
+        }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: .8px;
+            text-transform: uppercase
+        }
+
+        .badge-red {
+            background: rgba(255, 107, 107, .12);
+            color: var(--red);
+            border: 1px solid rgba(255, 107, 107, .2)
+        }
+
+        .badge-green {
+            background: rgba(0, 214, 143, .12);
+            color: var(--green);
+            border: 1px solid rgba(0, 214, 143, .2)
+        }
+
+        .badge-yellow {
+            background: rgba(255, 217, 61, .12);
+            color: var(--yellow);
+            border: 1px solid rgba(255, 217, 61, .2)
+        }
+
+        .badge-accent {
+            background: rgba(108, 92, 231, .12);
+            color: var(--accent);
+            border: 1px solid rgba(108, 92, 231, .2)
+        }
+
+        /* HEADER */
+        header {
+            position: relative;
+            padding: 60px 0 40px;
+            border-bottom: 1px solid var(--border);
+            overflow: hidden
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -20%;
+            width: 140%;
+            height: 200%;
+            background: radial-gradient(ellipse at 30% 0%, rgba(108, 92, 231, .08) 0%, transparent 60%), radial-gradient(ellipse at 70% 100%, rgba(168, 85, 247, .06) 0%, transparent 50%);
+            pointer-events: none
+        }
+
+        .header-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 32px;
+            position: relative
+        }
+
+        .logo-area h1 {
+            font-size: 13px;
+            font-weight: 600;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-bottom: 8px
+        }
+
+        .logo-area h2 {
+            font-size: 36px;
+            font-weight: 800;
+            background: linear-gradient(135deg, #fff 0%, #c4b5fd 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            line-height: 1.2
+        }
+
+        .logo-area p {
+            color: var(--text2);
+            font-size: 14px;
+            margin-top: 8px
+        }
+
+        .header-meta {
+            text-align: right;
+            color: var(--text3);
+            font-size: 13px;
+            line-height: 1.8
+        }
+
+        .header-meta strong {
+            color: var(--text2)
+        }
+
+        .verdict-bar {
+            position: relative;
+            background: linear-gradient(135deg, rgba(255, 107, 107, .08), rgba(255, 107, 107, .03));
+            border: 1px solid rgba(255, 107, 107, .15);
+            border-radius: 16px;
+            padding: 24px 32px;
+            display: flex;
+            align-items: center;
+            gap: 20px
+        }
+
+        .verdict-icon {
+            width: 52px;
+            height: 52px;
+            border-radius: 14px;
+            background: rgba(255, 107, 107, .12);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            flex-shrink: 0
+        }
+
+        .verdict-text h3 {
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--red);
+            margin-bottom: 4px
+        }
+
+        .verdict-text p {
+            font-size: 13px;
+            color: var(--text2);
+            line-height: 1.6
+        }
+
+        /* SECTIONS */
+        section {
+            padding: 48px 0
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            margin-bottom: 32px
+        }
+
+        .section-num {
+            width: 40px;
+            height: 40px;
+            border-radius: 12px;
+            background: linear-gradient(135deg, var(--accent), var(--accent2));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 15px;
+            font-weight: 800;
+            color: #fff;
+            flex-shrink: 0
+        }
+
+        .section-title {
+            font-size: 22px;
+            font-weight: 700
+        }
+
+        .section-subtitle {
+            font-size: 13px;
+            color: var(--text2);
+            margin-top: 2px
+        }
+
+        /* CARDS */
+        .grid-4 {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 16px;
+            margin-bottom: 32px
+        }
+
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+            margin-bottom: 32px
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            margin-bottom: 32px
+        }
+
+        .metric-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 24px;
+            position: relative;
+            overflow: hidden;
+            transition: border-color .3s, transform .2s
+        }
+
+        .metric-card:hover {
+            border-color: rgba(108, 92, 231, .3);
+            transform: translateY(-2px)
+        }
+
+        .metric-card::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--accent), var(--accent2));
+            opacity: 0;
+            transition: opacity .3s
+        }
+
+        .metric-card:hover::after {
+            opacity: 1
+        }
+
+        .metric-label {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text3);
+            font-weight: 600;
+            margin-bottom: 8px
+        }
+
+        .metric-value {
+            font-size: 32px;
+            font-weight: 800;
+            font-family: 'JetBrains Mono', monospace
+        }
+
+        .metric-sub {
+            font-size: 12px;
+            color: var(--text2);
+            margin-top: 6px
+        }
+
+        .metric-icon {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 20px;
+            opacity: .6
+        }
+
+        /* TABLE */
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: var(--surface);
+            border-radius: 16px;
+            overflow: hidden;
+            border: 1px solid var(--border)
+        }
+
+        .data-table thead {
+            background: var(--surface2)
+        }
+
+        .data-table th {
+            padding: 14px 18px;
+            text-align: left;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text3);
+            font-weight: 600;
+            border-bottom: 1px solid var(--border)
+        }
+
+        .data-table td {
+            padding: 14px 18px;
+            font-size: 13px;
+            border-bottom: 1px solid rgba(42, 42, 58, .5)
+        }
+
+        .data-table tr:last-child td {
+            border-bottom: none
+        }
+
+        .data-table tr:hover {
+            background: rgba(108, 92, 231, .04)
+        }
+
+        .highlight-row {
+            background: rgba(0, 214, 143, .04) !important
+        }
+
+        .danger-row {
+            background: rgba(255, 107, 107, .04) !important
+        }
+
+        /* CHART CONTAINERS */
+        .chart-container {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 28px;
+            margin-bottom: 20px
+        }
+
+        .chart-title {
+            font-size: 15px;
+            font-weight: 600;
+            margin-bottom: 4px
+        }
+
+        .chart-desc {
+            font-size: 12px;
+            color: var(--text3);
+            margin-bottom: 20px
+        }
+
+        .chart-wrap {
+            position: relative;
+            height: 300px
+        }
+
+        /* BOT SECTION */
+        .bot-alert {
+            background: linear-gradient(135deg, rgba(255, 107, 107, .06), rgba(255, 159, 67, .04));
+            border: 1px solid rgba(255, 107, 107, .15);
+            border-radius: 16px;
+            padding: 32px;
+            margin-bottom: 24px
+        }
+
+        .bot-alert h4 {
+            color: var(--red);
+            font-size: 16px;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px
+        }
+
+        .bot-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px
+        }
+
+        .bot-card {
+            background: rgba(255, 255, 255, .02);
+            border: 1px solid rgba(255, 107, 107, .1);
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center
+        }
+
+        .bot-card .loc {
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 4px
+        }
+
+        .bot-card .count {
+            font-size: 28px;
+            font-weight: 800;
+            color: var(--red);
+            font-family: 'JetBrains Mono', monospace
+        }
+
+        .bot-card .label {
+            font-size: 11px;
+            color: var(--text3);
+            text-transform: uppercase;
+            letter-spacing: .5px
+        }
+
+        /* FUNNEL */
+        .funnel {
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+            align-items: center;
+            margin: 32px auto;
+            max-width: 600px
+        }
+
+        .funnel-step {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 20px;
+            font-weight: 600;
+            color: #fff;
+            width: 100%;
+            clip-path: polygon(5% 0%, 95% 0%, 100% 100%, 0% 100%)
+        }
+
+        .funnel-step:nth-child(1) {
+            background: linear-gradient(135deg, #6c5ce7, #a855f7);
+            width: 100%
+        }
+
+        .funnel-step:nth-child(2) {
+            background: linear-gradient(135deg, #4ecdc4, #45b7aa);
+            width: 82%
+        }
+
+        .funnel-step:nth-child(3) {
+            background: linear-gradient(135deg, #ffd93d, #f0c929);
+            width: 64%;
+            color: #333
+        }
+
+        .funnel-step:nth-child(4) {
+            background: linear-gradient(135deg, #ff6b6b, #ee5a5a);
+            width: 46%
+        }
+
+        .funnel-arrow {
+            color: var(--text3);
+            font-size: 18px;
+            margin: 4px 0
+        }
+
+        .funnel-label {
+            font-size: 13px;
+            line-height: 1.4
+        }
+
+        .funnel-label span {
+            display: block;
+            font-size: 24px;
+            font-weight: 800;
+            font-family: 'JetBrains Mono', monospace
+        }
+
+        /* POSITION */
+        .pos-bar {
+            height: 32px;
+            border-radius: 8px;
+            position: relative;
+            overflow: hidden;
+            background: var(--surface2);
+            margin-bottom: 12px
+        }
+
+        .pos-fill {
+            height: 100%;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            padding: 0 14px;
+            font-size: 12px;
+            font-weight: 700;
+            color: #fff;
+            transition: width 1s ease
+        }
+
+        .pos-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 6px
+        }
+
+        .pos-info span:first-child {
+            font-size: 13px;
+            font-weight: 500
+        }
+
+        .pos-info span:last-child {
+            font-size: 13px;
+            font-weight: 700;
+            font-family: 'JetBrains Mono', monospace;
+            color: var(--accent)
+        }
+
+        /* QUESTIONS */
+        .q-list {
+            counter-reset: q
+        }
+
+        .q-item {
+            counter-increment: q;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 24px 24px 24px 68px;
+            margin-bottom: 12px;
+            position: relative;
+            transition: border-color .3s
+        }
+
+        .q-item:hover {
+            border-color: rgba(108, 92, 231, .3)
+        }
+
+        .q-item::before {
+            content: counter(q, decimal-leading-zero);
+            position: absolute;
+            left: 20px;
+            top: 24px;
+            width: 36px;
+            height: 36px;
+            border-radius: 10px;
+            background: linear-gradient(135deg, var(--accent), var(--accent2));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 13px;
+            font-weight: 800;
+            color: #fff
+        }
+
+        .q-item h4 {
+            font-size: 14px;
+            font-weight: 700;
+            margin-bottom: 4px
+        }
+
+        .q-cat {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: .8px;
+            color: var(--accent);
+            font-weight: 600;
+            margin-bottom: 6px
+        }
+
+        .q-item p {
+            font-size: 13px;
+            color: var(--text2);
+            line-height: 1.6
+        }
+
+        .q-tip {
+            background: rgba(108, 92, 231, .08);
+            border-left: 3px solid var(--accent);
+            padding: 10px 14px;
+            border-radius: 0 8px 8px 0;
+            margin-top: 10px;
+            font-size: 12px;
+            color: var(--text2)
+        }
+
+        /* FOOTER */
+        footer {
+            border-top: 1px solid var(--border);
+            padding: 40px 0;
+            text-align: center;
+            color: var(--text3);
+            font-size: 12px
+        }
+
+        footer .brand {
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--accent);
+            margin-bottom: 6px
+        }
+
+        /* PULSE ANIMATION */
+        @keyframes pulse {
+
+            0%,
+            100% {
+                opacity: 1
+            }
+
+            50% {
+                opacity: .5
+            }
+        }
+
+        .pulse {
+            animation: pulse 2s infinite
+        }
+
+        /* RESPONSIVE */
+        @media(max-width:900px) {
+            .grid-4 {
+                grid-template-columns: repeat(2, 1fr)
+            }
+
+            .grid-3 {
+                grid-template-columns: 1fr
+            }
+
+            .grid-2 {
+                grid-template-columns: 1fr
+            }
+
+            .header-top {
+                flex-direction: column;
+                gap: 16px
+            }
+
+            .header-meta {
+                text-align: left
+            }
+
+            .bot-grid {
+                grid-template-columns: 1fr
+            }
+        }
+
+        @media(max-width:600px) {
+            .grid-4 {
+                grid-template-columns: 1fr
+            }
+
+            .logo-area h2 {
+                font-size: 26px
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="grain"></div>
+
+    <!-- HEADER -->
+    <header>
+        <div class="container">
+            <div class="header-top">
+                <div class="logo-area">
+                    <h1>⚖️ Entrega de Relatório de Tráfego Pago</h1>
+                    <h2>Diagnóstico de Campanha<br>Google Ads</h2>
+                    <p>Análise forense de cliques, conversões e tráfego inválido</p>
+                </div>
+                <div class="header-meta">
+                    <strong>Cliente:</strong> Marcelo Colen Neves<br>
+                    <strong>Nicho:</strong> Direito — Heteroidentificação<br>
+                    <strong>Período:</strong> Campanha Ativa (2026)<br>
+                    <strong>Classificação:</strong> <span class="badge badge-red">⚠ Tráfego Contaminado</span>
+                </div>
+            </div>
+            <div class="verdict-bar">
+                <div class="verdict-icon">🔍</div>
+                <div class="verdict-text">
+                    <h3>Veredito: Cliques Fantasmagóricos Confirmados</h3>
+                    <p>Os dados do Google Analytics 4 confirmam presença massiva de bots estrangeiros (Índia e EUA)
+                        inflando os eventos de whatsapp_click. Das <strong>174 interações</strong> registradas, apenas
+                        <strong>8 leads reais</strong> foram validados como conversões legítimas — uma taxa de
+                        contaminação de <strong>82%</strong>.</p>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- SECTION 1: PAINEL GOOGLE ADS -->
+    <section>
+        <div class="container">
+            <div class="section-header">
+                <div class="section-num">01</div>
+                <div>
+                    <div class="section-title">Painel Google Ads — Visão Geral</div>
+                    <div class="section-subtitle">Métricas oficiais extraídas diretamente da plataforma</div>
+                </div>
+            </div>
+            <div class="grid-4">
+                <div class="metric-card">
+                    <div class="metric-icon">💰</div>
+                    <div class="metric-label">Investimento Total</div>
+                    <div class="metric-value" style="color:var(--accent)">R$ 765,63</div>
+                    <div class="metric-sub">Orçamento consumido no período</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-icon">👆</div>
+                    <div class="metric-label">Total de Cliques</div>
+                    <div class="metric-value">174</div>
+                    <div class="metric-sub">Interações registradas pelo Ads</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-icon">📊</div>
+                    <div class="metric-label">CPC Médio</div>
+                    <div class="metric-value" style="color:var(--yellow)">R$ 4,40</div>
+                    <div class="metric-sub">Custo por clique médio</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-icon">🎯</div>
+                    <div class="metric-label">Conversões Reais</div>
+                    <div class="metric-value" style="color:var(--green)">8,00</div>
+                    <div class="metric-sub">CPA: R$ 95,70 por lead</div>
+                </div>
+            </div>
+            <div class="grid-2">
+                <div class="chart-container">
+                    <div class="chart-title">Distribuição do Investimento</div>
+                    <div class="chart-desc">Custo vs. Conversões por canal</div>
+                    <div class="chart-wrap"><canvas id="chartInvest"></canvas></div>
+                </div>
+                <div class="chart-container">
+                    <div class="chart-title">Saúde da Conta</div>
+                    <div class="chart-desc">Índice de otimização e score qualitativo</div>
+                    <div class="chart-wrap"><canvas id="chartHealth"></canvas></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 2: KEYWORDS -->
+    <section style="background:var(--surface)">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-num">02</div>
+                <div>
+                    <div class="section-title">Análise de Intencionalidade — Keywords</div>
+                    <div class="section-subtitle">Performance por palavra-chave e qualificação de tráfego</div>
+                </div>
+            </div>
+            <div style="overflow-x:auto;margin-bottom:24px">
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Palavra-Chave</th>
+                            <th>Cliques</th>
+                            <th>Conversões</th>
+                            <th>Taxa Conv.</th>
+                            <th>CTR</th>
+                            <th>Diagnóstico</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="highlight-row">
+                            <td><strong>recurso administrativo heteroidentificação</strong></td>
+                            <td>79</td>
+                            <td>5</td>
+                            <td>6,33%</td>
+                            <td>—</td>
+                            <td><span class="badge badge-green">🚀 Motor Principal</span></td>
+                        </tr>
+                        <tr class="highlight-row">
+                            <td><strong>advogado heteroidentificação</strong></td>
+                            <td>6</td>
+                            <td>1</td>
+                            <td>16,67%</td>
+                            <td>—</td>
+                            <td><span class="badge badge-green">⭐ Lead Qualificado</span></td>
+                        </tr>
+                        <tr class="danger-row">
+                            <td><strong>modelo recurso heteroidentificação</strong></td>
+                            <td>9</td>
+                            <td>0</td>
+                            <td>0,00%</td>
+                            <td>22,50%</td>
+                            <td><span class="badge badge-red">🚫 Dreno de Verba</span></td>
+                        </tr>
+                        <tr>
+                            <td>heteroidentificação recurso</td>
+                            <td>28</td>
+                            <td>1</td>
+                            <td>3,57%</td>
+                            <td>—</td>
+                            <td><span class="badge badge-yellow">⚡ Monitorar</span></td>
+                        </tr>
+                        <tr>
+                            <td>outros termos combinados</td>
+                            <td>52</td>
+                            <td>1</td>
+                            <td>1,92%</td>
+                            <td>—</td>
+                            <td><span class="badge badge-yellow">⚡ Otimizar</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="grid-2">
+                <div class="chart-container">
+                    <div class="chart-title">Cliques por Keyword</div>
+                    <div class="chart-desc">Volume de tráfego por termo de busca</div>
+                    <div class="chart-wrap"><canvas id="chartKeyClicks"></canvas></div>
+                </div>
+                <div class="chart-container">
+                    <div class="chart-title">Taxa de Conversão por Keyword</div>
+                    <div class="chart-desc">Eficiência real de cada termo</div>
+                    <div class="chart-wrap"><canvas id="chartKeyConv"></canvas></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 3: BOTS -->
+    <section>
+        <div class="container">
+            <div class="section-header">
+                <div class="section-num">03</div>
+                <div>
+                    <div class="section-title">Detecção de Tráfego Inválido — Bots</div>
+                    <div class="section-subtitle">Análise de geolocalização e comportamento via GA4</div>
+                </div>
+            </div>
+            <div class="bot-alert">
+                <h4>🤖 Tráfego Inválido Detectado</h4>
+                <p style="font-size:13px;color:var(--text2);margin-bottom:20px">A análise cruzada entre cliques de
+                    WhatsApp (GA4) e conversões oficiais (Google Ads) revela uma discrepância crítica, sustentada por
+                    acessos de localidades incompatíveis com o público-alvo jurídico brasileiro.</p>
+                <div class="bot-grid">
+                    <div class="bot-card">
+                        <div class="loc">🇮🇳 Hyderabad, Índia</div>
+                        <div class="count">7</div>
+                        <div class="label">Usuários Detectados</div>
+                    </div>
+                    <div class="bot-card">
+                        <div class="loc">🇺🇸 Flint Hill, EUA</div>
+                        <div class="count">6</div>
+                        <div class="label">Usuários Detectados</div>
+                    </div>
+                    <div class="bot-card">
+                        <div class="loc">⏱️ Engajamento Médio</div>
+                        <div class="count">40s</div>
+                        <div class="label">Tempo na Página</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- FUNNEL -->
+            <div class="chart-container">
+                <div class="chart-title">Funil de Contaminação</div>
+                <div class="chart-desc">De cliques brutos a leads reais — onde o tráfego se perde</div>
+                <div class="funnel">
+                    <div class="funnel-step">
+                        <div class="funnel-label"><span>174</span>Cliques Totais (Google Ads)</div>
+                    </div>
+                    <div class="funnel-arrow">▼</div>
+                    <div class="funnel-step">
+                        <div class="funnel-label"><span>31</span>Cliques WhatsApp (GA4)</div>
+                    </div>
+                    <div class="funnel-arrow">▼</div>
+                    <div class="funnel-step">
+                        <div class="funnel-label"><span>23</span>Cliques Fantasma (sem contato real)</div>
+                    </div>
+                    <div class="funnel-arrow">▼</div>
+                    <div class="funnel-step">
+                        <div class="funnel-label"><span>8</span>Leads Reais Validados</div>
+                    </div>
+                </div>
+            </div>
+            <div class="grid-2">
+                <div class="chart-container">
+                    <div class="chart-title">Cliques WhatsApp vs Conversões Reais</div>
+                    <div class="chart-desc">A lacuna entre intenção aparente e resultado real</div>
+                    <div class="chart-wrap"><canvas id="chartDisc"></canvas></div>
+                </div>
+                <div class="chart-container">
+                    <div class="chart-title">Origem Geográfica dos Acessos Suspeitos</div>
+                    <div class="chart-desc">Distribuição de tráfego inválido por localidade</div>
+                    <div class="chart-wrap"><canvas id="chartGeo"></canvas></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 4: POSITION -->
+    <section style="background:var(--surface)">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-num">04</div>
+                <div>
+                    <div class="section-title">Posição de Mercado — Dominância no Leilão</div>
+                    <div class="section-subtitle">Parcela de impressões e posicionamento competitivo</div>
+                </div>
+            </div>
+            <div class="grid-2" style="margin-bottom:32px">
+                <div>
+                    <div class="pos-info"><span>Parcela de Impressões</span><span>34,56%</span></div>
+                    <div class="pos-bar">
+                        <div class="pos-fill"
+                            style="width:34.56%;background:linear-gradient(90deg,var(--accent),var(--accent2))">34,56%
+                        </div>
+                    </div>
+                    <div class="pos-info" style="margin-top:20px"><span>Topo Absoluto (1ª
+                            Posição)</span><span>45,52%</span></div>
+                    <div class="pos-bar">
+                        <div class="pos-fill"
+                            style="width:45.52%;background:linear-gradient(90deg,var(--green),#45b7aa)">45,52%</div>
+                    </div>
+                    <div class="pos-info" style="margin-top:20px"><span>Índice de Otimização</span><span>85,3%</span>
+                    </div>
+                    <div class="pos-bar">
+                        <div class="pos-fill" style="width:85.3%;background:linear-gradient(90deg,var(--blue),#38a89d)">
+                            85,3%</div>
+                    </div>
+                </div>
+                <div class="chart-container" style="margin-bottom:0">
+                    <div class="chart-title">Market Share no Leilão</div>
+                    <div class="chart-desc">Dominância vs. concorrentes</div>
+                    <div class="chart-wrap"><canvas id="chartMarket"></canvas></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 5: QUESTIONS -->
+    <section>
+        <div class="container">
+            <div class="section-header">
+                <div class="section-num">05</div>
+                <div>
+                    <div class="section-title">Roteiro de Perguntas Técnicas para Mentores</div>
+                    <div class="section-subtitle">Questões estratégicas para testar o domínio sobre tráfego inválido
+                    </div>
+                </div>
+            </div>
+            <div class="q-list">
+                <div class="q-item">
+                    <div class="q-cat">Detecção de Bots</div>
+                    <h4>Como vocês explicam 7 acessos de Hyderabad (Índia) em uma campanha segmentada exclusivamente
+                        para o Brasil?</h4>
+                    <p>Quero entender se existe algum mecanismo de proteção ativa ou se esses cliques estão sendo
+                        cobrados normalmente na minha conta.</p>
+                    <div class="q-tip">💡 <strong>O que observar:</strong> Se não souberem o que é "tráfego inválido" do
+                        GA4, isso revela falta de análise básica.</div>
+                </div>
+
+                <div class="q-item">
+                    <div class="q-cat">Discrepância de Dados</div>
+                    <h4>O GA4 registrou 31 cliques no WhatsApp, mas o Google Ads só contabilizou 8 conversões. Onde
+                        estão os outros 23?</h4>
+                    <p>Preciso saber se esses 23 cliques fantasmas estão sendo contabilizados como engajamento real ou
+                        se são bots que inflam as métricas.</p>
+                    <div class="q-tip">💡 <strong>O que observar:</strong> A resposta correta envolve explicar a
+                        diferença entre eventos JavaScript (GA4) e conversões com atribuição (Ads).</div>
+                </div>
+
+                <div class="q-item">
+                    <div class="q-cat">Proteção de Investimento</div>
+                    <h4>Qual é a política de reembolso do Google para cliques inválidos e como posso solicitar créditos
+                        retroativos?</h4>
+                    <p>Se o Google identifica tráfego inválido automaticamente, por que ainda estou pagando por cliques
+                        de Flint Hill, EUA?</p>
+                    <div class="q-tip">💡 <strong>O que observar:</strong> Devem mencionar o formulário de "Invalid
+                        Clicks Contact Form" e o relatório de cliques inválidos no painel.</div>
+                </div>
+
+                <div class="q-item">
+                    <div class="q-cat">Otimização de Keywords</div>
+                    <h4>O termo "modelo recurso heteroidentificação" tem CTR de 22,5% mas zero conversões. Por que não
+                        foi negativado ainda?</h4>
+                    <p>Esse termo atrai pessoas buscando templates gratuitos, não clientes pagantes. Já deveria estar na
+                        lista de palavras negativas.</p>
+                    <div class="q-tip">💡 <strong>O que observar:</strong> Se hesitarem em negativar por causa do
+                        "volume", mostra foco em vaidade métrica, não em ROI.</div>
+                </div>
+
+                <div class="q-item">
+                    <div class="q-cat">Comportamento do Usuário</div>
+                    <h4>O tempo médio de engajamento é de 40 segundos. Para uma página de serviços jurídicos complexos,
+                        isso é aceitável?</h4>
+                    <p>Uma landing page jurídica com conteúdo técnico deveria ter pelo menos 1min30s de leitura. 40s
+                        sugere bounce ou bot.</p>
+                    <div class="q-tip">💡 <strong>O que observar:</strong> A resposta técnica deveria segmentar o tempo
+                        por fonte (orgânico vs pago) e por device.</div>
+                </div>
+
+                <div class="q-item">
+                    <div class="q-cat">Estratégia de Leilão</div>
+                    <h4>Temos 34,56% de market share e 45,52% de topo absoluto. Qual a estratégia para chegar a 50% sem
+                        aumentar CPC?</h4>
+                    <p>Quero avaliar se a recomendação será simplesmente "aumente o orçamento" ou se há inteligência
+                        estratégica real.</p>
+                    <div class="q-tip">💡 <strong>O que observar:</strong> Respostas inteligentes envolvem Quality
+                        Score, extensões de anúncio, e ajuste de lance por horário/device.</div>
+                </div>
+
+                <div class="q-item">
+                    <div class="q-cat">ROI Real</div>
+                    <h4>Se o CPA real é R$ 95,70, qual deveria ser o ticket médio mínimo do cliente para a campanha ser
+                        lucrativa?</h4>
+                    <p>Preciso de um cálculo de LTV vs CAC para justificar o investimento ao cliente.</p>
+                    <div class="q-tip">💡 <strong>O que observar:</strong> Devem calcular considerando taxa de
+                        fechamento (leads → clientes), não apenas o custo do lead.</div>
+                </div>
+
+                <div class="q-item">
+                    <div class="q-cat">Segurança Avançada</div>
+                    <h4>Vocês recomendam ferramentas de terceiros como ClickCease ou CHEQ para proteção contra cliques
+                        inválidos?</h4>
+                    <p>Quero saber se existem soluções complementares ao filtro nativo do Google, que claramente não
+                        está sendo suficiente.</p>
+                    <div class="q-tip">💡 <strong>O que observar:</strong> Se desconhecerem essas ferramentas, estão
+                        atuando sem camada de proteção — red flag grave.</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="brand">⚖️ Relatório de Tráfego — Marcelo Colen</div>
+            <p>Relatório gerado em Fevereiro 2026 · Dados extraídos do Google Ads & GA4<br>Documento confidencial — uso
+                interno</p>
+        </div>
+    </footer>
+
+    <script>
+        const colors = { accent: '#6c5ce7', accent2: '#a855f7', green: '#00d68f', red: '#ff6b6b', yellow: '#ffd93d', blue: '#4ecdc4', orange: '#ff9f43', text3: '#666680' };
+        Chart.defaults.color = '#9999aa'; Chart.defaults.font.family = 'Inter'; Chart.defaults.plugins.legend.labels.usePointStyle = true; Chart.defaults.plugins.legend.labels.pointStyle = 'circle';
+        const gridColor = 'rgba(42,42,58,0.5)';
+
+        // Chart 1: Investment
+        new Chart(document.getElementById('chartInvest'), { type: 'bar', data: { labels: ['Investimento', 'Custo Conversões', 'Custo Cliques Fantasma'], datasets: [{ label: 'Valor (R$)', data: [765.63, 765.63 * 8 / 174, 765.63 * (174 - 8) / 174], backgroundColor: ['rgba(108,92,231,.7)', 'rgba(0,214,143,.7)', 'rgba(255,107,107,.7)'], borderRadius: 8, borderSkipped: false }] }, options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { y: { grid: { color: gridColor }, ticks: { callback: v => 'R$ ' + v.toFixed(0) } }, x: { grid: { display: false } } } } });
+
+        // Chart 2: Health
+        new Chart(document.getElementById('chartHealth'), { type: 'doughnut', data: { labels: ['Otimizado', 'A Otimizar'], datasets: [{ data: [85.3, 14.7], backgroundColor: ['rgba(0,214,143,.8)', 'rgba(42,42,58,.8)'], borderWidth: 0, cutout: '75%' }] }, options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'bottom' }, tooltip: { callbacks: { label: ctx => ctx.label + ': ' + ctx.raw + '%' } } } } });
+
+        // Chart 3: Keyword Clicks
+        new Chart(document.getElementById('chartKeyClicks'), { type: 'bar', data: { labels: ['recurso adm.', 'hetero recurso', 'modelo recurso', 'advogado hetero', 'outros'], datasets: [{ label: 'Cliques', data: [79, 28, 9, 6, 52], backgroundColor: ['rgba(108,92,231,.7)', 'rgba(78,205,196,.7)', 'rgba(255,107,107,.7)', 'rgba(0,214,143,.7)', 'rgba(255,217,61,.7)'], borderRadius: 8, borderSkipped: false }] }, options: { indexAxis: 'y', responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { x: { grid: { color: gridColor } }, y: { grid: { display: false } } } } });
+
+        // Chart 4: Conversion Rate
+        new Chart(document.getElementById('chartKeyConv'), { type: 'bar', data: { labels: ['advogado hetero', 'recurso adm.', 'hetero recurso', 'outros', 'modelo recurso'], datasets: [{ label: 'Taxa Conv. %', data: [16.67, 6.33, 3.57, 1.92, 0], backgroundColor: ['rgba(0,214,143,.8)', 'rgba(108,92,231,.7)', 'rgba(78,205,196,.7)', 'rgba(255,217,61,.7)', 'rgba(255,107,107,.7)'], borderRadius: 8, borderSkipped: false }] }, options: { indexAxis: 'y', responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { x: { grid: { color: gridColor }, ticks: { callback: v => v + '%' } }, y: { grid: { display: false } } } } });
+
+        // Chart 5: Discrepancy
+        new Chart(document.getElementById('chartDisc'), { type: 'bar', data: { labels: ['Cliques WhatsApp (GA4)', 'Cliques Fantasma', 'Conversões Reais (Ads)'], datasets: [{ label: 'Quantidade', data: [31, 23, 8], backgroundColor: ['rgba(255,217,61,.7)', 'rgba(255,107,107,.7)', 'rgba(0,214,143,.8)'], borderRadius: 8, borderSkipped: false }] }, options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { y: { grid: { color: gridColor } }, x: { grid: { display: false } } } } });
+
+        // Chart 6: Geo
+        new Chart(document.getElementById('chartGeo'), { type: 'polarArea', data: { labels: ['🇮🇳 Hyderabad, Índia', '🇺🇸 Flint Hill, EUA', '🇧🇷 Brasil (Legítimo)'], datasets: [{ data: [7, 6, 18], backgroundColor: ['rgba(255,107,107,.7)', 'rgba(255,159,67,.7)', 'rgba(0,214,143,.7)'], borderWidth: 0 }] }, options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'bottom' } }, scales: { r: { grid: { color: gridColor }, ticks: { display: false } } } } });
+
+        // Chart 7: Market
+        new Chart(document.getElementById('chartMarket'), { type: 'doughnut', data: { labels: ['Marcelo Colen', 'Concorrentes'], datasets: [{ data: [34.56, 65.44], backgroundColor: ['rgba(108,92,231,.8)', 'rgba(42,42,58,.8)'], borderWidth: 0, cutout: '70%' }] }, options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'bottom' } } } });
+    </script>
+</body>
+
+</html>
