@@ -339,7 +339,7 @@ export default function RecursoCotasPage() {
             {/* ══════════════════════════════════════════════════════════════ */}
             {/* VÍDEO — mensagem do advogado                                 */}
             {/* ══════════════════════════════════════════════════════════════ */}
-            <VideoSection />
+            <VideoSection youtubeId="jAiQi4CgMN0" />
 
             {/* ══════════════════════════════════════════════════════════════ */}
             {/* CHECKLIST — "Isso aconteceu com você?"                       */}
