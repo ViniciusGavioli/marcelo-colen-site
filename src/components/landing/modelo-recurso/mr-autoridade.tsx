@@ -5,6 +5,12 @@ import { Container } from "@/components/layout";
 import { MODELO_RECURSO_PAGE } from "@/lib/modelo-recurso-data";
 import { Award } from "lucide-react";
 
+function getAutoridadeTexto(a: { descricao: string; depoimento?: string }): string {
+    const d = a.depoimento;
+    if (typeof d === "string" && d.trim().length > 0) return d;
+    return a.descricao;
+}
+
 export function MrAutoridade() {
     const { autoridade } = MODELO_RECURSO_PAGE;
 
@@ -85,7 +91,7 @@ export function MrAutoridade() {
                                     className="text-base italic leading-relaxed mb-2"
                                     style={{ color: 'rgba(255, 255, 255, 0.9)' }}
                                 >
-                                    {autoridade.depoimento}
+                                    {getAutoridadeTexto(autoridade)}
                                 </p>
                                 <p
                                     className="text-sm font-semibold"

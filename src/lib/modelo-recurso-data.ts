@@ -91,6 +91,7 @@ export const MODELO_RECURSO_PAGE = {
         nome: "Dr. Marcelo Colen",
         oab: "OAB/MG Nº 137.052",
         descricao: "Advogado especialista em Igualdade Racial e Concursos Públicos. Com atuação nacional, ele reverteu dezenas de indeferimentos injustos, entendendo profundamente como a subjetividade das bancas opera contra o candidato pardo.",
+        depoimento: "Minha missão não é apenas escrever recursos. É garantir que a subjetividade de uma banca não destrua o mérito de quem realmente pertence às cotas.",
         ctaText: "CONHECER O ESPECIALISTA",
         credenciais: [
             "Especialista em Direito Administrativo",
