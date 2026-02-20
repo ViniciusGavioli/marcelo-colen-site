@@ -134,7 +134,46 @@ export const MODELO_RECURSO_PAGE = {
         ctaSub: "🔒 Pagamento seguro • Acesso imediato • Suporte por e-mail",
     },
 
+    // COMPARAÇÃO
+    comparacao: {
+        headline: "Por Que Improvisar Quando Você Pode Usar o Que Funciona?",
+        categorias: [
+            "Fundamentação jurídica",
+            "Referência à nova Lei 15.142/2025",
+            "Custo",
+            "Tempo para protocolar",
+            "Risco de perder o prazo",
+        ],
+        sozinho: [
+            "Fraca ou genérica",
+            "Raramente citada",
+            "Grátis (mas pode custar a vaga)",
+            "Horas pesquisando",
+            "Alto",
+        ],
+        advogado: [
+            "Forte, mas cara",
+            "Depende do profissional",
+            "R$ 1.500 a R$ 5.000+",
+            "2 a 5 dias úteis",
+            "Baixo (se tiver prazo)",
+        ],
+        modelo: [
+            "Profissional e completa",
+            "Integrada e atualizada",
+            "R$ 591 (Combo Blindagem)",
+            "Menos de 1 hora",
+            "Baixíssimo",
+        ],
+        ancoragem: "Um advogado cobra entre R$ 1.500 e R$ 5.000 para redigir um recurso administrativo. O Combo Blindagem entrega a mesma fundamentação técnica por R$ 591 — com acesso imediato.",
+        ctaText: "QUERO O COMBO BLINDAGEM — R$ 591",
+    },
+
+    // CHECKOUT URL
+    checkoutUrl: "https://pay.hotmart.com/PLACEHOLDER",
+
     // DISCLAIMER
     disclaimer:
         "Este produto é um modelo de documento para uso como referência na elaboração de recurso administrativo. Não constitui consultoria jurídica individualizada nem garantia de resultado. Cada caso possui particularidades que podem exigir análise profissional complementar. Em conformidade com o Provimento 205/2021 da OAB.",
-} as const;
+};
+
