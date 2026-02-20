@@ -65,6 +65,7 @@ export default function LandingPageLayout({
                 gtag('config', '${GA_ID}', {
                   page_path: window.location.pathname,
                   send_page_view: true,
+                  'conversion_linker': true
                 });
               `,
             }}

@@ -17,18 +17,27 @@ export const trackEvent = (eventName: string, eventData?: Record<string, unknown
 // Track Google Ads WhatsApp conversion with callback (padrão recomendado pelo Google)
 export const trackGoogleAdsWhatsAppConversion = (url?: string) => {
   if (typeof window !== "undefined" && (window as unknown as { gtag?: (...args: unknown[]) => void }).gtag) {
+    let navigated = false;
+
+    // Fallback de segurança: navega após 1 segundo se o callback da tag não disparar
     const callback = () => {
-      if (typeof url !== "undefined") {
+      if (!navigated && typeof url !== "undefined") {
+        navigated = true;
         window.location.href = url;
       }
     };
+
+    const timeout = setTimeout(callback, 1000);
 
     (window as unknown as { gtag: (...args: unknown[]) => void }).gtag(
       "event",
       "conversion",
       {
         "send_to": `${ADS_CONVERSION_ID}/${ADS_CONVERSION_LABEL}`,
-        "event_callback": callback
+        "event_callback": () => {
+          clearTimeout(timeout);
+          callback();
+        }
       }
     );
     return true; // Indica que callback vai navegar
@@ -38,11 +47,22 @@ export const trackGoogleAdsWhatsAppConversion = (url?: string) => {
 
 // Handler para clicks em botões WhatsApp
 export const trackWhatsAppClick = (e?: React.MouseEvent<HTMLAnchorElement>) => {
+  // Deduplicação: disparar apenas uma vez por sessão
+  if (typeof window !== "undefined" && sessionStorage.getItem("wa_fired")) {
+    console.log("[Analytics] WhatsApp conversion already fired in this session.");
+    return;
+  }
+
   // Google Analytics event
   trackEvent("whatsapp_click", {
     event_category: "engagement",
     event_label: "whatsapp_contact"
   });
+
+  // Marcar como disparado
+  if (typeof window !== "undefined") {
+    sessionStorage.setItem("wa_fired", "true");
+  }
 
   // Google Ads conversion com callback
   if (e) {

@@ -22,7 +22,10 @@ export default function GoogleAdsTag() {
                     window.dataLayer = window.dataLayer || [];
                     function gtag(){dataLayer.push(arguments);}
                     gtag('js', new Date());
-                    gtag('config', '${GOOGLE_ADS_ID}');
+                    gtag('config', '${GOOGLE_ADS_ID}', {
+                      'allow_ad_personalization_signals': false,
+                      'conversion_linker': true
+                    });
                 `}
             </Script>
         </>
