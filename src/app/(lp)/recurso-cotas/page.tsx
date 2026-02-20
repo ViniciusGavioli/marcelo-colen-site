@@ -17,7 +17,7 @@ import {
     Zap,
 } from "lucide-react";
 import { Container } from "@/components/layout";
-import { getWhatsAppLink } from "@/lib/whatsapp";
+import { getDirectWhatsAppLink } from "@/lib/whatsapp";
 import { trackWhatsAppClick } from "@/lib/analytics";
 import { useState } from "react";
 
@@ -52,87 +52,75 @@ const C = {
 // ============================================================================
 const D = {
     hero: {
-        badge: "⚠️ Os prazos para recurso costumam ser de 2 a 5 dias úteis",
-        h1_1: "Você foi indeferido na banca.",
-        h1_2: "Pode haver alternativas jurídicas.",
-        proof: "Em muitos casos, há falhas procedimentais que podem fundamentar um recurso.",
-        sub: "Se o procedimento de heteroidentificação apresentou irregularidades, é possível verificar a viabilidade de um recurso administrativo. Cada caso é analisado individualmente.",
-        cta: "Solicitar Análise do Meu Caso",
-        ctaInstruction: "Ao entrar em contato, você pode enviar seu resultado ou edital para avaliação.",
-        micro: "Consulta inicial sem custo · Sigilo garantido · Retorno rápido",
-        disclaimer: "A análise do caso não representa garantia de resultado. Cada situação é avaliada individualmente.",
+        badge: "⚠️ Seu prazo de recurso pode ser de apenas 2 a 5 dias",
+        h1_1: "Você Passou em Tudo.",
+        h1_2: "E Agora Pode Perder Sua Vaga.",
+        proof: "Muitos candidatos ainda conseguem reverter a eliminação.",
+        sub: "Se a banca te indeferiu, pode ter cometido um erro — e esse erro pode ser contestado antes do prazo acabar.",
+        cta: "Quero Analisar Meu Caso Agora",
+        ctaInstruction: "Ao clicar, você já pode enviar uma foto do seu resultado ou edital.",
+        micro: "Sem custo para a primeira análise · Sigilo total · Resposta em minutos",
+        disclaimer: "Cada caso é avaliado individualmente — sem promessa de resultado.",
     },
     check: {
-        title: "Você se identifica com essa situação?",
+        title: "Isso aconteceu com você?",
         items: [
-            "A banca informou o indeferimento sem apresentar fundamentação clara.",
-            "A avaliação foi realizada por vídeo, com pouco tempo ou condições inadequadas.",
-            "Você sempre se autodeclarou pardo ou negro e foi surpreendido pelo resultado.",
-            "Está preocupado com o prazo e não sabe se há alguma medida cabível.",
+            "A banca disse \"não atende ao fenótipo\" sem explicar o motivo.",
+            "A avaliação durou poucos segundos ou foi feita por vídeo.",
+            "Você sempre se identificou como pardo ou negro e foi pego de surpresa.",
+            "Está com medo de perder anos de estudo por uma análise subjetiva.",
         ],
-        cta: "Entrar em contato para orientação",
+        cta: "Se identificou? Fale comigo agora",
     },
     hope: {
-        title: "Procedimentos irregulares podem fundamentar recurso.",
+        title: "A Banca Erra — E Erra Muito.",
         p: [
-            "O processo de heteroidentificação envolve critérios subjetivos. Em alguns casos, candidatos têm sido indeferidos por condições alheias ao mérito — como iluminação inadequada, qualidade de imagem ou falta de fundamentação por parte da banca.",
-            "Existem casos em que falhas no procedimento permitiram a apresentação de recurso administrativo.",
-            "A análise jurídica identifica se há elementos que justifiquem contestação — e orienta sobre os passos mais adequados para cada situação.",
+            "O procedimento de heteroidentificação é subjetivo. Todos os dias, candidatos legítimos são eliminados por iluminação ruim, câmera de baixa qualidade ou despreparo dos avaliadores.",
+            "Muitos candidatos conseguem reverter. Erros de procedimento podem fundamentar o recurso.",
+            "Nós identificamos se houve falha no procedimento e orientamos sua defesa técnica.",
         ],
-        cta: "Solicitar avaliação de viabilidade",
+        cta: "Verificar se meu caso tem fundamento",
     },
     trigger: {
-        title: "Entre em contato se você:",
+        title: "Quando Você DEVE Procurar Ajuda Agora",
         items: [
-            "Recebeu o resultado de indeferimento recentemente",
-            "Não obteve fundamentação clara da banca",
-            "Realizou entrevista por poucos minutos ou por vídeo",
-            "Tem prazo próximo conforme previsto no edital",
+            "Recebeu o indeferimento hoje ou nos últimos dias",
+            "A banca não explicou claramente o motivo",
+            "A entrevista durou poucos minutos",
+            "Você tem prazo curto no edital",
         ],
-        cta: "Enviar meu resultado para análise",
+        cta: "Enviar Meu Resultado no WhatsApp",
     },
     urg: {
-        title: "O prazo é o fator mais crítico.",
-        text: "Os prazos para recurso administrativo variam de 2 a 5 dias úteis conforme o edital. Após esse período, não é mais possível apresentar contestação administrativa. Verificar o prazo do seu concurso é o primeiro passo.",
-        cta: "Verificar meu prazo no edital",
+        title: "O Único Risco Real Agora é o Tempo.",
+        text: "Você tem entre 2 a 5 dias para protocolar o recurso (dependendo do edital). Se perder esse prazo, não haverá mais como contestar administrativamente.",
+        cta: "Verificar Meu Prazo Agora",
     },
     steps: {
-        title: "Como funciona a orientação jurídica.",
+        title: "Como Funciona? 3 Passos.",
         items: [
-            { n: "01", t: "Envie seu caso", d: "Encaminhe o edital e o resultado pelo WhatsApp. Sem burocracia.", Icon: Send },
-            { n: "02", t: "Análise preliminar", d: "Verificamos se há elementos que possam fundamentar um recurso no seu caso.", Icon: Search },
-            { n: "03", t: "Orientação sobre os próximos passos", d: "Se houver viabilidade jurídica, você é orientado sobre como proceder.", Icon: Gavel },
+            { n: "01", t: "Envie Seu Caso", d: "Mande o edital e o resultado pelo WhatsApp. Simples assim.", Icon: Send },
+            { n: "02", t: "Análise Rápida", d: "Verificamos se a banca cometeu algum erro que pode ser contestado.", Icon: Search },
+            { n: "03", t: "Orientação Imediata", d: "Se houver fundamento, você recebe orientação sobre os próximos passos na hora.", Icon: Gavel },
         ],
-        cta: "Solicitar análise preliminar",
+        cta: "Iniciar Minha Análise",
     },
     suggestedMsg: {
         title: "Não sabe o que escrever? Copie e envie:",
-        msg: "Olá doutor, fui indeferido na heteroidentificação. Gostaria de saber se há alguma medida jurídica cabível no meu caso.",
+        msg: "Olá doutor, fui indeferido na heteroidentificação hoje. Posso te mandar meu resultado?",
     },
     trust: {
         name: "Dr. Marcelo Colen",
         role: "Advogado · OAB/MG · Direito Antidiscriminatório e Concursos Públicos",
-        quote: "Cada candidato que me procura recebe uma análise honesta da situação. Se houver fundamento jurídico, orientamos sobre o recurso. Se não houver, também informamos — pois transparência faz parte do exercício ético da advocacia.",
+        quote: "Minha missão não é apenas escrever recursos. É garantir que a subjetividade de uma banca não destrua o mérito de quem realmente pertence às cotas.",
     },
     faq: [
-        {
-            q: "A consulta inicial tem custo?",
-            a: "Não. O contato inicial para verificarmos se há elements que fundamentem um recurso no seu caso é gratuito e sem compromisso.",
-        },
-        {
-            q: "E se não houver fundamento jurídico para recurso?",
-            a: "Se a análise indicar que não há elementos que justifiquem contestação, você será informado com clareza. Não orientamos procedimentos sem base jurídica.",
-        },
-        {
-            q: "O atendimento é sigiloso?",
-            a: "Sim. Todo contato e informação compartilhada são tratados com absoluto sigilo profissional, conforme o Código de Ética da OAB.",
-        },
-        {
-            q: "Atende candidatos de todo o Brasil?",
-            a: "Sim. O atendimento é 100% remoto. Atuamos em concursos de âmbito federal, estadual e municipal em todo o território nacional.",
-        },
+        { q: "Tem custo essa primeira conversa?", a: "Não. A análise inicial para entender seu prazo e viabilidade é gratuita." },
+        { q: "E se não houver fundamento para recurso?", a: "Serei honesto. Se não houver erro da banca verificável, eu aviso para você não gastar dinheiro à toa." },
+        { q: "É sigiloso?", a: "Totalmente. Sigilo profissional conforme o Código de Ética da OAB." },
+        { q: "Atende meu estado?", a: "Sim, o atendimento é 100% digital. Atuamos em todo o Brasil." },
     ],
-    wa: "Olá doutor, fui indeferido na heteroidentificação. Gostaria de saber se há alguma medida jurídica cabível no meu caso.",
+    wa: "Olá doutor, fui indeferido na heteroidentificação hoje. Posso te mandar meu resultado?",
 };
 
 // ============================================================================
@@ -143,7 +131,7 @@ function Cta({ text, full = false }: {
 }) {
     return (
         <a
-            href={getWhatsAppLink()}
+            href={getDirectWhatsAppLink(D.wa)}
             onClick={trackWhatsAppClick}
             style={{
                 backgroundColor: C.cta,
@@ -164,7 +152,7 @@ function Cta({ text, full = false }: {
 function CtaLink({ text }: { text: string }) {
     return (
         <a
-            href={getWhatsAppLink()}
+            href={getDirectWhatsAppLink(D.wa)}
             onClick={trackWhatsAppClick}
             style={{ color: C.gold, borderColor: C.gold }}
             className="inline-flex items-center gap-2 font-bold border-b-2 pb-0.5 hover:brightness-125 transition-all"
@@ -347,6 +335,11 @@ export default function RecursoCotasPage() {
                 {/* Linha de base decorativa */}
                 <div className="absolute bottom-0 left-0 right-0 h-px bg-white/5 opacity-50" />
             </section>
+
+            {/* ══════════════════════════════════════════════════════════════ */}
+            {/* VÍDEO — mensagem do advogado                                 */}
+            {/* ══════════════════════════════════════════════════════════════ */}
+            <VideoSection />
 
             {/* ══════════════════════════════════════════════════════════════ */}
             {/* CHECKLIST — "Isso aconteceu com você?"                       */}
@@ -632,7 +625,7 @@ export default function RecursoCotasPage() {
             {/* Floating WhatsApp — verde mantido pois é ícone reconhecível */}
             <div className="fixed bottom-6 right-6 z-50">
                 <a
-                    href={getWhatsAppLink()}
+                    href={getDirectWhatsAppLink(D.wa)}
                     onClick={trackWhatsAppClick}
                     className="flex items-center justify-center w-14 h-14 rounded-full hover:scale-110 transition-transform"
                     style={{ backgroundColor: C.green, color: C.white, boxShadow: `0 4px 20px ${C.greenGlow}` }}
@@ -642,5 +635,88 @@ export default function RecursoCotasPage() {
                 </a>
             </div>
         </main>
+    );
+}
+
+// ============================================================================
+// VIDEO SECTION
+// ============================================================================
+// Para YouTube: passe youtubeId="dQw4w9WgXcQ"
+// Para Vimeo:  passe iframeSrc="https://player.vimeo.com/video/ID"
+// Para .mp4:   passe mp4Src="/videos/marcelo.mp4"
+function VideoSection({
+    youtubeId,
+    iframeSrc,
+    mp4Src,
+}: {
+    youtubeId?: string;
+    iframeSrc?: string;
+    mp4Src?: string;
+} = {}) {
+    // ── edite aqui ────────────────────────────────────────────────────────
+    const YOUTUBE_ID = youtubeId ?? "COLE_O_ID_AQUI";   // ex: "dQw4w9WgXcQ"
+    const IFRAME_SRC = iframeSrc ?? "";
+    const MP4_SRC = mp4Src ?? "";
+    // ──────────────────────────────────────────────────────────────────────
+
+    const src = IFRAME_SRC
+        ? IFRAME_SRC
+        : `https://www.youtube.com/embed/${YOUTUBE_ID}?rel=0&modestbranding=1`;
+
+    return (
+        <section className="py-14 md:py-20" style={{ backgroundColor: C.bg1 }}>
+            <div className="max-w-[720px] mx-auto px-4">
+                {/* Título */}
+                <p className="text-xs uppercase tracking-widest text-center mb-2" style={{ color: C.gold }}>
+                    Mensagem do advogado
+                </p>
+                <h2
+                    className="text-xl md:text-2xl font-bold text-center mb-8 leading-snug"
+                    style={{ color: C.white, fontFamily: "Georgia, serif" }}
+                >
+                    Entenda em 2 minutos por que você ainda pode contestar o resultado.
+                </h2>
+
+                {/* Wrapper 16:9 */}
+                <div
+                    className="relative w-full rounded-2xl overflow-hidden"
+                    style={{
+                        paddingBottom: "56.25%",
+                        boxShadow: "0 8px 40px rgba(0,0,0,0.55)",
+                        border: "1px solid rgba(255,255,255,0.07)",
+                    }}
+                >
+                    {MP4_SRC ? (
+                        <video
+                            src={MP4_SRC}
+                            controls
+                            playsInline
+                            preload="none"
+                            className="absolute inset-0 w-full h-full object-cover"
+                        />
+                    ) : (
+                        <iframe
+                            src={src}
+                            title="Vídeo do advogado"
+                            allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            allowFullScreen
+                            loading="lazy"
+                            className="absolute inset-0 w-full h-full"
+                        />
+                    )}
+                </div>
+
+                {/* Texto abaixo + CTA */}
+                <p className="text-center text-sm md:text-base mt-6 mb-5" style={{ color: C.gray2 }}>
+                    Ficou com alguma dúvida? Você pode mandar uma mensagem agora — a análise inicial é gratuita.
+                </p>
+                <div className="flex justify-center">
+                    <Cta text="Quero Analisar Meu Caso Agora" />
+                </div>
+                <p className="text-center text-xs mt-3 italic" style={{ color: C.gray3 }}>
+                    Cada caso é avaliado individualmente — sem promessa de resultado.
+                </p>
+            </div>
+        </section>
     );
 }
