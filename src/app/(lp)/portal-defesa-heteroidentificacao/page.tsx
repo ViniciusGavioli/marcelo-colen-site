@@ -100,7 +100,10 @@ function PortalHero() {
                         Portal de Defesa
                     </p>
 
-                    <h1 className="text-3xl font-extrabold leading-tight text-slate-900 sm:text-5xl">
+                    <h1
+                        className="text-3xl font-extrabold leading-tight sm:text-5xl"
+                        style={{ color: "#0B1220" }}
+                    >
                         Indeferimento na heteroidentificação
                     </h1>
 
