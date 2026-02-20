@@ -111,12 +111,15 @@ function PortalHero() {
                         Portal de Defesa
                     </p>
 
-                    <h1 className="text-3xl font-extrabold leading-tight text-white sm:text-5xl">
-                        Indeferimento na heteroidentificação
+                    <h1
+                        className="text-3xl font-extrabold leading-tight sm:text-5xl"
+                        style={{ color: "#FFFFFF" }}
+                    >
+                        Foi indeferido na banca de heteroidentificação
                     </h1>
 
-                    <p className="mt-3 text-base text-white/85 sm:text-lg">
-                        Análise inicial do caso e orientação do próximo passo.
+                    <p className="mt-3 text-base sm:text-lg" style={{ color: "rgba(255,255,255,0.88)" }}>
+                        Solicite análise inicial do caso e orientação do próximo passo.
                     </p>
 
                     <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:items-center">
