@@ -89,6 +89,7 @@ export const MODELO_RECURSO_PAGE = {
     autoridade: {
         headline: "Decifrou o Código das Bancas",
         nome: "Dr. Marcelo Colen",
+        oab: "OAB/MG Nº 137.052",
         descricao: "Advogado especialista em Igualdade Racial e Concursos Públicos. Com atuação nacional, ele reverteu dezenas de indeferimentos injustos, entendendo profundamente como a subjetividade das bancas opera contra o candidato pardo.",
         ctaText: "CONHECER O ESPECIALISTA",
         credenciais: [
