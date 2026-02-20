@@ -58,9 +58,9 @@ const D = {
         proof: "Muitos candidatos ainda conseguem reverter a eliminação.",
         sub: "Se a banca te indeferiu, pode ter cometido um erro — e esse erro pode ser contestado antes do prazo acabar.",
         cta: "Enviar meu caso no WhatsApp",
-        ctaInstruction: "Ao clicar, você já pode enviar uma foto do seu resultado ou edital.",
+        ctaLine1: "Você já pode enviar a foto do resultado ou do edital.",
+        ctaLine2: "Primeira análise sem custo e com sigilo.",
         ctaTrust: "O Dr. Marcelo acompanha pessoalmente as análises.",
-        micro: "Sem custo para a primeira análise · Sigilo total · Resposta em minutos",
         disclaimer: "Cada caso é avaliado individualmente — sem promessa de resultado.",
     },
     check: {
@@ -291,26 +291,23 @@ export default function RecursoCotasPage() {
                             </p>
 
                             {/* CTA Actions */}
-                            <div className="max-w-md w-full space-y-3">
+                            <div className="max-w-md w-full space-y-2">
                                 <Cta text={D.hero.cta} full />
-                                <p className="text-center text-sm font-semibold" style={{ color: C.gray1 }}>
-                                    📸 {D.hero.ctaInstruction}
+                                <p className="text-center text-sm" style={{ color: C.gray1 }}>
+                                    {D.hero.ctaLine1}
                                 </p>
                                 <p className="text-center text-xs text-gray-500">
                                     <Lock className="w-3 h-3 inline mr-1" />
-                                    {D.hero.micro}
-                                </p>
-                                <p className="text-center text-xs font-medium" style={{ color: C.gold }}>
-                                    {D.hero.ctaTrust}
-                                </p>
-                                <p className="text-center text-xs text-gray-600 italic">
-                                    {D.hero.disclaimer}
+                                    {D.hero.ctaLine2}
                                 </p>
                             </div>
                         </div>
 
                         {/* Imagem Desktop: Ancorada na Base da Seção (Planted on floor) */}
-                        <div className="hidden lg:flex absolute bottom-0 right-0 h-[92vh] w-[45%] items-end justify-end pointer-events-none overflow-hidden pr-[4%]">
+                        <div className="hidden lg:flex flex-col absolute bottom-0 right-0 h-[92vh] w-[45%] items-end justify-end pointer-events-none overflow-hidden pr-[4%]">
+                            <p className="text-xs font-medium mb-3 text-right" style={{ color: C.gold }}>
+                                {D.hero.ctaTrust}
+                            </p>
                             <Image
                                 src="/images/wordpress/marcelo-terno.png"
                                 alt="Dr. Marcelo Colen"
@@ -602,6 +599,9 @@ export default function RecursoCotasPage() {
                                 <FaqItem key={i} q={item.q} a={item.a} />
                             ))}
                         </div>
+                        <p className="text-xs text-center mt-6 italic" style={{ color: C.gray3 }}>
+                            {D.hero.disclaimer}
+                        </p>
                     </div>
                 </Container>
             </section>
