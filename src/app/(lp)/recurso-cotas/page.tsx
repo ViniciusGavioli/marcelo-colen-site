@@ -70,7 +70,7 @@ const D = {
             "Você sempre se identificou como pardo ou negro e foi pego de surpresa.",
             "Está com medo de perder anos de estudo por uma análise subjetiva.",
         ],
-        cta: "Se identificou? Fale comigo agora",
+        cta: "Se identificou? Envie seu caso — nossa equipe organiza para análise",
     },
     hope: {
         title: "A Banca Erra — E Erra Muito.",
@@ -79,7 +79,7 @@ const D = {
             "Muitos candidatos conseguem reverter. Erros de procedimento podem fundamentar o recurso.",
             "Nós identificamos se houve falha no procedimento e orientamos sua defesa técnica.",
         ],
-        cta: "Verificar se meu caso tem fundamento",
+        cta: "Enviar meu caso para análise",
     },
     trigger: {
         title: "Quando Você DEVE Procurar Ajuda Agora",
@@ -89,7 +89,7 @@ const D = {
             "A entrevista durou poucos minutos",
             "Você tem prazo curto no edital",
         ],
-        cta: "Enviar Meu Resultado no WhatsApp",
+        cta: "Enviar Meu Resultado — a equipe encaminha para o Dr. Marcelo",
     },
     urg: {
         title: "O Único Risco Real Agora é o Tempo.",
