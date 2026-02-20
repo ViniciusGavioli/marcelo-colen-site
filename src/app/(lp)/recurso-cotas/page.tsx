@@ -57,8 +57,9 @@ const D = {
         h1_2: "E Agora Pode Perder Sua Vaga.",
         proof: "Muitos candidatos ainda conseguem reverter a eliminação.",
         sub: "Se a banca te indeferiu, pode ter cometido um erro — e esse erro pode ser contestado antes do prazo acabar.",
-        cta: "Quero Analisar Meu Caso Agora",
+        cta: "Enviar meu caso no WhatsApp",
         ctaInstruction: "Ao clicar, você já pode enviar uma foto do seu resultado ou edital.",
+        ctaTrust: "O Dr. Marcelo acompanha pessoalmente as análises.",
         micro: "Sem custo para a primeira análise · Sigilo total · Resposta em minutos",
         disclaimer: "Cada caso é avaliado individualmente — sem promessa de resultado.",
     },
@@ -70,7 +71,7 @@ const D = {
             "Você sempre se identificou como pardo ou negro e foi pego de surpresa.",
             "Está com medo de perder anos de estudo por uma análise subjetiva.",
         ],
-        cta: "Se identificou? Envie seu caso — nossa equipe organiza para análise",
+        cta: "Pode me enviar seu caso",
     },
     hope: {
         title: "A Banca Erra — E Erra Muito.",
@@ -79,7 +80,7 @@ const D = {
             "Muitos candidatos conseguem reverter. Erros de procedimento podem fundamentar o recurso.",
             "Nós identificamos se houve falha no procedimento e orientamos sua defesa técnica.",
         ],
-        cta: "Enviar meu caso para análise",
+        cta: "Quero que o Dr. Marcelo veja meu caso",
     },
     trigger: {
         title: "Quando Você DEVE Procurar Ajuda Agora",
@@ -89,7 +90,7 @@ const D = {
             "A entrevista durou poucos minutos",
             "Você tem prazo curto no edital",
         ],
-        cta: "Enviar Meu Resultado — a equipe encaminha para o Dr. Marcelo",
+        cta: "Enviar meu resultado para análise",
     },
     urg: {
         title: "O Único Risco Real Agora é o Tempo.",
@@ -298,6 +299,9 @@ export default function RecursoCotasPage() {
                                 <p className="text-center text-xs text-gray-500">
                                     <Lock className="w-3 h-3 inline mr-1" />
                                     {D.hero.micro}
+                                </p>
+                                <p className="text-center text-xs font-medium" style={{ color: C.gold }}>
+                                    {D.hero.ctaTrust}
                                 </p>
                                 <p className="text-center text-xs text-gray-600 italic">
                                     {D.hero.disclaimer}
