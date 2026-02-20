@@ -130,7 +130,7 @@ function Cta({ text, full = false }: {
 }) {
     return (
         <a
-            href={getWhatsAppLink(D.wa)}
+            href={getWhatsAppLink()}
             onClick={trackWhatsAppClick}
             style={{
                 backgroundColor: C.cta,
@@ -151,7 +151,7 @@ function Cta({ text, full = false }: {
 function CtaLink({ text }: { text: string }) {
     return (
         <a
-            href={getWhatsAppLink(D.wa)}
+            href={getWhatsAppLink()}
             onClick={trackWhatsAppClick}
             style={{ color: C.gold, borderColor: C.gold }}
             className="inline-flex items-center gap-2 font-bold border-b-2 pb-0.5 hover:brightness-125 transition-all"
@@ -616,7 +616,7 @@ export default function RecursoCotasPage() {
             {/* Floating WhatsApp — verde mantido pois é ícone reconhecível */}
             <div className="fixed bottom-6 right-6 z-50">
                 <a
-                    href={getWhatsAppLink(D.wa)}
+                    href={getWhatsAppLink()}
                     onClick={trackWhatsAppClick}
                     className="flex items-center justify-center w-14 h-14 rounded-full hover:scale-110 transition-transform"
                     style={{ backgroundColor: C.green, color: C.white, boxShadow: `0 4px 20px ${C.greenGlow}` }}
