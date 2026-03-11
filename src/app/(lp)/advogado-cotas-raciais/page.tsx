@@ -65,7 +65,10 @@ const D = {
     trust: {
         name: "Dr. Marcelo Colen",
         role: "Advogado · OAB/MG · Direito Antidiscriminatório e Concursos Públicos",
-        quote: "Minha atuação técnica foca na legalidade e nos pilares do fenótipo. Analisamos cada detalhe procedimental da banca para buscar fundamentos reais de defesa.",
+        p1: "Marcelo Colen é advogado, Mestre em Direito pela UFMG, graduado em Direito pela PUC Minas e pós-graduado em Gestão Estratégica na Advocacia.",
+        p2: "Atua em temas ligados a Cotas Raciais, Heteroidentificação, Concursos Públicos e igualdade racial, com experiência em compliance antidiscriminatório, docência e produção de conteúdo técnico.",
+        p3: "Atualmente é Diretor de Diversidade e Inclusão da OAB/MG e Secretário da Comissão Nacional de Promoção da Igualdade da OAB Federal.",
+        p4: "Também é professor, palestrante e autor do \"Manual Antirracismo no Esporte\", adotado pela Amstel na campanha \"Barulho Contra o Racismo\" da Libertadores 2022.",
     },
     autoridadeNovo: {
         title: "Análise jurídica individual do seu caso.",
@@ -78,9 +81,10 @@ const D = {
         ]
     },
     dor: {
-        title: "Mesmo candidatos aprovados nas provas podem ser eliminados na heteroidentificação.",
+        title: "A avaliação técnica da decisão da comissão de heteroidentificação.",
         p: [
-            "Dependendo do edital e da motivação da banca, é possível avaliar a viabilidade de recurso judiciário ou administrativo."
+            "Muitas vezes, candidatos com autodeclaração válida são indeferidos de maneira genérica ou inconsistente com os critérios do edital.",
+            "Uma análise jurídica qualificada da fundamentação apresentada pela comissão pode apontar falhas procedimentais e indicar as bases fáticas e legais para o recurso."
         ],
         cta: "Pedir Análise Jurídica Agora",
     },
@@ -235,19 +239,21 @@ export default function AdvogadoPage() {
                                 <div className="absolute top-0 left-0 w-1 h-full" style={{ background: `linear-gradient(180deg, ${C.gold}, transparent)` }} />
                                 
                                 <p className="font-bold text-base md:text-xl tracking-wide mb-1" style={{ color: C.white }}>Dr. Marcelo Colen — Advogado OAB/MG</p>
-                                <p className="font-semibold text-sm md:text-base mb-1" style={{ color: C.gold }}>Mestre em Direito pela UFMG</p>
-                                <p className="text-[13px] md:text-sm mb-4 leading-tight opacity-90 font-medium" style={{ color: C.gray1 }}>
-                                    Especialista em Cotas Raciais, Heteroidentificação e Concursos Públicos
-                                </p>
+                                <p className="font-semibold text-sm md:text-base mb-1" style={{ color: C.gold }}>Mestre em Direito pela UFMG • Diretor de Diversidade da OAB/MG</p>
                                 
-                                <p className="text-[13px] md:text-sm leading-relaxed mb-4" style={{ color: C.gray2 }}>
-                                    Atuação jurídica focada na análise de indeferimentos em heteroidentificação, com avaliação individual do edital, da decisão da banca e dos caminhos possíveis para recurso.
+                                <p className="text-[13px] md:text-sm leading-relaxed mb-3 mt-3" style={{ color: C.gray1 }}>
+                                    <span className="font-medium" style={{ color: C.white }}>Atuação em Cotas Raciais, Heteroidentificação e Concursos Públicos</span>, com análise jurídica individual do edital, da decisão da banca e dos caminhos possíveis para recurso.
                                 </p>
 
-                                <div className="flex flex-wrap justify-center gap-x-4 gap-y-2 text-[11px] md:text-xs font-bold uppercase tracking-wider" style={{ color: C.gray1 }}>
-                                    <div className="flex items-center gap-1.5"><Check className="w-3.5 h-3.5" style={{ color: C.gold }} /> Atendimento nacional</div>
-                                    <div className="flex items-center gap-1.5"><Check className="w-3.5 h-3.5" style={{ color: C.gold }} /> Sigilo total</div>
-                                    <div className="flex items-center gap-1.5"><Check className="w-3.5 h-3.5" style={{ color: C.gold }} /> Análise rápida</div>
+                                <div className="flex flex-col items-center gap-1.5 mb-4 text-[12px] md:text-[13px]" style={{ color: C.gray2 }}>
+                                    <div className="flex items-center gap-2"><Check className="w-3.5 h-3.5 flex-shrink-0" style={{ color: C.gold }} /> Secretário da Comissão Nac. de Promoção da Igualdade da OAB Federal</div>
+                                    <div className="flex items-center gap-2"><Check className="w-3.5 h-3.5 flex-shrink-0" style={{ color: C.gold }} /> Professor, palestrante e autor publicado</div>
+                                </div>
+
+                                <div className="flex flex-wrap justify-center gap-x-4 gap-y-2 text-[11px] md:text-xs font-bold uppercase tracking-wider mt-2 border-t pt-3" style={{ color: C.gray1, borderColor: "rgba(255,255,255,0.05)" }}>
+                                    <div className="flex items-center gap-1.5"><Check className="w-3 h-3" style={{ color: C.gold }} /> Atendimento nacional</div>
+                                    <div className="flex items-center gap-1.5"><Check className="w-3 h-3" style={{ color: C.gold }} /> Sigilo total</div>
+                                    <div className="flex items-center gap-1.5"><Check className="w-3 h-3" style={{ color: C.gold }} /> Análise rápida</div>
                                 </div>
                             </div>
 
@@ -277,22 +283,26 @@ export default function AdvogadoPage() {
             <VideoSection youtubeId="jAiQi4CgMN0" />
 
             {/* ══════════════════════════════════════════════════════════════ */}
-            {/* AUTORIDADE — SUBIDO PARA LOGO APÓS O HERO                    */}
+            {/* AUTORIDADE INSTITUCIONAL E ACADÊMICA                           */}
             {/* ══════════════════════════════════════════════════════════════ */}
-            <section className="py-12 md:py-16" style={{ backgroundColor: C.bg2, borderBottom: "1px solid rgba(255,255,255,0.03)" }}>
+            <section className="py-12 md:py-20" style={{ backgroundColor: C.bg2, borderBottom: "1px solid rgba(255,255,255,0.03)" }}>
                 <Container>
-                    <div className="max-w-3xl mx-auto flex flex-col md:flex-row items-center gap-8 md:gap-12">
-                        <div className="relative flex-shrink-0">
-                            <div className="w-28 h-28 md:w-36 md:h-36 rounded-full overflow-hidden" style={{ border: `3px solid ${C.gold}`, boxShadow: `0 0 30px ${C.gold}22` }}>
-                                <Image src="/images/marcelo/marcelo-hero.jpg" alt="Dr. Marcelo Colen" width={144} height={144} className="object-cover w-full h-full" />
+                    <div className="max-w-4xl mx-auto flex flex-col md:flex-row items-center md:items-start gap-8 md:gap-12">
+                        <div className="relative flex-shrink-0 md:sticky md:top-10">
+                            <div className="w-40 h-40 md:w-56 md:h-56 rounded-2xl overflow-hidden" style={{ border: `1px solid rgba(255,255,255,0.1)`, boxShadow: `0 10px 40px rgba(0,0,0,0.5)` }}>
+                                <Image src="/images/marcelo/marcelo-hero.jpg" alt="Dr. Marcelo Colen" width={224} height={224} className="object-cover w-full h-full" />
                             </div>
                         </div>
                         <div className="text-center md:text-left">
-                            <h3 className="text-2xl font-bold mb-1" style={{ color: C.white }}>{D.trust.name}</h3>
-                            <p className="font-medium text-sm mb-4 tracking-wide" style={{ color: C.gold }}>{D.trust.role}</p>
-                            <blockquote className="leading-relaxed italic pl-4 text-sm md:text-base" style={{ color: C.gray2, borderLeft: `2px solid ${C.gold}` }}>
-                                &ldquo;{D.trust.quote}&rdquo;
-                            </blockquote>
+                            <h3 className="text-2xl md:text-3xl font-bold mb-2" style={{ color: C.white, fontFamily: "Georgia, serif" }}>{D.trust.name}</h3>
+                            <div className="inline-block px-3 py-1 mb-6 text-[10px] md:text-xs font-bold uppercase tracking-widest rounded-md" style={{ backgroundColor: C.goldSoft, color: C.gold, border: `1px solid ${C.gold}40` }}>Especialista em Direito Antidiscriminatório</div>
+                            
+                            <div className="space-y-4 text-[15px] md:text-base leading-relaxed text-left" style={{ color: C.gray2 }}>
+                                <p>{D.trust.p1}</p>
+                                <p>{D.trust.p2}</p>
+                                <p style={{ color: C.white, borderLeftColor: C.gold, backgroundColor: "rgba(255,255,255,0.03)" }} className="font-medium p-4 rounded-r-lg border-l-4">{D.trust.p3}</p>
+                                <p>{D.trust.p4}</p>
+                            </div>
                         </div>
                     </div>
                 </Container>
