@@ -457,20 +457,6 @@ export default function AdvogadoPage() {
                     </div>
                 </Container>
             </section>
-
-            {/* Floating WhatsApp Padrão Larga Mobile */}
-            <div className="fixed bottom-4 left-4 right-4 md:left-auto md:right-6 md:w-auto z-50">
-                <a
-                    href={getDirectWhatsAppLink(D.wa)}
-                    onClick={trackWhatsAppClick}
-                    className="flex items-center justify-center md:justify-start w-full md:w-auto h-14 md:h-14 md:px-6 rounded-xl md:rounded-full hover:scale-105 active:scale-95 transition-all font-bold text-[15px] shadow-[0_4px_20px_rgba(37,211,102,0.4)]"
-                    style={{ backgroundColor: C.green, color: C.white }}
-                    aria-label="WhatsApp"
-                >
-                    <MessageCircle className="w-6 h-6 mr-2" />
-                    Falar no WhatsApp
-                </a>
-            </div>
         </main>
     );
 }
