@@ -229,9 +229,27 @@ export default function AdvogadoPage() {
                                 <span style={{ color: C.gold }}>{D.hero.h1_2}</span>
                             </h1>
 
-                            <p className="text-sm md:text-lg lg:text-xl leading-relaxed mb-6 md:mb-8 max-w-[40ch] md:max-w-2xl text-gray-300 font-medium">
-                                {D.hero.sub}
-                            </p>
+                            {/* Bloco de Autoridade Acadêmica Compacto Integrado */}
+                            <div className="mb-6 md:mb-8 text-center bg-black/40 backdrop-blur-sm border border-white/10 rounded-2xl p-4 md:p-6 w-full max-w-2xl relative overflow-hidden">
+                                {/* Destaque visual sutil */}
+                                <div className="absolute top-0 left-0 w-1 h-full" style={{ background: `linear-gradient(180deg, ${C.gold}, transparent)` }} />
+                                
+                                <p className="font-bold text-base md:text-xl tracking-wide mb-1" style={{ color: C.white }}>Dr. Marcelo Colen — Advogado OAB/MG</p>
+                                <p className="font-semibold text-sm md:text-base mb-1" style={{ color: C.gold }}>Mestre em Direito pela UFMG</p>
+                                <p className="text-[13px] md:text-sm mb-4 leading-tight opacity-90 font-medium" style={{ color: C.gray1 }}>
+                                    Especialista em Cotas Raciais, Heteroidentificação e Concursos Públicos
+                                </p>
+                                
+                                <p className="text-[13px] md:text-sm leading-relaxed mb-4" style={{ color: C.gray2 }}>
+                                    Atuação jurídica focada na análise de indeferimentos em heteroidentificação, com avaliação individual do edital, da decisão da banca e dos caminhos possíveis para recurso.
+                                </p>
+
+                                <div className="flex flex-wrap justify-center gap-x-4 gap-y-2 text-[11px] md:text-xs font-bold uppercase tracking-wider" style={{ color: C.gray1 }}>
+                                    <div className="flex items-center gap-1.5"><Check className="w-3.5 h-3.5" style={{ color: C.gold }} /> Atendimento nacional</div>
+                                    <div className="flex items-center gap-1.5"><Check className="w-3.5 h-3.5" style={{ color: C.gold }} /> Sigilo total</div>
+                                    <div className="flex items-center gap-1.5"><Check className="w-3.5 h-3.5" style={{ color: C.gold }} /> Análise rápida</div>
+                                </div>
+                            </div>
 
                             <div className="max-w-md w-full flex flex-col items-center space-y-4">
                                 <Cta text={D.hero.cta} full />
