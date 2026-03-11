@@ -1,6 +1,8 @@
 "use client";
 
 import Image from "next/image";
+import LiteYouTubeEmbed from "react-lite-youtube-embed";
+import "react-lite-youtube-embed/dist/LiteYouTubeEmbed.css";
 import {
     MessageCircle,
     AlertTriangle,
@@ -199,7 +201,7 @@ export default function ReprovadoPage() {
             {/* ══════════════════════════════════════════════════════════════ */}
             {/* HERO                                                         */}
             {/* ══════════════════════════════════════════════════════════════ */}
-            <section className="relative min-h-0 flex items-center overflow-hidden py-16 md:py-24 lg:py-32" style={{ backgroundColor: C.bg1 }}>
+            <section className="relative min-h-0 flex items-center overflow-hidden py-8 md:py-24 lg:py-32" style={{ backgroundColor: C.bg1 }}>
                 <div className="absolute inset-0 z-0 select-none">
                     <Image src="/images/hero-scales.png" alt="" fill className="object-cover opacity-[0.05] lg:opacity-10" priority aria-hidden="true" />
                     <div className="absolute inset-0 md:hidden bg-gradient-to-b from-black/80 via-black/30 to-black/80" />
@@ -212,6 +214,15 @@ export default function ReprovadoPage() {
                             <div className="inline-flex items-center gap-2 rounded-full px-3 py-1 mb-4 md:mb-6 w-fit" style={{ backgroundColor: C.redBg, border: `1px solid ${C.redBorder}` }}>
                                 <AlertTriangle className="w-3.5 h-3.5 animate-pulse" style={{ color: C.red }} />
                                 <span className="text-[10px] md:text-xs font-black text-red-100 uppercase tracking-widest leading-none" style={{ color: C.white }}>{D.hero.badge}</span>
+                            </div>
+
+                            {/* Micro Avatar - Trust imediato acima da dobra mobile */}
+                            <div className="flex items-center gap-3 mb-5 pr-4 pl-1.5 py-1.5 rounded-full border md:hidden shadow-lg" style={{ backgroundColor: "rgba(255,255,255,0.05)", borderColor: "rgba(255,255,255,0.1)" }}>
+                                <Image src="/images/marcelo/marcelo-hero.jpg" alt="Dr. Marcelo Colen" width={32} height={32} className="rounded-full object-cover w-8 h-8" />
+                                <div className="text-left">
+                                    <p className="font-bold text-xs" style={{ color: C.gray1 }}>Dr. Marcelo Colen</p>
+                                    <p className="text-[10px] italic leading-none mt-0.5" style={{ color: C.gold }}>Advogado OAB/MG • Especialista</p>
+                                </div>
                             </div>
 
                             <h1 className="text-[clamp(1.85rem,9vw,2.5rem)] md:text-5xl lg:text-7xl font-black leading-[1.1] md:leading-[1.05] mb-4 md:mb-6 tracking-tighter" style={{ color: C.white, fontFamily: "Georgia, serif" }}>
@@ -467,16 +478,17 @@ export default function ReprovadoPage() {
                 </Container>
             </section>
 
-            {/* Floating WhatsApp */}
-            <div className="fixed bottom-6 right-6 z-50">
+            {/* Floating WhatsApp Padrão Larga Mobile */}
+            <div className="fixed bottom-4 left-4 right-4 md:left-auto md:right-6 md:w-auto z-50">
                 <a
                     href={getDirectWhatsAppLink(D.wa)}
                     onClick={trackWhatsAppClick}
-                    className="flex items-center justify-center w-14 h-14 rounded-full hover:scale-110 transition-transform"
-                    style={{ backgroundColor: C.green, color: C.white, boxShadow: `0 4px 20px ${C.greenGlow}` }}
+                    className="flex items-center justify-center md:justify-start w-full md:w-auto h-14 md:h-14 md:px-6 rounded-xl md:rounded-full hover:scale-105 active:scale-95 transition-all font-bold text-[15px] shadow-[0_4px_20px_rgba(37,211,102,0.4)]"
+                    style={{ backgroundColor: C.green, color: C.white }}
                     aria-label="WhatsApp"
                 >
-                    <MessageCircle className="w-7 h-7" />
+                    <MessageCircle className="w-6 h-6 mr-2" />
+                    Falar no WhatsApp
                 </a>
             </div>
         </main>
@@ -488,9 +500,7 @@ export default function ReprovadoPage() {
 // ============================================================================
 function VideoSection({ youtubeId, iframeSrc, mp4Src }: { youtubeId?: string; iframeSrc?: string; mp4Src?: string; } = {}) {
     const YOUTUBE_ID = youtubeId ?? "COLE_O_ID_AQUI";
-    const IFRAME_SRC = iframeSrc ?? "";
     const MP4_SRC = mp4Src ?? "";
-    const src = IFRAME_SRC ? IFRAME_SRC : `https://www.youtube.com/embed/${YOUTUBE_ID}?rel=0&modestbranding=1`;
 
     return (
         <section className="py-12 md:py-24" style={{ backgroundColor: C.bg1 }}>
@@ -501,11 +511,11 @@ function VideoSection({ youtubeId, iframeSrc, mp4Src }: { youtubeId?: string; if
                 <h2 className="text-2xl md:text-3xl font-bold text-center mb-10 leading-tight md:leading-snug" style={{ color: C.white, fontFamily: "Georgia, serif" }}>
                     Entenda em 2 minutos por que você ainda pode contestar o resultado.
                 </h2>
-                <div className="relative w-full rounded-2xl overflow-hidden scale-[1.02] md:scale-100" style={{ paddingBottom: "56.25%", boxShadow: "0 12px 60px rgba(0,0,0,0.65)", border: "1px solid rgba(255,255,255,0.1)" }}>
+                <div className="relative w-full rounded-2xl overflow-hidden scale-[1.02] md:scale-100" style={{ boxShadow: "0 12px 60px rgba(0,0,0,0.65)", border: "1px solid rgba(255,255,255,0.1)" }}>
                     {MP4_SRC ? (
-                        <video src={MP4_SRC} controls playsInline preload="none" className="absolute inset-0 w-full h-full object-cover" />
+                        <video src={MP4_SRC} controls playsInline preload="none" className="w-full object-cover" />
                     ) : (
-                        <iframe src={src} title="Vídeo do advogado" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen loading="lazy" className="absolute inset-0 w-full h-full" />
+                        <LiteYouTubeEmbed id={YOUTUBE_ID} title="Vídeo de Análise da Situação" poster="maxresdefault" wrapperClass="yt-lite" />
                     )}
                 </div>
                 <p className="text-center text-sm md:text-lg mt-8 mb-6 leading-relaxed" style={{ color: C.gray2 }}>
