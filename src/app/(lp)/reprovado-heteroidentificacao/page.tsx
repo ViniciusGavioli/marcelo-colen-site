@@ -63,7 +63,7 @@ const D = {
     },
     urg: {
         title: "O Seu Prazo Está Correndo.",
-        text: "Em diversos concursos, o prazo recursal após a reprovação é de apenas dias (ou até horas). Por isso é fundamental agir imediatamente após a divulgação.",
+        text: "Em muitos concursos o prazo de recurso é de apenas alguns dias. Por isso a análise precisa ser rápida.",
         cta: "Mandar Mensagem Rápida Agora",
     },
     dor: {
@@ -299,6 +299,34 @@ export default function ReprovadoPage() {
             </section>
 
             {/* ══════════════════════════════════════════════════════════════ */}
+            {/* BASE TÉCNICA (NOVO DO REPROVADO)                             */}
+            {/* ══════════════════════════════════════════════════════════════ */}
+            <section className="py-12 md:py-16" style={{ backgroundColor: C.bg2 }}>
+                <Container>
+                    <div className="max-w-3xl mx-auto">
+                        <h2 className="text-2xl md:text-3xl font-bold text-center mb-8" style={{ color: C.white, fontFamily: "Georgia, serif" }}>
+                            O que pode garantir o seu recurso
+                        </h2>
+                        <p className="text-center text-gray-300 md:text-lg mb-8 max-w-xl mx-auto">O recurso pode depender fundamentalmente de falhas muito comuns:</p>
+                        
+                        <div className="grid sm:grid-cols-2 gap-4">
+                            {[
+                                "Inconsistência na avaliação da banca",
+                                "Erro procedimental da comissão",
+                                "Motivação insuficiente (genérica)",
+                                "Análise incompatível com o que estava no edital"
+                            ].map((item, i) => (
+                                <div key={i} className="flex gap-4 items-center rounded-xl p-5" style={{ backgroundColor: "rgba(255,255,255,0.04)", border: `1px solid ${C.goldSoft}` }}>
+                                    <Scale className="w-6 h-6 flex-shrink-0" style={{ color: C.gold }} />
+                                    <p className="font-medium text-sm md:text-base text-gray-100">{item}</p>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                </Container>
+            </section>
+
+            {/* ══════════════════════════════════════════════════════════════ */}
             {/* O QUE ENVIAR AGORA                                           */}
             {/* ══════════════════════════════════════════════════════════════ */}
             <section className="py-12 md:py-20" style={{ backgroundColor: C.bg2 }}>
@@ -416,6 +444,21 @@ export default function ReprovadoPage() {
                         <p className="text-xl md:text-2xl font-bold mb-6" style={{ color: C.white, fontFamily: "Georgia, serif" }}>
                             Não deixe o seu tempo esgotar.
                         </p>
+
+                        <div className="mb-8 p-6 rounded-2xl text-left" style={{ backgroundColor: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.1)" }}>
+                            <p className="font-bold mb-4 text-sm md:text-base text-center" style={{ color: C.gold }}>Envie agora para análise rápida:</p>
+                            <div className="space-y-3 max-w-[280px] mx-auto">
+                                {["Resultado da heteroidentificação", "Edital do concurso", "Prazo final do recurso"].map((item, i) => (
+                                    <div key={i} className="flex gap-3 items-center">
+                                        <div className="w-5 h-5 rounded-full flex items-center justify-center flex-shrink-0" style={{ backgroundColor: C.gold, color: C.bg1 }}>
+                                            <Check className="w-3 h-3 font-bold" />
+                                        </div>
+                                        <span className="text-sm md:text-base font-medium text-gray-200">{item}</span>
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+
                         <Cta text="Falar com Especialista Agora" full />
                         <p className="text-xs mt-6" style={{ color: C.gray3 }}>
                             © 2026 Marcelo Colen Advogados · OAB/MG

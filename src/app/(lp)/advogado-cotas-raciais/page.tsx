@@ -53,7 +53,7 @@ const D = {
         badge: "⚖️ Análise Técnica Especializada - Atendimento Nacional",
         h1_1: "Advogado Especialista em",
         h1_2: "Cotas Raciais",
-        sub: "Atuação jurídica em recursos contra indeferimento na heteroidentificação e concursos públicos.",
+        sub: "Atuação jurídica em recursos contra indeferimento na heteroidentificação de concursos públicos.",
         cta: "Falar com Advogado Especialista",
         ctaLine1: "Você pode enviar a foto do resultado ou do edital agora mesmo.",
         ctaLine2: "Primeira análise sem custo extra e com sigilo total.",
@@ -65,36 +65,34 @@ const D = {
         role: "Advogado · OAB/MG · Direito Antidiscriminatório e Concursos Públicos",
         quote: "Minha atuação técnica foca na legalidade e nos pilares do fenótipo. Analisamos cada detalhe procedimental da banca para buscar fundamentos reais de defesa.",
     },
+    autoridadeNovo: {
+        title: "Análise jurídica individual do seu caso.",
+        desc: "Avaliação do edital, da motivação da banca e da viabilidade do recurso.",
+        items: [
+            "Análise do edital",
+            "Análise do resultado da banca",
+            "Análise do procedimento adotado",
+            "Avaliação do prazo recursal"
+        ]
+    },
     dor: {
-        title: "Você passou nas provas, mas foi indeferido na heteroidentificação.",
+        title: "Mesmo candidatos aprovados nas provas podem ser eliminados na heteroidentificação.",
         p: [
-            "Essa etapa rigorosa pode eliminar candidatos de forma definitiva mesmo após aprovação em todas as fases anteriores do concurso.",
-            "Dependendo do edital, o prazo para recorrer dessa decisão pode ser muito curto.",
+            "Dependendo do edital e da motivação da banca, é possível avaliar a viabilidade de recurso judiciário ou administrativo."
         ],
         cta: "Pedir Análise Jurídica Agora",
     },
-    analise: {
-        title: "O Que Estudamos e Analisamos no Seu Caso",
-        items: [
-            "Edital do concurso e regras específicas",
-            "Resultado da heteroidentificação",
-            "Procedimento adotado administrativamente pela banca",
-            "Motivação apresentada pela comissão de heteroidentificação",
-            "Prazo limite para apresentação de recurso"
-        ],
-        cta: "Enviar Documentos para Análise"
-    },
     urg: {
         title: "Por Que Agir Rápido?",
-        text: "Em diversos processos seletivos e concursos públicos, o prazo concedido para o envio do recurso é de apenas 2 a 5 dias. Por isso é fundamental realizar a avaliação inicial com o máximo de agilidade.",
+        text: "Em muitos concursos o prazo de recurso é de apenas 2 a 5 dias. Por isso a análise precisa ser rápida.",
         cta: "Verificar Meu Prazo Agora",
     },
     steps: {
         title: "Como Funciona o Nosso Atendimento.",
         items: [
-            { n: "01", t: "Análise do Caso", d: "Você envia o edital e o resultado do certame pelo WhatsApp para que eu possa verificar a situação inicial.", Icon: Send },
-            { n: "02", t: "Estudo Individualizado", d: "O seu caso é analisado detalhada e individualmente, estudando todas as possibilidades da situação.", Icon: Search },
-            { n: "03", t: "Estratégia", d: "Se constatado algum fundamento legal para questionar, você é orientado sobre a viabilidade do recurso.", Icon: Gavel },
+            { n: "01", t: "Envio", d: "Você envia o edital e resultado.", Icon: Send },
+            { n: "02", t: "Análise", d: "O caso é analisado.", Icon: Search },
+            { n: "03", t: "Orientação", d: "Orientamos os próximos passos.", Icon: Gavel },
         ],
         cta: "Iniciar Minha Análise",
     },
@@ -227,7 +225,7 @@ export default function AdvogadoPage() {
                             <div className="max-w-md w-full flex flex-col items-center space-y-4">
                                 <Cta text={D.hero.cta} full />
                                 <div className="mt-2 group">
-                                    <CtaLink text="Enviar Resultado e Edital Primeiro" />
+                                    <CtaLink text="Enviar Resultado e Edital" />
                                 </div>
 
                                 <div className="space-y-1 opacity-90 text-center mt-4">
@@ -272,6 +270,38 @@ export default function AdvogadoPage() {
             </section>
 
             {/* ══════════════════════════════════════════════════════════════ */}
+            {/* AUTORIDADE (NOVA PARTE)                                      */}
+            {/* ══════════════════════════════════════════════════════════════ */}
+            <section className="py-12 md:py-20" style={{ backgroundColor: C.bg2 }}>
+                <Container>
+                    <div className="max-w-2xl mx-auto scale-[0.98] lg:scale-100">
+                        <div className="flex flex-col items-center justify-center gap-3 mb-10 text-center">
+                            <Scale className="w-10 h-10" style={{ color: C.gold }} />
+                            <h2 className="text-2xl md:text-4xl font-bold px-4 mb-2" style={{ color: C.white, fontFamily: "Georgia, serif" }}>
+                                {D.autoridadeNovo.title}
+                            </h2>
+                            <p className="text-sm md:text-lg font-medium" style={{ color: C.gray2 }}>
+                                {D.autoridadeNovo.desc}
+                            </p>
+                        </div>
+
+                        <div className="space-y-3 mb-8">
+                            {D.autoridadeNovo.items.map((item, i) => (
+                                <div key={i} className="flex items-center gap-4 rounded-xl p-4 transition-colors hover:bg-white/5" style={{ border: `1px solid rgba(201,162,39,0.2)`, backgroundColor: C.goldSoft }}>
+                                    <div className="w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0 font-bold text-xs" style={{ backgroundColor: C.gold, color: C.bg1 }}>
+                                        ✓
+                                    </div>
+                                    <p className="font-medium text-sm md:text-base" style={{ color: C.gray1 }}>
+                                        {item}
+                                    </p>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                </Container>
+            </section>
+
+            {/* ══════════════════════════════════════════════════════════════ */}
             {/* BLOCO DE DOR                                                 */}
             {/* ══════════════════════════════════════════════════════════════ */}
             <section className="py-12 md:py-20 relative" style={{ backgroundColor: C.bg1 }}>
@@ -289,8 +319,8 @@ export default function AdvogadoPage() {
                             {D.dor.p.map((p, i) => (
                                 <p
                                     key={i}
-                                    className={`text-base md:text-lg leading-relaxed ${i === 1 ? "font-bold text-lg md:text-xl pl-4 py-2 rounded-r-lg" : ""}`}
-                                    style={i === 1 ? { color: C.gold, backgroundColor: C.goldSoft, borderLeft: `4px solid ${C.gold}` } : { color: C.gray2 }}
+                                    className={`text-base md:text-lg leading-relaxed ${i === 0 ? "font-bold text-lg md:text-xl pl-4 py-2 rounded-r-lg" : ""}`}
+                                    style={i === 0 ? { color: C.gold, backgroundColor: C.goldSoft, borderLeft: `4px solid ${C.gold}` } : { color: C.gray2 }}
                                 >
                                     {p}
                                 </p>
@@ -298,37 +328,6 @@ export default function AdvogadoPage() {
                         </div>
 
                         <Cta text={D.dor.cta} full />
-                    </div>
-                </Container>
-            </section>
-
-            {/* ══════════════════════════════════════════════════════════════ */}
-            {/* O QUE ANALISAMOS                                             */}
-            {/* ══════════════════════════════════════════════════════════════ */}
-            <section className="py-12 md:py-20" style={{ backgroundColor: C.bg2 }}>
-                <Container>
-                    <div className="max-w-2xl mx-auto scale-[0.98] lg:scale-100">
-                        <div className="flex flex-col items-center justify-center gap-3 mb-10">
-                            <Scale className="w-10 h-10" style={{ color: C.gold }} />
-                            <h2 className="text-2xl md:text-4xl font-bold text-center px-4" style={{ color: C.white, fontFamily: "Georgia, serif" }}>
-                                {D.analise.title}
-                            </h2>
-                        </div>
-
-                        <div className="space-y-3 mb-8">
-                            {D.analise.items.map((item, i) => (
-                                <div key={i} className="flex items-center gap-4 rounded-xl p-4 transition-colors hover:bg-white/5" style={{ border: `1px solid rgba(201,162,39,0.2)`, backgroundColor: C.goldSoft }}>
-                                    <div className="w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0 font-bold text-xs" style={{ backgroundColor: C.gold, color: C.bg1 }}>
-                                        ✓
-                                    </div>
-                                    <p className="font-medium text-sm md:text-base" style={{ color: C.gray1 }}>
-                                        {item}
-                                    </p>
-                                </div>
-                            ))}
-                        </div>
-
-                        <Cta text={D.analise.cta} full />
                     </div>
                 </Container>
             </section>
@@ -407,7 +406,22 @@ export default function AdvogadoPage() {
                         <p className="text-xl md:text-2xl font-bold mb-6" style={{ color: C.white, fontFamily: "Georgia, serif" }}>
                             Não deixe o seu direito ser negado indevidamente.
                         </p>
-                        <Cta text="Envie seu resultado e edital para a análise." full />
+
+                        <div className="mb-8 p-6 rounded-2xl text-left" style={{ backgroundColor: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.1)" }}>
+                            <p className="font-bold mb-4 text-sm md:text-base text-center" style={{ color: C.gold }}>Envie agora para análise:</p>
+                            <div className="space-y-3 max-w-xs mx-auto">
+                                {["Resultado da heteroidentificação", "Edital do concurso", "Prazo final do recurso"].map((item, i) => (
+                                    <div key={i} className="flex gap-3 items-center">
+                                        <div className="w-5 h-5 rounded-full flex items-center justify-center flex-shrink-0" style={{ backgroundColor: C.gold, color: C.bg1 }}>
+                                            <Check className="w-3 h-3 font-bold" />
+                                        </div>
+                                        <span className="text-sm md:text-base font-medium text-gray-200">{item}</span>
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+
+                        <Cta text="Falar com Advogado" full />
                         <p className="text-xs mt-6" style={{ color: C.gray3 }}>
                             © 2026 Marcelo Colen Advogados · OAB/MG
                         </p>

@@ -51,10 +51,10 @@ const C = {
 const D = {
     hero: {
         badge: "⚠️ Seu prazo de recurso pode ser de apenas 2 a 5 dias",
-        h1_1: "Recurso Contra",
-        h1_2: "Heteroidentificação",
-        sub: "Se sua autodeclaração foi indeferida, ainda pode ser possível recorrer antes do prazo acabar.",
-        cta: "Analisar Meu Recurso Agora",
+        h1_1: "Recurso Contra Indeferimento",
+        h1_2: "em Heteroidentificação",
+        sub: "Análise técnica do seu caso para verificar fundamentos de recurso.",
+        cta: "Analisar Meu Recurso",
         ctaLine1: "Você já pode enviar a foto do resultado ou do edital.",
         ctaLine2: "Primeira análise sem custo e com sigilo.",
         ctaTrust: "O Dr. Marcelo acompanha pessoalmente as análises.",
@@ -73,18 +73,19 @@ const D = {
         title: "Erros Que Podem Gerar Recurso",
         items: [
             "Motivação genérica da comissão para o indeferimento",
-            "Procedimento irregular adotado pela banca",
-            "Análise muito breve ou injusta do candidato",
-            "Inconsistência do processo com o que foi exigido no edital",
+            "Inconsistência do processo com o edital",
+            "Análise superficial ou muito breve do candidato",
+            "Erro procedimental adotado pela banca"
         ],
         cta: "Pedir Análise do Recurso"
     },
     enviar: {
-        title: "O Que Enviar Agora Para Análise",
+        title: "O Que Estudamos no Seu Caso",
         items: [
-            "Resultado da heteroidentificação",
             "Edital do concurso",
-            "Prazo final do recurso"
+            "Resultado da heteroidentificação",
+            "Fundamentação da banca",
+            "Prazo para recurso"
         ],
         cta: "Enviar Resultado no WhatsApp",
     },
@@ -94,11 +95,11 @@ const D = {
         cta: "Verificar Meu Prazo Agora",
     },
     steps: {
-        title: "Como Funciona? 3 Passos.",
+        title: "Como Funciona o Processo",
         items: [
-            { n: "01", t: "Envie as Informações", d: "Mande o edital e o resultado pelo WhatsApp. Simples assim.", Icon: Send },
-            { n: "02", t: "O Caso é Analisado", d: "Verificamos se há fundamentação para reverter a decisão.", Icon: Search },
-            { n: "03", t: "Próximos Passos", d: "Orientamos você sobre a possibilidade de defesa técnica e recurso.", Icon: Gavel },
+            { n: "01", t: "Envio", d: "Você envia resultado e edital.", Icon: Send },
+            { n: "02", t: "Análise", d: "O caso é analisado.", Icon: Search },
+            { n: "03", t: "Estratégia", d: "Orientamos a estratégia de recurso.", Icon: Gavel },
         ],
         cta: "Iniciar Minha Análise",
     },
@@ -461,6 +462,21 @@ export default function RecursoHeteroidentificacaoPage() {
                         <p className="text-xl md:text-2xl font-bold mb-6" style={{ color: C.white, fontFamily: "Georgia, serif" }}>
                             Não perca sua vaga por omissão.
                         </p>
+
+                        <div className="mb-8 p-6 rounded-2xl text-left" style={{ backgroundColor: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.1)" }}>
+                            <p className="font-bold mb-4 text-sm md:text-base text-center" style={{ color: C.gold }}>Envie agora para análise:</p>
+                            <div className="space-y-3 max-w-[280px] mx-auto">
+                                {["Resultado da banca", "Edital do concurso", "Prazo do recurso"].map((item, i) => (
+                                    <div key={i} className="flex gap-3 items-center">
+                                        <div className="w-5 h-5 rounded-full flex items-center justify-center flex-shrink-0" style={{ backgroundColor: C.gold, color: C.bg1 }}>
+                                            <Check className="w-3 h-3 font-bold" />
+                                        </div>
+                                        <span className="text-sm md:text-base font-medium text-gray-200">{item}</span>
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+
                         <Cta text="Falar com Dr. Marcelo Agora" full />
                         <p className="text-xs mt-6" style={{ color: C.gray3 }}>
                             © 2026 Marcelo Colen Advogados · OAB/MG
