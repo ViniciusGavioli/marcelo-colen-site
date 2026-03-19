@@ -219,7 +219,7 @@ function ProvasSocial() {
             <Container className="relative z-10">
                 <div className="max-w-4xl mx-auto">
                     <SectionLabel>Depoimentos</SectionLabel>
-                    <h2 className="text-2xl md:text-3xl font-bold text-center mb-2" style={{ color: C.white, fontFamily: "Georgia, serif" }}>
+                    <h2 className="text-2xl md:text-3xl font-bold text-center mb-2" style={{ color: C.white, fontFamily: "'Cormorant Garamond', Georgia, serif" }}>
                         Candidatos que contestaram a eliminação injusta
                     </h2>
                     <GoldDivider />
@@ -265,76 +265,61 @@ export default function AdvogadoPage() {
             {/* ══════════════════════════════════════════════════════════════ */}
             {/* HERO                                                         */}
             {/* ══════════════════════════════════════════════════════════════ */}
-            <section className="relative min-h-0 flex items-center overflow-hidden py-8 md:py-24 lg:py-32" style={{ backgroundColor: C.bg1 }}>
+            <section className="relative flex items-center overflow-hidden py-14 md:py-28 lg:py-36" style={{ backgroundColor: C.bg1 }}>
                 {/* Fundo em camadas */}
                 <div className="absolute inset-0 z-0 select-none">
-                    <Image src="/images/hero-scales.png" alt="" fill className="object-cover opacity-[0.04] lg:opacity-[0.07]" priority aria-hidden="true" />
-                    <div className="absolute inset-0 md:hidden bg-gradient-to-b from-black/80 via-black/30 to-black/80" />
-                    <div className="absolute inset-0" style={{ background: `linear-gradient(180deg, ${C.bg1} 0%, transparent 50%, ${C.bg1} 100%)` }} />
-                    {/* glow dourado radial atrás do título */}
-                    <div
-                        aria-hidden="true"
-                        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[320px] rounded-full pointer-events-none"
-                        style={{
-                            background: `radial-gradient(ellipse, rgba(201,162,39,0.07) 0%, transparent 70%)`,
-                            filter: "blur(40px)",
-                        }}
-                    />
+                    <Image src="/images/hero-scales.png" alt="" fill className="object-cover opacity-[0.04]" priority aria-hidden="true" />
+                    <div className="absolute inset-0" style={{ background: `radial-gradient(ellipse 80% 60% at 50% 0%, rgba(201,162,39,0.06) 0%, transparent 70%)` }} />
+                    <div className="absolute inset-0" style={{ background: `linear-gradient(180deg, ${C.bg1} 0%, transparent 40%, ${C.bg1} 100%)` }} />
                 </div>
 
                 <Container className="relative z-10 w-full px-4 md:px-6">
-                    <div className="flex flex-col items-center text-center">
-                        <div className="max-w-4xl flex flex-col justify-center items-center">
-                            <div className="inline-flex items-center gap-2 rounded-full px-3 py-1 mb-4 md:mb-6 w-fit" style={{ backgroundColor: C.redBg, border: `1px solid ${C.redBorder}` }}>
-                                <AlertTriangle className="w-3.5 h-3.5" style={{ color: C.red }} />
-                                <span className="text-[10px] md:text-xs font-black uppercase tracking-widest leading-none" style={{ color: "rgb(254,202,202)" }}>{D.hero.badge}</span>
-                            </div>
+                    <div className="flex flex-col items-center text-center max-w-3xl mx-auto">
 
-                            {/* Micro Avatar mobile */}
-                            <div className="flex items-center gap-3 mb-5 pr-4 pl-1.5 py-1.5 rounded-full border md:hidden shadow-lg" style={{ backgroundColor: "rgba(255,255,255,0.05)", borderColor: "rgba(255,255,255,0.1)" }}>
-                                <Image src="/images/marcelo/marcelo-hero.jpg" alt="Dr. Marcelo Colen" width={32} height={32} className="rounded-full object-cover w-8 h-8" />
-                                <div className="text-left">
-                                    <p className="font-bold text-xs" style={{ color: C.gray1 }}>Dr. Marcelo Colen</p>
-                                    <p className="text-[10px] italic leading-none mt-0.5" style={{ color: C.gold }}>Advogado OAB/MG • Especialista</p>
-                                </div>
-                            </div>
-
-                            <h1 className="text-[clamp(1.85rem,9vw,2.5rem)] md:text-5xl lg:text-7xl font-black leading-[1.1] md:leading-[1.05] mb-4 md:mb-6 tracking-tighter" style={{ color: C.white, fontFamily: "Georgia, serif" }}>
-                                {D.hero.h1_1}
-                                <br />
-                                <span style={{ color: C.gold }}>{D.hero.h1_2}</span>
-                            </h1>
-
-                            <p className="text-sm md:text-lg lg:text-xl leading-relaxed mb-4 md:mb-5 max-w-[40ch] md:max-w-2xl font-medium" style={{ color: C.gray2 }}>
-                                {D.hero.sub}
-                            </p>
-
-                            {/* Credenciais */}
-                            <div
-                                className="mb-6 md:mb-8 text-center backdrop-blur-sm rounded-2xl p-4 md:p-5 w-full max-w-2xl relative overflow-hidden"
-                                style={{
-                                    background: "rgba(201,162,39,0.06)",
-                                    border: `1px solid rgba(201,162,39,0.18)`,
-                                    boxShadow: "0 0 40px rgba(201,162,39,0.05)",
-                                }}
-                            >
-                                <div className="absolute top-0 left-0 w-[2px] h-full" style={{ background: `linear-gradient(180deg, ${C.gold}, transparent)` }} />
-                                <p className="text-sm md:text-base font-semibold leading-relaxed" style={{ color: C.gray1 }}>
-                                    {D.hero.credentials}
-                                </p>
-                            </div>
-
-                            <div className="max-w-md w-full flex flex-col items-center space-y-4">
-                                <Cta text={D.hero.cta} full />
-                                <div className="space-y-1 opacity-90 text-center">
-                                    <p className="text-[11px] md:text-sm font-bold" style={{ color: C.gray2 }}>{D.hero.ctaLine1}</p>
-                                    <p className="text-[9px] md:text-[10px] text-gray-500 uppercase tracking-widest font-extrabold flex items-center justify-center">
-                                        <Lock className="w-3 h-3 mr-1" />
-                                        {D.hero.ctaLine2}
-                                    </p>
-                                </div>
-                            </div>
+                        {/* Eyebrow com linhas douradas */}
+                        <div className="flex items-center gap-3 mb-6 md:mb-8">
+                            <div className="h-px w-8 md:w-12" style={{ background: `linear-gradient(90deg, transparent, ${C.gold})` }} />
+                            <span className="text-[10px] md:text-xs uppercase tracking-[0.15em] font-semibold" style={{ color: C.gold }}>
+                                Recurso Administrativo
+                            </span>
+                            <div className="h-px w-8 md:w-12" style={{ background: `linear-gradient(90deg, ${C.gold}, transparent)` }} />
                         </div>
+
+                        {/* H1 com hierarquia */}
+                        <h1 className="mb-5 md:mb-6" style={{ fontFamily: "'Cormorant Garamond', Georgia, serif" }}>
+                            <span className="block text-[clamp(1.4rem,5.5vw,2.2rem)] font-medium italic leading-[1.25] tracking-tight" style={{ color: C.gray1, opacity: 0.85 }}>
+                                {D.hero.h1_1}
+                            </span>
+                            <span className="block text-[clamp(2rem,8vw,4rem)] font-bold leading-[1.05] tracking-tight uppercase mt-1" style={{ color: C.gold }}>
+                                {D.hero.h1_2}
+                            </span>
+                        </h1>
+
+                        {/* Linha fina de separação */}
+                        <div className="h-px w-16 mb-5 md:mb-6 mx-auto" style={{ background: `linear-gradient(90deg, transparent, rgba(201,162,39,0.3), transparent)` }} />
+
+                        {/* Subtítulo */}
+                        <p className="text-base md:text-lg leading-relaxed mb-8 md:mb-10 max-w-[42ch]" style={{ color: C.gray2 }}>
+                            {D.hero.sub}
+                        </p>
+
+                        {/* CTA */}
+                        <div className="w-full max-w-sm flex flex-col items-center gap-3">
+                            <Cta text={D.hero.cta} full />
+                            <p className="text-[11px] md:text-xs font-medium" style={{ color: C.gray3 }}>
+                                <Lock className="w-3 h-3 inline mr-1 mb-0.5" />
+                                Sigiloso · Sem compromisso · Resposta rápida
+                            </p>
+                        </div>
+
+                        {/* Credencial inline com avatar */}
+                        <div className="flex items-center gap-2.5 mt-8 md:mt-10 px-4 py-2 rounded-full" style={{ backgroundColor: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.08)" }}>
+                            <Image src="/images/marcelo/marcelo-hero.jpg" alt="Dr. Marcelo Colen" width={24} height={24} className="rounded-full object-cover w-6 h-6" />
+                            <span className="text-[11px] md:text-xs uppercase tracking-wider font-semibold" style={{ color: C.gray2 }}>
+                                Dr. Marcelo Colen · Mestre UFMG · OAB/MG
+                            </span>
+                        </div>
+
                     </div>
                 </Container>
                 <div className="absolute bottom-0 left-0 right-0 h-px" style={{ background: `linear-gradient(to right, transparent, rgba(201,162,39,0.2), transparent)` }} />
@@ -357,7 +342,7 @@ export default function AdvogadoPage() {
                 <Container className="relative z-10">
                     <div className="max-w-2xl mx-auto">
                         <SectionLabel>Reconhece essa situação?</SectionLabel>
-                        <h2 className="text-2xl md:text-3xl font-bold text-center mb-2" style={{ color: C.white, fontFamily: "Georgia, serif" }}>
+                        <h2 className="text-2xl md:text-3xl font-bold text-center mb-2" style={{ color: C.white, fontFamily: "'Cormorant Garamond', Georgia, serif" }}>
                             Isso aconteceu com você?
                         </h2>
                         <GoldDivider />
@@ -391,6 +376,15 @@ export default function AdvogadoPage() {
             {/* ══════════════════════════════════════════════════════════════ */}
             <ProvasSocial />
 
+            {/* CTA intermediário após depoimentos */}
+            <section className="py-8 md:py-12" style={{ backgroundColor: C.bg1 }}>
+                <Container>
+                    <div className="flex justify-center">
+                        <Cta text="Quero Analisar Meu Caso" />
+                    </div>
+                </Container>
+            </section>
+
             {/* ══════════════════════════════════════════════════════════════ */}
             {/* A BANCA ERRA                                                 */}
             {/* ══════════════════════════════════════════════════════════════ */}
@@ -420,7 +414,7 @@ export default function AdvogadoPage() {
                 <Container className="relative z-10">
                     <div className="max-w-2xl mx-auto text-center px-4">
                         <SectionLabel>Por que você pode contestar</SectionLabel>
-                        <h2 className="text-2xl md:text-3xl font-bold mb-2" style={{ color: C.white, fontFamily: "Georgia, serif" }}>
+                        <h2 className="text-2xl md:text-3xl font-bold mb-2" style={{ color: C.white, fontFamily: "'Cormorant Garamond', Georgia, serif" }}>
                             A Banca Erra. E Erra Muito.
                         </h2>
                         <GoldDivider />
@@ -448,7 +442,7 @@ export default function AdvogadoPage() {
                         <div className="flex flex-col items-center justify-center gap-2 mb-2 text-center">
                             <Scale className="w-9 h-9" style={{ color: C.gold, opacity: 0.85 }} />
                             <SectionLabel>Análise técnica</SectionLabel>
-                            <h2 className="text-2xl md:text-4xl font-bold px-4" style={{ color: C.white, fontFamily: "Georgia, serif" }}>
+                            <h2 className="text-2xl md:text-4xl font-bold px-4" style={{ color: C.white, fontFamily: "'Cormorant Garamond', Georgia, serif" }}>
                                 {D.analiseCaso.title}
                             </h2>
                         </div>
@@ -501,7 +495,7 @@ export default function AdvogadoPage() {
                 <Container className="relative z-10">
                     <div className="max-w-2xl mx-auto text-center px-4">
                         <Clock className="w-10 h-10 md:w-12 md:h-12 mx-auto mb-6" style={{ color: C.gold }} />
-                        <h2 className="text-2xl md:text-3xl font-bold mb-6" style={{ color: C.white, fontFamily: "Georgia, serif" }}>
+                        <h2 className="text-2xl md:text-3xl font-bold mb-6" style={{ color: C.white, fontFamily: "'Cormorant Garamond', Georgia, serif" }}>
                             {D.urg.title}
                         </h2>
                         <p className="text-base md:text-lg leading-relaxed mb-8 font-medium" style={{ color: C.gray1 }}>
@@ -518,7 +512,7 @@ export default function AdvogadoPage() {
             <section className="py-12 md:py-24" style={{ backgroundColor: C.bg1 }}>
                 <Container>
                     <SectionLabel>Passo a passo</SectionLabel>
-                    <h2 className="text-2xl md:text-4xl font-bold text-center mb-2 px-4" style={{ color: C.white, fontFamily: "Georgia, serif" }}>
+                    <h2 className="text-2xl md:text-4xl font-bold text-center mb-2 px-4" style={{ color: C.white, fontFamily: "'Cormorant Garamond', Georgia, serif" }}>
                         {D.steps.title}
                     </h2>
                     <GoldDivider />
@@ -607,12 +601,19 @@ export default function AdvogadoPage() {
                                 Minha missão não é apenas escrever recursos. É garantir que a subjetividade de uma banca não destrua o mérito de quem realmente pertence às cotas.
                             </p>
                             <div className="h-px mb-4" style={{ background: `linear-gradient(to right, ${C.gold}, transparent)`, opacity: 0.3 }} />
-                            <p className="font-bold text-sm" style={{ color: C.gold }}>
+                            <p className="font-bold text-base" style={{ color: C.gold }}>
                                 Dr. Marcelo Colen
                             </p>
-                            <p className="text-xs mt-1" style={{ color: C.gray3 }}>
+                            <p className="text-xs mt-1 mb-4" style={{ color: C.gray3 }}>
                                 Advogado · OAB/MG · Direito Antidiscriminatório e Concursos Públicos
                             </p>
+                            {/* Bullets de autoridade */}
+                            <div className="space-y-2 text-xs md:text-sm" style={{ color: C.gray2 }}>
+                                <div className="flex items-center gap-2"><Check className="w-3.5 h-3.5 flex-shrink-0" style={{ color: C.gold }} /> Mestre em Direito pela UFMG</div>
+                                <div className="flex items-center gap-2"><Check className="w-3.5 h-3.5 flex-shrink-0" style={{ color: C.gold }} /> Secretário da Comissão Nac. de Promoção da Igualdade da OAB Federal</div>
+                                <div className="flex items-center gap-2"><Check className="w-3.5 h-3.5 flex-shrink-0" style={{ color: C.gold }} /> Diretor de Diversidade e Inclusão da OAB/MG</div>
+                                <div className="flex items-center gap-2"><Check className="w-3.5 h-3.5 flex-shrink-0" style={{ color: C.gold }} /> Professor, palestrante e autor publicado</div>
+                            </div>
                         </div>
                     </div>
                 </Container>
@@ -625,7 +626,7 @@ export default function AdvogadoPage() {
                 <Container>
                     <div className="max-w-2xl mx-auto">
                         <SectionLabel>Tire suas dúvidas</SectionLabel>
-                        <h2 className="text-2xl md:text-3xl font-bold mb-2 text-center" style={{ color: C.white, fontFamily: "Georgia, serif" }}>Perguntas Frequentes</h2>
+                        <h2 className="text-2xl md:text-3xl font-bold mb-2 text-center" style={{ color: C.white, fontFamily: "'Cormorant Garamond', Georgia, serif" }}>Perguntas Frequentes</h2>
                         <GoldDivider />
                         <div
                             className="rounded-2xl p-2 md:p-6 mt-8"
@@ -662,7 +663,7 @@ export default function AdvogadoPage() {
                 />
                 <Container className="relative z-10">
                     <div className="max-w-lg mx-auto text-center">
-                        <p className="text-xl md:text-2xl font-bold mb-3" style={{ color: C.white, fontFamily: "Georgia, serif" }}>
+                        <p className="text-xl md:text-2xl font-bold mb-3" style={{ color: C.white, fontFamily: "'Cormorant Garamond', Georgia, serif" }}>
                             Não deixe o prazo passar.
                         </p>
                         <p className="text-sm md:text-base mb-8" style={{ color: C.gray2 }}>
@@ -733,7 +734,7 @@ function VideoSection({ youtubeId, iframeSrc, mp4Src }: { youtubeId?: string; if
         <section className="py-12 md:py-24" style={{ backgroundColor: C.bg1 }}>
             <div className="max-w-[720px] mx-auto px-6">
                 <SectionLabel>Mensagem do Especialista</SectionLabel>
-                <h2 className="text-2xl md:text-3xl font-bold text-center mb-2 leading-tight md:leading-snug" style={{ color: C.white, fontFamily: "Georgia, serif" }}>
+                <h2 className="text-2xl md:text-3xl font-bold text-center mb-2 leading-tight md:leading-snug" style={{ color: C.white, fontFamily: "'Cormorant Garamond', Georgia, serif" }}>
                     Entenda em 2 minutos por que você ainda pode contestar.
                 </h2>
                 <GoldDivider />
