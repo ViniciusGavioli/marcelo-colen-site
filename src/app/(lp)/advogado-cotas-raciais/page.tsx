@@ -23,7 +23,7 @@ import {
 import { Container } from "@/components/layout";
 import { getDirectWhatsAppLink } from "@/lib/whatsapp";
 import { trackWhatsAppClick } from "@/lib/analytics";
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 
 // ============================================================================
 // CORES
@@ -231,7 +231,7 @@ function ProvasSocial() {
                                 style={{
                                     backgroundColor: "rgba(255,255,255,0.03)",
                                     border: "1px solid rgba(255,255,255,0.07)",
-                                    boxShadow: "0 2px 24px rgba(0,0,0,0.4)",
+                                    boxShadow: "0 4px 20px rgba(0,0,0,0.2)",
                                 }}
                             >
                                 {/* aspas decorativas */}
@@ -251,6 +251,46 @@ function ProvasSocial() {
                 </div>
             </Container>
         </section>
+    );
+}
+
+// ============================================================================
+// SCROLL REVEAL
+// ============================================================================
+function useScrollReveal() {
+    const ref = useRef<HTMLDivElement>(null);
+    useEffect(() => {
+        const el = ref.current;
+        if (!el) return;
+        const observer = new IntersectionObserver(
+            ([entry]) => {
+                if (entry.isIntersecting) {
+                    el.style.opacity = "1";
+                    el.style.transform = "translateY(0)";
+                    observer.unobserve(el);
+                }
+            },
+            { threshold: 0.1 }
+        );
+        observer.observe(el);
+        return () => observer.disconnect();
+    }, []);
+    return ref;
+}
+
+function Reveal({ children, delay = 0 }: { children: React.ReactNode; delay?: number }) {
+    const ref = useScrollReveal();
+    return (
+        <div
+            ref={ref}
+            style={{
+                opacity: 0,
+                transform: "translateY(24px)",
+                transition: `opacity 0.7s cubic-bezier(0.16,1,0.3,1) ${delay}s, transform 0.7s cubic-bezier(0.16,1,0.3,1) ${delay}s`,
+            }}
+        >
+            {children}
+        </div>
     );
 }
 
@@ -328,7 +368,7 @@ export default function AdvogadoPage() {
             {/* ══════════════════════════════════════════════════════════════ */}
             {/* VÍDEO                                                        */}
             {/* ══════════════════════════════════════════════════════════════ */}
-            <VideoSection youtubeId="jAiQi4CgMN0" />
+            <Reveal><VideoSection youtubeId="jAiQi4CgMN0" /></Reveal>
 
             {/* ══════════════════════════════════════════════════════════════ */}
             {/* ISSO ACONTECEU COM VOCÊ?                                     */}
@@ -359,7 +399,7 @@ export default function AdvogadoPage() {
                                     style={{
                                         backgroundColor: C.goldSoft,
                                         border: "1px solid rgba(201,162,39,0.15)",
-                                        boxShadow: "0 1px 12px rgba(0,0,0,0.3)",
+                                        boxShadow: "0 2px 10px rgba(0,0,0,0.15)",
                                     }}
                                 >
                                     <div className="w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0 font-bold text-xs mt-0.5" style={{ backgroundColor: C.gold, color: C.bg1 }}>✓</div>
@@ -374,7 +414,7 @@ export default function AdvogadoPage() {
             {/* ══════════════════════════════════════════════════════════════ */}
             {/* PROVA SOCIAL                                                 */}
             {/* ══════════════════════════════════════════════════════════════ */}
-            <ProvasSocial />
+            <Reveal><ProvasSocial /></Reveal>
 
             {/* CTA intermediário após depoimentos */}
             <section className="py-8 md:py-12" style={{ backgroundColor: C.bg1 }}>
@@ -389,7 +429,7 @@ export default function AdvogadoPage() {
             {/* A BANCA ERRA                                                 */}
             {/* ══════════════════════════════════════════════════════════════ */}
             <section
-                className="py-12 md:py-20 relative overflow-hidden"
+                className="py-16 md:py-28 relative overflow-hidden"
                 style={{
                     backgroundColor: C.bg1,
                     borderTop: "1px solid rgba(255,255,255,0.05)",
@@ -431,7 +471,7 @@ export default function AdvogadoPage() {
             {/* ══════════════════════════════════════════════════════════════ */}
             {/* O QUE ANALISAMOS NO SEU CASO                                 */}
             {/* ══════════════════════════════════════════════════════════════ */}
-            <section className="py-12 md:py-20 relative overflow-hidden" style={{ backgroundColor: C.bg2 }}>
+            <section className="py-16 md:py-28 relative overflow-hidden" style={{ backgroundColor: C.bg2 }}>
                 <div
                     aria-hidden="true"
                     className="absolute inset-0 pointer-events-none"
@@ -459,7 +499,7 @@ export default function AdvogadoPage() {
                                     style={{
                                         border: `1px solid rgba(201,162,39,0.15)`,
                                         backgroundColor: C.goldSoft,
-                                        boxShadow: "0 1px 10px rgba(0,0,0,0.3)",
+                                        boxShadow: "0 2px 10px rgba(0,0,0,0.15)",
                                     }}
                                 >
                                     <div className="w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0 font-bold text-xs" style={{ backgroundColor: C.gold, color: C.bg1 }}>
@@ -480,7 +520,7 @@ export default function AdvogadoPage() {
             {/* POR QUE AGIR RÁPIDO                                         */}
             {/* ══════════════════════════════════════════════════════════════ */}
             <section
-                className="py-12 md:py-20 relative overflow-hidden"
+                className="py-16 md:py-28 relative overflow-hidden"
                 style={{
                     backgroundColor: "#0B1730",
                     borderTop: "1px solid rgba(255,255,255,0.08)",
@@ -509,7 +549,7 @@ export default function AdvogadoPage() {
             {/* ══════════════════════════════════════════════════════════════ */}
             {/* COMO FUNCIONA                                                */}
             {/* ══════════════════════════════════════════════════════════════ */}
-            <section className="py-12 md:py-24" style={{ backgroundColor: C.bg1 }}>
+            <section className="py-16 md:py-28" style={{ backgroundColor: C.bg1 }}>
                 <Container>
                     <SectionLabel>Passo a passo</SectionLabel>
                     <h2 className="text-2xl md:text-4xl font-bold text-center mb-2 px-4" style={{ color: C.white, fontFamily: "'Cormorant Garamond', Georgia, serif" }}>
@@ -525,7 +565,7 @@ export default function AdvogadoPage() {
                                 style={{
                                     backgroundColor: "rgba(255,255,255,0.03)",
                                     border: "1px solid rgba(255,255,255,0.07)",
-                                    boxShadow: "0 4px 32px rgba(0,0,0,0.4), 0 0 0 1px rgba(201,162,39,0.04)",
+                                    boxShadow: "0 8px 28px rgba(0,0,0,0.2)",
                                 }}
                             >
                                 <div
@@ -568,7 +608,7 @@ export default function AdvogadoPage() {
                         style={{
                             background: "rgba(255,255,255,0.02)",
                             border: "1px solid rgba(201,162,39,0.15)",
-                            boxShadow: "0 4px 40px rgba(0,0,0,0.5)",
+                            boxShadow: "0 8px 28px rgba(0,0,0,0.2)",
                         }}
                     >
                         <div className="flex-shrink-0">
@@ -579,7 +619,7 @@ export default function AdvogadoPage() {
                                     width={160}
                                     height={160}
                                     className="rounded-xl object-cover w-28 h-28 md:w-36 md:h-36"
-                                    style={{ boxShadow: `0 0 0 2px rgba(201,162,39,0.3), 0 8px 32px rgba(0,0,0,0.5)` }}
+                                    style={{ boxShadow: `0 0 0 1px rgba(201,162,39,0.2), 0 6px 20px rgba(0,0,0,0.15)` }}
                                 />
                                 {/* badge OAB */}
                                 <div
@@ -622,7 +662,7 @@ export default function AdvogadoPage() {
             {/* ══════════════════════════════════════════════════════════════ */}
             {/* FAQ                                                          */}
             {/* ══════════════════════════════════════════════════════════════ */}
-            <section className="py-12 md:py-24" style={{ backgroundColor: C.bg1 }}>
+            <section className="py-16 md:py-28" style={{ backgroundColor: C.bg1 }}>
                 <Container>
                     <div className="max-w-2xl mx-auto">
                         <SectionLabel>Tire suas dúvidas</SectionLabel>
@@ -633,7 +673,7 @@ export default function AdvogadoPage() {
                             style={{
                                 backgroundColor: "rgba(255,255,255,0.02)",
                                 border: "1px solid rgba(255,255,255,0.07)",
-                                boxShadow: "0 4px 32px rgba(0,0,0,0.4)",
+                                boxShadow: "0 8px 28px rgba(0,0,0,0.2)",
                             }}
                         >
                             {D.faq.map((item, i) => (
@@ -675,7 +715,7 @@ export default function AdvogadoPage() {
                             style={{
                                 backgroundColor: "rgba(255,255,255,0.03)",
                                 border: "1px solid rgba(255,255,255,0.08)",
-                                boxShadow: "0 2px 20px rgba(0,0,0,0.3)",
+                                boxShadow: "0 4px 16px rgba(0,0,0,0.15)",
                             }}
                         >
                             <div className="space-y-3 max-w-xs mx-auto">
@@ -731,7 +771,7 @@ function VideoSection({ youtubeId, iframeSrc, mp4Src }: { youtubeId?: string; if
     const MP4_SRC = mp4Src ?? "";
 
     return (
-        <section className="py-12 md:py-24" style={{ backgroundColor: C.bg1 }}>
+        <section className="py-16 md:py-28" style={{ backgroundColor: C.bg1 }}>
             <div className="max-w-[720px] mx-auto px-6">
                 <SectionLabel>Mensagem do Especialista</SectionLabel>
                 <h2 className="text-2xl md:text-3xl font-bold text-center mb-2 leading-tight md:leading-snug" style={{ color: C.white, fontFamily: "'Cormorant Garamond', Georgia, serif" }}>
@@ -741,7 +781,7 @@ function VideoSection({ youtubeId, iframeSrc, mp4Src }: { youtubeId?: string; if
                 <div
                     className="relative w-full rounded-2xl overflow-hidden mt-10"
                     style={{
-                        boxShadow: "0 16px 64px rgba(0,0,0,0.7), 0 0 0 1px rgba(201,162,39,0.12)",
+                        boxShadow: "0 12px 40px rgba(0,0,0,0.25)",
                         border: "1px solid rgba(255,255,255,0.08)",
                     }}
                 >
