@@ -17,7 +17,8 @@ import {
     Copy,
     Check,
     Zap,
-    Scale
+    Scale,
+    FileText
 } from "lucide-react";
 import { Container } from "@/components/layout";
 import { getDirectWhatsAppLink } from "@/lib/whatsapp";
@@ -32,7 +33,8 @@ const C = {
     bg2: "#111111",
     bg3: "#181818",
     gold: "#c9a227",
-    goldSoft: "rgba(201,162,39,0.12)",
+    goldSoft: "rgba(201,162,39,0.10)",
+    goldMid: "rgba(201,162,39,0.18)",
     white: "#ffffff",
     gray1: "rgba(255,255,255,0.92)",
     gray2: "rgba(255,255,255,0.7)",
@@ -47,73 +49,99 @@ const C = {
     greenGlow: "rgba(37,211,102,0.25)",
 };
 
+// SVG grain texture como data URL
+const GRAIN_URL = `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='320' height='320'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.72' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='320' height='320' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E")`;
+
 // ============================================================================
 // DADOS LP 1: ADVOGADO ESPECIALISTA
 // ============================================================================
 const D = {
     hero: {
-        badge: "⚖️ Análise Técnica Especializada - Atendimento Nacional",
-        h1_1: "Advogado Especialista em",
-        h1_2: "Cotas Raciais",
-        sub: "Atuação jurídica em recursos contra indeferimento na heteroidentificação de concursos públicos.",
-        cta: "Falar com Advogado Especialista",
-        ctaLine1: "Você pode enviar a foto do resultado ou do edital agora mesmo.",
-        ctaLine2: "Primeira análise sem custo extra e com sigilo total.",
-        ctaTrust: "Análise individual, séria e sem falsas promessas de resultado.",
-        disclaimer: "Cada caso é avaliado individualmente — sem promessa de resultado.",
+        badge: "⚠️ Prazo de recurso: entre 2 e 5 dias a partir do resultado. Cada hora conta.",
+        h1_1: "Passou nas Provas e foi Reprovado pela banca?",
+        h1_2: "Isso tem contestação.",
+        sub: "Se a banca te indeferiu, pode ter cometido um erro. Esse erro pode ser contestado antes do prazo acabar.",
+        credentials: "Dr. Marcelo Colen · Mestre em Direito pela UFMG · Secretário da Comissão Nacional de Promoção da Igualdade da OAB Federal · Diretor de Diversidade da OAB/MG",
+        cta: "Enviar Meu Caso no WhatsApp",
+        ctaLine1: "Você pode enviar o resultado da heteroidentificação agora mesmo.",
+        ctaLine2: "Primeira análise gratuita e sigilosa.",
+        disclaimer: "Cada caso é avaliado individualmente. Não fazemos promessa de resultado.",
     },
-    trust: {
-        name: "Dr. Marcelo Colen",
-        role: "Advogado · OAB/MG · Direito Antidiscriminatório e Concursos Públicos",
-        p1: "Marcelo Colen é advogado, Mestre em Direito pela UFMG, graduado em Direito pela PUC Minas e pós-graduado em Gestão Estratégica na Advocacia.",
-        p2: "Atua em temas ligados a Cotas Raciais, Heteroidentificação, Concursos Públicos e igualdade racial, com experiência em compliance antidiscriminatório, docência e produção de conteúdo técnico.",
-        p3: "Atualmente é Diretor de Diversidade e Inclusão da OAB/MG e Secretário da Comissão Nacional de Promoção da Igualdade da OAB Federal.",
-        p4: "Também é professor, palestrante e autor do \"Manual Antirracismo no Esporte\", adotado pela Amstel na campanha \"Barulho Contra o Racismo\" da Libertadores 2022.",
-    },
-    autoridadeNovo: {
-        title: "Análise jurídica individual do seu caso.",
+    analiseCaso: {
+        title: "O que analisamos no seu caso",
         desc: "Avaliação do edital, da motivação da banca e da viabilidade do recurso.",
         items: [
-            "Análise do edital",
-            "Análise do resultado da banca",
-            "Análise do procedimento adotado",
-            "Avaliação do prazo recursal"
+            "Edital do concurso",
+            "Resultado da heteroidentificação",
+            "Fundamentação apresentada pela banca",
+            "Prazo recursal disponível",
         ]
-    },
-    dor: {
-        title: "A avaliação técnica da decisão da comissão de heteroidentificação.",
-        p: [
-            "Muitas vezes, candidatos com autodeclaração válida são indeferidos de maneira genérica ou inconsistente com os critérios do edital.",
-            "Uma análise jurídica qualificada da fundamentação apresentada pela comissão pode apontar falhas procedimentais e indicar as bases fáticas e legais para o recurso."
-        ],
-        cta: "Pedir Análise Jurídica Agora",
     },
     urg: {
         title: "Por Que Agir Rápido?",
-        text: "Em muitos concursos o prazo de recurso é de apenas 2 a 5 dias. Por isso a análise precisa ser rápida.",
-        cta: "Verificar Meu Prazo Agora",
+        text: "Em muitos concursos, o prazo de recurso administrativo é de apenas 2 a 5 dias corridos após o resultado. Passado esse prazo, a via administrativa fecha. Resta apenas a judicial, mais longa e mais cara. Por isso a análise precisa acontecer agora.",
+        cta: "Enviar Meu Caso no WhatsApp",
     },
     steps: {
-        title: "Como Funciona o Nosso Atendimento.",
+        title: "Como Funciona o Atendimento",
         items: [
-            { n: "01", t: "Envio", d: "Você envia o edital e resultado.", Icon: Send },
-            { n: "02", t: "Análise", d: "O caso é analisado.", Icon: Search },
-            { n: "03", t: "Orientação", d: "Orientamos os próximos passos.", Icon: Gavel },
+            { n: "01", t: "Você envia", d: "Manda o resultado da heteroidentificação e o edital pelo WhatsApp. Pode ser print, PDF ou foto.", Icon: Send },
+            { n: "02", t: "Analisamos", d: "O Dr. Marcelo analisa pessoalmente o caso: edital, motivação da banca, prazo e viabilidade do recurso.", Icon: Search },
+            { n: "03", t: "Você decide", d: "Recebe a orientação técnica e decide como prosseguir. Sem compromisso na primeira análise.", Icon: Gavel },
         ],
-        cta: "Iniciar Minha Análise",
-    },
-    suggestedMsg: {
-        title: "Copie a mensagem abaixo para iniciarmos a conversa no WhatsApp:",
-        msg: "Olá, gostaria de falar com um advogado especialista em cotas raciais.",
+        cta: "Enviar Meu Caso no WhatsApp",
     },
     faq: [
-        { q: "Tem custo essa primeira conversa?", a: "Não. A análise inicial que realizamos para compreender seu prazo e viabilidade básica é totalmente gratuita." },
-        { q: "E se não houver fundamento para recurso?", a: "Mantemos uma postura honesta e reta. Se não houver erro procedimental da comissão ou base sólida que justifique o questionamento, informaremos prontamente." },
-        { q: "A conversa é protegida por sigilo?", a: "Sim, atuamos respeitando estritamente o sigilo profissional conforme exigido pelo Código de Ética e Disciplina da OAB." },
-        { q: "A atuação abrange candidatos de qualquer estado?", a: "Sim. Realizamos atendimento em âmbito nacional por meio de suporte 100% digital e acessível." },
+        { q: "Tem custo essa primeira conversa?", a: "Não. A análise inicial do seu caso (edital, resultado e prazo) é feita sem custo. Se houver fundamento para recurso e você quiser contratar, apresentamos os honorários nesse momento." },
+        { q: "E se não houver fundamento para recurso?", a: "Informamos isso claramente, sem enrolação. Não cobramos para dizer que o caso não tem viabilidade. Preferimos ser diretos do que gerar expectativa falsa." },
+        { q: "A conversa é protegida por sigilo?", a: "Sim. Todo contato está protegido pelo sigilo profissional da advocacia. Nenhuma informação é compartilhada." },
+        { q: "A atuação abrange candidatos de qualquer estado?", a: "Sim. O atendimento é 100% online e nacional. Já atuamos em concursos federais e estaduais em todo o Brasil." },
     ],
-    wa: "Olá, gostaria de falar com um advogado especialista em cotas raciais.",
+    wa: "Olá doutor, fui indeferido na heteroidentificação hoje. Posso te mandar meu resultado?",
 };
+
+// ============================================================================
+// GRAIN OVERLAY — textura sutil em toda a página
+// ============================================================================
+function GrainOverlay() {
+    return (
+        <div
+            aria-hidden="true"
+            className="pointer-events-none fixed inset-0 z-[1]"
+            style={{
+                backgroundImage: GRAIN_URL,
+                backgroundRepeat: "repeat",
+                backgroundSize: "320px 320px",
+                opacity: 0.032,
+                mixBlendMode: "overlay",
+            }}
+        />
+    );
+}
+
+// ============================================================================
+// DIVISOR DOURADO ornamental entre seções
+// ============================================================================
+function GoldDivider() {
+    return (
+        <div className="flex items-center justify-center gap-3 py-1" aria-hidden="true">
+            <div className="h-px flex-1 max-w-[120px]" style={{ background: `linear-gradient(to right, transparent, ${C.gold})`, opacity: 0.35 }} />
+            <div className="w-1.5 h-1.5 rotate-45" style={{ backgroundColor: C.gold, opacity: 0.6 }} />
+            <div className="h-px flex-1 max-w-[120px]" style={{ background: `linear-gradient(to left, transparent, ${C.gold})`, opacity: 0.35 }} />
+        </div>
+    );
+}
+
+// ============================================================================
+// LABEL DE SEÇÃO — eyebrow text dourado
+// ============================================================================
+function SectionLabel({ children }: { children: string }) {
+    return (
+        <p className="text-[10px] md:text-xs uppercase tracking-[0.22em] text-center mb-3 font-semibold" style={{ color: C.gold }}>
+            {children}
+        </p>
+    );
+}
 
 // ============================================================================
 // CTA BUTTON
@@ -123,7 +151,11 @@ function Cta({ text, full = false }: { text: string; full?: boolean; }) {
         <a
             href={getDirectWhatsAppLink(D.wa)}
             onClick={trackWhatsAppClick}
-            style={{ backgroundColor: C.cta, color: C.white, boxShadow: `0 4px 28px ${C.ctaGlow}` }}
+            style={{
+                backgroundColor: C.cta,
+                color: C.white,
+                boxShadow: `0 4px 32px ${C.ctaGlow}, 0 1px 0 rgba(255,255,255,0.08) inset`,
+            }}
             className={`group inline-flex items-center justify-center gap-3 font-extrabold text-base md:text-lg px-6 py-5 md:px-8 md:py-4 rounded-xl transition-all duration-150 hover:brightness-110 hover:scale-[1.025] active:scale-[0.98] active:brightness-95 ${full ? "w-full" : ""}`}
         >
             <MessageCircle className="w-5 h-5 md:w-6 md:h-6 group-hover:animate-pulse" />
@@ -133,63 +165,92 @@ function Cta({ text, full = false }: { text: string; full?: boolean; }) {
 }
 
 // ============================================================================
-// CTA LINK (secondary)
-// ============================================================================
-function CtaLink({ text }: { text: string }) {
-    return (
-        <a
-            href={getDirectWhatsAppLink(D.wa)}
-            onClick={trackWhatsAppClick}
-            style={{ color: C.gold, borderColor: C.gold }}
-            className="inline-flex items-center gap-2 font-bold border-b-2 pb-0.5 hover:brightness-125 transition-all"
-        >
-            <MessageCircle className="w-4 h-4" />
-            {text}
-        </a>
-    );
-}
-
-// ============================================================================
-// FAQ ITEM
+// FAQ ITEM (aberto por padrão)
 // ============================================================================
 function FaqItem({ q, a }: { q: string; a: string }) {
-    const [open, setOpen] = useState(false);
+    const [open, setOpen] = useState(true);
     return (
-        <div style={{ borderColor: "rgba(255,255,255,0.08)" }} className="border-b last:border-0 px-1">
+        <div style={{ borderColor: "rgba(255,255,255,0.07)" }} className="border-b last:border-0 px-1">
             <button onClick={() => setOpen(!open)} className="w-full flex items-center justify-between py-6 text-left group">
-                <span style={{ color: C.white }} className="font-bold text-base md:text-lg pr-4 group-hover:brightness-125 transition-all">{q}</span>
+                <span style={{ color: C.white }} className="font-bold text-base md:text-lg pr-4 group-hover:brightness-125 transition-all">
+                    {q}
+                </span>
                 <ChevronDown style={{ color: C.gold }} className={`w-5 h-5 flex-shrink-0 transition-transform duration-200 ${open ? "rotate-180" : ""}`} />
             </button>
             {open && (
-                <div style={{ color: C.gray2 }} className="pb-6 leading-relaxed text-sm md:text-base">{a}</div>
+                <div style={{ color: C.gray2 }} className="pb-6 leading-relaxed text-sm md:text-base">
+                    {a}
+                </div>
             )}
         </div>
     );
 }
 
 // ============================================================================
-// SUGGESTED MESSAGE BOX
+// PROVA SOCIAL
 // ============================================================================
-function SuggestedMessage() {
-    const [copied, setCopied] = useState(false);
-    const handleCopy = () => {
-        navigator.clipboard.writeText(D.suggestedMsg.msg);
-        setCopied(true);
-        setTimeout(() => setCopied(false), 2000);
-    };
+function ProvasSocial() {
+    const depoimentos = [
+        {
+            nome: "M.S. · Concurso Federal · Brasília/DF",
+            texto: "Fui eliminada na heteroidentificação do CNU depois de anos estudando. O Dr. Marcelo analisou meu caso em horas e identificou falha procedimental da banca. Consegui liminar e retornei ao certame.",
+        },
+        {
+            nome: "R.O. · Concurso Estadual · Belo Horizonte/MG",
+            texto: "A motivação da banca era genérica, três linhas apenas. Com o recurso bem fundamentado, a eliminação foi revertida administrativamente. Hoje estou no cargo.",
+        },
+        {
+            nome: "C.A. · Concurso Cebraspe · São Paulo/SP",
+            texto: "Achei que não tinha mais saída. O atendimento foi imediato e o Dr. Marcelo explicou tecnicamente por que minha reprovação tinha base para contestação. Recomendo a qualquer candidato nessa situação.",
+        },
+    ];
+
     return (
-        <div className="rounded-2xl p-5 md:p-6 max-w-lg mx-auto" style={{ backgroundColor: "rgba(232,65,10,0.06)", border: `1px solid rgba(232,65,10,0.25)` }}>
-            <p className="text-sm font-bold mb-3 text-center" style={{ color: C.gray2 }}>{D.suggestedMsg.title}</p>
-            <div className="rounded-xl p-4 mb-3 relative" style={{ backgroundColor: "rgba(255,255,255,0.06)", border: "1px solid rgba(255,255,255,0.1)" }}>
-                <p className="text-base leading-relaxed pr-8" style={{ color: C.white, fontStyle: "italic" }}>
-                    &ldquo;{D.suggestedMsg.msg}&rdquo;
-                </p>
-                <button onClick={handleCopy} className="absolute top-3 right-3 p-2 rounded-lg hover:brightness-125 transition-all" style={{ backgroundColor: "rgba(255,255,255,0.08)" }} aria-label="Copiar mensagem">
-                    {copied ? <Check className="w-4 h-4" style={{ color: C.green }} /> : <Copy className="w-4 h-4" style={{ color: C.gray2 }} />}
-                </button>
-            </div>
-            <Cta text="Enviar Essa Mensagem no WhatsApp" full />
-        </div>
+        <section
+            className="py-14 md:py-20 relative overflow-hidden"
+            style={{ backgroundColor: C.bg2 }}
+        >
+            {/* textura grain local */}
+            <div
+                aria-hidden="true"
+                className="absolute inset-0 pointer-events-none"
+                style={{ backgroundImage: GRAIN_URL, backgroundRepeat: "repeat", backgroundSize: "320px 320px", opacity: 0.025 }}
+            />
+            <Container className="relative z-10">
+                <div className="max-w-4xl mx-auto">
+                    <SectionLabel>Resultados reais</SectionLabel>
+                    <h2 className="text-2xl md:text-3xl font-bold text-center mb-2" style={{ color: C.white, fontFamily: "Georgia, serif" }}>
+                        Candidatos que contestaram a eliminação injusta
+                    </h2>
+                    <GoldDivider />
+                    <div className="grid md:grid-cols-3 gap-5 mt-10">
+                        {depoimentos.map((dep, i) => (
+                            <div
+                                key={i}
+                                className="rounded-2xl p-6 flex flex-col relative overflow-hidden"
+                                style={{
+                                    backgroundColor: "rgba(255,255,255,0.03)",
+                                    border: "1px solid rgba(255,255,255,0.07)",
+                                    boxShadow: "0 2px 24px rgba(0,0,0,0.4)",
+                                }}
+                            >
+                                {/* aspas decorativas */}
+                                <span
+                                    aria-hidden="true"
+                                    className="absolute top-3 right-4 text-5xl leading-none font-serif select-none"
+                                    style={{ color: C.gold, opacity: 0.12 }}
+                                >&rdquo;</span>
+                                <p className="text-sm md:text-base leading-relaxed mb-5 flex-1 relative z-10" style={{ color: C.gray2, fontStyle: "italic" }}>
+                                    &ldquo;{dep.texto}&rdquo;
+                                </p>
+                                <div className="h-px mb-4" style={{ background: `linear-gradient(to right, ${C.gold}, transparent)`, opacity: 0.3 }} />
+                                <p className="text-xs font-bold uppercase tracking-widest" style={{ color: C.gold }}>{dep.nome}</p>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            </Container>
+        </section>
     );
 }
 
@@ -199,26 +260,37 @@ function SuggestedMessage() {
 export default function AdvogadoPage() {
     return (
         <main style={{ backgroundColor: C.bg1, color: C.white }}>
+            <GrainOverlay />
 
             {/* ══════════════════════════════════════════════════════════════ */}
             {/* HERO                                                         */}
             {/* ══════════════════════════════════════════════════════════════ */}
             <section className="relative min-h-0 flex items-center overflow-hidden py-8 md:py-24 lg:py-32" style={{ backgroundColor: C.bg1 }}>
+                {/* Fundo em camadas */}
                 <div className="absolute inset-0 z-0 select-none">
-                    <Image src="/images/hero-scales.png" alt="" fill className="object-cover opacity-[0.05] lg:opacity-10" priority aria-hidden="true" />
+                    <Image src="/images/hero-scales.png" alt="" fill className="object-cover opacity-[0.04] lg:opacity-[0.07]" priority aria-hidden="true" />
                     <div className="absolute inset-0 md:hidden bg-gradient-to-b from-black/80 via-black/30 to-black/80" />
                     <div className="absolute inset-0" style={{ background: `linear-gradient(180deg, ${C.bg1} 0%, transparent 50%, ${C.bg1} 100%)` }} />
+                    {/* glow dourado radial atrás do título */}
+                    <div
+                        aria-hidden="true"
+                        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[320px] rounded-full pointer-events-none"
+                        style={{
+                            background: `radial-gradient(ellipse, rgba(201,162,39,0.07) 0%, transparent 70%)`,
+                            filter: "blur(40px)",
+                        }}
+                    />
                 </div>
 
                 <Container className="relative z-10 w-full px-4 md:px-6">
                     <div className="flex flex-col items-center text-center">
                         <div className="max-w-4xl flex flex-col justify-center items-center">
-                            <div className="inline-flex items-center gap-2 rounded-full px-3 py-1 mb-4 md:mb-6 w-fit" style={{ backgroundColor: "rgba(255,255,255,0.08)", border: `1px solid rgba(255,255,255,0.15)` }}>
-                                <Scale className="w-3.5 h-3.5" style={{ color: C.gold }} />
-                                <span className="text-[10px] md:text-xs font-black uppercase tracking-widest leading-none" style={{ color: C.gray1 }}>{D.hero.badge}</span>
+                            <div className="inline-flex items-center gap-2 rounded-full px-3 py-1 mb-4 md:mb-6 w-fit" style={{ backgroundColor: C.redBg, border: `1px solid ${C.redBorder}` }}>
+                                <AlertTriangle className="w-3.5 h-3.5" style={{ color: C.red }} />
+                                <span className="text-[10px] md:text-xs font-black uppercase tracking-widest leading-none" style={{ color: "rgb(254,202,202)" }}>{D.hero.badge}</span>
                             </div>
 
-                            {/* Micro Avatar - Trust imediato acima da dobra mobile */}
+                            {/* Micro Avatar mobile */}
                             <div className="flex items-center gap-3 mb-5 pr-4 pl-1.5 py-1.5 rounded-full border md:hidden shadow-lg" style={{ backgroundColor: "rgba(255,255,255,0.05)", borderColor: "rgba(255,255,255,0.1)" }}>
                                 <Image src="/images/marcelo/marcelo-hero.jpg" alt="Dr. Marcelo Colen" width={32} height={32} className="rounded-full object-cover w-8 h-8" />
                                 <div className="text-left">
@@ -233,39 +305,30 @@ export default function AdvogadoPage() {
                                 <span style={{ color: C.gold }}>{D.hero.h1_2}</span>
                             </h1>
 
-                            {/* Bloco de Autoridade Acadêmica Compacto Integrado */}
-                            <div className="mb-6 md:mb-8 text-center bg-black/40 backdrop-blur-sm border border-white/10 rounded-2xl p-4 md:p-6 w-full max-w-2xl relative overflow-hidden">
-                                {/* Destaque visual sutil */}
-                                <div className="absolute top-0 left-0 w-1 h-full" style={{ background: `linear-gradient(180deg, ${C.gold}, transparent)` }} />
-                                
-                                <p className="font-bold text-base md:text-xl tracking-wide mb-1" style={{ color: C.white }}>Dr. Marcelo Colen — Advogado OAB/MG</p>
-                                <p className="font-semibold text-sm md:text-base mb-1" style={{ color: C.gold }}>Mestre em Direito pela UFMG • Diretor de Diversidade da OAB/MG</p>
-                                
-                                <p className="text-[13px] md:text-sm leading-relaxed mb-3 mt-3" style={{ color: C.gray1 }}>
-                                    <span className="font-medium" style={{ color: C.white }}>Atuação em Cotas Raciais, Heteroidentificação e Concursos Públicos</span>, com análise jurídica individual do edital, da decisão da banca e dos caminhos possíveis para recurso.
+                            <p className="text-sm md:text-lg lg:text-xl leading-relaxed mb-4 md:mb-5 max-w-[40ch] md:max-w-2xl font-medium" style={{ color: C.gray2 }}>
+                                {D.hero.sub}
+                            </p>
+
+                            {/* Credenciais */}
+                            <div
+                                className="mb-6 md:mb-8 text-center backdrop-blur-sm rounded-2xl p-4 md:p-5 w-full max-w-2xl relative overflow-hidden"
+                                style={{
+                                    background: "rgba(201,162,39,0.06)",
+                                    border: `1px solid rgba(201,162,39,0.18)`,
+                                    boxShadow: "0 0 40px rgba(201,162,39,0.05)",
+                                }}
+                            >
+                                <div className="absolute top-0 left-0 w-[2px] h-full" style={{ background: `linear-gradient(180deg, ${C.gold}, transparent)` }} />
+                                <p className="text-sm md:text-base font-semibold leading-relaxed" style={{ color: C.gray1 }}>
+                                    {D.hero.credentials}
                                 </p>
-
-                                <div className="flex flex-col items-center gap-1.5 mb-4 text-[12px] md:text-[13px]" style={{ color: C.gray2 }}>
-                                    <div className="flex items-center gap-2"><Check className="w-3.5 h-3.5 flex-shrink-0" style={{ color: C.gold }} /> Secretário da Comissão Nac. de Promoção da Igualdade da OAB Federal</div>
-                                    <div className="flex items-center gap-2"><Check className="w-3.5 h-3.5 flex-shrink-0" style={{ color: C.gold }} /> Professor, palestrante e autor publicado</div>
-                                </div>
-
-                                <div className="flex flex-wrap justify-center gap-x-4 gap-y-2 text-[11px] md:text-xs font-bold uppercase tracking-wider mt-2 border-t pt-3" style={{ color: C.gray1, borderColor: "rgba(255,255,255,0.05)" }}>
-                                    <div className="flex items-center gap-1.5"><Check className="w-3 h-3" style={{ color: C.gold }} /> Atendimento nacional</div>
-                                    <div className="flex items-center gap-1.5"><Check className="w-3 h-3" style={{ color: C.gold }} /> Sigilo total</div>
-                                    <div className="flex items-center gap-1.5"><Check className="w-3 h-3" style={{ color: C.gold }} /> Análise rápida</div>
-                                </div>
                             </div>
 
                             <div className="max-w-md w-full flex flex-col items-center space-y-4">
                                 <Cta text={D.hero.cta} full />
-                                <div className="mt-2 group">
-                                    <CtaLink text="Enviar Resultado e Edital" />
-                                </div>
-
-                                <div className="space-y-1 opacity-90 text-center mt-4">
+                                <div className="space-y-1 opacity-90 text-center">
                                     <p className="text-[11px] md:text-sm font-bold" style={{ color: C.gray2 }}>{D.hero.ctaLine1}</p>
-                                    <p className="text-[9px] md:text-[10px] text-gray-400 uppercase tracking-widest font-extrabold flex items-center justify-center">
+                                    <p className="text-[9px] md:text-[10px] text-gray-500 uppercase tracking-widest font-extrabold flex items-center justify-center">
                                         <Lock className="w-3 h-3 mr-1" />
                                         {D.hero.ctaLine2}
                                     </p>
@@ -274,59 +337,137 @@ export default function AdvogadoPage() {
                         </div>
                     </div>
                 </Container>
-                <div className="absolute bottom-0 left-0 right-0 h-px bg-white/5 opacity-50" />
+                <div className="absolute bottom-0 left-0 right-0 h-px" style={{ background: `linear-gradient(to right, transparent, rgba(201,162,39,0.2), transparent)` }} />
             </section>
 
             {/* ══════════════════════════════════════════════════════════════ */}
-            {/* VÍDEO COMPROVAÇÃO                                            */}
+            {/* VÍDEO                                                        */}
             {/* ══════════════════════════════════════════════════════════════ */}
             <VideoSection youtubeId="jAiQi4CgMN0" />
 
             {/* ══════════════════════════════════════════════════════════════ */}
-            {/* AUTORIDADE INSTITUCIONAL E ACADÊMICA                           */}
+            {/* ISSO ACONTECEU COM VOCÊ?                                     */}
             {/* ══════════════════════════════════════════════════════════════ */}
-            <section className="py-12 md:py-20" style={{ backgroundColor: C.bg2, borderBottom: "1px solid rgba(255,255,255,0.03)" }}>
-                <Container>
-                    <div className="max-w-4xl mx-auto flex flex-col md:flex-row items-center md:items-start gap-8 md:gap-12">
-                        <div className="relative flex-shrink-0 md:sticky md:top-10">
-                            <div className="w-40 h-40 md:w-56 md:h-56 rounded-2xl overflow-hidden" style={{ border: `1px solid rgba(255,255,255,0.1)`, boxShadow: `0 10px 40px rgba(0,0,0,0.5)` }}>
-                                <Image src="/images/marcelo/marcelo-hero.jpg" alt="Dr. Marcelo Colen" width={224} height={224} className="object-cover w-full h-full" />
-                            </div>
-                        </div>
-                        <div className="text-center md:text-left">
-                            <h3 className="text-2xl md:text-3xl font-bold mb-2" style={{ color: C.white, fontFamily: "Georgia, serif" }}>{D.trust.name}</h3>
-                            <div className="inline-block px-3 py-1 mb-6 text-[10px] md:text-xs font-bold uppercase tracking-widest rounded-md" style={{ backgroundColor: C.goldSoft, color: C.gold, border: `1px solid ${C.gold}40` }}>Especialista em Direito Antidiscriminatório</div>
-                            
-                            <div className="space-y-4 text-[15px] md:text-base leading-relaxed text-left" style={{ color: C.gray2 }}>
-                                <p>{D.trust.p1}</p>
-                                <p>{D.trust.p2}</p>
-                                <p style={{ color: C.white, borderLeftColor: C.gold, backgroundColor: "rgba(255,255,255,0.03)" }} className="font-medium p-4 rounded-r-lg border-l-4">{D.trust.p3}</p>
-                                <p>{D.trust.p4}</p>
-                            </div>
+            <section className="py-12 md:py-16 relative overflow-hidden" style={{ backgroundColor: C.bg2 }}>
+                <div
+                    aria-hidden="true"
+                    className="absolute inset-0 pointer-events-none"
+                    style={{ backgroundImage: GRAIN_URL, backgroundRepeat: "repeat", backgroundSize: "320px 320px", opacity: 0.025 }}
+                />
+                <Container className="relative z-10">
+                    <div className="max-w-2xl mx-auto">
+                        <SectionLabel>Reconhece essa situação?</SectionLabel>
+                        <h2 className="text-2xl md:text-3xl font-bold text-center mb-2" style={{ color: C.white, fontFamily: "Georgia, serif" }}>
+                            Isso aconteceu com você?
+                        </h2>
+                        <GoldDivider />
+                        <div className="space-y-3 mt-8 mb-10">
+                            {[
+                                "A banca disse 'não atende ao fenótipo' sem explicar o motivo.",
+                                "A avaliação durou poucos minutos ou foi feita por vídeo.",
+                                "Você sempre se identificou como pardo e foi pego de surpresa.",
+                                "Está com medo de perder anos de estudo por uma análise subjetiva.",
+                            ].map((item, i) => (
+                                <div
+                                    key={i}
+                                    className="flex items-start gap-4 rounded-xl p-4"
+                                    style={{
+                                        backgroundColor: C.goldSoft,
+                                        border: "1px solid rgba(201,162,39,0.15)",
+                                        boxShadow: "0 1px 12px rgba(0,0,0,0.3)",
+                                    }}
+                                >
+                                    <div className="w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0 font-bold text-xs mt-0.5" style={{ backgroundColor: C.gold, color: C.bg1 }}>✓</div>
+                                    <p className="text-sm md:text-base font-medium" style={{ color: C.gray1 }}>{item}</p>
+                                </div>
+                            ))}
                         </div>
                     </div>
                 </Container>
             </section>
 
             {/* ══════════════════════════════════════════════════════════════ */}
-            {/* AUTORIDADE (NOVA PARTE)                                      */}
+            {/* PROVA SOCIAL                                                 */}
             {/* ══════════════════════════════════════════════════════════════ */}
-            <section className="py-12 md:py-20" style={{ backgroundColor: C.bg2 }}>
-                <Container>
-                    <div className="max-w-2xl mx-auto scale-[0.98] lg:scale-100">
-                        <div className="flex flex-col items-center justify-center gap-3 mb-10 text-center">
-                            <Scale className="w-10 h-10" style={{ color: C.gold }} />
-                            <h2 className="text-2xl md:text-4xl font-bold px-4 mb-2" style={{ color: C.white, fontFamily: "Georgia, serif" }}>
-                                {D.autoridadeNovo.title}
+            <ProvasSocial />
+
+            {/* ══════════════════════════════════════════════════════════════ */}
+            {/* A BANCA ERRA                                                 */}
+            {/* ══════════════════════════════════════════════════════════════ */}
+            <section
+                className="py-12 md:py-20 relative overflow-hidden"
+                style={{
+                    backgroundColor: C.bg1,
+                    borderTop: "1px solid rgba(255,255,255,0.05)",
+                    borderBottom: "1px solid rgba(255,255,255,0.05)",
+                }}
+            >
+                {/* fundo sutil com linhas de grade */}
+                <div
+                    aria-hidden="true"
+                    className="absolute inset-0 pointer-events-none opacity-[0.03]"
+                    style={{
+                        backgroundImage: `linear-gradient(rgba(201,162,39,0.5) 1px, transparent 1px), linear-gradient(90deg, rgba(201,162,39,0.5) 1px, transparent 1px)`,
+                        backgroundSize: "60px 60px",
+                    }}
+                />
+                {/* glow central */}
+                <div
+                    aria-hidden="true"
+                    className="absolute inset-0 pointer-events-none"
+                    style={{ background: "radial-gradient(ellipse at center, rgba(201,162,39,0.04) 0%, transparent 70%)" }}
+                />
+                <Container className="relative z-10">
+                    <div className="max-w-2xl mx-auto text-center px-4">
+                        <SectionLabel>Por que você pode contestar</SectionLabel>
+                        <h2 className="text-2xl md:text-3xl font-bold mb-2" style={{ color: C.white, fontFamily: "Georgia, serif" }}>
+                            A Banca Erra. E Erra Muito.
+                        </h2>
+                        <GoldDivider />
+                        <p className="text-base md:text-lg leading-relaxed mb-4 mt-8" style={{ color: C.gray1 }}>
+                            O procedimento de heteroidentificação é subjetivo. Todos os dias, candidatos legítimos são eliminados por iluminação ruim, câmera de baixa qualidade ou despreparo dos avaliadores.
+                        </p>
+                        <p className="text-base md:text-lg leading-relaxed" style={{ color: C.gray2 }}>
+                            Erros de procedimento podem fundamentar o recurso. Nós identificamos se houve falha e orientamos sua defesa técnica.
+                        </p>
+                    </div>
+                </Container>
+            </section>
+
+            {/* ══════════════════════════════════════════════════════════════ */}
+            {/* O QUE ANALISAMOS NO SEU CASO                                 */}
+            {/* ══════════════════════════════════════════════════════════════ */}
+            <section className="py-12 md:py-20 relative overflow-hidden" style={{ backgroundColor: C.bg2 }}>
+                <div
+                    aria-hidden="true"
+                    className="absolute inset-0 pointer-events-none"
+                    style={{ backgroundImage: GRAIN_URL, backgroundRepeat: "repeat", backgroundSize: "320px 320px", opacity: 0.025 }}
+                />
+                <Container className="relative z-10">
+                    <div className="max-w-2xl mx-auto">
+                        <div className="flex flex-col items-center justify-center gap-2 mb-2 text-center">
+                            <Scale className="w-9 h-9" style={{ color: C.gold, opacity: 0.85 }} />
+                            <SectionLabel>Análise técnica</SectionLabel>
+                            <h2 className="text-2xl md:text-4xl font-bold px-4" style={{ color: C.white, fontFamily: "Georgia, serif" }}>
+                                {D.analiseCaso.title}
                             </h2>
-                            <p className="text-sm md:text-lg font-medium" style={{ color: C.gray2 }}>
-                                {D.autoridadeNovo.desc}
-                            </p>
                         </div>
+                        <GoldDivider />
+                        <p className="text-sm md:text-base font-medium text-center mt-3 mb-8" style={{ color: C.gray2 }}>
+                            {D.analiseCaso.desc}
+                        </p>
 
                         <div className="space-y-3 mb-8">
-                            {D.autoridadeNovo.items.map((item, i) => (
-                                <div key={i} className="flex items-center gap-4 rounded-xl p-4 transition-colors hover:bg-white/5" style={{ border: `1px solid rgba(201,162,39,0.2)`, backgroundColor: C.goldSoft }}>
+                            {D.analiseCaso.items.map((item, i) => (
+                                <div
+                                    key={i}
+                                    className="flex items-center gap-4 rounded-xl p-4 transition-colors hover:bg-white/[0.03]"
+                                    style={{
+                                        border: `1px solid rgba(201,162,39,0.15)`,
+                                        backgroundColor: C.goldSoft,
+                                        boxShadow: "0 1px 10px rgba(0,0,0,0.3)",
+                                    }}
+                                >
                                     <div className="w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0 font-bold text-xs" style={{ backgroundColor: C.gold, color: C.bg1 }}>
                                         ✓
                                     </div>
@@ -336,46 +477,28 @@ export default function AdvogadoPage() {
                                 </div>
                             ))}
                         </div>
+
                     </div>
                 </Container>
             </section>
 
             {/* ══════════════════════════════════════════════════════════════ */}
-            {/* BLOCO DE DOR                                                 */}
+            {/* POR QUE AGIR RÁPIDO                                         */}
             {/* ══════════════════════════════════════════════════════════════ */}
-            <section className="py-12 md:py-20 relative" style={{ backgroundColor: C.bg1 }}>
-                <div className="absolute left-0 top-0 bottom-0 w-1" style={{ background: `linear-gradient(180deg, transparent, ${C.gold}, transparent)` }} />
-                <Container>
-                    <div className="max-w-2xl mx-auto">
-                        <div className="flex items-center justify-center lg:justify-start gap-4 mb-8">
-                            <ShieldCheck className="w-8 h-8 md:w-10 md:h-10" style={{ color: C.gold }} />
-                            <h2 className="text-2xl md:text-3xl font-bold text-center lg:text-left" style={{ color: C.white, fontFamily: "Georgia, serif" }}>
-                                {D.dor.title}
-                            </h2>
-                        </div>
-
-                        <div className="space-y-5 mb-10">
-                            {D.dor.p.map((p, i) => (
-                                <p
-                                    key={i}
-                                    className={`text-base md:text-lg leading-relaxed ${i === 0 ? "font-bold text-lg md:text-xl pl-4 py-2 rounded-r-lg" : ""}`}
-                                    style={i === 0 ? { color: C.gold, backgroundColor: C.goldSoft, borderLeft: `4px solid ${C.gold}` } : { color: C.gray2 }}
-                                >
-                                    {p}
-                                </p>
-                            ))}
-                        </div>
-
-                        <Cta text={D.dor.cta} full />
-                    </div>
-                </Container>
-            </section>
-
-            {/* ══════════════════════════════════════════════════════════════ */}
-            {/* PRAZO CURTO E URGÊNCIA                                       */}
-            {/* ══════════════════════════════════════════════════════════════ */}
-            <section className="py-12 md:py-20" style={{ background: `linear-gradient(135deg, rgba(127,29,29,0.15) 0%, rgba(127,29,29,0.08) 50%, rgba(127,29,29,0.15) 100%)`, borderTop: `1px solid ${C.redBorder}`, borderBottom: `1px solid ${C.redBorder}` }}>
-                <Container>
+            <section
+                className="py-12 md:py-20 relative overflow-hidden"
+                style={{
+                    background: `linear-gradient(135deg, rgba(127,29,29,0.18) 0%, rgba(127,29,29,0.07) 50%, rgba(127,29,29,0.18) 100%)`,
+                    borderTop: `1px solid ${C.redBorder}`,
+                    borderBottom: `1px solid ${C.redBorder}`,
+                }}
+            >
+                <div
+                    aria-hidden="true"
+                    className="absolute inset-0 pointer-events-none"
+                    style={{ background: "radial-gradient(ellipse at center, rgba(239,68,68,0.04) 0%, transparent 70%)" }}
+                />
+                <Container className="relative z-10">
                     <div className="max-w-2xl mx-auto text-center px-4">
                         <Clock className="w-10 h-10 md:w-12 md:h-12 mx-auto mb-6 animate-pulse" style={{ color: "#f87171" }} />
                         <h2 className="text-2xl md:text-3xl font-bold mb-6" style={{ color: C.white, fontFamily: "Georgia, serif" }}>
@@ -390,29 +513,107 @@ export default function AdvogadoPage() {
             </section>
 
             {/* ══════════════════════════════════════════════════════════════ */}
-            {/* PASSOS — "Como Funciona"                                     */}
+            {/* COMO FUNCIONA                                                */}
             {/* ══════════════════════════════════════════════════════════════ */}
             <section className="py-12 md:py-24" style={{ backgroundColor: C.bg1 }}>
                 <Container>
-                    <h2 className="text-2xl md:text-4xl font-bold text-center mb-12 md:mb-16 px-4" style={{ color: C.white, fontFamily: "Georgia, serif" }}>
+                    <SectionLabel>Passo a passo</SectionLabel>
+                    <h2 className="text-2xl md:text-4xl font-bold text-center mb-2 px-4" style={{ color: C.white, fontFamily: "Georgia, serif" }}>
                         {D.steps.title}
                     </h2>
+                    <GoldDivider />
 
-                    <div className="grid md:grid-cols-3 gap-6 max-w-4xl mx-auto mb-10">
+                    <div className="grid md:grid-cols-3 gap-6 max-w-4xl mx-auto mb-10 mt-12">
                         {D.steps.items.map((step) => (
-                            <div key={step.n} className="relative rounded-2xl p-6 text-center transition-all" style={{ backgroundColor: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.08)" }}>
-                                <div className="absolute -top-4 left-1/2 -translate-x-1/2 w-8 h-8 rounded-full flex items-center justify-center font-extrabold text-sm" style={{ backgroundColor: C.gold, color: C.bg1 }}>
+                            <div
+                                key={step.n}
+                                className="relative rounded-2xl p-6 text-center transition-all"
+                                style={{
+                                    backgroundColor: "rgba(255,255,255,0.03)",
+                                    border: "1px solid rgba(255,255,255,0.07)",
+                                    boxShadow: "0 4px 32px rgba(0,0,0,0.4), 0 0 0 1px rgba(201,162,39,0.04)",
+                                }}
+                            >
+                                <div
+                                    className="absolute -top-4 left-1/2 -translate-x-1/2 w-8 h-8 rounded-full flex items-center justify-center font-extrabold text-sm"
+                                    style={{ backgroundColor: C.gold, color: C.bg1, boxShadow: `0 0 16px rgba(201,162,39,0.4)` }}
+                                >
                                     {step.n}
                                 </div>
-                                <step.Icon className="w-8 h-8 mx-auto mb-4 mt-4" style={{ color: C.gold }} />
+                                <step.Icon className="w-8 h-8 mx-auto mb-4 mt-4" style={{ color: C.gold, opacity: 0.85 }} />
                                 <h3 className="text-lg font-bold mb-2" style={{ color: C.white }}>{step.t}</h3>
                                 <p className="text-sm leading-relaxed" style={{ color: C.gray2 }}>{step.d}</p>
                             </div>
                         ))}
                     </div>
 
-                    <div className="text-center">
-                        <Cta text={D.steps.cta} />
+                </Container>
+            </section>
+
+            {/* ══════════════════════════════════════════════════════════════ */}
+            {/* DR. MARCELO                                                  */}
+            {/* ══════════════════════════════════════════════════════════════ */}
+            <section
+                className="py-14 md:py-20 relative overflow-hidden"
+                style={{ backgroundColor: C.bg2, borderTop: "1px solid rgba(255,255,255,0.05)" }}
+            >
+                <div
+                    aria-hidden="true"
+                    className="absolute inset-0 pointer-events-none"
+                    style={{ backgroundImage: GRAIN_URL, backgroundRepeat: "repeat", backgroundSize: "320px 320px", opacity: 0.025 }}
+                />
+                {/* glow dourado de fundo */}
+                <div
+                    aria-hidden="true"
+                    className="absolute left-0 top-0 w-64 h-64 pointer-events-none"
+                    style={{ background: "radial-gradient(circle, rgba(201,162,39,0.05) 0%, transparent 70%)", filter: "blur(30px)" }}
+                />
+                <Container className="relative z-10">
+                    <div
+                        className="max-w-2xl mx-auto rounded-2xl p-6 md:p-10 flex flex-col md:flex-row items-center gap-8"
+                        style={{
+                            background: "rgba(255,255,255,0.02)",
+                            border: "1px solid rgba(201,162,39,0.15)",
+                            boxShadow: "0 4px 40px rgba(0,0,0,0.5)",
+                        }}
+                    >
+                        <div className="flex-shrink-0">
+                            <div className="relative">
+                                <Image
+                                    src="/images/marcelo/marcelo-hero.jpg"
+                                    alt="Dr. Marcelo Colen"
+                                    width={160}
+                                    height={160}
+                                    className="rounded-xl object-cover w-28 h-28 md:w-36 md:h-36"
+                                    style={{ boxShadow: `0 0 0 2px rgba(201,162,39,0.3), 0 8px 32px rgba(0,0,0,0.5)` }}
+                                />
+                                {/* badge OAB */}
+                                <div
+                                    className="absolute -bottom-2 -right-2 px-2 py-0.5 rounded-full text-[9px] font-black uppercase tracking-widest"
+                                    style={{ backgroundColor: C.gold, color: C.bg1 }}
+                                >
+                                    OAB/MG
+                                </div>
+                            </div>
+                        </div>
+                        <div className="relative">
+                            {/* aspas decorativas grandes */}
+                            <span
+                                aria-hidden="true"
+                                className="absolute -top-4 -left-2 text-7xl leading-none font-serif select-none"
+                                style={{ color: C.gold, opacity: 0.15 }}
+                            >&ldquo;</span>
+                            <p className="text-base md:text-lg leading-relaxed italic mb-5 relative z-10" style={{ color: C.gray1 }}>
+                                Minha missão não é apenas escrever recursos. É garantir que a subjetividade de uma banca não destrua o mérito de quem realmente pertence às cotas.
+                            </p>
+                            <div className="h-px mb-4" style={{ background: `linear-gradient(to right, ${C.gold}, transparent)`, opacity: 0.3 }} />
+                            <p className="font-bold text-sm" style={{ color: C.gold }}>
+                                Dr. Marcelo Colen
+                            </p>
+                            <p className="text-xs mt-1" style={{ color: C.gray3 }}>
+                                Advogado · OAB/MG · Direito Antidiscriminatório e Concursos Públicos
+                            </p>
+                        </div>
                     </div>
                 </Container>
             </section>
@@ -420,48 +621,98 @@ export default function AdvogadoPage() {
             {/* ══════════════════════════════════════════════════════════════ */}
             {/* FAQ                                                          */}
             {/* ══════════════════════════════════════════════════════════════ */}
-            <section className="py-12 md:py-24" style={{ backgroundColor: C.bg2 }}>
+            <section className="py-12 md:py-24" style={{ backgroundColor: C.bg1 }}>
                 <Container>
                     <div className="max-w-2xl mx-auto">
-                        <h2 className="text-2xl md:text-3xl font-bold mb-10 text-center" style={{ color: C.white, fontFamily: "Georgia, serif" }}>Perguntas Frequentes</h2>
-                        <div className="rounded-2xl p-2 md:p-6" style={{ backgroundColor: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.08)" }}>
+                        <SectionLabel>Tire suas dúvidas</SectionLabel>
+                        <h2 className="text-2xl md:text-3xl font-bold mb-2 text-center" style={{ color: C.white, fontFamily: "Georgia, serif" }}>Perguntas Frequentes</h2>
+                        <GoldDivider />
+                        <div
+                            className="rounded-2xl p-2 md:p-6 mt-8"
+                            style={{
+                                backgroundColor: "rgba(255,255,255,0.02)",
+                                border: "1px solid rgba(255,255,255,0.07)",
+                                boxShadow: "0 4px 32px rgba(0,0,0,0.4)",
+                            }}
+                        >
                             {D.faq.map((item, i) => (
                                 <FaqItem key={i} q={item.q} a={item.a} />
                             ))}
                         </div>
-                        <p className="text-xs text-center mt-6 italic" style={{ color: C.gray3 }}>
-                            {D.hero.disclaimer}
-                        </p>
                     </div>
                 </Container>
             </section>
 
             {/* ══════════════════════════════════════════════════════════════ */}
-            {/* FOOTER CTA FINAL                                             */}
+            {/* CTA FINAL                                                    */}
             {/* ══════════════════════════════════════════════════════════════ */}
-            <section className="py-12" style={{ backgroundColor: C.bg1, borderTop: "1px solid rgba(255,255,255,0.05)" }}>
-                <Container>
+            <section
+                className="py-14 relative overflow-hidden"
+                style={{ backgroundColor: C.bg2, borderTop: "1px solid rgba(255,255,255,0.05)" }}
+            >
+                <div
+                    aria-hidden="true"
+                    className="absolute inset-0 pointer-events-none"
+                    style={{ backgroundImage: GRAIN_URL, backgroundRepeat: "repeat", backgroundSize: "320px 320px", opacity: 0.025 }}
+                />
+                <div
+                    aria-hidden="true"
+                    className="absolute inset-0 pointer-events-none"
+                    style={{ background: "radial-gradient(ellipse at center bottom, rgba(201,162,39,0.04) 0%, transparent 65%)" }}
+                />
+                <Container className="relative z-10">
                     <div className="max-w-lg mx-auto text-center">
-                        <p className="text-xl md:text-2xl font-bold mb-6" style={{ color: C.white, fontFamily: "Georgia, serif" }}>
-                            Não deixe o seu direito ser negado indevidamente.
+                        <p className="text-xl md:text-2xl font-bold mb-3" style={{ color: C.white, fontFamily: "Georgia, serif" }}>
+                            Não deixe o prazo passar.
+                        </p>
+                        <p className="text-sm md:text-base mb-8" style={{ color: C.gray2 }}>
+                            Manda o resultado e o edital agora. A análise é feita em horas.
                         </p>
 
-                        <div className="mb-8 p-6 rounded-2xl text-left" style={{ backgroundColor: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.1)" }}>
-                            <p className="font-bold mb-4 text-sm md:text-base text-center" style={{ color: C.gold }}>Envie agora para análise:</p>
+                        <div
+                            className="mb-6 p-6 rounded-2xl text-left"
+                            style={{
+                                backgroundColor: "rgba(255,255,255,0.03)",
+                                border: "1px solid rgba(255,255,255,0.08)",
+                                boxShadow: "0 2px 20px rgba(0,0,0,0.3)",
+                            }}
+                        >
                             <div className="space-y-3 max-w-xs mx-auto">
-                                {["Resultado da heteroidentificação", "Edital do concurso", "Prazo final do recurso"].map((item, i) => (
+                                {[
+                                    "Print ou PDF do resultado da heteroidentificação",
+                                    "Edital do concurso",
+                                    "Prazo final para recurso (data e horário)",
+                                ].map((item, i) => (
                                     <div key={i} className="flex gap-3 items-center">
                                         <div className="w-5 h-5 rounded-full flex items-center justify-center flex-shrink-0" style={{ backgroundColor: C.gold, color: C.bg1 }}>
                                             <Check className="w-3 h-3 font-bold" />
                                         </div>
-                                        <span className="text-sm md:text-base font-medium text-gray-200">{item}</span>
+                                        <span className="text-sm md:text-base font-medium" style={{ color: C.gray1 }}>{item}</span>
                                     </div>
                                 ))}
                             </div>
                         </div>
 
-                        <Cta text="Falar com Advogado" full />
-                        <p className="text-xs mt-6" style={{ color: C.gray3 }}>
+                        <div
+                            className="mb-6 p-4 rounded-xl"
+                            style={{
+                                backgroundColor: "rgba(255,255,255,0.03)",
+                                border: "1px solid rgba(255,255,255,0.07)",
+                            }}
+                        >
+                            <p className="text-xs text-center mb-2" style={{ color: C.gray3 }}>
+                                Não sabe o que escrever? Copie e envie:
+                            </p>
+                            <p className="text-sm font-bold italic text-center" style={{ color: C.gray2 }}>
+                                &ldquo;Olá doutor, fui indeferido na heteroidentificação hoje. Posso te mandar meu resultado?&rdquo;
+                            </p>
+                        </div>
+
+                        <Cta text="Enviar Meu Caso no WhatsApp" full />
+                        <p className="text-xs mt-6 italic" style={{ color: C.gray3 }}>
+                            {D.hero.disclaimer}
+                        </p>
+                        <p className="text-xs mt-2" style={{ color: C.gray3 }}>
                             © 2026 Marcelo Colen Advogados · OAB/MG
                         </p>
                     </div>
@@ -481,30 +732,25 @@ function VideoSection({ youtubeId, iframeSrc, mp4Src }: { youtubeId?: string; if
     return (
         <section className="py-12 md:py-24" style={{ backgroundColor: C.bg1 }}>
             <div className="max-w-[720px] mx-auto px-6">
-                <p className="text-[10px] md:text-xs uppercase tracking-[0.2em] text-center mb-3" style={{ color: C.gold }}>
-                    Mensagem do Especialista
-                </p>
-                <h2 className="text-2xl md:text-3xl font-bold text-center mb-10 leading-tight md:leading-snug" style={{ color: C.white, fontFamily: "Georgia, serif" }}>
-                    Entenda em 2 minutos por que você ainda pode contestar o resultado.
+                <SectionLabel>Mensagem do Especialista</SectionLabel>
+                <h2 className="text-2xl md:text-3xl font-bold text-center mb-2 leading-tight md:leading-snug" style={{ color: C.white, fontFamily: "Georgia, serif" }}>
+                    Entenda em 2 minutos por que você ainda pode contestar.
                 </h2>
-                <div className="relative w-full rounded-2xl overflow-hidden scale-[1.02] md:scale-100" style={{ boxShadow: "0 12px 60px rgba(0,0,0,0.65)", border: "1px solid rgba(255,255,255,0.1)" }}>
+                <GoldDivider />
+                <div
+                    className="relative w-full rounded-2xl overflow-hidden mt-10"
+                    style={{
+                        boxShadow: "0 16px 64px rgba(0,0,0,0.7), 0 0 0 1px rgba(201,162,39,0.12)",
+                        border: "1px solid rgba(255,255,255,0.08)",
+                    }}
+                >
                     {MP4_SRC ? (
                         <video src={MP4_SRC} controls playsInline preload="none" className="w-full object-cover" />
                     ) : (
                         <LiteYouTubeEmbed id={YOUTUBE_ID} title="Vídeo de Análise da Situação" poster="maxresdefault" wrapperClass="yt-lite" />
                     )}
                 </div>
-                <p className="text-center text-sm md:text-lg mt-8 mb-6 leading-relaxed" style={{ color: C.gray2 }}>
-                    Ficou com alguma dúvida? Você pode mandar uma mensagem agora — a análise inicial é gratuita.
-                </p>
-                <div className="flex justify-center">
-                    <Cta text="Quero Analisar Meu Caso Agora" />
-                </div>
-                <p className="text-center text-[10px] md:text-xs mt-4 italic opacity-80" style={{ color: C.gray3 }}>
-                    Cada caso é avaliado individualmente — sem promessa de resultado.
-                </p>
             </div>
         </section>
     );
 }
-
