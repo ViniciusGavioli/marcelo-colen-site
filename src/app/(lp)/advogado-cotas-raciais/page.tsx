@@ -23,40 +23,30 @@ import {
 import { Container } from "@/components/layout";
 import { getDirectWhatsAppLink } from "@/lib/whatsapp";
 import { trackWhatsAppClick } from "@/lib/analytics";
-import { useState, useEffect, useRef } from "react";
+import { useState } from "react";
 
 // ============================================================================
 // CORES
 // ============================================================================
 const C = {
-    // Light editorial palette
-    bg1: "#F6F2EB",       // off-white quente
-    bg2: "#FFFFFF",        // branco puro
-    bg3: "#EDE8DF",        // off-white mais escuro
-    navy: "#0B1730",       // navy profundo (destaques, urgência)
-    bronze: "#8C6A43",     // bronze fosco (eyebrows, detalhes)
-    bronzeSoft: "rgba(140,106,67,0.10)",
-    bronzeMid: "rgba(140,106,67,0.18)",
-    text: "#1C2430",       // grafite escuro (texto principal)
-    textMid: "#4A5568",    // grafite médio
-    textLight: "#718096",  // grafite claro
-    hairline: "rgba(11,23,48,0.08)", // bordas finas
-    cta: "#10b981",        // verde WhatsApp mais sóbrio
-    ctaHover: "#059669",
-    ctaGlow: "rgba(16,185,129,0.18)",
-    green: "#10b981",
-    greenGlow: "rgba(16,185,129,0.18)",
-    // Aliases para compatibilidade (evitar quebrar refs)
-    gold: "#8C6A43",
-    goldSoft: "rgba(140,106,67,0.08)",
-    goldMid: "rgba(140,106,67,0.15)",
-    white: "#FFFFFF",
-    gray1: "#1C2430",
-    gray2: "#4A5568",
-    gray3: "#718096",
-    red: "#0B1730",
-    redBg: "rgba(11,23,48,0.05)",
-    redBorder: "rgba(11,23,48,0.12)",
+    bg1: "#0a0a0a",
+    bg2: "#111111",
+    bg3: "#181818",
+    gold: "#c9a227",
+    goldSoft: "rgba(201,162,39,0.10)",
+    goldMid: "rgba(201,162,39,0.18)",
+    white: "#ffffff",
+    gray1: "rgba(255,255,255,0.92)",
+    gray2: "rgba(255,255,255,0.7)",
+    gray3: "rgba(255,255,255,0.45)",
+    red: "#ef4444",
+    redBg: "rgba(239,68,68,0.08)",
+    redBorder: "rgba(239,68,68,0.25)",
+    cta: "#25D366",
+    ctaHover: "#2BE673",
+    ctaGlow: "rgba(37,211,102,0.25)",
+    green: "#25D366",
+    greenGlow: "rgba(37,211,102,0.25)",
 };
 
 // SVG grain texture como data URL
@@ -164,7 +154,7 @@ function Cta({ text, full = false }: { text: string; full?: boolean; }) {
             style={{
                 backgroundColor: C.cta,
                 color: C.white,
-                boxShadow: `0 10px 24px ${C.ctaGlow}`,
+                boxShadow: `0 4px 32px ${C.ctaGlow}, 0 1px 0 rgba(255,255,255,0.08) inset`,
             }}
             className={`group inline-flex items-center justify-center gap-3 font-extrabold text-base md:text-lg px-6 py-5 md:px-8 md:py-4 rounded-xl transition-all duration-150 hover:brightness-110 hover:scale-[1.025] active:scale-[0.98] active:brightness-95 ${full ? "w-full" : ""}`}
         >
@@ -180,9 +170,9 @@ function Cta({ text, full = false }: { text: string; full?: boolean; }) {
 function FaqItem({ q, a }: { q: string; a: string }) {
     const [open, setOpen] = useState(false);
     return (
-        <div style={{ borderColor: "rgba(11,23,48,0.08)" }} className="border-b last:border-0 px-1">
+        <div style={{ borderColor: "rgba(255,255,255,0.07)" }} className="border-b last:border-0 px-1">
             <button onClick={() => setOpen(!open)} className="w-full flex items-center justify-between py-6 text-left group">
-                <span style={{ color: C.text }} className="font-bold text-base md:text-lg pr-4 group-hover:brightness-125 transition-all">
+                <span style={{ color: C.white }} className="font-bold text-base md:text-lg pr-4 group-hover:brightness-125 transition-all">
                     {q}
                 </span>
                 <ChevronDown style={{ color: C.gold }} className={`w-5 h-5 flex-shrink-0 transition-transform duration-200 ${open ? "rotate-180" : ""}`} />
@@ -229,7 +219,7 @@ function ProvasSocial() {
             <Container className="relative z-10">
                 <div className="max-w-4xl mx-auto">
                     <SectionLabel>Depoimentos</SectionLabel>
-                    <h2 className="text-2xl md:text-3xl font-bold text-center mb-2" style={{ color: C.text, fontFamily: "'Cormorant Garamond', Georgia, serif" }}>
+                    <h2 className="text-2xl md:text-3xl font-bold text-center mb-2" style={{ color: C.white, fontFamily: "'Cormorant Garamond', Georgia, serif" }}>
                         Candidatos que contestaram a eliminação injusta
                     </h2>
                     <GoldDivider />
@@ -239,9 +229,9 @@ function ProvasSocial() {
                                 key={i}
                                 className="rounded-2xl p-6 flex flex-col relative overflow-hidden"
                                 style={{
-                                    backgroundColor: "rgba(255,255,255,0.78)",
-                                    border: "1px solid rgba(11,23,48,0.08)",
-                                    boxShadow: "0 12px 40px rgba(11,23,48,0.08)",
+                                    backgroundColor: "rgba(255,255,255,0.03)",
+                                    border: "1px solid rgba(255,255,255,0.07)",
+                                    boxShadow: "0 2px 24px rgba(0,0,0,0.4)",
                                 }}
                             >
                                 {/* aspas decorativas */}
@@ -265,51 +255,12 @@ function ProvasSocial() {
 }
 
 // ============================================================================
-// SCROLL REVEAL ANIMATION
-// ============================================================================
-function useScrollReveal() {
-    const ref = useRef<HTMLDivElement>(null);
-    useEffect(() => {
-        const el = ref.current;
-        if (!el) return;
-        const observer = new IntersectionObserver(
-            ([entry]) => {
-                if (entry.isIntersecting) {
-                    el.style.opacity = "1";
-                    el.style.transform = "translateY(0)";
-                    observer.unobserve(el);
-                }
-            },
-            { threshold: 0.1 }
-        );
-        observer.observe(el);
-        return () => observer.disconnect();
-    }, []);
-    return ref;
-}
-
-function Reveal({ children, delay = 0 }: { children: React.ReactNode; delay?: number }) {
-    const ref = useScrollReveal();
-    return (
-        <div
-            ref={ref}
-            style={{
-                opacity: 0,
-                transform: "translateY(24px)",
-                transition: `opacity 0.7s cubic-bezier(0.16,1,0.3,1) ${delay}s, transform 0.7s cubic-bezier(0.16,1,0.3,1) ${delay}s`,
-            }}
-        >
-            {children}
-        </div>
-    );
-}
-
-// ============================================================================
 // PAGE
 // ============================================================================
 export default function AdvogadoPage() {
     return (
-        <main style={{ backgroundColor: C.bg1, color: C.text }}>
+        <main style={{ backgroundColor: C.bg1, color: C.white }}>
+            <GrainOverlay />
 
             {/* ══════════════════════════════════════════════════════════════ */}
             {/* HERO                                                         */}
@@ -362,7 +313,7 @@ export default function AdvogadoPage() {
                         </div>
 
                         {/* Credencial inline com avatar */}
-                        <div className="flex items-center gap-2.5 mt-8 md:mt-10 px-4 py-2 rounded-full" style={{ backgroundColor: "rgba(11,23,48,0.03)", border: "1px solid rgba(11,23,48,0.08)" }}>
+                        <div className="flex items-center gap-2.5 mt-8 md:mt-10 px-4 py-2 rounded-full" style={{ backgroundColor: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.08)" }}>
                             <Image src="/images/marcelo/marcelo-hero.jpg" alt="Dr. Marcelo Colen" width={24} height={24} className="rounded-full object-cover w-6 h-6" />
                             <span className="text-[11px] md:text-xs uppercase tracking-wider font-semibold" style={{ color: C.gray2 }}>
                                 Dr. Marcelo Colen · Mestre UFMG · OAB/MG
@@ -376,9 +327,8 @@ export default function AdvogadoPage() {
 
             {/* ══════════════════════════════════════════════════════════════ */}
             {/* VÍDEO                                                        */}
-            {/* Wrap sections with Reveal for scroll animations */}
             {/* ══════════════════════════════════════════════════════════════ */}
-            <Reveal><VideoSection youtubeId="jAiQi4CgMN0" /></Reveal>
+            <VideoSection youtubeId="jAiQi4CgMN0" />
 
             {/* ══════════════════════════════════════════════════════════════ */}
             {/* ISSO ACONTECEU COM VOCÊ?                                     */}
@@ -392,7 +342,7 @@ export default function AdvogadoPage() {
                 <Container className="relative z-10">
                     <div className="max-w-2xl mx-auto">
                         <SectionLabel>Reconhece essa situação?</SectionLabel>
-                        <h2 className="text-2xl md:text-3xl font-bold text-center mb-2" style={{ color: C.text, fontFamily: "'Cormorant Garamond', Georgia, serif" }}>
+                        <h2 className="text-2xl md:text-3xl font-bold text-center mb-2" style={{ color: C.white, fontFamily: "'Cormorant Garamond', Georgia, serif" }}>
                             Isso aconteceu com você?
                         </h2>
                         <GoldDivider />
@@ -409,7 +359,7 @@ export default function AdvogadoPage() {
                                     style={{
                                         backgroundColor: C.goldSoft,
                                         border: "1px solid rgba(201,162,39,0.15)",
-                                        boxShadow: "0 2px 12px rgba(11,23,48,0.05)",
+                                        boxShadow: "0 1px 12px rgba(0,0,0,0.3)",
                                     }}
                                 >
                                     <div className="w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0 font-bold text-xs mt-0.5" style={{ backgroundColor: C.gold, color: C.bg1 }}>✓</div>
@@ -424,7 +374,7 @@ export default function AdvogadoPage() {
             {/* ══════════════════════════════════════════════════════════════ */}
             {/* PROVA SOCIAL                                                 */}
             {/* ══════════════════════════════════════════════════════════════ */}
-            <Reveal><ProvasSocial /></Reveal>
+            <ProvasSocial />
 
             {/* CTA intermediário após depoimentos */}
             <section className="py-8 md:py-12" style={{ backgroundColor: C.bg1 }}>
@@ -439,11 +389,11 @@ export default function AdvogadoPage() {
             {/* A BANCA ERRA                                                 */}
             {/* ══════════════════════════════════════════════════════════════ */}
             <section
-                className="py-16 md:py-28 relative overflow-hidden"
+                className="py-12 md:py-20 relative overflow-hidden"
                 style={{
                     backgroundColor: C.bg1,
-                    borderTop: "1px solid rgba(11,23,48,0.06)",
-                    borderBottom: "1px solid rgba(11,23,48,0.06)",
+                    borderTop: "1px solid rgba(255,255,255,0.05)",
+                    borderBottom: "1px solid rgba(255,255,255,0.05)",
                 }}
             >
                 {/* fundo sutil com linhas de grade */}
@@ -464,7 +414,7 @@ export default function AdvogadoPage() {
                 <Container className="relative z-10">
                     <div className="max-w-2xl mx-auto text-center px-4">
                         <SectionLabel>Por que você pode contestar</SectionLabel>
-                        <h2 className="text-2xl md:text-3xl font-bold mb-2" style={{ color: C.text, fontFamily: "'Cormorant Garamond', Georgia, serif" }}>
+                        <h2 className="text-2xl md:text-3xl font-bold mb-2" style={{ color: C.white, fontFamily: "'Cormorant Garamond', Georgia, serif" }}>
                             A Banca Erra. E Erra Muito.
                         </h2>
                         <GoldDivider />
@@ -481,7 +431,7 @@ export default function AdvogadoPage() {
             {/* ══════════════════════════════════════════════════════════════ */}
             {/* O QUE ANALISAMOS NO SEU CASO                                 */}
             {/* ══════════════════════════════════════════════════════════════ */}
-            <section className="py-16 md:py-28 relative overflow-hidden" style={{ backgroundColor: C.bg2 }}>
+            <section className="py-12 md:py-20 relative overflow-hidden" style={{ backgroundColor: C.bg2 }}>
                 <div
                     aria-hidden="true"
                     className="absolute inset-0 pointer-events-none"
@@ -492,7 +442,7 @@ export default function AdvogadoPage() {
                         <div className="flex flex-col items-center justify-center gap-2 mb-2 text-center">
                             <Scale className="w-9 h-9" style={{ color: C.gold, opacity: 0.85 }} />
                             <SectionLabel>Análise técnica</SectionLabel>
-                            <h2 className="text-2xl md:text-4xl font-bold px-4" style={{ color: C.text, fontFamily: "'Cormorant Garamond', Georgia, serif" }}>
+                            <h2 className="text-2xl md:text-4xl font-bold px-4" style={{ color: C.white, fontFamily: "'Cormorant Garamond', Georgia, serif" }}>
                                 {D.analiseCaso.title}
                             </h2>
                         </div>
@@ -505,11 +455,11 @@ export default function AdvogadoPage() {
                             {D.analiseCaso.items.map((item, i) => (
                                 <div
                                     key={i}
-                                    className="flex items-center gap-4 rounded-xl p-4 transition-colors hover:bg-black/[0.02]"
+                                    className="flex items-center gap-4 rounded-xl p-4 transition-colors hover:bg-white/[0.03]"
                                     style={{
                                         border: `1px solid rgba(201,162,39,0.15)`,
                                         backgroundColor: C.goldSoft,
-                                        boxShadow: "0 2px 12px rgba(11,23,48,0.05)",
+                                        boxShadow: "0 1px 10px rgba(0,0,0,0.3)",
                                     }}
                                 >
                                     <div className="w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0 font-bold text-xs" style={{ backgroundColor: C.gold, color: C.bg1 }}>
@@ -530,11 +480,11 @@ export default function AdvogadoPage() {
             {/* POR QUE AGIR RÁPIDO                                         */}
             {/* ══════════════════════════════════════════════════════════════ */}
             <section
-                className="py-16 md:py-28 relative overflow-hidden"
+                className="py-12 md:py-20 relative overflow-hidden"
                 style={{
                     backgroundColor: "#0B1730",
-                    borderTop: "1px solid rgba(11,23,48,0.08)",
-                    borderBottom: "1px solid rgba(11,23,48,0.08)",
+                    borderTop: "1px solid rgba(255,255,255,0.08)",
+                    borderBottom: "1px solid rgba(255,255,255,0.08)",
                 }}
             >
                 <div
@@ -545,7 +495,7 @@ export default function AdvogadoPage() {
                 <Container className="relative z-10">
                     <div className="max-w-2xl mx-auto text-center px-4">
                         <Clock className="w-10 h-10 md:w-12 md:h-12 mx-auto mb-6" style={{ color: C.gold }} />
-                        <h2 className="text-2xl md:text-3xl font-bold mb-6" style={{ color: C.text, fontFamily: "'Cormorant Garamond', Georgia, serif" }}>
+                        <h2 className="text-2xl md:text-3xl font-bold mb-6" style={{ color: C.white, fontFamily: "'Cormorant Garamond', Georgia, serif" }}>
                             {D.urg.title}
                         </h2>
                         <p className="text-base md:text-lg leading-relaxed mb-8 font-medium" style={{ color: C.gray1 }}>
@@ -559,10 +509,10 @@ export default function AdvogadoPage() {
             {/* ══════════════════════════════════════════════════════════════ */}
             {/* COMO FUNCIONA                                                */}
             {/* ══════════════════════════════════════════════════════════════ */}
-            <section className="py-16 md:py-28" style={{ backgroundColor: C.bg1 }}>
+            <section className="py-12 md:py-24" style={{ backgroundColor: C.bg1 }}>
                 <Container>
                     <SectionLabel>Passo a passo</SectionLabel>
-                    <h2 className="text-2xl md:text-4xl font-bold text-center mb-2 px-4" style={{ color: C.text, fontFamily: "'Cormorant Garamond', Georgia, serif" }}>
+                    <h2 className="text-2xl md:text-4xl font-bold text-center mb-2 px-4" style={{ color: C.white, fontFamily: "'Cormorant Garamond', Georgia, serif" }}>
                         {D.steps.title}
                     </h2>
                     <GoldDivider />
@@ -573,9 +523,9 @@ export default function AdvogadoPage() {
                                 key={step.n}
                                 className="relative rounded-2xl p-6 text-center transition-all"
                                 style={{
-                                    backgroundColor: "rgba(255,255,255,0.78)",
-                                    border: "1px solid rgba(11,23,48,0.08)",
-                                    boxShadow: "0 12px 40px rgba(11,23,48,0.08)",
+                                    backgroundColor: "rgba(255,255,255,0.03)",
+                                    border: "1px solid rgba(255,255,255,0.07)",
+                                    boxShadow: "0 4px 32px rgba(0,0,0,0.4), 0 0 0 1px rgba(201,162,39,0.04)",
                                 }}
                             >
                                 <div
@@ -585,7 +535,7 @@ export default function AdvogadoPage() {
                                     {step.n}
                                 </div>
                                 <step.Icon className="w-8 h-8 mx-auto mb-4 mt-4" style={{ color: C.gold, opacity: 0.85 }} />
-                                <h3 className="text-lg font-bold mb-2" style={{ color: C.text }}>{step.t}</h3>
+                                <h3 className="text-lg font-bold mb-2" style={{ color: C.white }}>{step.t}</h3>
                                 <p className="text-sm leading-relaxed" style={{ color: C.gray2 }}>{step.d}</p>
                             </div>
                         ))}
@@ -599,7 +549,7 @@ export default function AdvogadoPage() {
             {/* ══════════════════════════════════════════════════════════════ */}
             <section
                 className="py-14 md:py-20 relative overflow-hidden"
-                style={{ backgroundColor: C.bg2, borderTop: "1px solid rgba(11,23,48,0.06)" }}
+                style={{ backgroundColor: C.bg2, borderTop: "1px solid rgba(255,255,255,0.05)" }}
             >
                 <div
                     aria-hidden="true"
@@ -618,7 +568,7 @@ export default function AdvogadoPage() {
                         style={{
                             background: "rgba(255,255,255,0.02)",
                             border: "1px solid rgba(201,162,39,0.15)",
-                            boxShadow: "0 12px 40px rgba(11,23,48,0.08)",
+                            boxShadow: "0 4px 40px rgba(0,0,0,0.5)",
                         }}
                     >
                         <div className="flex-shrink-0">
@@ -629,7 +579,7 @@ export default function AdvogadoPage() {
                                     width={160}
                                     height={160}
                                     className="rounded-xl object-cover w-28 h-28 md:w-36 md:h-36"
-                                    style={{ boxShadow: `0 0 0 2px rgba(140,106,67,0.2), 0 8px 24px rgba(11,23,48,0.08)` }}
+                                    style={{ boxShadow: `0 0 0 2px rgba(201,162,39,0.3), 0 8px 32px rgba(0,0,0,0.5)` }}
                                 />
                                 {/* badge OAB */}
                                 <div
@@ -672,18 +622,18 @@ export default function AdvogadoPage() {
             {/* ══════════════════════════════════════════════════════════════ */}
             {/* FAQ                                                          */}
             {/* ══════════════════════════════════════════════════════════════ */}
-            <section className="py-16 md:py-28" style={{ backgroundColor: C.bg1 }}>
+            <section className="py-12 md:py-24" style={{ backgroundColor: C.bg1 }}>
                 <Container>
                     <div className="max-w-2xl mx-auto">
                         <SectionLabel>Tire suas dúvidas</SectionLabel>
-                        <h2 className="text-2xl md:text-3xl font-bold mb-2 text-center" style={{ color: C.text, fontFamily: "'Cormorant Garamond', Georgia, serif" }}>Perguntas Frequentes</h2>
+                        <h2 className="text-2xl md:text-3xl font-bold mb-2 text-center" style={{ color: C.white, fontFamily: "'Cormorant Garamond', Georgia, serif" }}>Perguntas Frequentes</h2>
                         <GoldDivider />
                         <div
                             className="rounded-2xl p-2 md:p-6 mt-8"
                             style={{
-                                backgroundColor: "rgba(255,255,255,0.85)",
-                                border: "1px solid rgba(11,23,48,0.08)",
-                                boxShadow: "0 12px 40px rgba(11,23,48,0.08)",
+                                backgroundColor: "rgba(255,255,255,0.02)",
+                                border: "1px solid rgba(255,255,255,0.07)",
+                                boxShadow: "0 4px 32px rgba(0,0,0,0.4)",
                             }}
                         >
                             {D.faq.map((item, i) => (
@@ -699,7 +649,7 @@ export default function AdvogadoPage() {
             {/* ══════════════════════════════════════════════════════════════ */}
             <section
                 className="py-14 relative overflow-hidden"
-                style={{ backgroundColor: C.bg2, borderTop: "1px solid rgba(11,23,48,0.06)" }}
+                style={{ backgroundColor: C.bg2, borderTop: "1px solid rgba(255,255,255,0.05)" }}
             >
                 <div
                     aria-hidden="true"
@@ -713,7 +663,7 @@ export default function AdvogadoPage() {
                 />
                 <Container className="relative z-10">
                     <div className="max-w-lg mx-auto text-center">
-                        <p className="text-xl md:text-2xl font-bold mb-3" style={{ color: C.text, fontFamily: "'Cormorant Garamond', Georgia, serif" }}>
+                        <p className="text-xl md:text-2xl font-bold mb-3" style={{ color: C.white, fontFamily: "'Cormorant Garamond', Georgia, serif" }}>
                             Não deixe o prazo passar.
                         </p>
                         <p className="text-sm md:text-base mb-8" style={{ color: C.gray2 }}>
@@ -723,9 +673,9 @@ export default function AdvogadoPage() {
                         <div
                             className="mb-6 p-6 rounded-2xl text-left"
                             style={{
-                                backgroundColor: "rgba(255,255,255,0.78)",
-                                border: "1px solid rgba(11,23,48,0.08)",
-                                boxShadow: "0 2px 12px rgba(11,23,48,0.05)",
+                                backgroundColor: "rgba(255,255,255,0.03)",
+                                border: "1px solid rgba(255,255,255,0.08)",
+                                boxShadow: "0 2px 20px rgba(0,0,0,0.3)",
                             }}
                         >
                             <div className="space-y-3 max-w-xs mx-auto">
@@ -747,8 +697,8 @@ export default function AdvogadoPage() {
                         <div
                             className="mb-6 p-4 rounded-xl"
                             style={{
-                                backgroundColor: "rgba(255,255,255,0.78)",
-                                border: "1px solid rgba(11,23,48,0.08)",
+                                backgroundColor: "rgba(255,255,255,0.03)",
+                                border: "1px solid rgba(255,255,255,0.07)",
                             }}
                         >
                             <p className="text-xs text-center mb-2" style={{ color: C.gray3 }}>
@@ -781,18 +731,18 @@ function VideoSection({ youtubeId, iframeSrc, mp4Src }: { youtubeId?: string; if
     const MP4_SRC = mp4Src ?? "";
 
     return (
-        <section className="py-16 md:py-28" style={{ backgroundColor: C.bg1 }}>
+        <section className="py-12 md:py-24" style={{ backgroundColor: C.bg1 }}>
             <div className="max-w-[720px] mx-auto px-6">
                 <SectionLabel>Mensagem do Especialista</SectionLabel>
-                <h2 className="text-2xl md:text-3xl font-bold text-center mb-2 leading-tight md:leading-snug" style={{ color: C.text, fontFamily: "'Cormorant Garamond', Georgia, serif" }}>
+                <h2 className="text-2xl md:text-3xl font-bold text-center mb-2 leading-tight md:leading-snug" style={{ color: C.white, fontFamily: "'Cormorant Garamond', Georgia, serif" }}>
                     Entenda em 2 minutos por que você ainda pode contestar.
                 </h2>
                 <GoldDivider />
                 <div
                     className="relative w-full rounded-2xl overflow-hidden mt-10"
                     style={{
-                        boxShadow: "0 12px 40px rgba(11,23,48,0.08)",
-                        border: "1px solid rgba(11,23,48,0.08)",
+                        boxShadow: "0 16px 64px rgba(0,0,0,0.7), 0 0 0 1px rgba(201,162,39,0.12)",
+                        border: "1px solid rgba(255,255,255,0.08)",
                     }}
                 >
                     {MP4_SRC ? (
