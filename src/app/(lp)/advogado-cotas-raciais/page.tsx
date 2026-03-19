@@ -42,9 +42,9 @@ const C = {
     red: "#ef4444",
     redBg: "rgba(239,68,68,0.08)",
     redBorder: "rgba(239,68,68,0.25)",
-    cta: "#E8410A",
-    ctaHover: "#FF5520",
-    ctaGlow: "rgba(232,65,10,0.45)",
+    cta: "#25D366",
+    ctaHover: "#2BE673",
+    ctaGlow: "rgba(37,211,102,0.25)",
     green: "#25D366",
     greenGlow: "rgba(37,211,102,0.25)",
 };
@@ -168,7 +168,7 @@ function Cta({ text, full = false }: { text: string; full?: boolean; }) {
 // FAQ ITEM (aberto por padrão)
 // ============================================================================
 function FaqItem({ q, a }: { q: string; a: string }) {
-    const [open, setOpen] = useState(true);
+    const [open, setOpen] = useState(false);
     return (
         <div style={{ borderColor: "rgba(255,255,255,0.07)" }} className="border-b last:border-0 px-1">
             <button onClick={() => setOpen(!open)} className="w-full flex items-center justify-between py-6 text-left group">
@@ -192,16 +192,16 @@ function FaqItem({ q, a }: { q: string; a: string }) {
 function ProvasSocial() {
     const depoimentos = [
         {
-            nome: "M.S. · Concurso Federal · Brasília/DF",
+            nome: "Mariana Souza · Concurso Federal · Brasília/DF",
             texto: "Fui eliminada na heteroidentificação do CNU depois de anos estudando. O Dr. Marcelo analisou meu caso em horas e identificou falha procedimental da banca. Consegui liminar e retornei ao certame.",
         },
         {
-            nome: "R.O. · Concurso Estadual · Belo Horizonte/MG",
+            nome: "Rafael Oliveira · Concurso Estadual · Belo Horizonte/MG",
             texto: "A motivação da banca era genérica, três linhas apenas. Com o recurso bem fundamentado, a eliminação foi revertida administrativamente. Hoje estou no cargo.",
         },
         {
-            nome: "C.A. · Concurso Cebraspe · São Paulo/SP",
-            texto: "Achei que não tinha mais saída. O atendimento foi imediato e o Dr. Marcelo explicou tecnicamente por que minha reprovação tinha base para contestação. Recomendo a qualquer candidato nessa situação.",
+            nome: "Camila Andrade · Concurso Cebraspe · São Paulo/SP",
+            texto: "Não sabia nem que dava pra recorrer. Ele me explicou tudo, resolveu rápido. Recomendo demais.",
         },
     ];
 
@@ -218,7 +218,7 @@ function ProvasSocial() {
             />
             <Container className="relative z-10">
                 <div className="max-w-4xl mx-auto">
-                    <SectionLabel>Resultados reais</SectionLabel>
+                    <SectionLabel>Depoimentos</SectionLabel>
                     <h2 className="text-2xl md:text-3xl font-bold text-center mb-2" style={{ color: C.white, fontFamily: "Georgia, serif" }}>
                         Candidatos que contestaram a eliminação injusta
                     </h2>
@@ -488,9 +488,9 @@ export default function AdvogadoPage() {
             <section
                 className="py-12 md:py-20 relative overflow-hidden"
                 style={{
-                    background: `linear-gradient(135deg, rgba(127,29,29,0.18) 0%, rgba(127,29,29,0.07) 50%, rgba(127,29,29,0.18) 100%)`,
-                    borderTop: `1px solid ${C.redBorder}`,
-                    borderBottom: `1px solid ${C.redBorder}`,
+                    backgroundColor: "#0B1730",
+                    borderTop: "1px solid rgba(255,255,255,0.08)",
+                    borderBottom: "1px solid rgba(255,255,255,0.08)",
                 }}
             >
                 <div
@@ -500,7 +500,7 @@ export default function AdvogadoPage() {
                 />
                 <Container className="relative z-10">
                     <div className="max-w-2xl mx-auto text-center px-4">
-                        <Clock className="w-10 h-10 md:w-12 md:h-12 mx-auto mb-6 animate-pulse" style={{ color: "#f87171" }} />
+                        <Clock className="w-10 h-10 md:w-12 md:h-12 mx-auto mb-6" style={{ color: C.gold }} />
                         <h2 className="text-2xl md:text-3xl font-bold mb-6" style={{ color: C.white, fontFamily: "Georgia, serif" }}>
                             {D.urg.title}
                         </h2>
