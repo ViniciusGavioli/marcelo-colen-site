@@ -331,8 +331,16 @@ export default function AdvogadoPage() {
                 {/* Fundo em camadas */}
                 <div className="absolute inset-0 z-0 select-none">
                     <Image src="/images/hero-scales.png" alt="" fill className="object-cover opacity-[0.04]" priority aria-hidden="true" />
-                    <div className="absolute inset-0" style={{ background: `radial-gradient(ellipse 80% 60% at 50% 0%, rgba(201,162,39,0.06) 0%, transparent 70%)` }} />
-                    <div className="absolute inset-0" style={{ background: `linear-gradient(180deg, ${C.bg1} 0%, transparent 40%, ${C.bg1} 100%)` }} />
+                    {/* Textura atmosférica: vinho/borgonha + azul-acinzentado + preto profundo */}
+                    <div className="absolute inset-0" style={{ background: "radial-gradient(ellipse 65% 45% at 78% 12%, rgba(155,50,40,0.52) 0%, transparent 65%)" }} />
+                    <div className="absolute inset-0" style={{ background: "radial-gradient(ellipse 42% 32% at 12% 10%, rgba(95,88,125,0.38) 0%, transparent 58%)" }} />
+                    <div className="absolute inset-0" style={{ background: "radial-gradient(ellipse 55% 48% at 52% 58%, rgba(130,38,30,0.42) 0%, transparent 62%)" }} />
+                    <div className="absolute inset-0" style={{ background: "radial-gradient(ellipse 38% 28% at 88% 78%, rgba(148,52,36,0.32) 0%, transparent 55%)" }} />
+                    {/* Gold sutil por cima */}
+                    <div className="absolute inset-0" style={{ background: `radial-gradient(ellipse 80% 60% at 50% 0%, rgba(201,162,39,0.05) 0%, transparent 70%)` }} />
+                    {/* Fade nas bordas para não vazar */}
+                    <div className="absolute inset-0" style={{ background: `linear-gradient(180deg, ${C.bg1} 0%, transparent 25%, transparent 75%, ${C.bg1} 100%)` }} />
+                    <div className="absolute inset-0" style={{ background: `radial-gradient(ellipse 100% 100% at 50% 50%, transparent 50%, ${C.bg1} 100%)` }} />
                 </div>
 
                 <Container className="relative z-10 w-full px-4 md:px-6">
