@@ -62,7 +62,7 @@ const D = {
         h1_2: "Isso tem contestação.",
         sub: "Se a banca te indeferiu, pode ter cometido um erro. Esse erro pode ser contestado antes do prazo acabar.",
         credentials: "Dr. Marcelo Colen · Mestre em Direito pela UFMG · Secretário da Comissão Nacional de Promoção da Igualdade da OAB Federal · Diretor de Diversidade da OAB/MG",
-        cta: "Enviar Meu Caso no WhatsApp",
+        cta: "Ver se meu caso tem recurso",
         ctaLine1: "Você pode enviar o resultado da heteroidentificação agora mesmo.",
         ctaLine2: "Primeira análise gratuita e sigilosa.",
         disclaimer: "Cada caso é avaliado individualmente. Não fazemos promessa de resultado.",
@@ -144,7 +144,7 @@ function SectionLabel({ children }: { children: string }) {
 }
 
 // ============================================================================
-// CTA BUTTON
+// CTA BUTTON — verde WhatsApp (seções de conversão)
 // ============================================================================
 function Cta({ text, full = false }: { text: string; full?: boolean; }) {
     return (
@@ -160,6 +160,28 @@ function Cta({ text, full = false }: { text: string; full?: boolean; }) {
         >
             <MessageCircle className="w-5 h-5 md:w-6 md:h-6 group-hover:animate-pulse" />
             {text}
+        </a>
+    );
+}
+
+// ============================================================================
+// HERO CTA — botão discreto dourado (hero, topo da página)
+// ============================================================================
+function HeroCta({ text, full = false }: { text: string; full?: boolean }) {
+    return (
+        <a
+            href={getDirectWhatsAppLink(D.wa)}
+            onClick={trackWhatsAppClick}
+            style={{
+                background: "linear-gradient(160deg, #1c0a0a 0%, #0a0a0a 55%, #0f0d00 100%)",
+                border: "2px solid #c9a227",
+                color: C.white,
+                boxShadow: "0 0 28px rgba(201,162,39,0.18), 0 1px 0 rgba(201,162,39,0.12) inset",
+            }}
+            className={`group inline-flex items-center justify-center gap-2 font-semibold text-base md:text-lg px-8 py-4 rounded-full transition-all duration-200 hover:shadow-[0_0_40px_rgba(201,162,39,0.35)] hover:scale-[1.02] active:scale-[0.98] ${full ? "w-full" : ""}`}
+        >
+            {text}
+            <ChevronDown className="w-4 h-4 rotate-[-90deg] opacity-60 group-hover:translate-x-0.5 transition-transform duration-200" />
         </a>
     );
 }
@@ -345,7 +367,7 @@ export default function AdvogadoPage() {
 
                         {/* CTA */}
                         <div className="w-full max-w-sm flex flex-col items-center gap-3">
-                            <Cta text={D.hero.cta} full />
+                            <HeroCta text={D.hero.cta} full />
                             <p className="text-[11px] md:text-xs font-medium" style={{ color: C.gray3 }}>
                                 <Lock className="w-3 h-3 inline mr-1 mb-0.5" />
                                 Sigiloso · Sem compromisso · Resposta rápida
