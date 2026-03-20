@@ -4,6 +4,7 @@ import { SITE_CONFIG, DEFAULT_SEO } from "@/lib/constants";
 import FacebookPixel from "@/components/FacebookPixel";
 import GoogleAdsTag from "@/components/GoogleAdsTag";
 
+
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,

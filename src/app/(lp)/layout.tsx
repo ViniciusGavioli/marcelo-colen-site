@@ -1,12 +1,5 @@
-import { Raleway } from "next/font/google";
 import Script from "next/script";
 import { GTM_ID, GA_ID } from "@/lib/analytics";
-
-const raleway = Raleway({
-  subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700", "800"],
-  variable: "--font-raleway",
-});
 
 // Layout limpo para Landing Pages - SEM Header/Footer
 // Foco total em conversão
@@ -17,7 +10,10 @@ export default function LandingPageLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div className={`${raleway.variable} font-sans bg-[#3D2314]`} style={{ fontFamily: 'var(--font-raleway), Raleway, sans-serif' }}>
+    <div
+      className="font-sans bg-[#3D2314]"
+      style={{ fontFamily: "var(--font-sans)" }}
+    >
       {/* Google Tag Manager (noscript) */}
       {GTM_ID && (
         <noscript>

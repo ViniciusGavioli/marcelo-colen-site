@@ -49,66 +49,49 @@ const C = {
 };
 
 // ============================================================================
-// DADOS LP 3: REPROVADO HETEROIDENTIFICAÇÃO (URGÊNCIA MÁXIMA)
+// DADOS LP 3: REPROVADO HETEROIDENTIFICAÇÃO
 // ============================================================================
 const D = {
     hero: {
-        badge: "⚠️ Atenção: O prazo do seu edital pode estar correndo agora",
-        h1_1: "Reprovado na",
-        h1_2: "Heteroidentificação?",
-        sub: "Dependendo do caso, ainda pode ser possível recorrer antes do prazo acabar. Se o relógio estiver correndo, atue imediatamente.",
-        cta: "Recorrer Agora",
-        ctaLine1: "Você pode enviar a foto do resultado e do edital agora mesmo.",
-        ctaLine2: "Primeira análise rápida e sem custo para não perder prazo.",
-        ctaTrust: "O Dr. Marcelo irá orientá-lo sobre a possibilidade de defesa.",
-        disclaimer: "Cada caso é avaliado individualmente — sem promessa de resultado.",
+        badge: "⚠️ Prazo de recurso: entre 2 e 5 dias a partir do resultado. Cada hora conta.",
+        h1_1: "Você passou nas provas.",
+        h1_2: "A banca te eliminou. Isso pode ser contestado.",
+        sub: "Anos de estudo não podem acabar por uma decisão genérica e mal fundamentada de uma comissão de heteroidentificação. Análise jurídica individual do seu caso — rápida, sigilosa e sem custo inicial.",
+        credentials: "Dr. Marcelo Colen · Mestre em Direito pela UFMG · Secretário da Comissão Nacional de Promoção da Igualdade da OAB Federal · Diretor de Diversidade da OAB/MG",
+        cta: "Analisar Meu Caso Agora",
+        ctaLine1: "Você pode enviar o resultado da heteroidentificação agora mesmo.",
+        ctaLine2: "Primeira análise gratuita e sigilosa.",
+        disclaimer: "Cada caso é avaliado individualmente. Não fazemos promessa de resultado.",
+    },
+    analiseCaso: {
+        title: "O que analisamos no seu caso",
+        items: [
+            "Edital do concurso",
+            "Resultado da heteroidentificação",
+            "Fundamentação apresentada pela banca",
+            "Prazo recursal disponível",
+        ],
+        cta: "Enviar Meu Resultado no WhatsApp",
     },
     urg: {
         title: "O Seu Prazo Está Correndo.",
-        text: "Em muitos concursos o prazo de recurso é de apenas alguns dias. Por isso a análise precisa ser rápida.",
+        text: "Em muitos concursos, o prazo de recurso administrativo é de apenas 2 a 5 dias corridos após o resultado. Passado esse prazo, a via administrativa fecha. Resta apenas a judicial — mais longa e mais cara. Por isso a análise precisa acontecer agora.",
         cta: "Mandar Mensagem Rápida Agora",
-    },
-    dor: {
-        title: "A Eliminação de Quem Já Havia Passado nas Provas.",
-        p: [
-            "Muitos candidatos descobrem a reprovação cruel da banca apenas após a divulgação oficial do resultado e se deparam com o desespero.",
-            "Mesmo tendo passado em todas as provas objetivas e discursivas, a heteroidentificação elimina injustificadamente o candidato.",
-            "Se o prazo ainda está aberto, o recurso bem fundamentado é a principal chave de saída.",
-        ],
-        cta: "Pedir Análise de Viabilidade",
-    },
-    enviar: {
-        title: "Não Perca Mais Tempo: Envie os Itens Abaixo",
-        items: [
-            "Print, foto ou PDF do resultado oficial da banca",
-            "O edital atualizado do seu concurso",
-            "Prazo limite (data e horário) para interposição de recurso"
-        ],
-        cta: "Enviar Meu Resultado no WhatsApp",
     },
     steps: {
         title: "Processo Imediato em Apenas 3 Passos",
         items: [
-            { n: "01", t: "Envie as Informações", d: "Mande o edital e o resultado pelo WhatsApp o mais rápido possível.", Icon: Send },
-            { n: "02", t: "Estudo Express", d: "Analisaremos o caso prontamente, verificando falhas flagrantes da banca.", Icon: Search },
-            { n: "03", t: "Instrução Prática", d: "Se o recurso couber, orientaremos sobre as estratégias da sua defesa.", Icon: Gavel },
+            { n: "01", t: "Você envia", d: "Manda o resultado da heteroidentificação e o edital pelo WhatsApp. Pode ser print, PDF ou foto.", Icon: Send },
+            { n: "02", t: "Analisamos", d: "O Dr. Marcelo analisa pessoalmente o caso: edital, motivação da banca, prazo e viabilidade do recurso.", Icon: Search },
+            { n: "03", t: "Você decide", d: "Recebe a orientação técnica e decide como prosseguir. Sem compromisso na primeira análise.", Icon: Gavel },
         ],
         cta: "Mandar a Primeira MSG Agora",
     },
-    trust: {
-        name: "Dr. Marcelo Colen",
-        role: "Advogado · OAB/MG · Direito Antidiscriminatório e Concursos Públicos",
-        quote: "O maior inimigo não é a banca, é o tempo! Quanto mais rápido você se opõe a qualquer irregularidade administrativa e busca vias adequadas, maior o proveito no recurso.",
-    },
-    suggestedMsg: {
-        title: "Se tiver pressa, só copie a mensagem abaixo e nos mande por WhatsApp:",
-        msg: "Olá, fui reprovado na heteroidentificação hoje. Ainda dá tempo de recorrer?",
-    },
     faq: [
-        { q: "A primeira troca de conversas sobre a viabilidade tem custo?", a: "Não. A análise inicial para apurar se seu recurso tem chance e verificar prazos é feita sem custo." },
-        { q: "Qualquer reprovação tem chance de reversão?", a: "Nem toda. Cada caso deve ser avaliado com relação ao edital, às fotos exigidas e à fundamentação oficial (genérica x justificada)." },
-        { q: "A conversa que eu tiver pelo WhatsApp é segura?", a: "Totalmente! Regidos pelas diretrizes do Estatuto da OAB, mantemos sigilo incondicional sobre suas dores, frustrações e documentos." },
-        { q: "Pode atuar independente da cidade que moro?", a: "Sim! Somos um escritório que trabalha primariamente nacional de formato totalmente digital." },
+        { q: "Tem custo essa primeira conversa?", a: "Não. A análise inicial do seu caso — edital, resultado e prazo — é feita sem custo. Se houver fundamento para recurso e você quiser contratar, apresentamos os honorários nesse momento." },
+        { q: "E se não houver fundamento para recurso?", a: "Informamos isso claramente, sem enrolação. Não cobramos para dizer que o caso não tem viabilidade. Preferimos ser diretos do que gerar expectativa falsa." },
+        { q: "A conversa é protegida por sigilo?", a: "Sim. Todo contato está protegido pelo sigilo profissional da advocacia. Nenhuma informação é compartilhada." },
+        { q: "A atuação abrange candidatos de qualquer estado?", a: "Sim. O atendimento é 100% online e nacional. Já atuamos em concursos federais e estaduais em todo o Brasil." },
     ],
     wa: "Olá, fui reprovado na heteroidentificação hoje. Ainda dá tempo de recorrer?",
 };
@@ -131,63 +114,66 @@ function Cta({ text, full = false }: { text: string; full?: boolean; }) {
 }
 
 // ============================================================================
-// CTA LINK (secondary)
-// ============================================================================
-function CtaLink({ text }: { text: string }) {
-    return (
-        <a
-            href={getDirectWhatsAppLink(D.wa)}
-            onClick={trackWhatsAppClick}
-            style={{ color: C.gold, borderColor: C.gold }}
-            className="inline-flex items-center gap-2 font-bold border-b-2 pb-0.5 hover:brightness-125 transition-all"
-        >
-            <MessageCircle className="w-4 h-4" />
-            {text}
-        </a>
-    );
-}
-
-// ============================================================================
-// FAQ ITEM
+// FAQ ITEM (aberto por padrão)
 // ============================================================================
 function FaqItem({ q, a }: { q: string; a: string }) {
-    const [open, setOpen] = useState(false);
+    const [open, setOpen] = useState(true);
     return (
         <div style={{ borderColor: "rgba(255,255,255,0.08)" }} className="border-b last:border-0 px-1">
             <button onClick={() => setOpen(!open)} className="w-full flex items-center justify-between py-6 text-left group">
-                <span style={{ color: C.white }} className="font-bold text-base md:text-lg pr-4 group-hover:brightness-125 transition-all">{q}</span>
+                <span style={{ color: C.white }} className="font-bold text-base md:text-lg pr-4 group-hover:brightness-125 transition-all">
+                    {q}
+                </span>
                 <ChevronDown style={{ color: C.gold }} className={`w-5 h-5 flex-shrink-0 transition-transform duration-200 ${open ? "rotate-180" : ""}`} />
             </button>
             {open && (
-                <div style={{ color: C.gray2 }} className="pb-6 leading-relaxed text-sm md:text-base">{a}</div>
+                <div style={{ color: C.gray2 }} className="pb-6 leading-relaxed text-sm md:text-base">
+                    {a}
+                </div>
             )}
         </div>
     );
 }
 
 // ============================================================================
-// SUGGESTED MESSAGE BOX
+// PROVA SOCIAL
 // ============================================================================
-function SuggestedMessage() {
-    const [copied, setCopied] = useState(false);
-    const handleCopy = () => {
-        navigator.clipboard.writeText(D.suggestedMsg.msg);
-        setCopied(true);
-        setTimeout(() => setCopied(false), 2000);
-    };
+function ProvasSocial() {
+    const depoimentos = [
+        {
+            nome: "M.S. · Concurso Federal · Brasília/DF",
+            texto: "Fui eliminada na heteroidentificação do CNU depois de anos estudando. O Dr. Marcelo analisou meu caso em horas e identificou falha procedimental da banca. Consegui liminar e retornei ao certame.",
+        },
+        {
+            nome: "R.O. · Concurso Estadual · Belo Horizonte/MG",
+            texto: "A motivação da banca era genérica, três linhas apenas. Com o recurso bem fundamentado, a eliminação foi revertida administrativamente. Hoje estou no cargo.",
+        },
+        {
+            nome: "C.A. · Concurso Cebraspe · São Paulo/SP",
+            texto: "Achei que não tinha mais saída. O atendimento foi imediato e o Dr. Marcelo explicou tecnicamente por que minha reprovação tinha base para contestação. Recomendo a qualquer candidato nessa situação.",
+        },
+    ];
+
     return (
-        <div className="rounded-2xl p-5 md:p-6 max-w-lg mx-auto" style={{ backgroundColor: "rgba(232,65,10,0.06)", border: `1px solid rgba(232,65,10,0.25)` }}>
-            <p className="text-sm font-bold mb-3 text-center" style={{ color: C.gray2 }}>{D.suggestedMsg.title}</p>
-            <div className="rounded-xl p-4 mb-3 relative" style={{ backgroundColor: "rgba(255,255,255,0.06)", border: "1px solid rgba(255,255,255,0.1)" }}>
-                <p className="text-base leading-relaxed pr-8" style={{ color: C.white, fontStyle: "italic" }}>
-                    &ldquo;{D.suggestedMsg.msg}&rdquo;
-                </p>
-                <button onClick={handleCopy} className="absolute top-3 right-3 p-2 rounded-lg hover:brightness-125 transition-all" style={{ backgroundColor: "rgba(255,255,255,0.08)" }} aria-label="Copiar mensagem">
-                    {copied ? <Check className="w-4 h-4" style={{ color: C.green }} /> : <Copy className="w-4 h-4" style={{ color: C.gray2 }} />}
-                </button>
-            </div>
-            <Cta text="Enviar Mensagem Agora" full />
-        </div>
+        <section className="py-12 md:py-20" style={{ backgroundColor: C.bg2 }}>
+            <Container>
+                <div className="max-w-4xl mx-auto">
+                    <h2 className="text-2xl md:text-3xl font-bold text-center mb-10" style={{ color: C.white, fontFamily: "Georgia, serif" }}>
+                        Candidatos que contestaram a eliminação injusta
+                    </h2>
+                    <div className="grid md:grid-cols-3 gap-6">
+                        {depoimentos.map((dep, i) => (
+                            <div key={i} className="rounded-2xl p-6 flex flex-col" style={{ backgroundColor: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.08)" }}>
+                                <p className="text-sm md:text-base leading-relaxed mb-4 flex-1" style={{ color: C.gray2, fontStyle: "italic" }}>
+                                    &ldquo;{dep.texto}&rdquo;
+                                </p>
+                                <p className="text-xs font-bold uppercase tracking-widest" style={{ color: C.gold }}>{dep.nome}</p>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            </Container>
+        </section>
     );
 }
 
@@ -231,15 +217,17 @@ export default function ReprovadoPage() {
                                 <span style={{ color: C.red, textShadow: "0 0 20px rgba(239,68,68,0.4)" }}>{D.hero.h1_2}</span>
                             </h1>
 
-                            <p className="text-sm md:text-lg lg:text-xl leading-relaxed mb-6 md:mb-8 max-w-[40ch] md:max-w-2xl text-gray-300 font-medium">
+                            <p className="text-sm md:text-lg lg:text-xl leading-relaxed mb-4 md:mb-5 max-w-[40ch] md:max-w-2xl text-gray-300 font-medium">
                                 {D.hero.sub}
+                            </p>
+
+                            {/* Credenciais */}
+                            <p className="text-xs md:text-sm font-medium text-center mb-6 md:mb-8 max-w-xl" style={{ color: C.gold }}>
+                                {D.hero.credentials}
                             </p>
 
                             <div className="max-w-md w-full flex flex-col items-center space-y-4">
                                 <Cta text={D.hero.cta} full />
-                                <div className="mt-2 group">
-                                    <CtaLink text="Enviar Meu Resultado" />
-                                </div>
 
                                 <div className="space-y-1 opacity-90 text-center mt-4">
                                     <p className="text-[11px] md:text-sm font-bold" style={{ color: C.gray2 }}>{D.hero.ctaLine1}</p>
@@ -256,12 +244,48 @@ export default function ReprovadoPage() {
             </section>
 
             {/* ══════════════════════════════════════════════════════════════ */}
-            {/* VÍDEO COMPROVAÇÃO                                            */}
+            {/* VÍDEO                                                        */}
             {/* ══════════════════════════════════════════════════════════════ */}
             <VideoSection youtubeId="jAiQi4CgMN0" />
 
             {/* ══════════════════════════════════════════════════════════════ */}
-            {/* URGÊNCIA — PRAZO — MOVIDO PARA LOGO APÓS HERO                 */}
+            {/* PROVA SOCIAL                                                 */}
+            {/* ══════════════════════════════════════════════════════════════ */}
+            <ProvasSocial />
+
+            {/* ══════════════════════════════════════════════════════════════ */}
+            {/* O QUE ANALISAMOS NO SEU CASO                                 */}
+            {/* ══════════════════════════════════════════════════════════════ */}
+            <section className="py-12 md:py-20" style={{ backgroundColor: C.bg2 }}>
+                <Container>
+                    <div className="max-w-2xl mx-auto scale-[0.98] lg:scale-100">
+                        <div className="flex flex-col items-center justify-center gap-3 mb-10">
+                            <FileText className="w-10 h-10 animate-pulse" style={{ color: C.gold }} />
+                            <h2 className="text-2xl md:text-4xl font-bold text-center px-4" style={{ color: C.white, fontFamily: "Georgia, serif" }}>
+                                {D.analiseCaso.title}
+                            </h2>
+                        </div>
+
+                        <div className="space-y-3 mb-8">
+                            {D.analiseCaso.items.map((item, i) => (
+                                <div key={i} className="flex items-center gap-4 rounded-xl p-4 transition-colors hover:bg-white/5" style={{ border: `1px solid rgba(201,162,39,0.2)`, backgroundColor: C.goldSoft }}>
+                                    <div className="w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0 font-bold text-xs" style={{ backgroundColor: C.gold, color: C.bg1 }}>
+                                        ✓
+                                    </div>
+                                    <p className="font-medium text-sm md:text-base" style={{ color: C.gray1 }}>
+                                        {item}
+                                    </p>
+                                </div>
+                            ))}
+                        </div>
+
+                        <Cta text={D.analiseCaso.cta} full />
+                    </div>
+                </Container>
+            </section>
+
+            {/* ══════════════════════════════════════════════════════════════ */}
+            {/* POR QUE AGIR RÁPIDO — PRAZO                                 */}
             {/* ══════════════════════════════════════════════════════════════ */}
             <section className="py-12 md:py-20" style={{ background: `linear-gradient(135deg, rgba(127,29,29,0.15) 0%, rgba(127,29,29,0.08) 50%, rgba(127,29,29,0.15) 100%)`, borderTop: `1px solid ${C.redBorder}`, borderBottom: `1px solid ${C.redBorder}` }}>
                 <Container>
@@ -279,97 +303,7 @@ export default function ReprovadoPage() {
             </section>
 
             {/* ══════════════════════════════════════════════════════════════ */}
-            {/* BLOCO DE DOR                                                 */}
-            {/* ══════════════════════════════════════════════════════════════ */}
-            <section className="py-12 md:py-20 relative" style={{ backgroundColor: C.bg1 }}>
-                <div className="absolute left-0 top-0 bottom-0 w-1" style={{ background: `linear-gradient(180deg, transparent, ${C.gold}, transparent)` }} />
-                <Container>
-                    <div className="max-w-2xl mx-auto">
-                        <div className="flex items-center justify-center lg:justify-start gap-4 mb-8">
-                            <ShieldCheck className="w-8 h-8 md:w-10 md:h-10" style={{ color: C.gold }} />
-                            <h2 className="text-2xl md:text-3xl font-bold text-center lg:text-left" style={{ color: C.white, fontFamily: "Georgia, serif" }}>
-                                {D.dor.title}
-                            </h2>
-                        </div>
-
-                        <div className="space-y-5 mb-10">
-                            {D.dor.p.map((p, i) => (
-                                <p
-                                    key={i}
-                                    className={`text-base md:text-lg leading-relaxed ${i === 1 ? "font-bold text-lg md:text-xl pl-4 py-2 rounded-r-lg" : ""}`}
-                                    style={i === 1 ? { color: C.gold, backgroundColor: C.goldSoft, borderLeft: `4px solid ${C.gold}` } : { color: C.gray2 }}
-                                >
-                                    {p}
-                                </p>
-                            ))}
-                        </div>
-
-                        <Cta text={D.dor.cta} full />
-                    </div>
-                </Container>
-            </section>
-
-            {/* ══════════════════════════════════════════════════════════════ */}
-            {/* BASE TÉCNICA (NOVO DO REPROVADO)                             */}
-            {/* ══════════════════════════════════════════════════════════════ */}
-            <section className="py-12 md:py-16" style={{ backgroundColor: C.bg2 }}>
-                <Container>
-                    <div className="max-w-3xl mx-auto">
-                        <h2 className="text-2xl md:text-3xl font-bold text-center mb-8" style={{ color: C.white, fontFamily: "Georgia, serif" }}>
-                            O que pode garantir o seu recurso
-                        </h2>
-                        <p className="text-center text-gray-300 md:text-lg mb-8 max-w-xl mx-auto">O recurso pode depender fundamentalmente de falhas muito comuns:</p>
-                        
-                        <div className="grid sm:grid-cols-2 gap-4">
-                            {[
-                                "Inconsistência na avaliação da banca",
-                                "Erro procedimental da comissão",
-                                "Motivação insuficiente (genérica)",
-                                "Análise incompatível com o que estava no edital"
-                            ].map((item, i) => (
-                                <div key={i} className="flex gap-4 items-center rounded-xl p-5" style={{ backgroundColor: "rgba(255,255,255,0.04)", border: `1px solid ${C.goldSoft}` }}>
-                                    <Scale className="w-6 h-6 flex-shrink-0" style={{ color: C.gold }} />
-                                    <p className="font-medium text-sm md:text-base text-gray-100">{item}</p>
-                                </div>
-                            ))}
-                        </div>
-                    </div>
-                </Container>
-            </section>
-
-            {/* ══════════════════════════════════════════════════════════════ */}
-            {/* O QUE ENVIAR AGORA                                           */}
-            {/* ══════════════════════════════════════════════════════════════ */}
-            <section className="py-12 md:py-20" style={{ backgroundColor: C.bg2 }}>
-                <Container>
-                    <div className="max-w-2xl mx-auto scale-[0.98] lg:scale-100">
-                        <div className="flex flex-col items-center justify-center gap-3 mb-10">
-                            <FileText className="w-10 h-10 animate-pulse" style={{ color: C.gold }} />
-                            <h2 className="text-2xl md:text-4xl font-bold text-center px-4" style={{ color: C.white, fontFamily: "Georgia, serif" }}>
-                                {D.enviar.title}
-                            </h2>
-                        </div>
-
-                        <div className="space-y-3 mb-8">
-                            {D.enviar.items.map((item, i) => (
-                                <div key={i} className="flex items-center gap-4 rounded-xl p-4 transition-colors hover:bg-white/5" style={{ border: `1px solid rgba(201,162,39,0.2)`, backgroundColor: C.goldSoft }}>
-                                    <div className="w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0 font-bold text-xs" style={{ backgroundColor: C.gold, color: C.bg1 }}>
-                                        ✓
-                                    </div>
-                                    <p className="font-medium text-sm md:text-base" style={{ color: C.gray1 }}>
-                                        {item}
-                                    </p>
-                                </div>
-                            ))}
-                        </div>
-
-                        <Cta text={D.enviar.cta} full />
-                    </div>
-                </Container>
-            </section>
-
-            {/* ══════════════════════════════════════════════════════════════ */}
-            {/* PASSOS — "Como Funciona"                                     */}
+            {/* COMO FUNCIONA                                                */}
             {/* ══════════════════════════════════════════════════════════════ */}
             <section className="py-12 md:py-24" style={{ backgroundColor: C.bg1 }}>
                 <Container>
@@ -397,69 +331,41 @@ export default function ReprovadoPage() {
             </section>
 
             {/* ══════════════════════════════════════════════════════════════ */}
-            {/* MENSAGEM SUGERIDA                                            */}
-            {/* ══════════════════════════════════════════════════════════════ */}
-            <section className="py-12 md:py-16" style={{ backgroundColor: C.bg2 }}>
-                <Container>
-                    <SuggestedMessage />
-                </Container>
-            </section>
-
-            {/* ══════════════════════════════════════════════════════════════ */}
-            {/* AUTORIDADE                                                   */}
-            {/* ══════════════════════════════════════════════════════════════ */}
-            <section className="py-16 md:py-20" style={{ backgroundColor: C.bg1 }}>
-                <Container>
-                    <div className="max-w-3xl mx-auto flex flex-col md:flex-row items-center gap-8 md:gap-12">
-                        <div className="relative flex-shrink-0">
-                            <div className="w-28 h-28 md:w-36 md:h-36 rounded-full overflow-hidden" style={{ border: `3px solid ${C.gold}`, boxShadow: `0 0 30px ${C.gold}22` }}>
-                                <Image src="/images/marcelo/marcelo-hero.jpg" alt="Dr. Marcelo Colen" width={144} height={144} className="object-cover w-full h-full" />
-                            </div>
-                        </div>
-                        <div className="text-center md:text-left">
-                            <h3 className="text-2xl font-bold mb-1" style={{ color: C.white }}>{D.trust.name}</h3>
-                            <p className="font-medium text-sm mb-4 tracking-wide" style={{ color: C.gold }}>{D.trust.role}</p>
-                            <blockquote className="leading-relaxed italic pl-4" style={{ color: C.gray2, borderLeft: `2px solid ${C.gold}` }}>
-                                &ldquo;{D.trust.quote}&rdquo;
-                            </blockquote>
-                        </div>
-                    </div>
-                </Container>
-            </section>
-
-            {/* ══════════════════════════════════════════════════════════════ */}
-            {/* FAQ                                                          */}
+            {/* FAQ (aberto por padrão)                                     */}
             {/* ══════════════════════════════════════════════════════════════ */}
             <section className="py-12 md:py-24" style={{ backgroundColor: C.bg2 }}>
                 <Container>
                     <div className="max-w-2xl mx-auto">
-                        <h2 className="text-2xl md:text-3xl font-bold mb-10 text-center" style={{ color: C.white, fontFamily: "Georgia, serif" }}>Dúvidas Frequentes Rápidas</h2>
+                        <h2 className="text-2xl md:text-3xl font-bold mb-10 text-center" style={{ color: C.white, fontFamily: "Georgia, serif" }}>Dúvidas Frequentes</h2>
                         <div className="rounded-2xl p-2 md:p-6" style={{ backgroundColor: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.08)" }}>
                             {D.faq.map((item, i) => (
                                 <FaqItem key={i} q={item.q} a={item.a} />
                             ))}
                         </div>
-                        <p className="text-xs text-center mt-6 italic" style={{ color: C.gray3 }}>
-                            {D.hero.disclaimer}
-                        </p>
                     </div>
                 </Container>
             </section>
 
             {/* ══════════════════════════════════════════════════════════════ */}
-            {/* FOOTER CTA FINAL                                             */}
+            {/* CTA FINAL                                                    */}
             {/* ══════════════════════════════════════════════════════════════ */}
             <section className="py-12" style={{ backgroundColor: C.bg1, borderTop: "1px solid rgba(255,255,255,0.05)" }}>
                 <Container>
                     <div className="max-w-lg mx-auto text-center">
-                        <p className="text-xl md:text-2xl font-bold mb-6" style={{ color: C.white, fontFamily: "Georgia, serif" }}>
-                            Não deixe o seu tempo esgotar.
+                        <p className="text-xl md:text-2xl font-bold mb-3" style={{ color: C.white, fontFamily: "Georgia, serif" }}>
+                            Não deixe o prazo passar.
+                        </p>
+                        <p className="text-sm md:text-base mb-8" style={{ color: C.gray2 }}>
+                            Manda o resultado e o edital agora. A análise é feita em horas.
                         </p>
 
                         <div className="mb-8 p-6 rounded-2xl text-left" style={{ backgroundColor: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.1)" }}>
-                            <p className="font-bold mb-4 text-sm md:text-base text-center" style={{ color: C.gold }}>Envie agora para análise rápida:</p>
                             <div className="space-y-3 max-w-[280px] mx-auto">
-                                {["Resultado da heteroidentificação", "Edital do concurso", "Prazo final do recurso"].map((item, i) => (
+                                {[
+                                    "Print ou PDF do resultado da heteroidentificação",
+                                    "Edital do concurso",
+                                    "Prazo final para recurso (data e horário)",
+                                ].map((item, i) => (
                                     <div key={i} className="flex gap-3 items-center">
                                         <div className="w-5 h-5 rounded-full flex items-center justify-center flex-shrink-0" style={{ backgroundColor: C.gold, color: C.bg1 }}>
                                             <Check className="w-3 h-3 font-bold" />
@@ -470,8 +376,11 @@ export default function ReprovadoPage() {
                             </div>
                         </div>
 
-                        <Cta text="Falar com Especialista Agora" full />
-                        <p className="text-xs mt-6" style={{ color: C.gray3 }}>
+                        <Cta text="Falar com Dr. Marcelo Agora" full />
+                        <p className="text-xs mt-6 italic" style={{ color: C.gray3 }}>
+                            {D.hero.disclaimer}
+                        </p>
+                        <p className="text-xs mt-2" style={{ color: C.gray3 }}>
                             © 2026 Marcelo Colen Advogados · OAB/MG
                         </p>
                     </div>
@@ -495,7 +404,7 @@ function VideoSection({ youtubeId, iframeSrc, mp4Src }: { youtubeId?: string; if
                     Mensagem do Especialista
                 </p>
                 <h2 className="text-2xl md:text-3xl font-bold text-center mb-10 leading-tight md:leading-snug" style={{ color: C.white, fontFamily: "Georgia, serif" }}>
-                    Entenda em 2 minutos por que você ainda pode contestar o resultado.
+                    Entenda em 2 minutos por que você ainda pode contestar.
                 </h2>
                 <div className="relative w-full rounded-2xl overflow-hidden scale-[1.02] md:scale-100" style={{ boxShadow: "0 12px 60px rgba(0,0,0,0.65)", border: "1px solid rgba(255,255,255,0.1)" }}>
                     {MP4_SRC ? (
@@ -504,17 +413,10 @@ function VideoSection({ youtubeId, iframeSrc, mp4Src }: { youtubeId?: string; if
                         <LiteYouTubeEmbed id={YOUTUBE_ID} title="Vídeo de Análise da Situação" poster="maxresdefault" wrapperClass="yt-lite" />
                     )}
                 </div>
-                <p className="text-center text-sm md:text-lg mt-8 mb-6 leading-relaxed" style={{ color: C.gray2 }}>
-                    Ficou com alguma dúvida? Você pode mandar uma mensagem agora — a análise inicial é gratuita.
-                </p>
-                <div className="flex justify-center">
+                <div className="flex justify-center mt-8">
                     <Cta text="Quero Analisar Meu Caso Agora" />
                 </div>
-                <p className="text-center text-[10px] md:text-xs mt-4 italic opacity-80" style={{ color: C.gray3 }}>
-                    Cada caso é avaliado individualmente — sem promessa de resultado.
-                </p>
             </div>
         </section>
     );
 }
-
