@@ -144,30 +144,9 @@ function SectionLabel({ children }: { children: string }) {
 }
 
 // ============================================================================
-// CTA BUTTON — verde WhatsApp (seções de conversão)
+// CTA BUTTON — pill escuro com borda dourada
 // ============================================================================
 function Cta({ text, full = false }: { text: string; full?: boolean; }) {
-    return (
-        <a
-            href={getDirectWhatsAppLink(D.wa)}
-            onClick={trackWhatsAppClick}
-            style={{
-                backgroundColor: C.cta,
-                color: C.white,
-                boxShadow: `0 4px 32px ${C.ctaGlow}, 0 1px 0 rgba(255,255,255,0.08) inset`,
-            }}
-            className={`group inline-flex items-center justify-center gap-3 font-extrabold text-base md:text-lg px-6 py-5 md:px-8 md:py-4 rounded-xl transition-all duration-150 hover:brightness-110 hover:scale-[1.025] active:scale-[0.98] active:brightness-95 ${full ? "w-full" : ""}`}
-        >
-            <MessageCircle className="w-5 h-5 md:w-6 md:h-6 group-hover:animate-pulse" />
-            {text}
-        </a>
-    );
-}
-
-// ============================================================================
-// HERO CTA — botão discreto dourado (hero, topo da página)
-// ============================================================================
-function HeroCta({ text, full = false }: { text: string; full?: boolean }) {
     return (
         <a
             href={getDirectWhatsAppLink(D.wa)}
@@ -185,6 +164,8 @@ function HeroCta({ text, full = false }: { text: string; full?: boolean }) {
         </a>
     );
 }
+
+const HeroCta = Cta;
 
 // ============================================================================
 // FAQ ITEM (aberto por padrão)
