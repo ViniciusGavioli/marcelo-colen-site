@@ -331,6 +331,8 @@ export default function AdvogadoPage() {
             <section className="relative flex items-center overflow-hidden py-14 md:py-28 lg:py-36" style={{ backgroundColor: C.bg1 }}>
                 {/* Fundo em camadas */}
                 <div className="absolute inset-0 z-0 select-none">
+                    {/* Ardósia base */}
+                    <div className="absolute inset-0" style={{ backgroundImage: "url('/texture-pedra.png')", backgroundSize: "cover", backgroundPosition: "top center", opacity: 0.18 }} />
                     <Image src="/images/hero-scales.png" alt="" fill className="object-cover opacity-[0.04]" priority aria-hidden="true" />
                     {/* Textura atmosférica: vinho/borgonha + azul-acinzentado + preto profundo */}
                     <div className="absolute inset-0" style={{ background: "radial-gradient(ellipse 65% 45% at 78% 12%, rgba(155,50,40,0.52) 0%, transparent 65%)" }} />
@@ -562,6 +564,12 @@ export default function AdvogadoPage() {
                     aria-hidden="true"
                     className="absolute inset-0 pointer-events-none"
                     style={{ background: "radial-gradient(ellipse at center, rgba(239,68,68,0.04) 0%, transparent 70%)" }}
+                />
+                {/* Símbolos jurídicos */}
+                <div
+                    aria-hidden="true"
+                    className="absolute inset-0 pointer-events-none"
+                    style={{ backgroundImage: "url('/texture-juridica.png')", backgroundRepeat: "repeat", backgroundSize: "1100px 730px", opacity: 0.07 }}
                 />
                 <Container className="relative z-10">
                     <div className="max-w-2xl mx-auto text-center px-4">
