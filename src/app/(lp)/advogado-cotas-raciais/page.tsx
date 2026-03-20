@@ -144,7 +144,7 @@ function SectionLabel({ children }: { children: string }) {
 }
 
 // ============================================================================
-// CTA BUTTON — verde WhatsApp (seções de conversão)
+// CTA BUTTON — dark gold border (todas as seções)
 // ============================================================================
 function Cta({ text, full = false }: { text: string; full?: boolean; }) {
     return (
@@ -152,13 +152,14 @@ function Cta({ text, full = false }: { text: string; full?: boolean; }) {
             href={getDirectWhatsAppLink(D.wa)}
             onClick={trackWhatsAppClick}
             style={{
-                backgroundColor: C.cta,
+                background: "linear-gradient(160deg, #1c0a0a 0%, #0a0a0a 55%, #0f0d00 100%)",
+                border: "2px solid #c9a227",
                 color: C.white,
-                boxShadow: `0 4px 32px ${C.ctaGlow}, 0 1px 0 rgba(255,255,255,0.08) inset`,
+                boxShadow: "0 0 28px rgba(201,162,39,0.18), 0 1px 0 rgba(201,162,39,0.12) inset",
             }}
-            className={`group inline-flex items-center justify-center gap-3 font-extrabold text-base md:text-lg px-6 py-5 md:px-8 md:py-4 rounded-xl transition-all duration-150 hover:brightness-110 hover:scale-[1.025] active:scale-[0.98] active:brightness-95 ${full ? "w-full" : ""}`}
+            className={`group inline-flex items-center justify-center gap-2 font-semibold text-base md:text-lg px-8 py-4 rounded-full transition-all duration-200 hover:shadow-[0_0_40px_rgba(201,162,39,0.35)] hover:scale-[1.02] active:scale-[0.98] ${full ? "w-full" : ""}`}
         >
-            <MessageCircle className="w-5 h-5 md:w-6 md:h-6 group-hover:animate-pulse" />
+            <MessageCircle className="w-5 h-5 opacity-70 group-hover:opacity-100 transition-opacity" />
             {text}
         </a>
     );
