@@ -58,7 +58,7 @@ const GRAIN_URL = `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/
 const D = {
     hero: {
         badge: "⚠️ Prazo de recurso: entre 2 e 5 dias a partir do resultado. Cada hora conta.",
-        h1_1: "Passou nas Provas e foi Reprovado pela banca?",
+        h1_1: "Passou em tudo e foi reprovado na banca?",
         h1_2: "Isso tem contestação.",
         sub: "Se a banca te indeferiu, pode ter cometido um erro. Esse erro pode ser contestado antes do prazo acabar.",
         credentials: "Dr. Marcelo Colen · Mestre em Direito pela UFMG · Secretário da Comissão Nacional de Promoção da Igualdade da OAB Federal · Diretor de Diversidade da OAB/MG",
