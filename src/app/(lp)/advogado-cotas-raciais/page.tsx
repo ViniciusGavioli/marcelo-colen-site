@@ -144,9 +144,31 @@ function SectionLabel({ children }: { children: string }) {
 }
 
 // ============================================================================
-// CTA BUTTON — pill escuro com borda dourada
+// CTA BUTTON — dark gold border (todas as seções)
 // ============================================================================
 function Cta({ text, full = false }: { text: string; full?: boolean; }) {
+    return (
+        <a
+            href={getDirectWhatsAppLink(D.wa)}
+            onClick={trackWhatsAppClick}
+            style={{
+                background: "linear-gradient(160deg, #1c0a0a 0%, #0a0a0a 55%, #0f0d00 100%)",
+                border: "2px solid #c9a227",
+                color: C.white,
+                boxShadow: "0 0 28px rgba(201,162,39,0.18), 0 1px 0 rgba(201,162,39,0.12) inset",
+            }}
+            className={`group inline-flex items-center justify-center gap-2 font-semibold text-base md:text-lg px-8 py-4 rounded-full transition-all duration-200 hover:shadow-[0_0_40px_rgba(201,162,39,0.35)] hover:scale-[1.02] active:scale-[0.98] ${full ? "w-full" : ""}`}
+        >
+            <MessageCircle className="w-5 h-5 opacity-70 group-hover:opacity-100 transition-opacity" />
+            {text}
+        </a>
+    );
+}
+
+// ============================================================================
+// HERO CTA — botão discreto dourado (hero, topo da página)
+// ============================================================================
+function HeroCta({ text, full = false }: { text: string; full?: boolean }) {
     return (
         <a
             href={getDirectWhatsAppLink(D.wa)}
@@ -164,8 +186,6 @@ function Cta({ text, full = false }: { text: string; full?: boolean; }) {
         </a>
     );
 }
-
-const HeroCta = Cta;
 
 // ============================================================================
 // FAQ ITEM (aberto por padrão)
@@ -311,12 +331,9 @@ export default function AdvogadoPage() {
             <section className="relative flex items-center overflow-hidden py-14 md:py-28 lg:py-36" style={{ backgroundColor: C.bg1 }}>
                 {/* Fundo em camadas */}
                 <div className="absolute inset-0 z-0 select-none">
+                    {/* Ardósia sutil */}
+                    <div className="absolute inset-0" style={{ backgroundImage: "url('/texture-pedra.png')", backgroundSize: "cover", backgroundPosition: "top center", opacity: 0.06 }} />
                     <Image src="/images/hero-scales.png" alt="" fill className="object-cover opacity-[0.04]" priority aria-hidden="true" />
-                    {/* Textura atmosférica: vinho/borgonha + azul-acinzentado + preto profundo */}
-                    <div className="absolute inset-0" style={{ background: "radial-gradient(ellipse 65% 45% at 78% 12%, rgba(155,50,40,0.52) 0%, transparent 65%)" }} />
-                    <div className="absolute inset-0" style={{ background: "radial-gradient(ellipse 42% 32% at 12% 10%, rgba(95,88,125,0.38) 0%, transparent 58%)" }} />
-                    <div className="absolute inset-0" style={{ background: "radial-gradient(ellipse 55% 48% at 52% 58%, rgba(130,38,30,0.42) 0%, transparent 62%)" }} />
-                    <div className="absolute inset-0" style={{ background: "radial-gradient(ellipse 38% 28% at 88% 78%, rgba(148,52,36,0.32) 0%, transparent 55%)" }} />
                     {/* Gold sutil por cima */}
                     <div className="absolute inset-0" style={{ background: `radial-gradient(ellipse 80% 60% at 50% 0%, rgba(201,162,39,0.05) 0%, transparent 70%)` }} />
                     {/* Fade nas bordas para não vazar */}
@@ -447,14 +464,11 @@ export default function AdvogadoPage() {
                     borderBottom: "1px solid rgba(255,255,255,0.05)",
                 }}
             >
-                {/* fundo sutil com linhas de grade */}
+                {/* Símbolos jurídicos sutil */}
                 <div
                     aria-hidden="true"
-                    className="absolute inset-0 pointer-events-none opacity-[0.03]"
-                    style={{
-                        backgroundImage: `linear-gradient(rgba(201,162,39,0.5) 1px, transparent 1px), linear-gradient(90deg, rgba(201,162,39,0.5) 1px, transparent 1px)`,
-                        backgroundSize: "60px 60px",
-                    }}
+                    className="absolute inset-0 pointer-events-none"
+                    style={{ backgroundImage: "url('/texture-juridica.png')", backgroundRepeat: "repeat", backgroundSize: "1200px 800px", opacity: 0.035 }}
                 />
                 {/* glow central */}
                 <div
@@ -543,6 +557,12 @@ export default function AdvogadoPage() {
                     className="absolute inset-0 pointer-events-none"
                     style={{ background: "radial-gradient(ellipse at center, rgba(239,68,68,0.04) 0%, transparent 70%)" }}
                 />
+                {/* Símbolos jurídicos */}
+                <div
+                    aria-hidden="true"
+                    className="absolute inset-0 pointer-events-none"
+                    style={{ backgroundImage: "url('/texture-juridica.png')", backgroundRepeat: "repeat", backgroundSize: "1200px 800px", opacity: 0.04 }}
+                />
                 <Container className="relative z-10">
                     <div className="max-w-2xl mx-auto text-center px-4">
                         <Clock className="w-10 h-10 md:w-12 md:h-12 mx-auto mb-6" style={{ color: C.gold }} />
@@ -560,8 +580,14 @@ export default function AdvogadoPage() {
             {/* ══════════════════════════════════════════════════════════════ */}
             {/* COMO FUNCIONA                                                */}
             {/* ══════════════════════════════════════════════════════════════ */}
-            <section className="py-16 md:py-28" style={{ backgroundColor: C.bg1 }}>
-                <Container>
+            <section className="py-16 md:py-28 relative overflow-hidden" style={{ backgroundColor: C.bg1 }}>
+                {/* Ardósia sutil */}
+                <div
+                    aria-hidden="true"
+                    className="absolute inset-0 pointer-events-none"
+                    style={{ backgroundImage: "url('/texture-pedra.png')", backgroundSize: "cover", backgroundPosition: "center bottom", opacity: 0.03 }}
+                />
+                <Container className="relative z-10">
                     <SectionLabel>Passo a passo</SectionLabel>
                     <h2 className="text-2xl md:text-4xl font-bold text-center mb-2 px-4" style={{ color: C.white, fontFamily: "'Cormorant Garamond', Georgia, serif" }}>
                         {D.steps.title}
@@ -602,10 +628,11 @@ export default function AdvogadoPage() {
                 className="py-14 md:py-20 relative overflow-hidden"
                 style={{ backgroundColor: C.bg2, borderTop: "1px solid rgba(255,255,255,0.05)" }}
             >
+                {/* Ardósia sutil */}
                 <div
                     aria-hidden="true"
                     className="absolute inset-0 pointer-events-none"
-                    style={{ backgroundImage: GRAIN_URL, backgroundRepeat: "repeat", backgroundSize: "320px 320px", opacity: 0.025 }}
+                    style={{ backgroundImage: "url('/texture-pedra.png')", backgroundSize: "cover", backgroundPosition: "center", opacity: 0.04 }}
                 />
                 {/* glow dourado de fundo */}
                 <div
@@ -673,8 +700,14 @@ export default function AdvogadoPage() {
             {/* ══════════════════════════════════════════════════════════════ */}
             {/* FAQ                                                          */}
             {/* ══════════════════════════════════════════════════════════════ */}
-            <section className="py-16 md:py-28" style={{ backgroundColor: C.bg1 }}>
-                <Container>
+            <section className="py-16 md:py-28 relative overflow-hidden" style={{ backgroundColor: C.bg1 }}>
+                {/* Símbolos jurídicos sutil */}
+                <div
+                    aria-hidden="true"
+                    className="absolute inset-0 pointer-events-none"
+                    style={{ backgroundImage: "url('/texture-juridica.png')", backgroundRepeat: "repeat", backgroundSize: "1200px 800px", opacity: 0.025 }}
+                />
+                <Container className="relative z-10">
                     <div className="max-w-2xl mx-auto">
                         <SectionLabel>Tire suas dúvidas</SectionLabel>
                         <h2 className="text-2xl md:text-3xl font-bold mb-2 text-center" style={{ color: C.white, fontFamily: "'Cormorant Garamond', Georgia, serif" }}>Perguntas Frequentes</h2>
@@ -702,10 +735,11 @@ export default function AdvogadoPage() {
                 className="py-14 relative overflow-hidden"
                 style={{ backgroundColor: C.bg2, borderTop: "1px solid rgba(255,255,255,0.05)" }}
             >
+                {/* Ardósia sutil */}
                 <div
                     aria-hidden="true"
                     className="absolute inset-0 pointer-events-none"
-                    style={{ backgroundImage: GRAIN_URL, backgroundRepeat: "repeat", backgroundSize: "320px 320px", opacity: 0.025 }}
+                    style={{ backgroundImage: "url('/texture-pedra.png')", backgroundSize: "cover", backgroundPosition: "bottom center", opacity: 0.035 }}
                 />
                 <div
                     aria-hidden="true"
