@@ -674,14 +674,20 @@ export default function RecursoHeteroidentificacaoPage() {
 
                         {/* FOTO — coluna esquerda, sem fundo, grande */}
                         <div className="flex-shrink-0 flex items-end justify-center md:justify-start md:w-64 lg:w-72">
-                            <div className="w-48 md:w-full">
+                            <div className="relative w-52 md:w-full">
                                 <Image
                                     src="/images/marcelo/marcelo-sem-fundo-.png"
                                     alt="Dr. Marcelo Colen"
                                     width={320}
                                     height={420}
                                     className="object-contain w-full"
-                                    style={{ filter: "drop-shadow(0 20px 40px rgba(0,0,0,0.5))" }}
+                                    style={{ filter: "drop-shadow(0 8px 24px rgba(0,0,0,0.6))" }}
+                                />
+                                {/* gradiente base — dissolve o corte inferior */}
+                                <div
+                                    aria-hidden="true"
+                                    className="absolute bottom-0 left-0 right-0 h-28 pointer-events-none"
+                                    style={{ background: `linear-gradient(to top, ${C.bg2} 0%, transparent 100%)` }}
                                 />
                             </div>
                         </div>
