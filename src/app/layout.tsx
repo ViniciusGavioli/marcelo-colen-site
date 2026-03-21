@@ -5,11 +5,10 @@ import FacebookPixel from "@/components/FacebookPixel";
 import GoogleAdsTag from "@/components/GoogleAdsTag";
 import { WhatsAppFloat } from "@/components/WhatsAppFloat";
 
-
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
-  themeColor: "#8B6914",
+  themeColor: "#0a0a0a",
 };
 
 export const metadata: Metadata = {
@@ -23,22 +22,6 @@ export const metadata: Metadata = {
   creator: SITE_CONFIG.name,
   publisher: SITE_CONFIG.name,
   metadataBase: new URL(SITE_CONFIG.url),
-  alternates: {
-    canonical: "/",
-  },
-  openGraph: {
-    type: "website",
-    locale: SITE_CONFIG.locale,
-    url: SITE_CONFIG.url,
-    siteName: SITE_CONFIG.fullName,
-    title: DEFAULT_SEO.title,
-    description: DEFAULT_SEO.description,
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: DEFAULT_SEO.title,
-    description: DEFAULT_SEO.description,
-  },
   robots: {
     index: true,
     follow: true,
@@ -52,8 +35,8 @@ export const metadata: Metadata = {
   },
 };
 
-// Root Layout - apenas HTML/Body
-// Header/Footer são adicionados no (main)/layout.tsx
+// Root Layout — apenas HTML/Body/Providers
+// Header/Footer ficam nos route group layouts: (site)/layout.tsx e (lp)/layout.tsx
 export default function RootLayout({
   children,
 }: Readonly<{
