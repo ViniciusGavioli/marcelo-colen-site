@@ -24,6 +24,7 @@ import { Container } from "@/components/layout";
 import { getDirectWhatsAppLink } from "@/lib/whatsapp";
 import { trackWhatsAppClick } from "@/lib/analytics";
 import { useState, useEffect, useRef } from "react";
+import { DrMarceloSection } from "@/components/sections/DrMarceloSection";
 
 // ============================================================================
 // CORES
@@ -656,117 +657,7 @@ export default function RecursoHeteroidentificacaoPage() {
             {/* ══════════════════════════════════════════════════════════════ */}
             {/* DR. MARCELO                                                  */}
             {/* ══════════════════════════════════════════════════════════════ */}
-            <section
-                className="relative overflow-hidden"
-                style={{ backgroundColor: C.bg2, borderTop: "1px solid rgba(255,255,255,0.05)" }}
-            >
-                {/* Ardósia sutil */}
-                <div aria-hidden="true" className="absolute inset-0 pointer-events-none"
-                    style={{ backgroundImage: "url('/texture-pedra.png')", backgroundSize: "cover", backgroundPosition: "center", opacity: 0.04 }}
-                />
-                {/* glow dourado lateral esquerdo */}
-                <div aria-hidden="true" className="absolute left-0 top-0 bottom-0 w-1/2 pointer-events-none"
-                    style={{ background: "radial-gradient(ellipse at left center, rgba(201,162,39,0.06) 0%, transparent 65%)" }}
-                />
-
-                <Container className="relative z-10">
-                    <div className="max-w-4xl mx-auto flex flex-col md:flex-row items-stretch gap-0">
-
-                        {/* FOTO + TARJA — coluna esquerda */}
-                        <div className="flex-shrink-0 md:w-64 lg:w-72 -mx-4 md:mx-0 flex flex-col">
-                            <style>{`
-                                @keyframes marquee-colen {
-                                    0% { transform: translateX(0); }
-                                    100% { transform: translateX(-50%); }
-                                }
-                            `}</style>
-                            <Image
-                                src="/images/marcelo/marcelo-sem-fundo-.png"
-                                alt="Dr. Marcelo Colen"
-                                width={553}
-                                height={722}
-                                className="w-full object-contain"
-                                style={{ filter: "drop-shadow(0 8px 24px rgba(0,0,0,0.6))", display: "block" }}
-                            />
-                            {/* Tarja credencial colada embaixo da foto */}
-                            <div style={{
-                                backgroundColor: "#0B1730",
-                                borderTop: "1px solid rgba(201,162,39,0.3)",
-                                borderBottom: "1px solid rgba(201,162,39,0.1)",
-                                overflow: "hidden",
-                                padding: "10px 0",
-                            }}>
-                                <div style={{
-                                    display: "inline-block",
-                                    whiteSpace: "nowrap",
-                                    animation: "marquee-colen 22s linear infinite",
-                                }}>
-                                    {[0, 1].map(i => (
-                                        <span key={i}>
-                                            {["Dr. Marcelo Colen", "Mestre em Direito UFMG", "OAB/MG", "Especialista em Heteroidentificação", "Diretor de Diversidade OAB/MG"].map((txt, j) => (
-                                                <span key={j} style={{ color: C.gold, fontSize: "11px", fontWeight: 600, letterSpacing: "0.12em", textTransform: "uppercase" }}>
-                                                    {txt}
-                                                    <span style={{ color: "rgba(201,162,39,0.35)", margin: "0 14px" }}>·</span>
-                                                </span>
-                                            ))}
-                                        </span>
-                                    ))}
-                                </div>
-                            </div>
-                        </div>
-
-                        {/* linha divisória vertical dourada */}
-                        <div className="hidden md:block w-px mx-8 self-stretch" style={{ background: `linear-gradient(to bottom, transparent, rgba(201,162,39,0.3), transparent)` }} />
-
-                        {/* TEXTO — coluna direita */}
-                        <div className="flex-1 flex flex-col justify-center py-10 md:py-12 px-4 md:px-0">
-                            <SectionLabel>Quem vai analisar seu caso</SectionLabel>
-
-                            {/* aspas decorativas */}
-                            <span aria-hidden="true" className="text-7xl leading-none font-serif select-none mb-1"
-                                style={{ color: C.gold, opacity: 0.15 }}>
-                                &ldquo;
-                            </span>
-                            <p className="text-base md:text-lg leading-relaxed italic mb-5" style={{ color: C.gray1 }}>
-                                Minha missão não é apenas escrever recursos. É garantir que a subjetividade de uma banca não destrua o mérito de quem realmente pertence às cotas.
-                            </p>
-
-                            <div className="h-px mb-5" style={{ background: `linear-gradient(to right, ${C.gold}, transparent)`, opacity: 0.3 }} />
-
-                            <div className="flex items-center gap-2 flex-wrap">
-                                <p className="font-bold text-lg" style={{ color: C.gold, fontFamily: "'Cormorant Garamond', Georgia, serif" }}>
-                                    Dr. Marcelo Colen
-                                </p>
-                                <span
-                                    className="px-2 py-0.5 rounded-full text-[9px] font-black uppercase tracking-widest"
-                                    style={{ backgroundColor: C.gold, color: C.bg1 }}
-                                >
-                                    OAB/MG
-                                </span>
-                            </div>
-                            <p className="text-xs mt-1 mb-6" style={{ color: C.gray3 }}>
-                                Advogado · Direito Antidiscriminatório e Concursos Públicos
-                            </p>
-
-                            {/* Bullets de autoridade */}
-                            <div className="space-y-3" style={{ color: C.gray2 }}>
-                                {[
-                                    "Mestre em Direito pela UFMG",
-                                    "Secretário da Comissão Nac. de Promoção da Igualdade da OAB Federal",
-                                    "Diretor de Diversidade e Inclusão da OAB/MG",
-                                    "Professor, palestrante e autor publicado",
-                                ].map((item, i) => (
-                                    <div key={i} className="flex items-start gap-3 text-sm md:text-base">
-                                        <Check className="w-4 h-4 flex-shrink-0 mt-0.5" style={{ color: C.gold }} />
-                                        <span>{item}</span>
-                                    </div>
-                                ))}
-                            </div>
-                        </div>
-
-                    </div>
-                </Container>
-            </section>
+            <DrMarceloSection />
 
             {/* ══════════════════════════════════════════════════════════════ */}
             {/* FAQ                                                          */}
