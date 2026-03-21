@@ -24,6 +24,7 @@ import { Container } from "@/components/layout";
 import { getDirectWhatsAppLink } from "@/lib/whatsapp";
 import { trackWhatsAppClick } from "@/lib/analytics";
 import { useState } from "react";
+import { DrMarceloSection } from "@/components/sections/DrMarceloSection";
 
 // ============================================================================
 // CORES
@@ -329,6 +330,11 @@ export default function ReprovadoPage() {
                     </div>
                 </Container>
             </section>
+
+            {/* ══════════════════════════════════════════════════════════════ */}
+            {/* DR. MARCELO                                                  */}
+            {/* ══════════════════════════════════════════════════════════════ */}
+            <DrMarceloSection />
 
             {/* ══════════════════════════════════════════════════════════════ */}
             {/* FAQ (aberto por padrão)                                     */}

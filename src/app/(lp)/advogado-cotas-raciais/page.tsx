@@ -24,6 +24,7 @@ import { Container } from "@/components/layout";
 import { getDirectWhatsAppLink } from "@/lib/whatsapp";
 import { trackWhatsAppClick } from "@/lib/analytics";
 import { useState, useEffect, useRef } from "react";
+import { DrMarceloSection } from "@/components/sections/DrMarceloSection";
 
 // ============================================================================
 // CORES
@@ -624,78 +625,7 @@ export default function AdvogadoPage() {
             {/* ══════════════════════════════════════════════════════════════ */}
             {/* DR. MARCELO                                                  */}
             {/* ══════════════════════════════════════════════════════════════ */}
-            <section
-                className="py-14 md:py-20 relative overflow-hidden"
-                style={{ backgroundColor: C.bg2, borderTop: "1px solid rgba(255,255,255,0.05)" }}
-            >
-                {/* Ardósia sutil */}
-                <div
-                    aria-hidden="true"
-                    className="absolute inset-0 pointer-events-none"
-                    style={{ backgroundImage: "url('/texture-pedra.png')", backgroundSize: "cover", backgroundPosition: "center", opacity: 0.04 }}
-                />
-                {/* glow dourado de fundo */}
-                <div
-                    aria-hidden="true"
-                    className="absolute left-0 top-0 w-64 h-64 pointer-events-none"
-                    style={{ background: "radial-gradient(circle, rgba(201,162,39,0.05) 0%, transparent 70%)", filter: "blur(30px)" }}
-                />
-                <Container className="relative z-10">
-                    <div
-                        className="max-w-2xl mx-auto rounded-2xl p-6 md:p-10 flex flex-col md:flex-row items-center gap-8"
-                        style={{
-                            background: "rgba(255,255,255,0.02)",
-                            border: "1px solid rgba(201,162,39,0.15)",
-                            boxShadow: "0 8px 28px rgba(0,0,0,0.2)",
-                        }}
-                    >
-                        <div className="flex-shrink-0">
-                            <div className="relative">
-                                <Image
-                                    src="/images/marcelo/marcelo-hero.jpg"
-                                    alt="Dr. Marcelo Colen"
-                                    width={160}
-                                    height={160}
-                                    className="rounded-xl object-cover w-28 h-28 md:w-36 md:h-36"
-                                    style={{ boxShadow: `0 0 0 1px rgba(201,162,39,0.2), 0 6px 20px rgba(0,0,0,0.15)` }}
-                                />
-                                {/* badge OAB */}
-                                <div
-                                    className="absolute -bottom-2 -right-2 px-2 py-0.5 rounded-full text-[9px] font-black uppercase tracking-widest"
-                                    style={{ backgroundColor: C.gold, color: C.bg1 }}
-                                >
-                                    OAB/MG
-                                </div>
-                            </div>
-                        </div>
-                        <div className="relative">
-                            {/* aspas decorativas grandes */}
-                            <span
-                                aria-hidden="true"
-                                className="absolute -top-4 -left-2 text-7xl leading-none font-serif select-none"
-                                style={{ color: C.gold, opacity: 0.15 }}
-                            >&ldquo;</span>
-                            <p className="text-base md:text-lg leading-relaxed italic mb-5 relative z-10" style={{ color: C.gray1 }}>
-                                Minha missão não é apenas escrever recursos. É garantir que a subjetividade de uma banca não destrua o mérito de quem realmente pertence às cotas.
-                            </p>
-                            <div className="h-px mb-4" style={{ background: `linear-gradient(to right, ${C.gold}, transparent)`, opacity: 0.3 }} />
-                            <p className="font-bold text-base" style={{ color: C.gold }}>
-                                Dr. Marcelo Colen
-                            </p>
-                            <p className="text-xs mt-1 mb-4" style={{ color: C.gray3 }}>
-                                Advogado · OAB/MG · Direito Antidiscriminatório e Concursos Públicos
-                            </p>
-                            {/* Bullets de autoridade */}
-                            <div className="space-y-2 text-xs md:text-sm" style={{ color: C.gray2 }}>
-                                <div className="flex items-center gap-2"><Check className="w-3.5 h-3.5 flex-shrink-0" style={{ color: C.gold }} /> Mestre em Direito pela UFMG</div>
-                                <div className="flex items-center gap-2"><Check className="w-3.5 h-3.5 flex-shrink-0" style={{ color: C.gold }} /> Secretário da Comissão Nac. de Promoção da Igualdade da OAB Federal</div>
-                                <div className="flex items-center gap-2"><Check className="w-3.5 h-3.5 flex-shrink-0" style={{ color: C.gold }} /> Diretor de Diversidade e Inclusão da OAB/MG</div>
-                                <div className="flex items-center gap-2"><Check className="w-3.5 h-3.5 flex-shrink-0" style={{ color: C.gold }} /> Professor, palestrante e autor publicado</div>
-                            </div>
-                        </div>
-                    </div>
-                </Container>
-            </section>
+            <DrMarceloSection />
 
             {/* ══════════════════════════════════════════════════════════════ */}
             {/* FAQ                                                          */}
