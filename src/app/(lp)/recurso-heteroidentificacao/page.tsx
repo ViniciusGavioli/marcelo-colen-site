@@ -672,24 +672,16 @@ export default function RecursoHeteroidentificacaoPage() {
                 <Container className="relative z-10">
                     <div className="max-w-4xl mx-auto flex flex-col md:flex-row items-stretch gap-0">
 
-                        {/* FOTO — coluna esquerda, sem fundo, grande */}
-                        <div className="flex-shrink-0 flex items-end justify-center md:justify-start md:w-64 lg:w-72">
-                            <div className="relative w-52 md:w-full">
-                                <Image
-                                    src="/images/marcelo/marcelo-sem-fundo-.png"
-                                    alt="Dr. Marcelo Colen"
-                                    width={320}
-                                    height={420}
-                                    className="object-contain w-full"
-                                    style={{ filter: "drop-shadow(0 8px 24px rgba(0,0,0,0.6))" }}
-                                />
-                                {/* gradiente base — dissolve o corte inferior */}
-                                <div
-                                    aria-hidden="true"
-                                    className="absolute bottom-0 left-0 right-0 h-28 pointer-events-none"
-                                    style={{ background: `linear-gradient(to top, ${C.bg2} 0%, transparent 100%)` }}
-                                />
-                            </div>
+                        {/* FOTO — full width mobile, coluna no desktop */}
+                        <div className="flex-shrink-0 md:w-64 lg:w-72 -mx-4 md:mx-0">
+                            <Image
+                                src="/images/marcelo/marcelo-sem-fundo-.png"
+                                alt="Dr. Marcelo Colen"
+                                width={553}
+                                height={722}
+                                className="w-full md:w-full object-contain"
+                                style={{ filter: "drop-shadow(0 8px 24px rgba(0,0,0,0.6))" }}
+                            />
                         </div>
 
                         {/* linha divisória vertical dourada */}
