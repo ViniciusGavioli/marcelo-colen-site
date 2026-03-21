@@ -5,25 +5,19 @@ import LiteYouTubeEmbed from "react-lite-youtube-embed";
 import "react-lite-youtube-embed/dist/LiteYouTubeEmbed.css";
 import {
     MessageCircle,
-    AlertTriangle,
-    XCircle,
-    ShieldCheck,
+    ChevronDown,
+    Lock,
+    Check,
     Clock,
     Send,
     Search,
     Gavel,
-    ChevronDown,
-    Lock,
-    Copy,
-    Check,
-    Zap,
-    Scale,
-    FileText
+    FileText,
 } from "lucide-react";
 import { Container } from "@/components/layout";
 import { getDirectWhatsAppLink } from "@/lib/whatsapp";
 import { trackWhatsAppClick } from "@/lib/analytics";
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import { DrMarceloSection } from "@/components/sections/DrMarceloSection";
 
 // ============================================================================
@@ -34,7 +28,8 @@ const C = {
     bg2: "#111111",
     bg3: "#181818",
     gold: "#c9a227",
-    goldSoft: "rgba(201,162,39,0.12)",
+    goldSoft: "rgba(201,162,39,0.10)",
+    goldMid: "rgba(201,162,39,0.18)",
     white: "#ffffff",
     gray1: "rgba(255,255,255,0.92)",
     gray2: "rgba(255,255,255,0.7)",
@@ -42,26 +37,21 @@ const C = {
     red: "#ef4444",
     redBg: "rgba(239,68,68,0.08)",
     redBorder: "rgba(239,68,68,0.25)",
-    cta: "#E8410A",
-    ctaHover: "#FF5520",
-    ctaGlow: "rgba(232,65,10,0.45)",
-    green: "#25D366",
-    greenGlow: "rgba(37,211,102,0.25)",
+    cta: "#25D366",
 };
+
+const GRAIN_URL = `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='320' height='320'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.72' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='320' height='320' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E")`;
 
 // ============================================================================
 // DADOS LP 3: REPROVADO HETEROIDENTIFICAÇÃO
 // ============================================================================
 const D = {
     hero: {
-        badge: "⚠️ Prazo de recurso: entre 2 e 5 dias a partir do resultado. Cada hora conta.",
+        badge: "Prazo de recurso: entre 2 e 5 dias a partir do resultado. Cada hora conta.",
         h1_1: "Você passou nas provas.",
         h1_2: "A banca te eliminou. Isso pode ser contestado.",
-        sub: "Anos de estudo não podem acabar por uma decisão genérica e mal fundamentada de uma comissão de heteroidentificação. Análise jurídica individual do seu caso — rápida, sigilosa e sem custo inicial.",
-        credentials: "Dr. Marcelo Colen · Mestre em Direito pela UFMG · Secretário da Comissão Nacional de Promoção da Igualdade da OAB Federal · Diretor de Diversidade da OAB/MG",
+        sub: "Anos de estudo não podem acabar por uma decisão genérica e mal fundamentada de uma comissão de heteroidentificação. Análise jurídica individual do seu caso, rápida, sigilosa e sem custo inicial.",
         cta: "Analisar Meu Caso Agora",
-        ctaLine1: "Você pode enviar o resultado da heteroidentificação agora mesmo.",
-        ctaLine2: "Primeira análise gratuita e sigilosa.",
         disclaimer: "Cada caso é avaliado individualmente. Não fazemos promessa de resultado.",
     },
     analiseCaso: {
@@ -76,7 +66,7 @@ const D = {
     },
     urg: {
         title: "O Seu Prazo Está Correndo.",
-        text: "Em muitos concursos, o prazo de recurso administrativo é de apenas 2 a 5 dias corridos após o resultado. Passado esse prazo, a via administrativa fecha. Resta apenas a judicial — mais longa e mais cara. Por isso a análise precisa acontecer agora.",
+        text: "Em muitos concursos, o prazo de recurso administrativo é de apenas 2 a 5 dias corridos após o resultado. Passado esse prazo, a via administrativa fecha. Resta apenas a judicial, mais longa e mais cara. Por isso a análise precisa acontecer agora.",
         cta: "Mandar Mensagem Rápida Agora",
     },
     steps: {
@@ -89,7 +79,7 @@ const D = {
         cta: "Mandar a Primeira MSG Agora",
     },
     faq: [
-        { q: "Tem custo essa primeira conversa?", a: "Não. A análise inicial do seu caso — edital, resultado e prazo — é feita sem custo. Se houver fundamento para recurso e você quiser contratar, apresentamos os honorários nesse momento." },
+        { q: "Tem custo essa primeira conversa?", a: "Não. A análise inicial do seu caso (edital, resultado e prazo) é feita sem custo. Se houver fundamento para recurso e você quiser contratar, apresentamos os honorários nesse momento." },
         { q: "E se não houver fundamento para recurso?", a: "Informamos isso claramente, sem enrolação. Não cobramos para dizer que o caso não tem viabilidade. Preferimos ser diretos do que gerar expectativa falsa." },
         { q: "A conversa é protegida por sigilo?", a: "Sim. Todo contato está protegido pelo sigilo profissional da advocacia. Nenhuma informação é compartilhada." },
         { q: "A atuação abrange candidatos de qualquer estado?", a: "Sim. O atendimento é 100% online e nacional. Já atuamos em concursos federais e estaduais em todo o Brasil." },
@@ -98,29 +88,77 @@ const D = {
 };
 
 // ============================================================================
-// CTA BUTTON
+// GRAIN OVERLAY
 // ============================================================================
-function Cta({ text, full = false }: { text: string; full?: boolean; }) {
+function GrainOverlay() {
+    return (
+        <div
+            aria-hidden="true"
+            className="pointer-events-none fixed inset-0 z-[1]"
+            style={{
+                backgroundImage: GRAIN_URL,
+                backgroundRepeat: "repeat",
+                backgroundSize: "320px 320px",
+                opacity: 0.032,
+                mixBlendMode: "overlay",
+            }}
+        />
+    );
+}
+
+// ============================================================================
+// DIVISOR DOURADO
+// ============================================================================
+function GoldDivider() {
+    return (
+        <div className="flex items-center justify-center gap-3 py-1" aria-hidden="true">
+            <div className="h-px flex-1 max-w-[120px]" style={{ background: `linear-gradient(to right, transparent, ${C.gold})`, opacity: 0.35 }} />
+            <div className="w-1.5 h-1.5 rotate-45" style={{ backgroundColor: C.gold, opacity: 0.6 }} />
+            <div className="h-px flex-1 max-w-[120px]" style={{ background: `linear-gradient(to left, transparent, ${C.gold})`, opacity: 0.35 }} />
+        </div>
+    );
+}
+
+// ============================================================================
+// LABEL DE SEÇÃO
+// ============================================================================
+function SectionLabel({ children }: { children: string }) {
+    return (
+        <p className="text-[10px] md:text-xs uppercase tracking-[0.22em] text-center mb-3 font-semibold" style={{ color: C.gold }}>
+            {children}
+        </p>
+    );
+}
+
+// ============================================================================
+// CTA BUTTON — dark gold border
+// ============================================================================
+function Cta({ text, full = false }: { text: string; full?: boolean }) {
     return (
         <a
             href={getDirectWhatsAppLink(D.wa)}
             onClick={trackWhatsAppClick}
-            style={{ backgroundColor: C.cta, color: C.white, boxShadow: `0 4px 28px ${C.ctaGlow}` }}
-            className={`group inline-flex items-center justify-center gap-3 font-extrabold text-base md:text-lg px-6 py-5 md:px-8 md:py-4 rounded-xl transition-all duration-150 hover:brightness-110 hover:scale-[1.025] active:scale-[0.98] active:brightness-95 ${full ? "w-full" : ""}`}
+            style={{
+                background: "linear-gradient(160deg, #1c0a0a 0%, #0a0a0a 55%, #0f0d00 100%)",
+                border: "2px solid #c9a227",
+                color: C.white,
+                boxShadow: "0 0 28px rgba(201,162,39,0.18), 0 1px 0 rgba(201,162,39,0.12) inset",
+            }}
+            className={`group inline-flex items-center justify-center gap-2 font-semibold text-base md:text-lg px-8 py-4 rounded-full transition-all duration-200 hover:shadow-[0_0_40px_rgba(201,162,39,0.35)] hover:scale-[1.02] active:scale-[0.98] ${full ? "w-full" : ""}`}
         >
-            <MessageCircle className="w-5 h-5 md:w-6 md:h-6 group-hover:animate-pulse" />
+            <MessageCircle className="w-5 h-5 opacity-70 group-hover:opacity-100 transition-opacity" />
             {text}
         </a>
     );
 }
 
 // ============================================================================
-// FAQ ITEM (aberto por padrão)
+// FAQ ITEM (fechado por padrão)
 // ============================================================================
 function FaqItem({ q, a }: { q: string; a: string }) {
-    const [open, setOpen] = useState(true);
+    const [open, setOpen] = useState(false);
     return (
-        <div style={{ borderColor: "rgba(255,255,255,0.08)" }} className="border-b last:border-0 px-1">
+        <div style={{ borderColor: "rgba(255,255,255,0.07)" }} className="border-b last:border-0 px-1">
             <button onClick={() => setOpen(!open)} className="w-full flex items-center justify-between py-6 text-left group">
                 <span style={{ color: C.white }} className="font-bold text-base md:text-lg pr-4 group-hover:brightness-125 transition-all">
                     {q}
@@ -142,32 +180,40 @@ function FaqItem({ q, a }: { q: string; a: string }) {
 function ProvasSocial() {
     const depoimentos = [
         {
-            nome: "M.S. · Concurso Federal · Brasília/DF",
+            nome: "Mariana Souza · Concurso Federal · Brasília/DF",
             texto: "Fui eliminada na heteroidentificação do CNU depois de anos estudando. O Dr. Marcelo analisou meu caso em horas e identificou falha procedimental da banca. Consegui liminar e retornei ao certame.",
         },
         {
-            nome: "R.O. · Concurso Estadual · Belo Horizonte/MG",
+            nome: "Rafael Oliveira · Concurso Estadual · Belo Horizonte/MG",
             texto: "A motivação da banca era genérica, três linhas apenas. Com o recurso bem fundamentado, a eliminação foi revertida administrativamente. Hoje estou no cargo.",
         },
         {
-            nome: "C.A. · Concurso Cebraspe · São Paulo/SP",
+            nome: "Camila Andrade · Concurso Cebraspe · São Paulo/SP",
             texto: "Achei que não tinha mais saída. O atendimento foi imediato e o Dr. Marcelo explicou tecnicamente por que minha reprovação tinha base para contestação. Recomendo a qualquer candidato nessa situação.",
         },
     ];
 
     return (
-        <section className="py-12 md:py-20" style={{ backgroundColor: C.bg2 }}>
-            <Container>
+        <section className="py-16 md:py-28 relative overflow-hidden" style={{ backgroundColor: C.bg2 }}>
+            <div aria-hidden="true" className="absolute inset-0 pointer-events-none"
+                style={{ backgroundImage: "url('/texture-juridica.png')", backgroundRepeat: "repeat", backgroundSize: "1200px 800px", opacity: 0.03 }} />
+            <Container className="relative z-10">
                 <div className="max-w-4xl mx-auto">
-                    <h2 className="text-2xl md:text-3xl font-bold text-center mb-10" style={{ color: C.white, fontFamily: "Georgia, serif" }}>
+                    <SectionLabel>Depoimentos</SectionLabel>
+                    <h2 className="text-2xl md:text-3xl font-bold text-center mb-2" style={{ color: C.white, fontFamily: "'Cormorant Garamond', Georgia, serif" }}>
                         Candidatos que contestaram a eliminação injusta
                     </h2>
-                    <div className="grid md:grid-cols-3 gap-6">
+                    <GoldDivider />
+                    <div className="grid md:grid-cols-3 gap-5 mt-10">
                         {depoimentos.map((dep, i) => (
-                            <div key={i} className="rounded-2xl p-6 flex flex-col" style={{ backgroundColor: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.08)" }}>
-                                <p className="text-sm md:text-base leading-relaxed mb-4 flex-1" style={{ color: C.gray2, fontStyle: "italic" }}>
+                            <div key={i} className="rounded-2xl p-6 flex flex-col relative overflow-hidden"
+                                style={{ backgroundColor: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.07)", boxShadow: "0 4px 20px rgba(0,0,0,0.2)" }}>
+                                <span aria-hidden="true" className="absolute top-3 right-4 text-5xl leading-none font-serif select-none"
+                                    style={{ color: C.gold, opacity: 0.12 }}>&rdquo;</span>
+                                <p className="text-sm md:text-base leading-relaxed mb-5 flex-1 relative z-10" style={{ color: C.gray2, fontStyle: "italic" }}>
                                     &ldquo;{dep.texto}&rdquo;
                                 </p>
+                                <div className="h-px mb-4" style={{ background: `linear-gradient(to right, ${C.gold}, transparent)`, opacity: 0.3 }} />
                                 <p className="text-xs font-bold uppercase tracking-widest" style={{ color: C.gold }}>{dep.nome}</p>
                             </div>
                         ))}
@@ -179,120 +225,202 @@ function ProvasSocial() {
 }
 
 // ============================================================================
+// SCROLL REVEAL
+// ============================================================================
+function useScrollReveal() {
+    const ref = useRef<HTMLDivElement>(null);
+    useEffect(() => {
+        const el = ref.current;
+        if (!el) return;
+        const observer = new IntersectionObserver(
+            ([entry]) => {
+                if (entry.isIntersecting) {
+                    el.style.opacity = "1";
+                    el.style.transform = "translateY(0)";
+                    observer.unobserve(el);
+                }
+            },
+            { threshold: 0.1 }
+        );
+        observer.observe(el);
+        return () => observer.disconnect();
+    }, []);
+    return ref;
+}
+
+function Reveal({ children, delay = 0 }: { children: React.ReactNode; delay?: number }) {
+    const ref = useScrollReveal();
+    return (
+        <div ref={ref} style={{
+            opacity: 0,
+            transform: "translateY(24px)",
+            transition: `opacity 0.7s cubic-bezier(0.16,1,0.3,1) ${delay}s, transform 0.7s cubic-bezier(0.16,1,0.3,1) ${delay}s`,
+        }}>
+            {children}
+        </div>
+    );
+}
+
+// ============================================================================
+// VIDEO SECTION
+// ============================================================================
+function VideoSection({ youtubeId }: { youtubeId: string }) {
+    return (
+        <section className="py-16 md:py-28" style={{ backgroundColor: C.bg1 }}>
+            <div className="max-w-[720px] mx-auto px-6">
+                <SectionLabel>Mensagem do Especialista</SectionLabel>
+                <h2 className="text-2xl md:text-3xl font-bold text-center mb-2 leading-tight" style={{ color: C.white, fontFamily: "'Cormorant Garamond', Georgia, serif" }}>
+                    Entenda em 2 minutos por que você ainda pode contestar.
+                </h2>
+                <GoldDivider />
+                <div className="relative w-full rounded-2xl overflow-hidden mt-10"
+                    style={{ boxShadow: "0 12px 60px rgba(0,0,0,0.65)", border: "1px solid rgba(255,255,255,0.1)" }}>
+                    <LiteYouTubeEmbed id={youtubeId} title="Vídeo de Análise da Situação" poster="maxresdefault" wrapperClass="yt-lite" />
+                </div>
+                <div className="flex justify-center mt-8">
+                    <Cta text="Quero Analisar Meu Caso Agora" />
+                </div>
+            </div>
+        </section>
+    );
+}
+
+// ============================================================================
 // PAGE
 // ============================================================================
 export default function ReprovadoPage() {
     return (
         <main style={{ backgroundColor: C.bg1, color: C.white }}>
+            <GrainOverlay />
 
             {/* ══════════════════════════════════════════════════════════════ */}
             {/* HERO                                                         */}
             {/* ══════════════════════════════════════════════════════════════ */}
-            <section className="relative min-h-0 flex items-center overflow-hidden py-8 md:py-24 lg:py-32" style={{ backgroundColor: C.bg1 }}>
+            <section className="relative flex items-center overflow-hidden py-14 md:py-28 lg:py-36" style={{ backgroundColor: C.bg1 }}>
                 <div className="absolute inset-0 z-0 select-none">
-                    <Image src="/images/hero-scales.png" alt="" fill className="object-cover opacity-[0.05] lg:opacity-10" priority aria-hidden="true" />
-                    <div className="absolute inset-0 md:hidden bg-gradient-to-b from-black/80 via-black/30 to-black/80" />
-                    <div className="absolute inset-0" style={{ background: `linear-gradient(180deg, ${C.bg1} 0%, transparent 50%, ${C.bg1} 100%)` }} />
+                    <div className="absolute inset-0" style={{ backgroundImage: "url('/texture-pedra.png')", backgroundSize: "cover", backgroundPosition: "top center", opacity: 0.06 }} />
+                    <div className="absolute inset-0" style={{ background: `radial-gradient(ellipse 80% 60% at 50% 0%, rgba(201,162,39,0.05) 0%, transparent 70%)` }} />
+                    <div className="absolute inset-0" style={{ background: `linear-gradient(180deg, ${C.bg1} 0%, transparent 25%, transparent 75%, ${C.bg1} 100%)` }} />
+                    <div className="absolute inset-0" style={{ background: `radial-gradient(ellipse 100% 100% at 50% 50%, transparent 50%, ${C.bg1} 100%)` }} />
                 </div>
 
                 <Container className="relative z-10 w-full px-4 md:px-6">
-                    <div className="flex flex-col items-center text-center">
-                        <div className="max-w-4xl flex flex-col justify-center items-center">
-                            <div className="inline-flex items-center gap-2 rounded-full px-3 py-1 mb-4 md:mb-6 w-fit" style={{ backgroundColor: C.redBg, border: `1px solid ${C.redBorder}` }}>
-                                <AlertTriangle className="w-3.5 h-3.5 animate-pulse" style={{ color: C.red }} />
-                                <span className="text-[10px] md:text-xs font-black text-red-100 uppercase tracking-widest leading-none" style={{ color: C.white }}>{D.hero.badge}</span>
-                            </div>
+                    <div className="flex flex-col items-center text-center max-w-3xl mx-auto">
 
-                            {/* Micro Avatar - Trust imediato acima da dobra mobile */}
-                            <div className="flex items-center gap-3 mb-5 pr-4 pl-1.5 py-1.5 rounded-full border md:hidden shadow-lg" style={{ backgroundColor: "rgba(255,255,255,0.05)", borderColor: "rgba(255,255,255,0.1)" }}>
-                                <Image src="/images/marcelo/marcelo-hero.jpg" alt="Dr. Marcelo Colen" width={32} height={32} className="rounded-full object-cover w-8 h-8" />
-                                <div className="text-left">
-                                    <p className="font-bold text-xs" style={{ color: C.gray1 }}>Dr. Marcelo Colen</p>
-                                    <p className="text-[10px] italic leading-none mt-0.5" style={{ color: C.gold }}>Advogado OAB/MG • Especialista</p>
-                                </div>
-                            </div>
-
-                            <h1 className="text-[clamp(1.85rem,9vw,2.5rem)] md:text-5xl lg:text-7xl font-black leading-[1.1] md:leading-[1.05] mb-4 md:mb-6 tracking-tighter" style={{ color: C.white, fontFamily: "Georgia, serif" }}>
-                                {D.hero.h1_1}
-                                <br />
-                                <span style={{ color: C.red, textShadow: "0 0 20px rgba(239,68,68,0.4)" }}>{D.hero.h1_2}</span>
-                            </h1>
-
-                            <p className="text-sm md:text-lg lg:text-xl leading-relaxed mb-4 md:mb-5 max-w-[40ch] md:max-w-2xl text-gray-300 font-medium">
-                                {D.hero.sub}
-                            </p>
-
-                            {/* Credenciais */}
-                            <p className="text-xs md:text-sm font-medium text-center mb-6 md:mb-8 max-w-xl" style={{ color: C.gold }}>
-                                {D.hero.credentials}
-                            </p>
-
-                            <div className="max-w-md w-full flex flex-col items-center space-y-4">
-                                <Cta text={D.hero.cta} full />
-
-                                <div className="space-y-1 opacity-90 text-center mt-4">
-                                    <p className="text-[11px] md:text-sm font-bold" style={{ color: C.gray2 }}>{D.hero.ctaLine1}</p>
-                                    <p className="text-[9px] md:text-[10px] text-gray-400 uppercase tracking-widest font-extrabold flex items-center justify-center">
-                                        <Lock className="w-3 h-3 mr-1" />
-                                        {D.hero.ctaLine2}
-                                    </p>
-                                </div>
-                            </div>
+                        {/* Eyebrow badge urgência */}
+                        <div className="inline-flex items-center gap-3 mb-6 md:mb-8 px-4 py-2 rounded-full"
+                            style={{ backgroundColor: C.redBg, border: `1px solid ${C.redBorder}` }}>
+                            <div className="w-1.5 h-1.5 rounded-full bg-red-500 animate-pulse flex-shrink-0" />
+                            <span className="text-[10px] md:text-xs font-semibold uppercase tracking-[0.12em]" style={{ color: "rgba(255,180,180,0.9)" }}>
+                                {D.hero.badge}
+                            </span>
                         </div>
+
+                        {/* H1 com hierarquia */}
+                        <h1 className="mb-5 md:mb-6" style={{ fontFamily: "'Cormorant Garamond', Georgia, serif" }}>
+                            <span className="block text-[clamp(1.4rem,5.5vw,2.2rem)] font-medium italic leading-[1.25] tracking-tight" style={{ color: C.gray1, opacity: 0.85 }}>
+                                {D.hero.h1_1}
+                            </span>
+                            <span className="block text-[clamp(1.8rem,7vw,3.6rem)] font-bold leading-[1.05] tracking-tight mt-1" style={{ color: C.gold }}>
+                                {D.hero.h1_2}
+                            </span>
+                        </h1>
+
+                        <div className="h-px w-16 mb-5 mx-auto" style={{ background: `linear-gradient(90deg, transparent, rgba(201,162,39,0.3), transparent)` }} />
+
+                        <p className="text-base md:text-lg leading-relaxed mb-8 md:mb-10 max-w-[44ch]" style={{ color: C.gray2 }}>
+                            {D.hero.sub}
+                        </p>
+
+                        <div className="w-full max-w-sm flex flex-col items-center gap-3">
+                            <Cta text={D.hero.cta} full />
+                            <p className="text-[11px] md:text-xs font-medium" style={{ color: C.gray3 }}>
+                                <Lock className="w-3 h-3 inline mr-1 mb-0.5" />
+                                Sigiloso · Sem compromisso · Resposta rápida
+                            </p>
+                        </div>
+
+                        {/* Credencial inline */}
+                        <div className="flex items-center gap-2.5 mt-8 px-4 py-2 rounded-full"
+                            style={{ backgroundColor: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.08)" }}>
+                            <Image src="/images/marcelo/marcelo-sem-fundo-.png" alt="Dr. Marcelo Colen" width={24} height={24} className="rounded-full object-cover w-6 h-6" />
+                            <span className="text-[11px] md:text-xs uppercase tracking-wider font-semibold" style={{ color: C.gray2 }}>
+                                Dr. Marcelo Colen · Mestre UFMG · OAB/MG
+                            </span>
+                        </div>
+
                     </div>
                 </Container>
-                <div className="absolute bottom-0 left-0 right-0 h-px bg-white/5 opacity-50" />
+                <div className="absolute bottom-0 left-0 right-0 h-px" style={{ background: `linear-gradient(to right, transparent, rgba(201,162,39,0.2), transparent)` }} />
             </section>
 
             {/* ══════════════════════════════════════════════════════════════ */}
             {/* VÍDEO                                                        */}
             {/* ══════════════════════════════════════════════════════════════ */}
-            <VideoSection youtubeId="jAiQi4CgMN0" />
+            <Reveal><VideoSection youtubeId="jAiQi4CgMN0" /></Reveal>
 
             {/* ══════════════════════════════════════════════════════════════ */}
             {/* PROVA SOCIAL                                                 */}
             {/* ══════════════════════════════════════════════════════════════ */}
-            <ProvasSocial />
+            <Reveal><ProvasSocial /></Reveal>
 
-            {/* ══════════════════════════════════════════════════════════════ */}
-            {/* O QUE ANALISAMOS NO SEU CASO                                 */}
-            {/* ══════════════════════════════════════════════════════════════ */}
-            <section className="py-12 md:py-20" style={{ backgroundColor: C.bg2 }}>
+            {/* CTA intermediário */}
+            <section className="py-8 md:py-12" style={{ backgroundColor: C.bg1 }}>
                 <Container>
-                    <div className="max-w-2xl mx-auto scale-[0.98] lg:scale-100">
-                        <div className="flex flex-col items-center justify-center gap-3 mb-10">
-                            <FileText className="w-10 h-10 animate-pulse" style={{ color: C.gold }} />
-                            <h2 className="text-2xl md:text-4xl font-bold text-center px-4" style={{ color: C.white, fontFamily: "Georgia, serif" }}>
-                                {D.analiseCaso.title}
-                            </h2>
-                        </div>
-
-                        <div className="space-y-3 mb-8">
-                            {D.analiseCaso.items.map((item, i) => (
-                                <div key={i} className="flex items-center gap-4 rounded-xl p-4 transition-colors hover:bg-white/5" style={{ border: `1px solid rgba(201,162,39,0.2)`, backgroundColor: C.goldSoft }}>
-                                    <div className="w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0 font-bold text-xs" style={{ backgroundColor: C.gold, color: C.bg1 }}>
-                                        ✓
-                                    </div>
-                                    <p className="font-medium text-sm md:text-base" style={{ color: C.gray1 }}>
-                                        {item}
-                                    </p>
-                                </div>
-                            ))}
-                        </div>
-
-                        <Cta text={D.analiseCaso.cta} full />
+                    <div className="flex justify-center">
+                        <Cta text="Quero Analisar Meu Caso" />
                     </div>
                 </Container>
             </section>
 
             {/* ══════════════════════════════════════════════════════════════ */}
-            {/* POR QUE AGIR RÁPIDO — PRAZO                                 */}
+            {/* O QUE ANALISAMOS                                             */}
             {/* ══════════════════════════════════════════════════════════════ */}
-            <section className="py-12 md:py-20" style={{ background: `linear-gradient(135deg, rgba(127,29,29,0.15) 0%, rgba(127,29,29,0.08) 50%, rgba(127,29,29,0.15) 100%)`, borderTop: `1px solid ${C.redBorder}`, borderBottom: `1px solid ${C.redBorder}` }}>
-                <Container>
+            <section className="py-16 md:py-28 relative overflow-hidden" style={{ backgroundColor: C.bg2 }}>
+                <div aria-hidden="true" className="absolute inset-0 pointer-events-none"
+                    style={{ backgroundImage: GRAIN_URL, backgroundRepeat: "repeat", backgroundSize: "320px 320px", opacity: 0.025 }} />
+                <Container className="relative z-10">
+                    <div className="max-w-2xl mx-auto">
+                        <div className="flex flex-col items-center justify-center gap-2 mb-2 text-center">
+                            <FileText className="w-9 h-9" style={{ color: C.gold, opacity: 0.85 }} />
+                            <SectionLabel>Análise técnica</SectionLabel>
+                            <h2 className="text-2xl md:text-4xl font-bold px-4" style={{ color: C.white, fontFamily: "'Cormorant Garamond', Georgia, serif" }}>
+                                {D.analiseCaso.title}
+                            </h2>
+                        </div>
+                        <GoldDivider />
+                        <div className="space-y-3 mt-8 mb-10">
+                            {D.analiseCaso.items.map((item, i) => (
+                                <Reveal key={i} delay={i * 0.08}>
+                                    <div className="flex items-center gap-4 rounded-xl p-4 transition-colors"
+                                        style={{ border: "1px solid rgba(201,162,39,0.15)", backgroundColor: C.goldSoft, boxShadow: "0 2px 10px rgba(0,0,0,0.15)" }}>
+                                        <div className="w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0 font-bold text-xs"
+                                            style={{ backgroundColor: C.gold, color: C.bg1 }}>✓</div>
+                                        <p className="font-medium text-sm md:text-base" style={{ color: C.gray1 }}>{item}</p>
+                                    </div>
+                                </Reveal>
+                            ))}
+                        </div>
+                        <div className="flex justify-center">
+                            <Cta text={D.analiseCaso.cta} />
+                        </div>
+                    </div>
+                </Container>
+            </section>
+
+            {/* ══════════════════════════════════════════════════════════════ */}
+            {/* URGÊNCIA                                                     */}
+            {/* ══════════════════════════════════════════════════════════════ */}
+            <section className="py-16 md:py-28 relative overflow-hidden"
+                style={{ backgroundColor: "#0B1730", borderTop: "1px solid rgba(255,255,255,0.08)", borderBottom: "1px solid rgba(255,255,255,0.08)" }}>
+                <div aria-hidden="true" className="absolute inset-0 pointer-events-none"
+                    style={{ backgroundImage: "url('/texture-juridica.png')", backgroundRepeat: "repeat", backgroundSize: "1200px 800px", opacity: 0.04 }} />
+                <div aria-hidden="true" className="absolute inset-0 pointer-events-none"
+                    style={{ background: "radial-gradient(ellipse at center, rgba(239,68,68,0.04) 0%, transparent 70%)" }} />
+                <Container className="relative z-10">
                     <div className="max-w-2xl mx-auto text-center px-4">
-                        <Clock className="w-10 h-10 md:w-12 md:h-12 mx-auto mb-6 animate-[bounce_2s_infinite]" style={{ color: "#f87171" }} />
-                        <h2 className="text-2xl md:text-3xl font-bold mb-6" style={{ color: C.white, fontFamily: "Georgia, serif" }}>
+                        <Clock className="w-10 h-10 md:w-12 md:h-12 mx-auto mb-6" style={{ color: C.gold }} />
+                        <h2 className="text-2xl md:text-3xl font-bold mb-6" style={{ color: C.white, fontFamily: "'Cormorant Garamond', Georgia, serif" }}>
                             {D.urg.title}
                         </h2>
                         <p className="text-base md:text-lg leading-relaxed mb-8 font-medium" style={{ color: C.gray1 }}>
@@ -306,26 +434,32 @@ export default function ReprovadoPage() {
             {/* ══════════════════════════════════════════════════════════════ */}
             {/* COMO FUNCIONA                                                */}
             {/* ══════════════════════════════════════════════════════════════ */}
-            <section className="py-12 md:py-24" style={{ backgroundColor: C.bg1 }}>
-                <Container>
-                    <h2 className="text-2xl md:text-4xl font-bold text-center mb-12 md:mb-16 px-4" style={{ color: C.white, fontFamily: "Georgia, serif" }}>
+            <section className="py-16 md:py-28 relative overflow-hidden" style={{ backgroundColor: C.bg1 }}>
+                <div aria-hidden="true" className="absolute inset-0 pointer-events-none"
+                    style={{ backgroundImage: "url('/texture-pedra.png')", backgroundSize: "cover", backgroundPosition: "center bottom", opacity: 0.03 }} />
+                <Container className="relative z-10">
+                    <SectionLabel>Passo a passo</SectionLabel>
+                    <h2 className="text-2xl md:text-4xl font-bold text-center mb-2 px-4" style={{ color: C.white, fontFamily: "'Cormorant Garamond', Georgia, serif" }}>
                         {D.steps.title}
                     </h2>
-
-                    <div className="grid md:grid-cols-3 gap-6 max-w-4xl mx-auto mb-10">
-                        {D.steps.items.map((step) => (
-                            <div key={step.n} className="relative rounded-2xl p-6 text-center transition-all" style={{ backgroundColor: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.08)" }}>
-                                <div className="absolute -top-4 left-1/2 -translate-x-1/2 w-8 h-8 rounded-full flex items-center justify-center font-extrabold text-sm" style={{ backgroundColor: C.gold, color: C.bg1 }}>
-                                    {step.n}
+                    <GoldDivider />
+                    <div className="grid md:grid-cols-3 gap-6 max-w-4xl mx-auto mt-12 mb-10">
+                        {D.steps.items.map((step, i) => (
+                            <Reveal key={step.n} delay={i * 0.12}>
+                                <div className="relative rounded-2xl p-6 text-center"
+                                    style={{ backgroundColor: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.07)", boxShadow: "0 8px 28px rgba(0,0,0,0.2)" }}>
+                                    <div className="absolute -top-4 left-1/2 -translate-x-1/2 w-8 h-8 rounded-full flex items-center justify-center font-extrabold text-sm"
+                                        style={{ backgroundColor: C.gold, color: C.bg1, boxShadow: "0 0 16px rgba(201,162,39,0.4)" }}>
+                                        {step.n}
+                                    </div>
+                                    <step.Icon className="w-8 h-8 mx-auto mb-4 mt-4" style={{ color: C.gold, opacity: 0.85 }} />
+                                    <h3 className="text-lg font-bold mb-2" style={{ color: C.white }}>{step.t}</h3>
+                                    <p className="text-sm leading-relaxed" style={{ color: C.gray2 }}>{step.d}</p>
                                 </div>
-                                <step.Icon className="w-8 h-8 mx-auto mb-4 mt-4" style={{ color: C.gold }} />
-                                <h3 className="text-lg font-bold mb-2" style={{ color: C.white }}>{step.t}</h3>
-                                <p className="text-sm leading-relaxed" style={{ color: C.gray2 }}>{step.d}</p>
-                            </div>
+                            </Reveal>
                         ))}
                     </div>
-
-                    <div className="text-center">
+                    <div className="flex justify-center">
                         <Cta text={D.steps.cta} />
                     </div>
                 </Container>
@@ -337,13 +471,20 @@ export default function ReprovadoPage() {
             <DrMarceloSection />
 
             {/* ══════════════════════════════════════════════════════════════ */}
-            {/* FAQ (aberto por padrão)                                     */}
+            {/* FAQ                                                          */}
             {/* ══════════════════════════════════════════════════════════════ */}
-            <section className="py-12 md:py-24" style={{ backgroundColor: C.bg2 }}>
-                <Container>
+            <section className="py-16 md:py-28 relative overflow-hidden" style={{ backgroundColor: C.bg1 }}>
+                <div aria-hidden="true" className="absolute inset-0 pointer-events-none"
+                    style={{ backgroundImage: "url('/texture-juridica.png')", backgroundRepeat: "repeat", backgroundSize: "1200px 800px", opacity: 0.025 }} />
+                <Container className="relative z-10">
                     <div className="max-w-2xl mx-auto">
-                        <h2 className="text-2xl md:text-3xl font-bold mb-10 text-center" style={{ color: C.white, fontFamily: "Georgia, serif" }}>Dúvidas Frequentes</h2>
-                        <div className="rounded-2xl p-2 md:p-6" style={{ backgroundColor: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.08)" }}>
+                        <SectionLabel>Tire suas dúvidas</SectionLabel>
+                        <h2 className="text-2xl md:text-3xl font-bold mb-2 text-center" style={{ color: C.white, fontFamily: "'Cormorant Garamond', Georgia, serif" }}>
+                            Dúvidas Frequentes
+                        </h2>
+                        <GoldDivider />
+                        <div className="rounded-2xl p-2 md:p-6 mt-8"
+                            style={{ backgroundColor: "rgba(255,255,255,0.02)", border: "1px solid rgba(255,255,255,0.07)", boxShadow: "0 8px 28px rgba(0,0,0,0.2)" }}>
                             {D.faq.map((item, i) => (
                                 <FaqItem key={i} q={item.q} a={item.a} />
                             ))}
@@ -355,74 +496,45 @@ export default function ReprovadoPage() {
             {/* ══════════════════════════════════════════════════════════════ */}
             {/* CTA FINAL                                                    */}
             {/* ══════════════════════════════════════════════════════════════ */}
-            <section className="py-12" style={{ backgroundColor: C.bg1, borderTop: "1px solid rgba(255,255,255,0.05)" }}>
-                <Container>
+            <section className="py-14 relative overflow-hidden"
+                style={{ backgroundColor: C.bg2, borderTop: "1px solid rgba(255,255,255,0.05)" }}>
+                <div aria-hidden="true" className="absolute inset-0 pointer-events-none"
+                    style={{ backgroundImage: "url('/texture-pedra.png')", backgroundSize: "cover", backgroundPosition: "bottom center", opacity: 0.035 }} />
+                <div aria-hidden="true" className="absolute inset-0 pointer-events-none"
+                    style={{ background: "radial-gradient(ellipse at center bottom, rgba(201,162,39,0.04) 0%, transparent 65%)" }} />
+                <Container className="relative z-10">
                     <div className="max-w-lg mx-auto text-center">
-                        <p className="text-xl md:text-2xl font-bold mb-3" style={{ color: C.white, fontFamily: "Georgia, serif" }}>
+                        <p className="text-xl md:text-2xl font-bold mb-3" style={{ color: C.white, fontFamily: "'Cormorant Garamond', Georgia, serif" }}>
                             Não deixe o prazo passar.
                         </p>
                         <p className="text-sm md:text-base mb-8" style={{ color: C.gray2 }}>
                             Manda o resultado e o edital agora. A análise é feita em horas.
                         </p>
-
-                        <div className="mb-8 p-6 rounded-2xl text-left" style={{ backgroundColor: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.1)" }}>
-                            <div className="space-y-3 max-w-[280px] mx-auto">
+                        <div className="mb-6 p-6 rounded-2xl text-left"
+                            style={{ backgroundColor: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.08)", boxShadow: "0 4px 16px rgba(0,0,0,0.15)" }}>
+                            <div className="space-y-3 max-w-xs mx-auto">
                                 {[
                                     "Print ou PDF do resultado da heteroidentificação",
                                     "Edital do concurso",
                                     "Prazo final para recurso (data e horário)",
                                 ].map((item, i) => (
                                     <div key={i} className="flex gap-3 items-center">
-                                        <div className="w-5 h-5 rounded-full flex items-center justify-center flex-shrink-0" style={{ backgroundColor: C.gold, color: C.bg1 }}>
-                                            <Check className="w-3 h-3 font-bold" />
+                                        <div className="w-5 h-5 rounded-full flex items-center justify-center flex-shrink-0"
+                                            style={{ backgroundColor: C.gold, color: C.bg1 }}>
+                                            <Check className="w-3 h-3" />
                                         </div>
-                                        <span className="text-sm md:text-base font-medium text-gray-200">{item}</span>
+                                        <span className="text-sm md:text-base font-medium" style={{ color: C.gray1 }}>{item}</span>
                                     </div>
                                 ))}
                             </div>
                         </div>
-
                         <Cta text="Falar com Dr. Marcelo Agora" full />
-                        <p className="text-xs mt-6 italic" style={{ color: C.gray3 }}>
-                            {D.hero.disclaimer}
-                        </p>
-                        <p className="text-xs mt-2" style={{ color: C.gray3 }}>
-                            © 2026 Marcelo Colen Advogados · OAB/MG
-                        </p>
+                        <p className="text-xs mt-6 italic" style={{ color: C.gray3 }}>{D.hero.disclaimer}</p>
+                        <p className="text-xs mt-2" style={{ color: C.gray3 }}>© 2026 Marcelo Colen Advogados · OAB/MG</p>
                     </div>
                 </Container>
             </section>
+
         </main>
-    );
-}
-
-// ============================================================================
-// VIDEO SECTION
-// ============================================================================
-function VideoSection({ youtubeId, iframeSrc, mp4Src }: { youtubeId?: string; iframeSrc?: string; mp4Src?: string; } = {}) {
-    const YOUTUBE_ID = youtubeId ?? "COLE_O_ID_AQUI";
-    const MP4_SRC = mp4Src ?? "";
-
-    return (
-        <section className="py-12 md:py-24" style={{ backgroundColor: C.bg1 }}>
-            <div className="max-w-[720px] mx-auto px-6">
-                <p className="text-[10px] md:text-xs uppercase tracking-[0.2em] text-center mb-3" style={{ color: C.gold }}>
-                    Mensagem do Especialista
-                </p>
-                <h2 className="text-2xl md:text-3xl font-bold text-center mb-10 leading-tight md:leading-snug" style={{ color: C.white, fontFamily: "Georgia, serif" }}>
-                    Entenda em 2 minutos por que você ainda pode contestar.
-                </h2>
-                <div className="relative w-full rounded-2xl overflow-hidden scale-[1.02] md:scale-100" style={{ boxShadow: "0 12px 60px rgba(0,0,0,0.65)", border: "1px solid rgba(255,255,255,0.1)" }}>
-                    {MP4_SRC ? (
-                        <video src={MP4_SRC} controls playsInline preload="none" className="w-full object-cover" />
-                    ) : (
-                        <LiteYouTubeEmbed id={YOUTUBE_ID} title="Vídeo de Análise da Situação" poster="maxresdefault" wrapperClass="yt-lite" />
-                    )}
-                </div>
-                <div className="flex justify-center mt-8">
-                    <Cta text="Quero Analisar Meu Caso Agora" />
-                </div>
-            </div>
-        </section>
     );
 }
