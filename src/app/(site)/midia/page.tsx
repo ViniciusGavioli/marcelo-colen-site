@@ -71,7 +71,7 @@ const SOCIAL = [
         icon: Instagram,
         platform: "Instagram",
         handle: "@marcelocolen.adv",
-        followers: "56 mil+ seguidores",
+        followers: "",
         desc: "Publicações diárias sobre conscientização racial, análise de legislação e conteúdo jurídico educativo",
         url: "https://instagram.com/marcelocolen.adv",
     },
@@ -211,11 +211,11 @@ export default function MidiaPage() {
                                         </div>
                                         <ExternalLink className="w-4 h-4 ml-auto opacity-0 group-hover:opacity-50 transition-opacity" style={{ color: C.gray3 }} />
                                     </div>
-                                    {s.followers && (
-                                        <p className="text-2xl font-bold mb-2" style={{ color: C.gold, fontFamily: C.serif }}>
+                                    {s.followers ? (
+                                        <p className="text-sm font-medium mb-2" style={{ color: C.gray3 }}>
                                             {s.followers}
                                         </p>
-                                    )}
+                                    ) : null}
                                     <p className="text-xs leading-relaxed" style={{ color: C.gray2 }}>{s.desc}</p>
                                 </a>
                             </Reveal>
@@ -231,12 +231,21 @@ export default function MidiaPage() {
                 <Container>
                     <div className="max-w-lg mx-auto text-center">
                         <h2 className="text-2xl md:text-3xl font-bold mb-4" style={{ color: C.white, fontFamily: C.serif }}>
-                            Quer agendar uma entrevista ou palestra?
+                            Convites para entrevistas e palestras
                         </h2>
                         <p className="text-sm md:text-base leading-relaxed mb-8" style={{ color: C.gray2 }}>
-                            {renderBold("Entre em contato para **convites**, **consultas à imprensa** ou **solicitações de palestra** sobre igualdade racial e direito antidiscriminatório.")}
+                            {renderBold("Para **convites de imprensa**, **solicitações de palestra** ou **consultoria institucional** sobre igualdade racial e direito antidiscriminatório.")}
                         </p>
-                        <Cta text="Entrar em contato" full />
+                        <a
+                            href="https://wa.me/5531972206996?text=Ol%C3%A1%2C%20gostaria%20de%20entrar%20em%20contato%20para%20um%20convite."
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="inline-flex items-center gap-2.5 text-sm font-medium px-6 py-3 rounded transition-all duration-200 hover:opacity-90"
+                            style={{ backgroundColor: "#c9a227", color: "#0a0a0a" }}
+                        >
+                            Entrar em contato
+                            <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
+                        </a>
                     </div>
                 </Container>
             </section>

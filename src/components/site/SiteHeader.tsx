@@ -88,11 +88,11 @@ export function SiteHeader() {
                                 href={getDirectWhatsAppLink(WA_MSG)}
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="hidden sm:inline-flex items-center gap-2 px-4 py-2 rounded-full text-xs font-semibold uppercase tracking-wider transition-all hover:scale-[1.03]"
-                                style={{ border: "1px solid rgba(201,162,39,0.4)", color: C.gold }}
+                                className="hidden sm:inline-flex items-center gap-2 px-4 py-2 rounded text-xs font-semibold uppercase tracking-wider transition-all hover:opacity-90"
+                                style={{ backgroundColor: "rgba(201,162,39,0.12)", border: "1px solid rgba(201,162,39,0.3)", color: C.gold }}
                             >
                                 <Phone className="w-3.5 h-3.5" />
-                                Fale Conosco
+                                Contato
                             </a>
 
                             {/* Mobile Hamburger */}
@@ -135,16 +135,14 @@ export function SiteHeader() {
                             href={getDirectWhatsAppLink(WA_MSG)}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="flex items-center justify-center gap-2 mt-3 px-6 py-3.5 rounded-full font-semibold text-sm transition-all"
+                            className="flex items-center justify-center gap-2 mt-3 px-6 py-3.5 rounded font-semibold text-sm transition-all hover:opacity-90"
                             style={{
-                                background: "linear-gradient(160deg, #1c0a0a 0%, #0a0a0a 55%, #0f0d00 100%)",
-                                border: "2px solid #c9a227",
-                                color: C.white,
-                                boxShadow: "0 0 28px rgba(201,162,39,0.18)",
+                                backgroundColor: "#c9a227",
+                                color: "#0a0a0a",
                             }}
                         >
                             <MessageCircle className="w-4 h-4" />
-                            Fale Conosco pelo WhatsApp
+                            Solicitar atendimento
                         </a>
                     </div>
                 </div>
