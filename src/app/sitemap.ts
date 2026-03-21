@@ -3,27 +3,33 @@ import { SITE_CONFIG } from "@/lib/constants";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = SITE_CONFIG.url;
-  
-  const routes = [
-    "",
-    "/sobre",
-    "/atuacao",
-    "/atuacao/criminal",
-    "/atuacao/compliance",
-    "/atuacao/direitos-humanos",
-    "/atuacao/igualdade-racial",
-    "/conteudos",
-    "/midia",
-    "/publicacoes",
-    "/contato",
-    "/privacidade",
-    "/termos",
-  ];
 
-  return routes.map((route) => ({
-    url: `${baseUrl}${route}`,
-    lastModified: new Date(),
-    changeFrequency: route === "" ? "weekly" : "monthly",
-    priority: route === "" ? 1 : route === "/contato" ? 0.9 : 0.8,
-  }));
+  return [
+    // Homepage
+    {
+      url: baseUrl,
+      lastModified: new Date(),
+      changeFrequency: "weekly",
+      priority: 1,
+    },
+    // LPs ativas — alto valor para SEO
+    {
+      url: `${baseUrl}/recurso-heteroidentificacao`,
+      lastModified: new Date(),
+      changeFrequency: "weekly",
+      priority: 0.95,
+    },
+    {
+      url: `${baseUrl}/reprovado-heteroidentificacao`,
+      lastModified: new Date(),
+      changeFrequency: "weekly",
+      priority: 0.95,
+    },
+    {
+      url: `${baseUrl}/advogado-cotas-raciais`,
+      lastModified: new Date(),
+      changeFrequency: "weekly",
+      priority: 0.95,
+    },
+  ];
 }

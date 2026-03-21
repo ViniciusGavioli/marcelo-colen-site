@@ -3,6 +3,7 @@ import "./globals.css";
 import { SITE_CONFIG, DEFAULT_SEO } from "@/lib/constants";
 import FacebookPixel from "@/components/FacebookPixel";
 import GoogleAdsTag from "@/components/GoogleAdsTag";
+import { WhatsAppFloat } from "@/components/WhatsAppFloat";
 
 
 export const viewport: Viewport = {
@@ -64,6 +65,7 @@ export default function RootLayout({
         <FacebookPixel />
         <GoogleAdsTag />
         {children}
+        <WhatsAppFloat />
       </body>
     </html>
   );

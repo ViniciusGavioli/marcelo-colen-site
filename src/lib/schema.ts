@@ -56,27 +56,27 @@ export function getLegalServiceSchema() {
           "@type": "Offer",
           itemOffered: {
             "@type": "Service",
-            name: "Advocacia Criminal",
+            name: "Recurso contra Reprovação em Heteroidentificação",
             description:
-              "Defesa técnica em processos criminais, inquéritos policiais, júri e habeas corpus.",
+              "Elaboração de recurso administrativo e judicial contra indeferimento em comissão de heteroidentificação em concursos públicos e vestibulares.",
           },
         },
         {
           "@type": "Offer",
           itemOffered: {
             "@type": "Service",
-            name: "Compliance e Integridade",
+            name: "Assessoria em Cotas Raciais",
             description:
-              "Programas de compliance, prevenção de riscos e adequação à lei anticorrupção.",
+              "Orientação jurídica especializada para candidatos em processos de autodeclaração e verificação racial em concursos e seleções.",
           },
         },
         {
           "@type": "Offer",
           itemOffered: {
             "@type": "Service",
-            name: "Direitos Humanos e Antidiscriminação",
+            name: "Direito Antidiscriminatório",
             description:
-              "Defesa de direitos fundamentais e atuação em casos de discriminação.",
+              "Defesa de direitos fundamentais em casos de discriminação racial e proteção de políticas afirmativas.",
           },
         },
       ],
@@ -95,17 +95,17 @@ export function getPersonSchema() {
     "@type": "Person",
     "@id": `${SITE_CONFIG.url}/#person`,
     name: "Marcelo Colen",
-    jobTitle: "Advogado Criminalista",
+    jobTitle: "Advogado Especialista em Heteroidentificação e Cotas Raciais",
     description:
-      "Advogado especializado em Direito Criminal, Compliance e Direitos Humanos. Mestre em Direito pela PUC Minas.",
-    url: `${SITE_CONFIG.url}/sobre`,
-    image: `${SITE_CONFIG.url}/images/marcelo/about.jpg`,
+      "Advogado especializado em Direito Antidiscriminatório, Heteroidentificação e Cotas Raciais. Mestre em Direito pela UFMG. Secretário da Comissão Nacional de Promoção da Igualdade da OAB Federal. Diretor de Diversidade e Inclusão da OAB/MG.",
+    url: SITE_CONFIG.url,
+    image: `${SITE_CONFIG.url}/images/marcelo/marcelo-sem-fundo-.png`,
     email: SITE_CONFIG.contact.email,
     telephone: SITE_CONFIG.contact.phone,
     alumniOf: [
       {
         "@type": "EducationalOrganization",
-        name: "Pontifícia Universidade Católica de Minas Gerais",
+        name: "Universidade Federal de Minas Gerais (UFMG)",
       },
     ],
     memberOf: [
@@ -113,14 +113,20 @@ export function getPersonSchema() {
         "@type": "Organization",
         name: "Ordem dos Advogados do Brasil - Seção Minas Gerais",
       },
+      {
+        "@type": "Organization",
+        name: "Comissão Nacional de Promoção da Igualdade - OAB Federal",
+      },
     ],
     knowsAbout: [
-      "Direito Penal",
-      "Direito Criminal",
-      "Compliance",
-      "Direitos Humanos",
+      "Heteroidentificação",
+      "Cotas Raciais",
+      "Direito Antidiscriminatório",
+      "Concursos Públicos",
+      "Recurso Administrativo",
       "Igualdade Racial",
-      "Tribunal do Júri",
+      "Direitos Humanos",
+      "Políticas Afirmativas",
     ],
     worksFor: {
       "@type": "LegalService",
