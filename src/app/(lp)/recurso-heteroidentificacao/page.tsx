@@ -672,16 +672,47 @@ export default function RecursoHeteroidentificacaoPage() {
                 <Container className="relative z-10">
                     <div className="max-w-4xl mx-auto flex flex-col md:flex-row items-stretch gap-0">
 
-                        {/* FOTO — full width mobile, coluna no desktop */}
-                        <div className="flex-shrink-0 md:w-64 lg:w-72 -mx-4 md:mx-0">
+                        {/* FOTO + TARJA — coluna esquerda */}
+                        <div className="flex-shrink-0 md:w-64 lg:w-72 -mx-4 md:mx-0 flex flex-col">
+                            <style>{`
+                                @keyframes marquee-colen {
+                                    0% { transform: translateX(0); }
+                                    100% { transform: translateX(-50%); }
+                                }
+                            `}</style>
                             <Image
                                 src="/images/marcelo/marcelo-sem-fundo-.png"
                                 alt="Dr. Marcelo Colen"
                                 width={553}
                                 height={722}
-                                className="w-full md:w-full object-contain"
-                                style={{ filter: "drop-shadow(0 8px 24px rgba(0,0,0,0.6))" }}
+                                className="w-full object-contain"
+                                style={{ filter: "drop-shadow(0 8px 24px rgba(0,0,0,0.6))", display: "block" }}
                             />
+                            {/* Tarja credencial colada embaixo da foto */}
+                            <div style={{
+                                backgroundColor: "#0B1730",
+                                borderTop: "1px solid rgba(201,162,39,0.3)",
+                                borderBottom: "1px solid rgba(201,162,39,0.1)",
+                                overflow: "hidden",
+                                padding: "10px 0",
+                            }}>
+                                <div style={{
+                                    display: "inline-block",
+                                    whiteSpace: "nowrap",
+                                    animation: "marquee-colen 22s linear infinite",
+                                }}>
+                                    {[0, 1].map(i => (
+                                        <span key={i}>
+                                            {["Dr. Marcelo Colen", "Mestre em Direito UFMG", "OAB/MG", "Especialista em Heteroidentificação", "Diretor de Diversidade OAB/MG"].map((txt, j) => (
+                                                <span key={j} style={{ color: C.gold, fontSize: "11px", fontWeight: 600, letterSpacing: "0.12em", textTransform: "uppercase" }}>
+                                                    {txt}
+                                                    <span style={{ color: "rgba(201,162,39,0.35)", margin: "0 14px" }}>·</span>
+                                                </span>
+                                            ))}
+                                        </span>
+                                    ))}
+                                </div>
+                            </div>
                         </div>
 
                         {/* linha divisória vertical dourada */}
