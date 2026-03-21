@@ -18,8 +18,9 @@ const WA_MSG = "Olá Dr. Marcelo, vim pelo site e gostaria de uma análise do me
 
 const NAV = [
     { label: "Início", href: "/" },
-    { label: "Atuação", href: "/#areas" },
-    { label: "Sobre", href: "/#sobre" },
+    { label: "Sobre", href: "/sobre" },
+    { label: "Atuação", href: "/atuacao" },
+    { label: "Na Mídia", href: "/midia" },
 ];
 
 export function SiteHeader() {
