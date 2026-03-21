@@ -299,12 +299,21 @@ export default function SobrePage() {
                 <Container>
                     <div className="max-w-lg mx-auto text-center">
                         <h2 className="text-2xl md:text-3xl font-bold mb-4" style={{ color: C.white, fontFamily: C.serif }}>
-                            Precisa de orientação jurídica?
+                            Agende uma consulta
                         </h2>
                         <p className="text-sm md:text-base leading-relaxed mb-8" style={{ color: C.gray2 }}>
-                            {renderBold("Entre em contato para uma **análise inicial** do seu caso. Atendimento **ágil, sigiloso e nacional**.")}
+                            {renderBold("O escritório realiza uma **análise preliminar** do caso para avaliar a viabilidade jurídica. Atendimento **nacional**, por videoconferência ou presencial em Belo Horizonte.")}
                         </p>
-                        <Cta text="Falar com Dr. Marcelo" full />
+                        <a
+                            href="https://wa.me/5531972206996?text=Ol%C3%A1%2C%20gostaria%20de%20agendar%20uma%20consulta."
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="inline-flex items-center gap-2.5 text-sm font-medium px-6 py-3 rounded transition-all duration-200 hover:opacity-90"
+                            style={{ backgroundColor: "#c9a227", color: "#0a0a0a" }}
+                        >
+                            Solicitar atendimento
+                            <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
+                        </a>
                     </div>
                 </Container>
             </section>

@@ -2,67 +2,67 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { Check, Scale, Shield, FileText, Briefcase, ArrowRight, Award, Tv, Mic, BookOpen } from "lucide-react";
+import { ArrowRight, Scale, Shield, Briefcase, BookOpen, Award, GraduationCap, Tv, Users, Mic } from "lucide-react";
 import { Container } from "@/components/layout";
-import { C, GrainOverlay, GoldDivider, SectionLabel, Cta, LinkButton, Reveal, renderBold } from "@/components/site/primitives";
+import { C, GrainOverlay, GoldDivider, Reveal, renderBold } from "@/components/site/primitives";
 
 // ============================================================================
 // DATA
 // ============================================================================
-const CREDENTIALS = [
-    "Mestre em Direito · UFMG",
-    "OAB/MG 167.463",
-    "Diretor de Diversidade e Inclusão · OAB/MG",
-    "Secretário da Comissão Nac. de Igualdade Racial · OAB Federal",
-    "Ex-Presidente da Comissão de Igualdade Racial · OAB/MG",
-    "Conselheiro Municipal de Igualdade Racial · BH",
+
+const NUMBERS = [
+    { value: "10+", label: "anos de atuação" },
+    { value: "UFMG", label: "Mestre em Direito" },
+    { value: "OAB/MG", label: "Diretor de Diversidade" },
+    { value: "OAB Federal", label: "Comissão Nacional" },
 ];
 
 const AREAS = [
     {
         Icon: Scale,
         title: "Heteroidentificação e Cotas Raciais",
-        desc: "Defesa administrativa e judicial de candidatos cotistas em concursos públicos. Recurso contra indeferimento em bancas de heteroidentificação.",
-        href: "/recurso-heteroidentificacao",
+        desc: "Referência nacional na defesa de candidatos cotistas eliminados em comissões de heteroidentificação. Recursos administrativos e judiciais com atuação em todo o Brasil.",
+        href: "/atuacao#heteroidentificacao",
     },
     {
         Icon: Shield,
         title: "Compliance Antidiscriminatório",
-        desc: "Consultoria para empresas e instituições que buscam implementar políticas internas de combate ao racismo e à discriminação.",
+        desc: "Consultoria para empresas e instituições públicas na implementação de programas de integridade com foco em diversidade e combate à discriminação racial.",
         href: "/atuacao#compliance",
     },
     {
         Icon: Briefcase,
         title: "Direito Criminal",
-        desc: "Defesa técnica em processos criminais, inquéritos policiais, habeas corpus e crimes empresariais. Atuação em tribunais superiores.",
+        desc: "Defesa técnica em processos penais, habeas corpus, crimes empresariais e atuação perante tribunais superiores, incluindo STJ. Base em BH, atuação nacional.",
         href: "/atuacao#criminal",
     },
     {
         Icon: BookOpen,
-        title: "Consultoria e Ensino",
-        desc: "Palestras, treinamentos e consultoria jurídica em igualdade racial, políticas afirmativas e direitos humanos para instituições.",
+        title: "Consultoria, Ensino e Palestras",
+        desc: "Palestrante em eventos da OAB, Poder Judiciário e universidades. Consultoria institucional e pareceres sobre igualdade racial e políticas afirmativas.",
         href: "/atuacao#consultoria",
     },
 ];
 
-const MEDIA = [
-    { name: "TV Globo Minas", sub: "MG1 · MG2", icon: Tv, desc: "Análises sobre injúria racial e legislação antidiscriminatória" },
-    { name: "Podcast Inspirando Advocacia", sub: "Spotify · 2022", icon: Mic, desc: "\"Por um Judiciário Antirracista\"" },
-    { name: "TJMG", sub: "Fórum Lafayette · 2026", icon: Award, desc: "Debate sobre equidade no judiciário mineiro" },
-    { name: "Assembleia Legislativa MG", sub: "Comissão de Direitos Humanos", icon: Award, desc: "Homenagem por atuação antirracista" },
+const POSITIONS = [
+    { role: "Diretor de Diversidade e Inclusão", org: "OAB/MG", current: true },
+    { role: "Secretário da Comissão Nacional de Igualdade Racial", org: "Conselho Federal da OAB", current: true },
+    { role: "Conselheiro Municipal de Igualdade Racial", org: "Prefeitura de Belo Horizonte", current: true },
+    { role: "Conselheiro Seccional", org: "OAB/MG", current: true },
+    { role: "Presidente da Comissão de Igualdade Racial", org: "OAB/MG · 2022–2024", current: false },
 ];
 
-const NUMBERS = [
-    { value: "56mil+", label: "seguidores no Instagram" },
-    { value: "10+", label: "anos de atuação" },
-    { value: "27", label: "estados atendidos" },
-    { value: "100%", label: "online e presencial" },
+const RECOGNITION = [
+    { icon: Tv, title: "TV Globo Minas", desc: "Entrevistas nos telejornais MG1 e MG2 como especialista em legislação antidiscriminatória" },
+    { icon: Award, title: "Assembleia Legislativa de MG", desc: "Homenagem oficial da Comissão de Direitos Humanos por atuação no combate ao racismo" },
+    { icon: Mic, title: "Podcast Inspirando Advocacia", desc: "\"Por um Judiciário Antirracista\" — episódio sobre igualdade racial no sistema de justiça" },
+    { icon: Users, title: "TJMG — Fórum Lafayette", desc: "Debate sobre equidade no judiciário mineiro, em apoio a um judiciário antirracista" },
 ];
 
 const TESTIMONIALS = [
-    { nome: "Mariana S. · Concurso Federal · Brasília/DF", texto: "Fui eliminada na heteroidentificação do CNU depois de anos estudando. O Dr. Marcelo analisou meu caso em horas e identificou falha procedimental da banca. Consegui liminar e retornei ao certame." },
-    { nome: "Rafael O. · Concurso Estadual · BH/MG", texto: "A motivação da banca era genérica, três linhas apenas. Com o recurso bem fundamentado, a eliminação foi revertida administrativamente. Hoje estou no cargo." },
-    { nome: "Camila A. · Concurso Cebraspe · SP", texto: "Não sabia nem que dava pra recorrer. Ele me explicou tudo, resolveu rápido. Recomendo demais." },
+    { nome: "M.S. — Concurso Federal", texto: "A equipe analisou o caso em poucas horas e identificou falha procedimental da banca. Consegui retornar ao certame por liminar." },
+    { nome: "R.O. — Concurso Estadual", texto: "A motivação do indeferimento era genérica. Com o recurso fundamentado, a eliminação foi revertida administrativamente." },
+    { nome: "C.A. — Concurso Cebraspe", texto: "Não sabia que era possível recorrer. A orientação foi clara e o resultado veio rápido." },
 ];
 
 // ============================================================================
@@ -76,135 +76,93 @@ export default function HomePage() {
             {/* ═══════════════════════════════════════════════════════════ */}
             {/* HERO                                                       */}
             {/* ═══════════════════════════════════════════════════════════ */}
-            <section className="relative overflow-hidden pt-4 pb-16 md:pt-12 md:pb-24 lg:pt-16 lg:pb-32" style={{ backgroundColor: C.bg1 }}>
-                {/* Texture + Gradients */}
+            <section className="relative overflow-hidden py-16 md:py-24 lg:py-32" style={{ backgroundColor: C.bg1 }}>
                 <div className="absolute inset-0 z-0 select-none">
-                    <div className="absolute inset-0" style={{ backgroundImage: "url('/texture-pedra.png')", backgroundSize: "cover", backgroundPosition: "top center", opacity: 0.05 }} />
-                    <div className="absolute inset-0" style={{ background: `radial-gradient(ellipse 70% 50% at 70% 30%, rgba(201,162,39,0.04) 0%, transparent 70%)` }} />
+                    <div className="absolute inset-0" style={{ backgroundImage: "url('/texture-pedra.png')", backgroundSize: "cover", backgroundPosition: "top center", opacity: 0.04 }} />
                 </div>
 
                 <Container className="relative z-10">
-                    <div className="flex flex-col md:flex-row items-center gap-8 md:gap-16 max-w-6xl mx-auto">
+                    <div className="flex flex-col md:flex-row items-center gap-10 md:gap-16 max-w-5xl mx-auto">
+
+                        {/* Foto */}
+                        <div className="hidden md:block flex-shrink-0 w-64 lg:w-72">
+                            <div
+                                className="rounded-xl overflow-hidden"
+                                style={{ border: `1px solid rgba(255,255,255,0.08)`, boxShadow: "0 8px 40px rgba(0,0,0,0.4)" }}
+                            >
+                                <Image
+                                    src="/images/marcelo/marcelo-hero.jpg"
+                                    alt="Dr. Marcelo Colen — Advogado, Mestre em Direito pela UFMG"
+                                    width={500}
+                                    height={667}
+                                    className="w-full object-cover"
+                                    priority
+                                />
+                            </div>
+                        </div>
 
                         {/* Texto */}
-                        <div className="flex-1 text-center md:text-left order-2 md:order-1">
-                            <div className="flex items-center gap-3 mb-5 justify-center md:justify-start">
-                                <div className="h-px w-8" style={{ background: `linear-gradient(90deg, transparent, ${C.gold})` }} />
-                                <span className="text-[10px] md:text-xs uppercase tracking-[0.2em] font-semibold" style={{ color: C.gold }}>
-                                    Advocacia · Belo Horizonte
-                                </span>
-                            </div>
+                        <div className="flex-1">
+                            <p className="text-[10px] md:text-xs uppercase tracking-[0.25em] font-medium mb-4" style={{ color: C.gold }}>
+                                OAB/MG 167.463 · Mestre em Direito pela UFMG
+                            </p>
 
-                            <h1 style={{ fontFamily: C.serif }}>
-                                <span className="block text-[clamp(2.4rem,8vw,5rem)] font-bold leading-[0.95] tracking-tight" style={{ color: C.white }}>
-                                    Marcelo
-                                </span>
-                                <span className="block text-[clamp(2.4rem,8vw,5rem)] font-bold leading-[0.95] tracking-tight" style={{ color: C.gold }}>
-                                    Colen
+                            <h1 className="mb-2" style={{ fontFamily: C.serif }}>
+                                <span className="block text-4xl md:text-5xl lg:text-6xl font-bold leading-[1.1] tracking-tight" style={{ color: C.white }}>
+                                    Dr. Marcelo Colen
                                 </span>
                             </h1>
 
-                            <div className="h-px w-20 my-5 mx-auto md:mx-0" style={{ background: `linear-gradient(90deg, ${C.gold}, transparent)`, opacity: 0.4 }} />
-
-                            <p className="text-sm md:text-base font-medium uppercase tracking-[0.12em] mb-6" style={{ color: C.gray2 }}>
-                                Advogado · Mestre em Direito UFMG · Diretor de Diversidade OAB/MG
+                            <p className="text-base md:text-lg font-medium uppercase tracking-[0.08em] mb-6" style={{ color: C.gold }}>
+                                Advogado Criminalista · Escritório próprio há mais de 10 anos
                             </p>
 
-                            <p className="text-base md:text-lg leading-relaxed mb-8 max-w-[52ch] mx-auto md:mx-0" style={{ color: C.gray2 }}>
-                                {renderBold("Referência nacional em **direito antidiscriminatório** e defesa de candidatos cotistas. Atuação técnica, ética e comprometida com a **igualdade racial**.")}
+                            <div className="h-px w-20 mb-6" style={{ background: `linear-gradient(90deg, ${C.gold}, transparent)`, opacity: 0.35 }} />
+
+                            <p className="text-sm md:text-base leading-[1.8] mb-4 max-w-[55ch]" style={{ color: C.gray2 }}>
+                                {renderBold("Uma das maiores referências do Brasil em **direito antidiscriminatório** e defesa de candidatos cotistas. Diretor de Diversidade e Inclusão da **OAB/MG**, Secretário da Comissão Nacional de Igualdade Racial no **Conselho Federal da OAB** e Conselheiro Municipal em Belo Horizonte.")}
                             </p>
 
-                            <div className="flex flex-col sm:flex-row items-center gap-4 justify-center md:justify-start">
-                                <Cta text="Fale Comigo" />
-                                <LinkButton text="Conheça minha atuação" href="/atuacao" />
+                            <p className="text-sm leading-[1.8] mb-8 max-w-[55ch]" style={{ color: C.gray3 }}>
+                                Homenageado pela Assembleia Legislativa de MG por atuação no combate ao racismo. Palestrante em eventos da OAB, TJMG e universidades. Entrevistado pela TV Globo Minas como especialista em legislação antidiscriminatória.
+                            </p>
+
+                            <div className="flex flex-col sm:flex-row items-start gap-3">
+                                <a
+                                    href="https://wa.me/5531972206996?text=Ol%C3%A1%2C%20gostaria%20de%20agendar%20uma%20consulta."
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="inline-flex items-center gap-2.5 text-sm font-medium px-6 py-3 rounded transition-all duration-200 hover:opacity-90"
+                                    style={{ backgroundColor: C.gold, color: "#0a0a0a" }}
+                                >
+                                    Solicitar atendimento
+                                    <ArrowRight className="w-4 h-4" />
+                                </a>
+                                <Link
+                                    href="/sobre"
+                                    className="inline-flex items-center gap-2.5 text-sm font-medium px-6 py-3 rounded transition-all duration-200 hover:bg-white/5"
+                                    style={{ border: `1px solid rgba(255,255,255,0.15)`, color: C.gray2 }}
+                                >
+                                    Conheça a trajetória
+                                </Link>
                             </div>
-                        </div>
-
-                        {/* Foto */}
-                        <div className="flex-shrink-0 w-56 md:w-72 lg:w-[340px] order-1 md:order-2">
-                            <Image
-                                src="/images/marcelo/marcelo-sem-fundo-.png"
-                                alt="Dr. Marcelo Colen — Advogado, Mestre UFMG, Diretor OAB/MG"
-                                width={553}
-                                height={722}
-                                className="w-full object-contain"
-                                style={{ filter: "drop-shadow(0 16px 48px rgba(0,0,0,0.55))" }}
-                                priority
-                            />
                         </div>
                     </div>
                 </Container>
-
-                <div className="absolute bottom-0 left-0 right-0 h-px" style={{ background: `linear-gradient(to right, transparent, rgba(201,162,39,0.15), transparent)` }} />
             </section>
 
             {/* ═══════════════════════════════════════════════════════════ */}
-            {/* CREDENCIAIS STRIP                                          */}
+            {/* NÚMEROS DE AUTORIDADE                                      */}
             {/* ═══════════════════════════════════════════════════════════ */}
-            <section style={{ backgroundColor: "#0B1730", borderTop: `1px solid rgba(201,162,39,0.2)`, borderBottom: `1px solid rgba(201,162,39,0.1)` }}>
-                <style>{`@keyframes marquee-home { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }`}</style>
-                <div className="overflow-hidden py-3">
-                    <div style={{ display: "inline-block", whiteSpace: "nowrap", animation: "marquee-home 30s linear infinite" }}>
-                        {[0, 1].map(i => (
-                            <span key={i}>
-                                {CREDENTIALS.map((txt, j) => (
-                                    <span key={j} style={{ color: C.gold, fontSize: "11px", fontWeight: 600, letterSpacing: "0.12em", textTransform: "uppercase" }}>
-                                        {txt}
-                                        <span style={{ color: "rgba(201,162,39,0.35)", margin: "0 18px" }}>◆</span>
-                                    </span>
-                                ))}
-                            </span>
+            <section style={{ backgroundColor: C.bg2, borderTop: `1px solid rgba(255,255,255,0.04)`, borderBottom: `1px solid rgba(255,255,255,0.04)` }}>
+                <Container>
+                    <div className="grid grid-cols-2 md:grid-cols-4 gap-6 py-10 md:py-14">
+                        {NUMBERS.map((n, i) => (
+                            <div key={i} className="text-center">
+                                <p className="text-2xl md:text-3xl font-bold mb-1" style={{ color: C.gold, fontFamily: C.serif }}>{n.value}</p>
+                                <p className="text-[10px] md:text-xs uppercase tracking-[0.15em]" style={{ color: C.gray3 }}>{n.label}</p>
+                            </div>
                         ))}
-                    </div>
-                </div>
-            </section>
-
-            {/* ═══════════════════════════════════════════════════════════ */}
-            {/* SOBRE — Resumo                                             */}
-            {/* ═══════════════════════════════════════════════════════════ */}
-            <section className="py-20 md:py-32 relative overflow-hidden" style={{ backgroundColor: C.bg2 }}>
-                <div aria-hidden="true" className="absolute inset-0 pointer-events-none" style={{ backgroundImage: "url('/texture-pedra.png')", backgroundSize: "cover", opacity: 0.035 }} />
-                <Container className="relative z-10">
-                    <div className="max-w-4xl mx-auto flex flex-col md:flex-row gap-10 md:gap-16 items-center">
-                        {/* Foto */}
-                        <Reveal>
-                            <div className="w-64 md:w-72 flex-shrink-0 rounded-2xl overflow-hidden" style={{ border: `1px solid ${C.goldBorder}` }}>
-                                <Image
-                                    src="/images/marcelo/about.jpg"
-                                    alt="Dr. Marcelo Colen"
-                                    width={400}
-                                    height={500}
-                                    className="w-full object-cover"
-                                />
-                            </div>
-                        </Reveal>
-
-                        {/* Texto */}
-                        <Reveal delay={0.15}>
-                            <div>
-                                <SectionLabel align="left">Sobre</SectionLabel>
-                                <h2 className="text-2xl md:text-3xl font-bold mb-5" style={{ color: C.white, fontFamily: C.serif }}>
-                                    Quem é Marcelo Colen
-                                </h2>
-                                <p className="text-sm md:text-base leading-relaxed mb-4" style={{ color: C.gray2 }}>
-                                    {renderBold("Advogado criminalista em Belo Horizonte, **Mestre em Direito pela UFMG**, com atuação especializada em **direito antidiscriminatório e defesa de candidatos cotistas** em concursos públicos.")}
-                                </p>
-                                <p className="text-sm md:text-base leading-relaxed mb-6" style={{ color: C.gray2 }}>
-                                    {renderBold("É **Diretor de Diversidade e Inclusão da OAB/MG** e **Secretário da Comissão Nacional de Promoção da Igualdade Racial** no Conselho Federal da OAB. Foi presidente da Comissão Estadual de Igualdade Racial da OAB-MG (2022–2024) e atua como professor, palestrante e consultor em compliance antidiscriminatório.")}
-                                </p>
-
-                                <div className="grid grid-cols-2 gap-2 mb-6">
-                                    {["Mestre UFMG", "Diretor OAB/MG", "OAB Federal", "56mil+ seguidores"].map((item) => (
-                                        <span key={item} className="flex items-center gap-2 text-xs md:text-sm" style={{ color: C.gray2 }}>
-                                            <Check className="w-3.5 h-3.5 flex-shrink-0" style={{ color: C.gold }} />
-                                            {item}
-                                        </span>
-                                    ))}
-                                </div>
-
-                                <LinkButton text="Leia a trajetória completa" href="/sobre" />
-                            </div>
-                        </Reveal>
                     </div>
                 </Container>
             </section>
@@ -212,119 +170,155 @@ export default function HomePage() {
             {/* ═══════════════════════════════════════════════════════════ */}
             {/* ÁREAS DE ATUAÇÃO                                           */}
             {/* ═══════════════════════════════════════════════════════════ */}
-            <section id="areas" className="py-20 md:py-32 relative overflow-hidden" style={{ backgroundColor: C.bg1 }}>
-                <div aria-hidden="true" className="absolute inset-0 pointer-events-none"
-                    style={{ backgroundImage: "url('/texture-juridica.png')", backgroundRepeat: "repeat", backgroundSize: "1200px 800px", opacity: 0.03 }} />
+            <section className="py-20 md:py-32 relative overflow-hidden" style={{ backgroundColor: C.bg1 }}>
                 <Container className="relative z-10">
-                    <SectionLabel>Áreas de Atuação</SectionLabel>
-                    <h2 className="text-2xl md:text-4xl font-bold text-center mb-2" style={{ color: C.white, fontFamily: C.serif }}>
-                        Como posso ajudar
+                    <p className="text-[10px] md:text-xs uppercase tracking-[0.25em] font-medium mb-3" style={{ color: C.gold }}>
+                        Áreas de Atuação
+                    </p>
+                    <h2 className="text-2xl md:text-3xl font-bold mb-3" style={{ color: C.white, fontFamily: C.serif }}>
+                        Especialidades
                     </h2>
-                    <GoldDivider />
+                    <p className="text-sm leading-relaxed mb-10 max-w-xl" style={{ color: C.gray3 }}>
+                        Mais de uma década de experiência em direito antidiscriminatório, criminal e consultoria institucional.
+                    </p>
 
-                    <div className="grid sm:grid-cols-2 gap-5 max-w-4xl mx-auto mt-12">
+                    <div className="grid sm:grid-cols-2 gap-px rounded-xl overflow-hidden" style={{ backgroundColor: "rgba(255,255,255,0.04)" }}>
                         {AREAS.map((area, i) => (
-                            <Reveal key={i} delay={i * 0.1}>
-                                <Link href={area.href} className="group block rounded-2xl p-6 md:p-7 transition-all duration-300 hover:-translate-y-1 h-full"
-                                    style={{ backgroundColor: "rgba(255,255,255,0.025)", border: "1px solid rgba(255,255,255,0.06)" }}>
-                                    <area.Icon className="w-8 h-8 mb-4" style={{ color: C.gold, opacity: 0.85 }} />
-                                    <h3 className="text-lg font-bold mb-2" style={{ color: C.white, fontFamily: C.serif }}>
-                                        {area.title}
-                                    </h3>
-                                    <p className="text-sm leading-relaxed" style={{ color: C.gray2 }}>
-                                        {area.desc}
-                                    </p>
-                                    <span className="inline-flex items-center gap-2 text-xs font-semibold mt-4 group-hover:gap-3 transition-all" style={{ color: C.gold }}>
-                                        Saiba mais
-                                        <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-1" />
-                                    </span>
-                                </Link>
-                            </Reveal>
-                        ))}
-                    </div>
-
-                    <div className="mt-10 text-center">
-                        <LinkButton text="Ver todas as áreas" href="/atuacao" />
-                    </div>
-                </Container>
-            </section>
-
-            {/* ═══════════════════════════════════════════════════════════ */}
-            {/* NÚMEROS                                                    */}
-            {/* ═══════════════════════════════════════════════════════════ */}
-            <section className="py-12 md:py-16" style={{ backgroundColor: C.bg3, borderTop: `1px solid rgba(255,255,255,0.04)`, borderBottom: `1px solid rgba(255,255,255,0.04)` }}>
-                <Container>
-                    <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8 max-w-4xl mx-auto text-center">
-                        {NUMBERS.map((n, i) => (
-                            <Reveal key={i} delay={i * 0.08}>
-                                <div>
-                                    <p className="text-3xl md:text-4xl font-bold" style={{ color: C.gold, fontFamily: C.serif }}>
-                                        {n.value}
-                                    </p>
-                                    <p className="text-xs md:text-sm mt-1 uppercase tracking-wider" style={{ color: C.gray3 }}>
-                                        {n.label}
-                                    </p>
-                                </div>
-                            </Reveal>
+                            <Link
+                                key={i}
+                                href={area.href}
+                                className="group p-7 md:p-9 transition-colors duration-300 hover:bg-white/[0.02]"
+                                style={{ backgroundColor: C.bg1 }}
+                            >
+                                <area.Icon className="w-6 h-6 mb-4" style={{ color: C.gold, opacity: 0.6 }} />
+                                <h3 className="text-base md:text-lg font-bold mb-2" style={{ color: C.white, fontFamily: C.serif }}>
+                                    {area.title}
+                                </h3>
+                                <p className="text-sm leading-relaxed mb-4" style={{ color: C.gray3 }}>
+                                    {area.desc}
+                                </p>
+                                <span className="inline-flex items-center gap-1.5 text-xs font-medium group-hover:gap-2.5 transition-all" style={{ color: C.gold }}>
+                                    Saiba mais
+                                    <ArrowRight className="w-3.5 h-3.5" />
+                                </span>
+                            </Link>
                         ))}
                     </div>
                 </Container>
             </section>
 
             {/* ═══════════════════════════════════════════════════════════ */}
-            {/* NA MÍDIA                                                   */}
+            {/* QUEM É MARCELO COLEN                                       */}
             {/* ═══════════════════════════════════════════════════════════ */}
-            <section className="py-20 md:py-32 relative overflow-hidden" style={{ backgroundColor: C.bg2 }}>
+            <section className="py-20 md:py-32 relative overflow-hidden" style={{ backgroundColor: C.bg2, borderTop: `1px solid rgba(255,255,255,0.04)` }}>
                 <Container className="relative z-10">
-                    <SectionLabel>Na Mídia</SectionLabel>
-                    <h2 className="text-2xl md:text-3xl font-bold text-center mb-2" style={{ color: C.white, fontFamily: C.serif }}>
-                        Presença e reconhecimento
-                    </h2>
-                    <GoldDivider />
+                    <div className="max-w-4xl mx-auto">
+                        <p className="text-[10px] md:text-xs uppercase tracking-[0.25em] font-medium mb-3" style={{ color: C.gold }}>
+                            Quem é Dr. Marcelo Colen
+                        </p>
+                        <h2 className="text-2xl md:text-3xl font-bold mb-6" style={{ color: C.white, fontFamily: C.serif }}>
+                            Trajetória de autoridade no Direito brasileiro
+                        </h2>
 
-                    <div className="grid sm:grid-cols-2 gap-4 max-w-3xl mx-auto mt-10">
-                        {MEDIA.map((m, i) => (
-                            <Reveal key={i} delay={i * 0.08}>
-                                <div className="rounded-xl p-5 flex items-start gap-4"
-                                    style={{ backgroundColor: "rgba(255,255,255,0.025)", border: "1px solid rgba(255,255,255,0.06)" }}>
-                                    <m.icon className="w-8 h-8 flex-shrink-0 mt-0.5" style={{ color: C.gold, opacity: 0.7 }} />
+                        <div className="space-y-4 text-sm md:text-base leading-[1.8] mb-10" style={{ color: C.gray2 }}>
+                            <p>
+                                {renderBold("**Marcelo Ladeia Colen Guterres** é advogado criminalista em Belo Horizonte e fundador do escritório Marcelo Colen Advocacia, em atuação há mais de 10 anos. **Mestre em Direito pela Universidade Federal de Minas Gerais (UFMG)**, é uma das maiores referências nacionais em **direito antidiscriminatório** e na defesa de candidatos cotistas eliminados em comissões de heteroidentificação.")}
+                            </p>
+                            <p>
+                                {renderBold("Ocupa posições de liderança institucional na advocacia brasileira: é **Diretor de Diversidade e Inclusão da OAB/MG**, **Secretário da Comissão Nacional de Promoção da Igualdade Racial no Conselho Federal da OAB** (Portaria nº 269/2025), **Conselheiro Seccional da OAB/MG** e **Conselheiro Municipal de Promoção da Igualdade Racial de Belo Horizonte**.")}
+                            </p>
+                            <p>
+                                {renderBold("Foi **Presidente da Comissão Estadual de Igualdade Racial da OAB-MG** (2022–2024) e **Diretor do Núcleo de Igualdade Racial da ESAMG** — Escola Superior de Advocacia de Minas Gerais. Também é professor, palestrante e consultor institucional em igualdade racial para empresas, universidades e órgãos do Poder Judiciário.")}
+                            </p>
+                        </div>
+
+                        {/* Cargos atuais */}
+                        <p className="text-[10px] md:text-xs uppercase tracking-[0.15em] font-semibold mb-4" style={{ color: C.gold }}>
+                            Cargos institucionais em exercício
+                        </p>
+                        <div className="space-y-2 mb-8">
+                            {POSITIONS.filter(p => p.current).map((pos, i) => (
+                                <div key={i} className="flex items-start gap-3 py-2 px-3 rounded-lg" style={{ backgroundColor: "rgba(255,255,255,0.02)" }}>
+                                    <Award className="w-4 h-4 flex-shrink-0 mt-0.5" style={{ color: C.gold, opacity: 0.6 }} />
                                     <div>
-                                        <p className="font-bold text-sm" style={{ color: C.white }}>{m.name}</p>
-                                        <p className="text-xs mt-0.5" style={{ color: C.gray3 }}>{m.sub}</p>
-                                        <p className="text-xs mt-2 leading-relaxed" style={{ color: C.gray2 }}>{m.desc}</p>
+                                        <p className="text-sm font-semibold" style={{ color: C.white }}>{pos.role}</p>
+                                        <p className="text-xs" style={{ color: C.gray3 }}>{pos.org}</p>
                                     </div>
                                 </div>
+                            ))}
+                        </div>
+
+                        <Link
+                            href="/sobre"
+                            className="inline-flex items-center gap-2 text-sm font-medium transition-all hover:gap-3"
+                            style={{ color: C.gold }}
+                        >
+                            Ver trajetória completa e formação acadêmica
+                            <ArrowRight className="w-4 h-4" />
+                        </Link>
+                    </div>
+                </Container>
+            </section>
+
+            {/* ═══════════════════════════════════════════════════════════ */}
+            {/* RECONHECIMENTO E MÍDIA                                     */}
+            {/* ═══════════════════════════════════════════════════════════ */}
+            <section className="py-20 md:py-28 relative overflow-hidden" style={{ backgroundColor: C.bg1, borderTop: `1px solid rgba(255,255,255,0.04)` }}>
+                <Container className="relative z-10">
+                    <p className="text-[10px] md:text-xs uppercase tracking-[0.25em] font-medium mb-3" style={{ color: C.gold }}>
+                        Reconhecimento
+                    </p>
+                    <h2 className="text-2xl md:text-3xl font-bold mb-3" style={{ color: C.white, fontFamily: C.serif }}>
+                        Presença na mídia e instituições
+                    </h2>
+                    <p className="text-sm leading-relaxed mb-10 max-w-xl" style={{ color: C.gray3 }}>
+                        Entrevistas, homenagens e participações que consolidam a posição de Dr. Marcelo Colen como referência em direito antidiscriminatório.
+                    </p>
+
+                    <div className="grid sm:grid-cols-2 gap-4 max-w-3xl">
+                        {RECOGNITION.map((item, i) => (
+                            <Reveal key={i} delay={i * 0.08}>
+                                <div className="p-5 rounded-xl h-full" style={{ backgroundColor: "rgba(255,255,255,0.02)", border: "1px solid rgba(255,255,255,0.05)" }}>
+                                    <item.icon className="w-6 h-6 mb-3" style={{ color: C.gold, opacity: 0.7 }} />
+                                    <h3 className="text-sm font-bold mb-1" style={{ color: C.white }}>{item.title}</h3>
+                                    <p className="text-xs leading-relaxed" style={{ color: C.gray3 }}>{item.desc}</p>
+                                </div>
                             </Reveal>
                         ))}
                     </div>
 
-                    <div className="mt-10 text-center">
-                        <LinkButton text="Ver todas as aparições" href="/midia" />
-                    </div>
+                    <Link
+                        href="/midia"
+                        className="inline-flex items-center gap-2 text-sm font-medium mt-8 transition-all hover:gap-3"
+                        style={{ color: C.gold }}
+                    >
+                        Ver todas as aparições
+                        <ArrowRight className="w-4 h-4" />
+                    </Link>
                 </Container>
             </section>
 
             {/* ═══════════════════════════════════════════════════════════ */}
             {/* DEPOIMENTOS                                                */}
             {/* ═══════════════════════════════════════════════════════════ */}
-            <section className="py-20 md:py-32 relative overflow-hidden" style={{ backgroundColor: C.bg1 }}>
+            <section className="py-20 md:py-28 relative overflow-hidden" style={{ backgroundColor: C.bg2, borderTop: `1px solid rgba(255,255,255,0.04)` }}>
                 <Container className="relative z-10">
-                    <SectionLabel>Depoimentos</SectionLabel>
-                    <h2 className="text-2xl md:text-3xl font-bold text-center mb-2" style={{ color: C.white, fontFamily: C.serif }}>
-                        Candidatos que recuperaram suas vagas
+                    <p className="text-[10px] md:text-xs uppercase tracking-[0.25em] font-medium mb-3" style={{ color: C.gold }}>
+                        Resultados
+                    </p>
+                    <h2 className="text-2xl md:text-3xl font-bold mb-10" style={{ color: C.white, fontFamily: C.serif }}>
+                        O que dizem os clientes
                     </h2>
-                    <GoldDivider />
-                    <div className="grid md:grid-cols-3 gap-5 max-w-4xl mx-auto mt-10">
+
+                    <div className="grid md:grid-cols-3 gap-6 max-w-4xl">
                         {TESTIMONIALS.map((dep, i) => (
                             <Reveal key={i} delay={i * 0.1}>
-                                <div className="rounded-2xl p-6 flex flex-col relative overflow-hidden h-full"
-                                    style={{ backgroundColor: "rgba(255,255,255,0.025)", border: "1px solid rgba(255,255,255,0.06)" }}>
-                                    <span aria-hidden="true" className="absolute top-3 right-4 text-5xl leading-none font-serif select-none" style={{ color: C.gold, opacity: 0.1 }}>&rdquo;</span>
-                                    <p className="text-sm leading-relaxed mb-5 flex-1 relative z-10" style={{ color: C.gray2, fontStyle: "italic" }}>
+                                <div className="p-6 rounded-xl h-full" style={{ backgroundColor: "rgba(255,255,255,0.02)", border: "1px solid rgba(255,255,255,0.05)" }}>
+                                    <p className="text-sm leading-[1.8] mb-5" style={{ color: C.gray2 }}>
                                         &ldquo;{dep.texto}&rdquo;
                                     </p>
-                                    <div className="h-px mb-3" style={{ background: `linear-gradient(to right, ${C.gold}, transparent)`, opacity: 0.25 }} />
-                                    <p className="text-[10px] font-bold uppercase tracking-widest" style={{ color: C.gold }}>{dep.nome}</p>
+                                    <div className="h-px mb-3" style={{ background: `linear-gradient(to right, rgba(255,255,255,0.06), transparent)` }} />
+                                    <p className="text-[10px] font-medium uppercase tracking-wider" style={{ color: C.gray3 }}>{dep.nome}</p>
                                 </div>
                             </Reveal>
                         ))}
@@ -335,21 +329,30 @@ export default function HomePage() {
             {/* ═══════════════════════════════════════════════════════════ */}
             {/* CTA FINAL                                                  */}
             {/* ═══════════════════════════════════════════════════════════ */}
-            <section className="py-20 md:py-28 relative overflow-hidden" style={{ backgroundColor: C.bg3, borderTop: `1px solid rgba(255,255,255,0.04)` }}>
-                <div aria-hidden="true" className="absolute inset-0 pointer-events-none"
-                    style={{ background: "radial-gradient(ellipse at center, rgba(201,162,39,0.04) 0%, transparent 65%)" }} />
-                <Container className="relative z-10">
-                    <div className="max-w-lg mx-auto text-center">
-                        <SectionLabel>Contato</SectionLabel>
-                        <h2 className="text-2xl md:text-3xl font-bold mb-4" style={{ color: C.white, fontFamily: C.serif }}>
-                            Precisa de orientação jurídica?
-                        </h2>
-                        <p className="text-base leading-relaxed mb-8" style={{ color: C.gray2 }}>
-                            {renderBold("Entre em contato para uma **análise inicial do seu caso**. Atendimento **100% online**, ágil e sigiloso.")}
+            <section className="py-20 md:py-28" style={{ backgroundColor: C.bg1, borderTop: `1px solid rgba(255,255,255,0.04)` }}>
+                <Container>
+                    <div className="max-w-xl">
+                        <p className="text-[10px] md:text-xs uppercase tracking-[0.25em] font-medium mb-3" style={{ color: C.gold }}>
+                            Atendimento
                         </p>
-                        <Cta text="Falar com Dr. Marcelo" full />
-                        <p className="text-[10px] mt-6" style={{ color: C.gray4 }}>
-                            Cada caso é avaliado individualmente. Não fazemos promessa de resultado.
+                        <h2 className="text-2xl md:text-3xl font-bold mb-4" style={{ color: C.white, fontFamily: C.serif }}>
+                            Agende uma consulta
+                        </h2>
+                        <p className="text-sm md:text-base leading-[1.8] mb-8" style={{ color: C.gray2 }}>
+                            {renderBold("O escritório realiza uma **análise preliminar** do caso para avaliar a viabilidade jurídica antes de qualquer contratação. Atendimento **nacional**, por videoconferência ou presencial em Belo Horizonte.")}
+                        </p>
+                        <a
+                            href="https://wa.me/5531972206996?text=Ol%C3%A1%2C%20gostaria%20de%20agendar%20uma%20consulta%20com%20o%20escrit%C3%B3rio."
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="inline-flex items-center gap-2.5 text-sm font-medium px-6 py-3 rounded transition-all duration-200 hover:opacity-90"
+                            style={{ backgroundColor: C.gold, color: "#0a0a0a" }}
+                        >
+                            Solicitar atendimento
+                            <ArrowRight className="w-4 h-4" />
+                        </a>
+                        <p className="text-[10px] mt-6 leading-relaxed" style={{ color: C.gray4 }}>
+                            Este site tem caráter informativo. Cada caso requer análise individualizada. Não fazemos promessa de resultado.
                         </p>
                     </div>
                 </Container>
