@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { MessageCircle, ChevronDown, Check, Scale, FileText, Shield, ArrowRight, Phone } from "lucide-react";
+import { MessageCircle, Check, Scale, FileText, Shield, ArrowRight } from "lucide-react";
 import { Container } from "@/components/layout";
 import { getDirectWhatsAppLink } from "@/lib/whatsapp";
 import { trackWhatsAppClick } from "@/lib/analytics";
@@ -142,44 +142,13 @@ const AREAS = [
 // ============================================================================
 export default function HomePage() {
     return (
-        <main style={{ backgroundColor: C.bg1, color: C.white }}>
+        <div style={{ backgroundColor: C.bg1, color: C.white }}>
             <GrainOverlay />
-
-            {/* ══════════════════════════════════════════════════════════════ */}
-            {/* HEADER SIMPLES                                               */}
-            {/* ══════════════════════════════════════════════════════════════ */}
-            <header className="fixed top-0 left-0 right-0 z-50" style={{ backgroundColor: "rgba(10,10,10,0.85)", backdropFilter: "blur(12px)", borderBottom: "1px solid rgba(255,255,255,0.06)" }}>
-                <Container>
-                    <div className="flex items-center justify-between h-14 md:h-16">
-                        <a href="/" className="flex items-center gap-2">
-                            <span className="text-lg md:text-xl font-bold tracking-tight" style={{ color: C.gold, fontFamily: "'Cormorant Garamond', Georgia, serif" }}>
-                                Marcelo Colen
-                            </span>
-                            <span className="hidden md:inline text-[10px] uppercase tracking-widest font-semibold" style={{ color: C.gray3 }}>
-                                Advocacia
-                            </span>
-                        </a>
-                        <nav className="hidden md:flex items-center gap-8">
-                            <a href="#areas" className="text-xs uppercase tracking-widest font-semibold transition-colors hover:text-white" style={{ color: C.gray2 }}>Atuação</a>
-                            <a href="#sobre" className="text-xs uppercase tracking-widest font-semibold transition-colors hover:text-white" style={{ color: C.gray2 }}>Sobre</a>
-                        </nav>
-                        <a
-                            href={getDirectWhatsAppLink(WA_MSG)}
-                            onClick={trackWhatsAppClick}
-                            className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-xs font-semibold uppercase tracking-wider transition-all hover:scale-[1.03]"
-                            style={{ border: "1px solid rgba(201,162,39,0.4)", color: C.gold }}
-                        >
-                            <Phone className="w-3.5 h-3.5" />
-                            <span className="hidden sm:inline">Fale Conosco</span>
-                        </a>
-                    </div>
-                </Container>
-            </header>
 
             {/* ══════════════════════════════════════════════════════════════ */}
             {/* HERO                                                         */}
             {/* ══════════════════════════════════════════════════════════════ */}
-            <section className="relative flex items-center overflow-hidden pt-24 pb-16 md:pt-32 md:pb-28 lg:py-40" style={{ backgroundColor: C.bg1 }}>
+            <section className="relative flex items-center overflow-hidden pt-8 pb-16 md:pt-16 md:pb-28 lg:py-32" style={{ backgroundColor: C.bg1 }}>
                 <div className="absolute inset-0 z-0 select-none">
                     <div className="absolute inset-0" style={{ backgroundImage: "url('/texture-pedra.png')", backgroundSize: "cover", backgroundPosition: "top center", opacity: 0.06 }} />
                     <div className="absolute inset-0" style={{ background: `radial-gradient(ellipse 80% 60% at 50% 0%, rgba(201,162,39,0.05) 0%, transparent 70%)` }} />
@@ -356,60 +325,6 @@ export default function HomePage() {
                     </div>
                 </Container>
             </section>
-
-            {/* ══════════════════════════════════════════════════════════════ */}
-            {/* FOOTER                                                       */}
-            {/* ══════════════════════════════════════════════════════════════ */}
-            <footer style={{ backgroundColor: C.bg3, borderTop: "1px solid rgba(255,255,255,0.06)" }}>
-                <Container>
-                    <div className="py-10 md:py-14">
-                        <div className="grid md:grid-cols-3 gap-8 md:gap-12">
-                            {/* Marca */}
-                            <div>
-                                <p className="text-xl font-bold mb-2" style={{ color: C.gold, fontFamily: "'Cormorant Garamond', Georgia, serif" }}>
-                                    Marcelo Colen
-                                </p>
-                                <p className="text-xs mb-4" style={{ color: C.gray3 }}>Advocacia</p>
-                                <p className="text-sm leading-relaxed" style={{ color: C.gray2 }}>
-                                    Especialista em Direito Antidiscriminatório, heteroidentificação e defesa de candidatos cotistas em concursos públicos.
-                                </p>
-                            </div>
-
-                            {/* Links */}
-                            <div>
-                                <p className="text-xs uppercase tracking-widest font-semibold mb-4" style={{ color: C.gold }}>Áreas de Atuação</p>
-                                <div className="space-y-2">
-                                    {AREAS.map((area) => (
-                                        <a key={area.href} href={area.href} className="block text-sm transition-colors hover:text-white" style={{ color: C.gray2 }}>
-                                            {area.title}
-                                        </a>
-                                    ))}
-                                </div>
-                            </div>
-
-                            {/* Contato */}
-                            <div>
-                                <p className="text-xs uppercase tracking-widest font-semibold mb-4" style={{ color: C.gold }}>Contato</p>
-                                <div className="space-y-2 text-sm" style={{ color: C.gray2 }}>
-                                    <p>OAB/MG 167.463</p>
-                                    <p>(31) 97220-6996</p>
-                                    <p>marcelo@cardosocolen.com.br</p>
-                                    <a href="https://instagram.com/marcelocolen.adv" target="_blank" rel="noopener noreferrer" className="block hover:text-white transition-colors">
-                                        @marcelocolen.adv
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div className="h-px mt-10 mb-6" style={{ background: "rgba(255,255,255,0.06)" }} />
-
-                        <div className="flex flex-col md:flex-row items-center justify-between gap-2 text-xs" style={{ color: C.gray3 }}>
-                            <p>© 2026 Marcelo Colen Advocacia. Todos os direitos reservados.</p>
-                            <p>Belo Horizonte/MG · Atendimento 100% online e nacional</p>
-                        </div>
-                    </div>
-                </Container>
-            </footer>
-        </main>
+        </div>
     );
 }
