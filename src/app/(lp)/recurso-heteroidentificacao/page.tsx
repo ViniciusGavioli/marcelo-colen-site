@@ -673,19 +673,19 @@ export default function RecursoHeteroidentificacaoPage() {
                     <div className="max-w-4xl mx-auto flex flex-col md:flex-row items-stretch gap-0">
 
                         {/* FOTO — coluna esquerda, sem fundo, grande */}
-                        <div className="flex-shrink-0 flex items-end justify-center md:justify-start pt-10 md:pt-0 md:w-64 lg:w-72">
-                            <div className="relative w-52 md:w-64 lg:w-72">
+                        <div className="flex-shrink-0 flex items-end justify-center md:justify-start md:w-64 lg:w-72">
+                            <div className="relative w-48 md:w-full">
                                 <Image
                                     src="/images/marcelo/marcelo-sem-fundo-.png"
                                     alt="Dr. Marcelo Colen"
                                     width={320}
                                     height={420}
-                                    className="object-contain w-full drop-shadow-2xl"
+                                    className="object-contain w-full"
                                     style={{ filter: "drop-shadow(0 20px 40px rgba(0,0,0,0.5))" }}
                                 />
-                                {/* badge OAB sobre a foto */}
+                                {/* badge OAB */}
                                 <div
-                                    className="absolute bottom-4 left-1/2 -translate-x-1/2 px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-widest whitespace-nowrap"
+                                    className="absolute bottom-2 left-1/2 -translate-x-1/2 px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-widest whitespace-nowrap"
                                     style={{ backgroundColor: C.gold, color: C.bg1, boxShadow: "0 2px 12px rgba(201,162,39,0.4)" }}
                                 >
                                     OAB/MG
