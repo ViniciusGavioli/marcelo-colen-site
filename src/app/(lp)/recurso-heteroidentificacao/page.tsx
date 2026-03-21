@@ -674,7 +674,7 @@ export default function RecursoHeteroidentificacaoPage() {
 
                         {/* FOTO — coluna esquerda, sem fundo, grande */}
                         <div className="flex-shrink-0 flex items-end justify-center md:justify-start md:w-64 lg:w-72">
-                            <div className="relative w-48 md:w-full">
+                            <div className="w-48 md:w-full">
                                 <Image
                                     src="/images/marcelo/marcelo-sem-fundo-.png"
                                     alt="Dr. Marcelo Colen"
@@ -683,13 +683,6 @@ export default function RecursoHeteroidentificacaoPage() {
                                     className="object-contain w-full"
                                     style={{ filter: "drop-shadow(0 20px 40px rgba(0,0,0,0.5))" }}
                                 />
-                                {/* badge OAB */}
-                                <div
-                                    className="absolute bottom-2 left-1/2 -translate-x-1/2 px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-widest whitespace-nowrap"
-                                    style={{ backgroundColor: C.gold, color: C.bg1, boxShadow: "0 2px 12px rgba(201,162,39,0.4)" }}
-                                >
-                                    OAB/MG
-                                </div>
                             </div>
                         </div>
 
@@ -711,11 +704,19 @@ export default function RecursoHeteroidentificacaoPage() {
 
                             <div className="h-px mb-5" style={{ background: `linear-gradient(to right, ${C.gold}, transparent)`, opacity: 0.3 }} />
 
-                            <p className="font-bold text-lg" style={{ color: C.gold, fontFamily: "'Cormorant Garamond', Georgia, serif" }}>
-                                Dr. Marcelo Colen
-                            </p>
+                            <div className="flex items-center gap-2 flex-wrap">
+                                <p className="font-bold text-lg" style={{ color: C.gold, fontFamily: "'Cormorant Garamond', Georgia, serif" }}>
+                                    Dr. Marcelo Colen
+                                </p>
+                                <span
+                                    className="px-2 py-0.5 rounded-full text-[9px] font-black uppercase tracking-widest"
+                                    style={{ backgroundColor: C.gold, color: C.bg1 }}
+                                >
+                                    OAB/MG
+                                </span>
+                            </div>
                             <p className="text-xs mt-1 mb-6" style={{ color: C.gray3 }}>
-                                Advogado · OAB/MG · Direito Antidiscriminatório e Concursos Públicos
+                                Advogado · Direito Antidiscriminatório e Concursos Públicos
                             </p>
 
                             {/* Bullets de autoridade */}
