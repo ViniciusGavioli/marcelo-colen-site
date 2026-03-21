@@ -57,8 +57,8 @@ const GRAIN_URL = `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/
 // ============================================================================
 const D = {
     hero: {
-        h1_1: "Dá pra recorrer.",
-        h1_2: "Mas o prazo está correndo agora.",
+        h1_1: "Passou em tudo e foi reprovado na banca?",
+        h1_2: "Você ainda pode recorrer.",
         sub: "A decisão da banca pode ter falhas técnicas que tornam o recurso viável. Análise do seu caso em horas, antes que o prazo feche.",
         cta: "Verificar se posso recorrer",
         disclaimer: "Cada caso é avaliado individualmente. Não fazemos promessa de resultado.",
