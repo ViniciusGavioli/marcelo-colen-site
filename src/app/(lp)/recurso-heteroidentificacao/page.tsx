@@ -60,7 +60,7 @@ const D = {
     hero: {
         h1_1: "Passou em tudo e foi reprovado na banca?",
         h1_2: "Você ainda pode recorrer.",
-        sub: "A decisão da banca pode ter falhas técnicas que tornam o recurso viável. Análise do seu caso em horas, antes que o prazo feche.",
+        sub: "A decisão da banca pode ter **falhas técnicas** que tornam o recurso viável. **Análise do seu caso em horas**, antes que o prazo feche.",
         cta: "Verificar se posso recorrer",
         disclaimer: "Cada caso é avaliado individualmente. Não fazemos promessa de resultado.",
     },
@@ -70,19 +70,19 @@ const D = {
         items: [
             {
                 titulo: "Motivação genérica",
-                texto: "A decisão disse apenas que você 'não apresenta fenótipo pardo' sem detalhar quais características foram avaliadas. Isso é insuficiente e contestável.",
+                texto: "A decisão disse apenas que você 'não apresenta fenótipo pardo' sem detalhar quais características foram avaliadas. **Isso é insuficiente e contestável.**",
             },
             {
                 titulo: "Análise superficial",
-                texto: "A banca avaliou apenas a cor da pele, ignorando outros traços fenotípicos exigidos pelo edital como cabelo, traços faciais e contexto racial.",
+                texto: "A banca avaliou **apenas a cor da pele**, ignorando outros traços fenotípicos exigidos pelo edital como cabelo, traços faciais e contexto racial.",
             },
             {
                 titulo: "Erro procedimental",
-                texto: "Irregularidades na condução da avaliação: tempo insuficiente, composição irregular da comissão ou ausência de filmagem podem invalidar o resultado.",
+                texto: "Irregularidades na condução da avaliação: tempo insuficiente, composição irregular da comissão ou ausência de filmagem podem **invalidar o resultado**.",
             },
             {
                 titulo: "Inconsistência com o edital",
-                texto: "A comissão adotou critérios diferentes dos previstos no edital do concurso. O que não está no edital não pode ser usado contra o candidato.",
+                texto: "A comissão adotou **critérios diferentes dos previstos no edital**. O que não está no edital **não pode ser usado contra o candidato**.",
             },
         ],
     },
@@ -98,7 +98,7 @@ const D = {
     },
     urg: {
         title: "O Único Risco Real Agora é o Tempo.",
-        text: "Em muitos concursos, o prazo de recurso administrativo é de apenas 2 a 5 dias corridos após o resultado. Passado esse prazo, a via administrativa fecha. Resta apenas a judicial, mais longa e mais cara. Por isso a análise precisa acontecer agora.",
+        text: "Em muitos concursos, o prazo de recurso administrativo é de apenas **2 a 5 dias corridos** após o resultado. Passado esse prazo, a via administrativa **fecha**. Resta apenas a judicial, **mais longa e mais cara**. Por isso a análise **precisa acontecer agora**.",
         cta: "Verificar Meu Prazo Agora",
     },
     steps: {
@@ -117,6 +117,17 @@ const D = {
     ],
     wa: "Olá, fui indeferido na heteroidentificação e quero saber se posso recorrer. Vou enviar o resultado e o edital.",
 };
+
+// ============================================================================
+// RENDER BOLD — converte **texto** em <strong>
+// ============================================================================
+function renderBold(text: string): React.ReactNode {
+    return text.split(/\*\*(.*?)\*\*/g).map((part, i) =>
+        i % 2 === 1
+            ? <strong key={i} style={{ color: "rgba(255,255,255,0.98)", fontWeight: 700 }}>{part}</strong>
+            : part
+    );
+}
 
 // ============================================================================
 // GRAIN OVERLAY
@@ -220,7 +231,7 @@ function FaqItem({ q, a }: { q: string; a: string }) {
             </button>
             {open && (
                 <div style={{ color: C.gray2 }} className="pb-6 leading-relaxed text-sm md:text-base">
-                    {a}
+                    {renderBold(a)}
                 </div>
             )}
         </div>
@@ -511,7 +522,7 @@ export default function RecursoHeteroidentificacaoPage() {
                                         <XCircle className="w-5 h-5 flex-shrink-0 mt-0.5" style={{ color: C.red }} />
                                         <div>
                                             <p className="font-bold text-sm mb-1" style={{ color: C.white }}>{item.titulo}</p>
-                                            <p className="text-xs md:text-sm leading-relaxed" style={{ color: C.gray2 }}>{item.texto}</p>
+                                            <p className="text-xs md:text-sm leading-relaxed" style={{ color: C.gray2 }}>{renderBold(item.texto)}</p>
                                         </div>
                                     </div>
                                 </Reveal>
@@ -544,7 +555,7 @@ export default function RecursoHeteroidentificacaoPage() {
                         </div>
                         <GoldDivider />
                         <p className="text-sm md:text-base font-medium text-center mt-3 mb-8" style={{ color: C.gray2 }}>
-                            {D.analiseCaso.desc}
+                            {renderBold(D.analiseCaso.desc)}
                         </p>
 
                         <div className="space-y-3 mb-8">
@@ -602,7 +613,7 @@ export default function RecursoHeteroidentificacaoPage() {
                             {D.urg.title}
                         </h2>
                         <p className="text-base md:text-lg leading-relaxed mb-8 font-medium" style={{ color: C.gray1 }}>
-                            {D.urg.text}
+                            {renderBold(D.urg.text)}
                         </p>
                         <Cta text={D.urg.cta} />
                     </div>
@@ -645,7 +656,7 @@ export default function RecursoHeteroidentificacaoPage() {
                                     </div>
                                     <step.Icon className="w-8 h-8 mx-auto mb-4 mt-4" style={{ color: C.gold, opacity: 0.85 }} />
                                     <h3 className="text-lg font-bold mb-2" style={{ color: C.white }}>{step.t}</h3>
-                                    <p className="text-sm leading-relaxed" style={{ color: C.gray2 }}>{step.d}</p>
+                                    <p className="text-sm leading-relaxed" style={{ color: C.gray2 }}>{renderBold(step.d)}</p>
                                 </div>
                             </Reveal>
                         ))}
