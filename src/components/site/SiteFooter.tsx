@@ -11,8 +11,15 @@ const C = {
 
 const WA_MSG = "Olá Dr. Marcelo, vim pelo site e gostaria de uma análise do meu caso.";
 
+const SITE_LINKS = [
+    { label: "Início", href: "/" },
+    { label: "Sobre", href: "/sobre" },
+    { label: "Atuação", href: "/atuacao" },
+    { label: "Na Mídia", href: "/midia" },
+];
+
 const AREAS = [
-    { label: "Recurso Heteroidentificação", href: "/recurso-heteroidentificacao" },
+    { label: "Heteroidentificação e Cotas", href: "/recurso-heteroidentificacao" },
     { label: "Advogado Cotas Raciais", href: "/advogado-cotas-raciais" },
     { label: "Reprovado na Banca", href: "/reprovado-heteroidentificacao" },
 ];
@@ -42,13 +49,32 @@ export function SiteFooter() {
                             </p>
                         </div>
 
-                        {/* Áreas */}
+                        {/* Navegação */}
                         <div>
                             <p
                                 className="text-xs uppercase tracking-widest font-semibold mb-4"
                                 style={{ color: C.gold }}
                             >
-                                Áreas de Atuação
+                                Navegação
+                            </p>
+                            <div className="space-y-2">
+                                {SITE_LINKS.map((link) => (
+                                    <Link
+                                        key={link.href}
+                                        href={link.href}
+                                        className="block text-sm transition-colors hover:text-white"
+                                        style={{ color: C.gray2 }}
+                                    >
+                                        {link.label}
+                                    </Link>
+                                ))}
+                            </div>
+
+                            <p
+                                className="text-xs uppercase tracking-widest font-semibold mb-3 mt-6"
+                                style={{ color: C.gold }}
+                            >
+                                Atendimento Direto
                             </p>
                             <div className="space-y-2">
                                 {AREAS.map((area) => (
