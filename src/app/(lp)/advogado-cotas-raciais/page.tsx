@@ -61,7 +61,7 @@ const D = {
         badge: "⚠️ Prazo de recurso: entre 2 e 5 dias a partir do resultado. Cada hora conta.",
         h1_1: "Passou em tudo e foi reprovado na banca?",
         h1_2: "Isso tem contestação.",
-        sub: "Se a banca te indeferiu, pode ter cometido um erro. Esse erro pode ser contestado antes do prazo acabar.",
+        sub: "Se a banca te indeferiu, **pode ter cometido um erro**. Esse erro **pode ser contestado** antes do prazo acabar.",
         credentials: "Dr. Marcelo Colen · Mestre em Direito pela UFMG · Secretário da Comissão Nacional de Promoção da Igualdade da OAB Federal · Diretor de Diversidade da OAB/MG",
         cta: "Ver se meu caso tem recurso",
         ctaLine1: "Você pode enviar o resultado da heteroidentificação agora mesmo.",
@@ -70,7 +70,7 @@ const D = {
     },
     analiseCaso: {
         title: "O que analisamos no seu caso",
-        desc: "Avaliação do edital, da motivação da banca e da viabilidade do recurso.",
+        desc: "Avaliação do edital, da **motivação da banca** e da **viabilidade do recurso**.",
         items: [
             "Edital do concurso",
             "Resultado da heteroidentificação",
@@ -80,26 +80,37 @@ const D = {
     },
     urg: {
         title: "Por Que Agir Rápido?",
-        text: "Em muitos concursos, o prazo de recurso administrativo é de apenas 2 a 5 dias corridos após o resultado. Passado esse prazo, a via administrativa fecha. Resta apenas a judicial, mais longa e mais cara. Por isso a análise precisa acontecer agora.",
+        text: "Em muitos concursos, o prazo de recurso administrativo é de apenas **2 a 5 dias corridos** após o resultado. Passado esse prazo, a via administrativa **fecha**. Resta apenas a judicial, **mais longa e mais cara**. Por isso a análise **precisa acontecer agora**.",
         cta: "Enviar Meu Caso no WhatsApp",
     },
     steps: {
         title: "Como Funciona o Atendimento",
         items: [
-            { n: "01", t: "Você envia", d: "Manda o resultado da heteroidentificação e o edital pelo WhatsApp. Pode ser print, PDF ou foto.", Icon: Send },
-            { n: "02", t: "Analisamos", d: "O Dr. Marcelo analisa pessoalmente o caso: edital, motivação da banca, prazo e viabilidade do recurso.", Icon: Search },
-            { n: "03", t: "Você decide", d: "Recebe a orientação técnica e decide como prosseguir. Sem compromisso na primeira análise.", Icon: Gavel },
+            { n: "01", t: "Você envia", d: "Manda o resultado e o edital pelo WhatsApp. **Print, PDF ou foto.** Quanto mais rápido, melhor.", Icon: Send },
+            { n: "02", t: "Analisamos", d: "O Dr. Marcelo analisa pessoalmente: edital, motivação da banca, prazo e **viabilidade do recurso**.", Icon: Search },
+            { n: "03", t: "Você decide", d: "Recebe a orientação técnica e decide como prosseguir. **Sem compromisso** na primeira análise.", Icon: Gavel },
         ],
         cta: "Enviar Meu Caso no WhatsApp",
     },
     faq: [
-        { q: "Tem custo essa primeira conversa?", a: "Não. A análise inicial do seu caso (edital, resultado e prazo) é feita sem custo. Se houver fundamento para recurso e você quiser contratar, apresentamos os honorários nesse momento." },
-        { q: "E se não houver fundamento para recurso?", a: "Informamos isso claramente, sem enrolação. Não cobramos para dizer que o caso não tem viabilidade. Preferimos ser diretos do que gerar expectativa falsa." },
-        { q: "A conversa é protegida por sigilo?", a: "Sim. Todo contato está protegido pelo sigilo profissional da advocacia. Nenhuma informação é compartilhada." },
-        { q: "A atuação abrange candidatos de qualquer estado?", a: "Sim. O atendimento é 100% online e nacional. Já atuamos em concursos federais e estaduais em todo o Brasil." },
+        { q: "Tem custo essa primeira conversa?", a: "**Não.** A análise inicial do seu caso (edital, resultado e prazo) é feita **sem custo**. Se houver fundamento para recurso e você quiser contratar, apresentamos os honorários nesse momento." },
+        { q: "E se não houver fundamento para recurso?", a: "Informamos isso claramente, **sem enrolação**. Não cobramos para dizer que o caso não tem viabilidade. Preferimos ser **diretos** do que gerar expectativa falsa." },
+        { q: "A conversa é protegida por sigilo?", a: "**Sim.** Todo contato está protegido pelo **sigilo profissional** da advocacia. Nenhuma informação é compartilhada." },
+        { q: "A atuação abrange candidatos de qualquer estado?", a: "**Sim.** O atendimento é **100% online e nacional**. Já atuamos em concursos federais e estaduais em todo o Brasil." },
     ],
     wa: "Olá doutor, fui indeferido na heteroidentificação hoje. Posso te mandar meu resultado?",
 };
+
+// ============================================================================
+// RENDER BOLD — converte **texto** em <strong>
+// ============================================================================
+function renderBold(text: string): React.ReactNode {
+    return text.split(/\*\*(.*?)\*\*/g).map((part, i) =>
+        i % 2 === 1
+            ? <strong key={i} style={{ color: "rgba(255,255,255,0.98)", fontWeight: 700 }}>{part}</strong>
+            : part
+    );
+}
 
 // ============================================================================
 // GRAIN OVERLAY — textura sutil em toda a página
@@ -203,7 +214,7 @@ function FaqItem({ q, a }: { q: string; a: string }) {
             </button>
             {open && (
                 <div style={{ color: C.gray2 }} className="pb-6 leading-relaxed text-sm md:text-base">
-                    {a}
+                    {renderBold(a)}
                 </div>
             )}
         </div>
@@ -369,7 +380,7 @@ export default function AdvogadoPage() {
 
                         {/* Subtítulo */}
                         <p className="text-base md:text-lg leading-relaxed mb-8 md:mb-10 max-w-[42ch]" style={{ color: C.gray2 }}>
-                            {D.hero.sub}
+                            {renderBold(D.hero.sub)}
                         </p>
 
                         {/* CTA */}
@@ -514,7 +525,7 @@ export default function AdvogadoPage() {
                         </div>
                         <GoldDivider />
                         <p className="text-sm md:text-base font-medium text-center mt-3 mb-8" style={{ color: C.gray2 }}>
-                            {D.analiseCaso.desc}
+                            {renderBold(D.analiseCaso.desc)}
                         </p>
 
                         <div className="space-y-3 mb-8">
@@ -571,7 +582,7 @@ export default function AdvogadoPage() {
                             {D.urg.title}
                         </h2>
                         <p className="text-base md:text-lg leading-relaxed mb-8 font-medium" style={{ color: C.gray1 }}>
-                            {D.urg.text}
+                            {renderBold(D.urg.text)}
                         </p>
                         <Cta text={D.urg.cta} />
                     </div>
@@ -614,7 +625,7 @@ export default function AdvogadoPage() {
                                 </div>
                                 <step.Icon className="w-8 h-8 mx-auto mb-4 mt-4" style={{ color: C.gold, opacity: 0.85 }} />
                                 <h3 className="text-lg font-bold mb-2" style={{ color: C.white }}>{step.t}</h3>
-                                <p className="text-sm leading-relaxed" style={{ color: C.gray2 }}>{step.d}</p>
+                                <p className="text-sm leading-relaxed" style={{ color: C.gray2 }}>{renderBold(step.d)}</p>
                             </div>
                         ))}
                     </div>

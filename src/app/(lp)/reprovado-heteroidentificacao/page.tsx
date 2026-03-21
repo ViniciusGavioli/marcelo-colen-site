@@ -50,7 +50,7 @@ const D = {
         badge: "Prazo de recurso: entre 2 e 5 dias a partir do resultado. Cada hora conta.",
         h1_1: "Você passou nas provas.",
         h1_2: "A banca te eliminou. Isso pode ser contestado.",
-        sub: "Anos de estudo não podem acabar por uma decisão genérica e mal fundamentada de uma comissão de heteroidentificação. Análise jurídica individual do seu caso, rápida, sigilosa e sem custo inicial.",
+        sub: "**Anos de estudo** não podem acabar por uma **decisão genérica e mal fundamentada** de uma comissão de heteroidentificação. Análise jurídica individual do seu caso, **rápida, sigilosa e sem custo inicial**.",
         cta: "Analisar Meu Caso Agora",
         disclaimer: "Cada caso é avaliado individualmente. Não fazemos promessa de resultado.",
     },
@@ -66,7 +66,7 @@ const D = {
     },
     urg: {
         title: "O Seu Prazo Está Correndo.",
-        text: "Em muitos concursos, o prazo de recurso administrativo é de apenas 2 a 5 dias corridos após o resultado. Passado esse prazo, a via administrativa fecha. Resta apenas a judicial, mais longa e mais cara. Por isso a análise precisa acontecer agora.",
+        text: "Em muitos concursos, o prazo de recurso administrativo é de apenas **2 a 5 dias corridos** após o resultado. Passado esse prazo, a via administrativa **fecha**. Resta apenas a judicial, **mais longa e mais cara**. Por isso a análise **precisa acontecer agora**.",
         cta: "Mandar Mensagem Rápida Agora",
     },
     steps: {
@@ -79,13 +79,24 @@ const D = {
         cta: "Mandar a Primeira MSG Agora",
     },
     faq: [
-        { q: "Tem custo essa primeira conversa?", a: "Não. A análise inicial do seu caso (edital, resultado e prazo) é feita sem custo. Se houver fundamento para recurso e você quiser contratar, apresentamos os honorários nesse momento." },
-        { q: "E se não houver fundamento para recurso?", a: "Informamos isso claramente, sem enrolação. Não cobramos para dizer que o caso não tem viabilidade. Preferimos ser diretos do que gerar expectativa falsa." },
-        { q: "A conversa é protegida por sigilo?", a: "Sim. Todo contato está protegido pelo sigilo profissional da advocacia. Nenhuma informação é compartilhada." },
-        { q: "A atuação abrange candidatos de qualquer estado?", a: "Sim. O atendimento é 100% online e nacional. Já atuamos em concursos federais e estaduais em todo o Brasil." },
+        { q: "Tem custo essa primeira conversa?", a: "**Não.** A análise inicial do seu caso (edital, resultado e prazo) é feita **sem custo**. Se houver fundamento para recurso e você quiser contratar, apresentamos os honorários nesse momento." },
+        { q: "E se não houver fundamento para recurso?", a: "Informamos isso claramente, **sem enrolação**. Não cobramos para dizer que o caso não tem viabilidade. Preferimos ser **diretos** do que gerar expectativa falsa." },
+        { q: "A conversa é protegida por sigilo?", a: "**Sim.** Todo contato está protegido pelo **sigilo profissional** da advocacia. Nenhuma informação é compartilhada." },
+        { q: "A atuação abrange candidatos de qualquer estado?", a: "**Sim.** O atendimento é **100% online e nacional**. Já atuamos em concursos federais e estaduais em todo o Brasil." },
     ],
     wa: "Olá, fui reprovado na heteroidentificação hoje. Ainda dá tempo de recorrer?",
 };
+
+// ============================================================================
+// RENDER BOLD — converte **texto** em <strong>
+// ============================================================================
+function renderBold(text: string): React.ReactNode {
+    return text.split(/\*\*(.*?)\*\*/g).map((part, i) =>
+        i % 2 === 1
+            ? <strong key={i} style={{ color: "rgba(255,255,255,0.98)", fontWeight: 700 }}>{part}</strong>
+            : part
+    );
+}
 
 // ============================================================================
 // GRAIN OVERLAY
@@ -167,7 +178,7 @@ function FaqItem({ q, a }: { q: string; a: string }) {
             </button>
             {open && (
                 <div style={{ color: C.gray2 }} className="pb-6 leading-relaxed text-sm md:text-base">
-                    {a}
+                    {renderBold(a)}
                 </div>
             )}
         </div>
@@ -329,7 +340,7 @@ export default function ReprovadoPage() {
                         <div className="h-px w-16 mb-5 mx-auto" style={{ background: `linear-gradient(90deg, transparent, rgba(201,162,39,0.3), transparent)` }} />
 
                         <p className="text-base md:text-lg leading-relaxed mb-8 md:mb-10 max-w-[44ch]" style={{ color: C.gray2 }}>
-                            {D.hero.sub}
+                            {renderBold(D.hero.sub)}
                         </p>
 
                         <div className="w-full max-w-sm flex flex-col items-center gap-3">
@@ -424,7 +435,7 @@ export default function ReprovadoPage() {
                             {D.urg.title}
                         </h2>
                         <p className="text-base md:text-lg leading-relaxed mb-8 font-medium" style={{ color: C.gray1 }}>
-                            {D.urg.text}
+                            {renderBold(D.urg.text)}
                         </p>
                         <Cta text={D.urg.cta} />
                     </div>
@@ -454,7 +465,7 @@ export default function ReprovadoPage() {
                                     </div>
                                     <step.Icon className="w-8 h-8 mx-auto mb-4 mt-4" style={{ color: C.gold, opacity: 0.85 }} />
                                     <h3 className="text-lg font-bold mb-2" style={{ color: C.white }}>{step.t}</h3>
-                                    <p className="text-sm leading-relaxed" style={{ color: C.gray2 }}>{step.d}</p>
+                                    <p className="text-sm leading-relaxed" style={{ color: C.gray2 }}>{renderBold(step.d)}</p>
                                 </div>
                             </Reveal>
                         ))}
