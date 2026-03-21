@@ -6,10 +6,10 @@
 export const SITE_CONFIG = {
   name: "Marcelo Colen",
   fullName: "Marcelo Colen Advocacia",
-  tagline: "Defesa Criminal, Compliance e Direitos Humanos",
+  tagline: "Especialista em Heteroidentificação e Cotas Raciais",
   description:
-    "Advocacia especializada em Direito Penal, programas de Compliance empresarial e defesa de Direitos Humanos. Atuação técnica, ética e comprometida com a justiça. Atendimento em Belo Horizonte e todo o Brasil.",
-  url: process.env.NEXT_PUBLIC_SITE_URL || "https://marcelocolen.adv.br",
+    "Advogado especialista em heteroidentificação, cotas raciais e recurso administrativo. Mestre em Direito pela UFMG, Diretor de Diversidade da OAB/MG. Atendimento em todo o Brasil.",
+  url: process.env.NEXT_PUBLIC_SITE_URL || "https://marcelocolen.com.br",
   locale: "pt-BR",
   
   // Informações de contato (use ENV em produção)
@@ -78,21 +78,26 @@ export const DEFAULT_MESSAGES = {
 
 // SEO padrão
 export const DEFAULT_SEO = {
-  title: `${SITE_CONFIG.name} | Advogado Criminal, Compliance e Direitos Humanos`,
-  description: SITE_CONFIG.description,
+  title: `Marcelo Colen | Advogado Especialista em Heteroidentificação e Cotas Raciais`,
+  description:
+    "Reprovado na heteroidentificação? Advogado especialista em recurso administrativo, cotas raciais e concursos públicos. Mestre em Direito pela UFMG. Atendimento em todo o Brasil.",
   keywords: [
-    "advogado criminal Belo Horizonte",
-    "advogado direito penal BH",
-    "defesa criminal Minas Gerais",
-    "compliance empresarial",
-    "programa de integridade",
-    "direitos humanos advogado",
-    "discriminação racial advogado",
-    "cotas raciais advogado",
     "heteroidentificação",
-    "advogado antirracista",
-    "habeas corpus BH",
-    "defesa penal MG",
+    "advogado heteroidentificação",
+    "recurso heteroidentificação",
+    "reprovado heteroidentificação",
+    "cotas raciais advogado",
+    "recurso cotas raciais",
+    "advogado cotas raciais",
+    "recurso administrativo concurso",
+    "reprovado banca heteroidentificação",
+    "comissão de heteroidentificação",
+    "advogado concurso público cotas",
+    "recurso indeferimento cotas",
+    "autodeclaração racial recurso",
+    "advogado direito antidiscriminatório",
+    "marcelo colen advogado",
+    "especialista cotas raciais",
   ],
 } as const;
 
