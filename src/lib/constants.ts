@@ -60,6 +60,15 @@ export const FOOTER_LINKS = {
     { label: "Advogado Cotas Raciais", href: "/advogado-cotas-raciais" },
     { label: "Reprovado na Banca", href: "/reprovado-heteroidentificacao" },
   ],
+  conteudo: [
+    { label: "Direito Criminal", href: "/atuacao#criminal" },
+    { label: "Compliance", href: "/atuacao#compliance" },
+    { label: "Direitos Humanos", href: "/atuacao#direitos-humanos" },
+  ],
+  legal: [
+    { label: "Termos de Uso", href: "/termos" },
+    { label: "Políticas de Privacidade", href: "/privacidade" },
+  ]
 } as const;
 
 // Mensagens padrão
