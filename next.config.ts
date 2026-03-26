@@ -7,7 +7,7 @@ const nextConfig: NextConfig = {
     return [
       {
         source: "/",
-        destination: "/advogado-cotas-raciais",
+        destination: "/recurso-heteroidentificacao",
         permanent: false, // 307 — temporário, até a nova home ficar pronta
       },
     ];
