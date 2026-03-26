@@ -3,6 +3,7 @@
 import { Tv, Mic, Award, Users, Youtube, Instagram, ExternalLink } from "lucide-react";
 import { Container } from "@/components/layout";
 import { C, GrainOverlay, GoldDivider, SectionLabel, Cta, Reveal, renderBold } from "@/components/site/primitives";
+import { Breadcrumb } from "@/components/site/Breadcrumb";
 
 // ============================================================================
 // DATA
@@ -101,6 +102,7 @@ export default function MidiaPage() {
                     <div className="absolute inset-0" style={{ backgroundImage: "url('/texture-pedra.png')", backgroundSize: "cover", opacity: 0.035 }} />
                 </div>
                 <Container className="relative z-10">
+                    <Breadcrumb items={[{ label: "Na Mídia" }]} />
                     <div className="max-w-3xl mx-auto text-center">
                         <SectionLabel>Na Mídia</SectionLabel>
                         <h1 className="text-3xl md:text-5xl font-bold mb-4" style={{ color: C.white, fontFamily: C.serif }}>

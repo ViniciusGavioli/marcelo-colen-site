@@ -4,6 +4,7 @@ import Image from "next/image";
 import { Check, GraduationCap, Briefcase, Award, Users, Mic } from "lucide-react";
 import { Container } from "@/components/layout";
 import { C, GrainOverlay, GoldDivider, SectionLabel, Cta, LinkButton, Reveal, renderBold } from "@/components/site/primitives";
+import { Breadcrumb } from "@/components/site/Breadcrumb";
 
 // ============================================================================
 // DATA
@@ -98,6 +99,7 @@ export default function SobrePage() {
                 </div>
 
                 <Container className="relative z-10">
+                    <Breadcrumb items={[{ label: "Sobre" }]} />
                     <div className="max-w-4xl mx-auto flex flex-col md:flex-row items-center gap-10 md:gap-14">
                         {/* Foto */}
                         <Reveal>

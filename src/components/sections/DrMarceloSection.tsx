@@ -111,7 +111,7 @@ export function DrMarceloSection() {
                             className="text-base md:text-lg leading-relaxed italic mb-5 -mt-2"
                             style={{ color: gray1 }}
                         >
-                            Minha missão não é apenas escrever recursos. É garantir que a subjetividade de uma banca não destrua o mérito de quem realmente pertence às cotas.
+                            Minha missão vai muito além de escrever recursos. É lutar para que ninguém perca seu direito às cotas por causa de uma avaliação subjetiva e injusta.
                         </p>
 
                         <div
@@ -142,7 +142,7 @@ export function DrMarceloSection() {
                             </div>
                             <div className="flex items-center gap-2">
                                 <Check className="w-3.5 h-3.5 flex-shrink-0" style={{ color: gold }} />
-                                Professor, palestrante e autor publicado
+                                Professor, palestrante e escritor
                             </div>
                         </div>
                     </div>

@@ -1,0 +1,6 @@
+{
+  "version": 3,
+  "sources": [],
+  "sections": [
+    {"offset": {"line": 7, "column": 0}, "map": {"version":3,"sources":["file:///D:/Documents/Trabalho/08%20-%20Marcelo%20Colen/marcelo-colen-site/.claude/worktrees/clever-boyd/src/app/icon.png.mjs%20%28structured%20image%20object%29"],"sourcesContent":["import src from \"IMAGE\";\nexport default { src, width: 1024, height: 1024 }\n"],"names":[],"mappings":";;;;AAAA;;uCACe;IAAE,KAAA,kLAAG;IAAE,OAAO;IAAM,QAAQ;AAAK"}}]
+}

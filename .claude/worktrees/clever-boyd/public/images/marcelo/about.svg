@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="600" height="800" viewBox="0 0 600 800">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0A192F"/>
+      <stop offset="100%" style="stop-color:#0D1F38"/>
+    </linearGradient>
+  </defs>
+  <rect width="600" height="800" fill="url(#bg)"/>
+  <rect x="40" y="40" width="520" height="720" fill="none" stroke="#C5A059" stroke-width="1" opacity="0.3"/>
+  <text x="300" y="380" font-family="Georgia, serif" font-size="140" fill="#C5A059" text-anchor="middle">MC</text>
+  <text x="300" y="430" font-family="system-ui" font-size="12" fill="#C5A059" text-anchor="middle" opacity="0.6" letter-spacing="4">MARCELO COLEN</text>
+  <text x="300" y="455" font-family="system-ui" font-size="10" fill="#C5A059" text-anchor="middle" opacity="0.4" letter-spacing="2">PLACEHOLDER • ABOUT</text>
+</svg>

@@ -1,0 +1,6 @@
+{
+  "version": 3,
+  "sources": [],
+  "sections": [
+    {"offset": {"line": 3, "column": 0}, "map": {"version":3,"sources":["file:///D:/Documents/Trabalho/08%20-%20Marcelo%20Colen/marcelo-colen-site/node_modules/.pnpm/next%4016.1.4_%40babel%2Bcore%407.2_1030efa206a82bc0948ff4616bea95d1/node_modules/next/app.js"],"sourcesContent":["module.exports = require('./dist/pages/_app')\n"],"names":[],"mappings":"AAAA,OAAO,OAAO","ignoreList":[0]}}]
+}

@@ -1,0 +1,825 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Relatório de Tráfego — Marcelo Colen | Cotas Raciais</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --navy: #0A192F;
+            --navy-deep: #071226;
+            --bronze: #C5A059;
+            --bronze-hover: #B69146;
+            --bronze-soft: #F3E9D6;
+            --ice: #F8F9FA;
+            --graphite: #333333;
+            --white: #FFFFFF;
+            --border: #D9E0E8;
+            --text-secondary: #5B6676;
+            --success: #0F766E;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--ice);
+            color: var(--navy);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .bg-editorial::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+            pointer-events: none;
+            z-index: 1000;
+        }
+
+        h1, h2, h3, .font-serif {
+            font-family: 'Playfair Display', serif;
+            font-weight: 600;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* Header Styles */
+        header {
+            background-color: var(--navy);
+            color: var(--white);
+            padding: 80px 0 60px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::after {
+            content: "";
+            position: absolute;
+            top: -50%;
+            right: -10%;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(197, 160, 89, 0.1) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+
+        .header-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 6px 12px;
+            border-radius: 4px;
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 16px;
+        }
+
+        .badge-premium {
+            background-color: var(--bronze);
+            color: var(--navy);
+        }
+
+        header h1 {
+            font-size: 42px;
+            margin-bottom: 12px;
+            color: var(--white);
+        }
+
+        .header-meta {
+            display: flex;
+            gap: 32px;
+            margin-top: 24px;
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .header-meta strong {
+            color: var(--bronze);
+            display: block;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 4px;
+        }
+
+        /* Summary Cards */
+        .summary-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            margin-top: -40px;
+            position: relative;
+            z-index: 10;
+        }
+
+        .card {
+            background: var(--white);
+            padding: 24px;
+            border: 1px solid var(--border);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease, border-color 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            border-color: var(--bronze);
+        }
+
+        .card-label {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-secondary);
+            font-weight: 700;
+            margin-bottom: 8px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .card-value {
+            font-size: 28px;
+            font-weight: 800;
+            color: var(--navy);
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .card-value small {
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--text-secondary);
+        }
+
+        .card-trend {
+            font-size: 12px;
+            margin-top: 8px;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .trend-up { color: var(--success); }
+
+        /* Sections */
+        section {
+            padding: 80px 0;
+        }
+
+        .section-title {
+            margin-bottom: 40px;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .section-title h2 {
+            font-size: 28px;
+        }
+
+        .section-title::after {
+            content: "";
+            flex: 1;
+            height: 1px;
+            background: linear-gradient(90deg, var(--bronze), transparent);
+        }
+
+        .analysis-box {
+            background-color: var(--bronze-soft);
+            padding: 40px;
+            border-left: 4px solid var(--bronze);
+            margin-bottom: 40px;
+        }
+
+        .analysis-box h3 {
+            margin-bottom: 16px;
+            color: var(--bronze-hover);
+            font-size: 20px;
+        }
+
+        .analysis-box p {
+            font-size: 17px;
+            color: var(--navy);
+            font-style: italic;
+            line-height: 1.8;
+        }
+
+        /* Charts Layout */
+        .chart-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 24px;
+            margin-bottom: 24px;
+        }
+
+        .chart-card {
+            background: var(--white);
+            padding: 30px;
+            border: 1px solid var(--border);
+        }
+
+        .chart-header {
+            margin-bottom: 24px;
+        }
+
+        .chart-header h4 {
+            font-size: 16px;
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+
+        .chart-header p {
+            font-size: 13px;
+            color: var(--text-secondary);
+        }
+
+        /* Table Style */
+        .table-container {
+            background: var(--white);
+            border: 1px solid var(--border);
+            overflow: hidden;
+            margin-top: 24px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+        }
+
+        th {
+            background-color: var(--navy);
+            color: var(--white);
+            padding: 16px 20px;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        td {
+            padding: 18px 20px;
+            font-size: 14px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        tr:last-child td { border-bottom: none; }
+
+        tr:hover td { background-color: rgba(197, 160, 89, 0.05); }
+
+        .keyword-name { font-weight: 600; color: var(--navy); }
+
+        .perc-bar-wrap {
+            width: 100px;
+            height: 6px;
+            background: #eee;
+            border-radius: 3px;
+            overflow: hidden;
+            margin-top: 4px;
+        }
+
+        .perc-bar {
+            height: 100%;
+            background: var(--bronze);
+            transition: width 1s ease-in-out;
+        }
+
+        /* Groups list */
+        .groups-list {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .group-item {
+            background: var(--white);
+            border: 1px solid var(--border);
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+
+        .group-item:hover {
+            border-color: var(--bronze);
+            transform: translateX(10px);
+        }
+
+        .group-info h5 {
+            font-size: 14px;
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+
+        .group-info p {
+            font-size: 12px;
+            color: var(--text-secondary);
+        }
+
+        .group-stats {
+            text-align: right;
+        }
+
+        .group-stats .val {
+            font-size: 18px;
+            font-weight: 800;
+            color: var(--bronze);
+        }
+
+        .group-stats .label {
+            font-size: 10px;
+            text-transform: uppercase;
+            color: var(--text-secondary);
+        }
+
+        /* Auction Insights */
+        .auction-box {
+            background: var(--navy);
+            color: var(--white);
+            padding: 40px;
+            margin-top: 40px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+        }
+
+        .progress-circle-wrap {
+            display: flex;
+            align-items: center;
+            gap: 24px;
+        }
+
+        .circle-stat {
+            position: relative;
+            width: 120px;
+            height: 120px;
+        }
+
+        .circle-stat svg {
+            transform: rotate(-90deg);
+        }
+
+        .circle-stat circle {
+            fill: none;
+            stroke-width: 8;
+        }
+
+        .circle-bg { stroke: rgba(255, 255, 255, 0.1); }
+        .circle-val {
+            stroke: var(--bronze);
+            stroke-dasharray: 314;
+            stroke-dashoffset: 314;
+            transition: stroke-dashoffset 2s ease-out;
+            stroke-linecap: round;
+        }
+
+        .circle-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 20px;
+            font-weight: 800;
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--navy-deep);
+            color: rgba(255, 255, 255, 0.5);
+            padding: 60px 0;
+            text-align: center;
+            font-size: 13px;
+        }
+
+        footer strong { color: var(--bronze); }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .animate {
+            animation: fadeIn 0.8s ease forwards;
+            opacity: 0;
+        }
+
+        .delay-1 { animation-delay: 0.1s; }
+        .delay-2 { animation-delay: 0.2s; }
+        .delay-3 { animation-delay: 0.3s; }
+        .delay-4 { animation-delay: 0.4s; }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        .pulse { animation: pulse 2s infinite ease-in-out; }
+
+        @media (max-width: 900px) {
+            .summary-grid { grid-template-columns: repeat(2, 1fr); }
+            .chart-grid { grid-template-columns: 1fr; }
+            .auction-box { grid-template-columns: 1fr; }
+        }
+
+        @media (max-width: 600px) {
+            .summary-grid { grid-template-columns: 1fr; }
+            header h1 { font-size: 32px; }
+            .header-meta { flex-direction: column; gap: 12px; }
+        }
+    </style>
+</head>
+
+<body class="bg-editorial">
+
+    <header>
+        <div class="container header-content">
+            <span class="badge badge-premium pulse"><i class="fas fa-crown"></i> Relatório de Performance</span>
+            <h1>RELATÓRIO DE TRÁFEGO — MARCELO COLEN</h1>
+            <p style="color: var(--bronze-soft); font-size: 18px; font-style: italic;">Campanha: Cotas Raciais / Heteroidentificação</p>
+            
+            <div class="header-meta">
+                <div>
+                    <strong>Período de Análise</strong>
+                    14 fev – 15 mar 2026
+                </div>
+                <div>
+                    <strong>Plataforma</strong>
+                    Google Ads Network
+                </div>
+                <div>
+                    <strong>Status da Estratégia</strong>
+                    <span style="color: var(--success);"><i class="fas fa-check-circle"></i> Otimização em Alta</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <!-- Summary Cards -->
+        <div class="summary-grid">
+            <div class="card animate" style="border-top: 4px solid var(--bronze);">
+                <div class="card-label">Cliques <i class="fas fa-mouse-pointer"></i></div>
+                <div class="card-value">259</div>
+                <div class="card-trend trend-up"><i class="fas fa-users"></i> 2.320 Impressões</div>
+            </div>
+            <div class="card animate delay-1" style="border-top: 4px solid var(--navy);">
+                <div class="card-label">Conversões <i class="fas fa-bullseye"></i></div>
+                <div class="card-value" style="color: var(--bronze);">79</div>
+                <div class="card-trend trend-up"><i class="fas fa-chart-line"></i> Taxa: 30,50%</div>
+            </div>
+            <div class="card animate delay-2" style="border-top: 4px solid var(--bronze);">
+                <div class="card-label">Investimento <i class="fas fa-wallet"></i></div>
+                <div class="card-value"><small>R$</small> 2.644,19</div>
+                <div class="card-trend">CPC Médio: R$ 10,21</div>
+            </div>
+            <div class="card animate delay-3" style="border-top: 4px solid var(--success);">
+                <div class="card-label">CPA <i class="fas fa-hand-holding-usd"></i></div>
+                <div class="card-value" style="color: var(--success);"><small>R$</small> 33,47</div>
+                <div class="card-trend">Custo por conversão</div>
+            </div>
+        </div>
+
+        <!-- Leitura Estratégica -->
+        <section class="animate delay-4">
+            <div class="section-title">
+                <h2>Leitura Estratégica</h2>
+            </div>
+            <div class="analysis-box">
+                <h3>Veredito do Especialista</h3>
+                <p>"A campanha apresenta alta taxa de conversão (30,5%), indicando que o tráfego captado é extremamente qualificado, composto majoritariamente por pessoas que já enfrentam problemas com heteroidentificação em concursos. O custo por conversão está bem controlado para o nicho jurídico, principalmente considerando que se trata de casos jurídicos complexos e de alto valor potencial."</p>
+            </div>
+        </section>
+
+        <!-- Gráficos Principais -->
+        <section>
+            <div class="section-title">
+                <h2>Performance e Estrutura</h2>
+            </div>
+            
+            <div class="chart-grid">
+                <!-- Funil de Conversão -->
+                <div class="chart-card animate">
+                    <div class="chart-header">
+                        <h4>Funil de Aquisição</h4>
+                        <p>Visualização da jornada do usuário (Impressões → Cliques → Conversões)</p>
+                    </div>
+                    <div style="height: 300px;">
+                        <canvas id="funnelChart"></canvas>
+                    </div>
+                </div>
+
+                <!-- Share de Conversão por Grupo -->
+                <div class="chart-card animate delay-1">
+                    <div class="chart-header">
+                        <h4>Share de Conversões</h4>
+                        <p>Distribuição entre grupos de anúncios</p>
+                    </div>
+                    <div style="height: 300px;">
+                        <canvas id="shareChart"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Lista de Grupos -->
+            <div class="groups-list">
+                <div class="group-item animate">
+                    <div class="group-info">
+                        <h5>ADVOGADO – HETEROIDENTIFICAÇÃO – ESPECIALISTA</h5>
+                        <p>Estratégia direta de autoridade e especialidade. Foco em busca qualificada.</p>
+                    </div>
+                    <div class="group-stats">
+                        <div class="val">74</div>
+                        <div class="label">Conversões</div>
+                    </div>
+                    <div class="group-stats" style="margin-left: 40px;">
+                        <div class="val" style="color: var(--navy);"><small>R$</small> 32,22</div>
+                        <div class="label">CPA Médio</div>
+                    </div>
+                </div>
+                <div class="group-item animate delay-1">
+                    <div class="group-info">
+                        <h5>RECURSO HETEROIDENTIFICAÇÃO</h5>
+                        <p>Captura de usuários em fase administrativa avançada (pós-reprovação).</p>
+                    </div>
+                    <div class="group-stats">
+                        <div class="val">3</div>
+                        <div class="label">Conversões</div>
+                    </div>
+                    <div class="group-stats" style="margin-left: 40px;">
+                        <div class="val" style="color: var(--navy);"><small>R$</small> 69,64</div>
+                        <div class="label">CPA Médio</div>
+                    </div>
+                </div>
+                <div class="group-item animate delay-2">
+                    <div class="group-info">
+                        <h5>REPROVADO / INDEFERIDO</h5>
+                        <p>Focado em usuários com reprovação confirmada, forte potencial jurídico.</p>
+                    </div>
+                    <div class="group-stats">
+                        <div class="val">2</div>
+                        <div class="label">Conversões</div>
+                    </div>
+                    <div class="group-stats" style="margin-left: 40px;">
+                        <div class="val" style="color: var(--navy);"><small>R$</small> 25,54</div>
+                        <div class="label">CPA Médio</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Palavras-Chave -->
+        <section>
+            <div class="section-title">
+                <h2>Palavras-Chave com Melhor Performance</h2>
+            </div>
+            <div class="table-container animate">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Termo de Busca</th>
+                            <th>Cliques</th>
+                            <th>Conversões</th>
+                            <th>Custo Médio</th>
+                            <th>Taxa de Conversão</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <div class="keyword-name">advogado especialista em cotas raciais</div>
+                                <div class="perc-bar-wrap"><div class="perc-bar" style="width: 57%;"></div></div>
+                            </td>
+                            <td>43</td>
+                            <td>24,5</td>
+                            <td>R$ 13,84</td>
+                            <td><strong>56,98%</strong></td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="keyword-name">advogado heteroidentificação</div>
+                                <div class="perc-bar-wrap"><div class="perc-bar" style="width: 48%;"></div></div>
+                            </td>
+                            <td>51</td>
+                            <td>24,5</td>
+                            <td>R$ 14,31</td>
+                            <td><strong>48,04%</strong></td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="keyword-name">recurso de heteroidentificação</div>
+                                <div class="perc-bar-wrap"><div class="perc-bar" style="width: 37%;"></div></div>
+                            </td>
+                            <td>8</td>
+                            <td>3,0</td>
+                            <td>R$ 4,74</td>
+                            <td><strong>37,50%</strong></td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="keyword-name">recurso cotas raciais</div>
+                                <div class="perc-bar-wrap"><div class="perc-bar" style="width: 28%;"></div></div>
+                            </td>
+                            <td>7</td>
+                            <td>2,0</td>
+                            <td>R$ 5,56</td>
+                            <td><strong>28,57%</strong></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Concorrência e Posicionamento -->
+        <section style="margin-bottom: 80px;">
+            <div class="section-title">
+                <h2>Domínio de Mercado e Leilão</h2>
+            </div>
+            
+            <div class="auction-box animate">
+                <div>
+                    <h3 style="font-family: inherit; color: var(--bronze); margin-bottom: 16px;">Parcela de Impressão</h3>
+                    <p style="font-size: 14px; opacity: 0.8; margin-bottom: 30px;">Sua presença comparada aos principais competidores no leilão do Google.</p>
+                    
+                    <div class="progress-circle-wrap">
+                        <div class="circle-stat">
+                            <svg width="120" height="120">
+                                <circle class="circle-bg" cx="60" cy="60" r="50"></circle>
+                                <circle id="impressionCircle" class="circle-val" cx="60" cy="60" r="50"></circle>
+                            </svg>
+                            <div class="circle-text">29%</div>
+                        </div>
+                        <div>
+                            <p style="font-size: 13px; font-weight: 700;">LIDERANÇA DE LEILÃO</p>
+                            <p style="font-size: 12px; opacity: 0.7;">Próximo concorrente: 26% (paesadvogados.com.br)</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div style="border-left: 1px solid rgba(255, 255, 255, 0.1); padding-left: 40px;">
+                    <h3 style="font-family: inherit; color: var(--bronze); margin-bottom: 16px;">Qualidade de Entrega</h3>
+                    <div style="margin-bottom: 24px;">
+                        <div style="display: flex; justify-content: space-between; font-size: 12px; margin-bottom: 4px;">
+                            <span>Parte superior da página (Top 4)</span>
+                            <span>86,62%</span>
+                        </div>
+                        <div style="height: 4px; background: rgba(255, 255, 255, 0.1); border-radius: 2px;">
+                            <div style="width: 86%; height: 100%; background: var(--bronze);"></div>
+                        </div>
+                    </div>
+                    <div>
+                        <div style="display: flex; justify-content: space-between; font-size: 12px; margin-bottom: 4px;">
+                            <span>Primeira posição absoluta</span>
+                            <span>36,90%</span>
+                        </div>
+                        <div style="height: 4px; background: rgba(255, 255, 255, 0.1); border-radius: 2px;">
+                            <div style="width: 37%; height: 100%; background: white;"></div>
+                        </div>
+                    </div>
+                    <p style="font-size: 12px; opacity: 0.6; margin-top: 20px;">Isso significa que você domina as posições onde acontecem os cliques de maior valor.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Próximos Passos -->
+        <section style="padding-top: 0;">
+            <div class="section-title">
+                <h2>Estratégia Futura</h2>
+            </div>
+            <div class="chart-grid" style="grid-template-columns: 1fr 1fr;">
+                <div class="card animate" style="background: var(--navy); color: white;">
+                    <h4 style="color: var(--bronze); margin-bottom: 12px;"><i class="fas fa-rocket"></i> Otimizações de Curto Prazo</h4>
+                    <ul style="font-size: 14px; list-style: none; padding: 0;">
+                        <li style="margin-bottom: 10px; border-bottom: 1px solid rgba(255, 255, 255, 0.1); padding-bottom: 8px;"><i class="fas fa-check" style="color: var(--bronze); margin-right: 8px;"></i> Ampliar palavras-chave de recurso</li>
+                        <li style="margin-bottom: 10px; border-bottom: 1px solid rgba(255, 255, 255, 0.1); padding-bottom: 8px;"><i class="fas fa-check" style="color: var(--bronze); margin-right: 8px;"></i> Expandir termos com "advogado cotas"</li>
+                        <li style="margin-bottom: 10px; border-bottom: 1px solid rgba(255, 255, 255, 0.1); padding-bottom: 8px;"><i class="fas fa-check" style="color: var(--bronze); margin-right: 8px;"></i> Escalonar orçamento para share de 40%</li>
+                    </ul>
+                </div>
+                <div class="card animate delay-1">
+                    <h4 style="color: var(--navy); margin-bottom: 12px;"><i class="fas fa-vial"></i> Testes Criativos</h4>
+                    <p style="font-size: 14px; color: var(--text-secondary); margin-bottom: 12px;">Faremos novos anúncios focados em <strong>Urgência Jurídica</strong> para aumentar o volume nos grupos de menor performance.</p>
+                    <div style="padding: 12px; background: var(--ice); border: 1px dashed var(--border); font-size: 12px; font-style: italic;">
+                        "Otimizando para converter leads de alta complexidade com menor custo operacional."
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <footer>
+        <div class="container">
+            <p>Relatório Gerado para <strong>MARCELO COLEN ADVOCACIA</strong></p>
+            <p style="margin-top: 8px; opacity: 0.6;">&copy; 2026 Inteligência de Dados & Performance Jurídica</p>
+        </div>
+    </footer>
+
+    <script>
+        // Number counting animation
+        const animateValue = (id, start, end, duration) => {
+            if (isNaN(end)) return;
+            const obj = document.getElementById(id);
+            const range = end - start;
+            let current = start;
+            const increment = end > start ? 1 : -1;
+            const stepTime = Math.abs(Math.floor(duration / range));
+            const timer = setInterval(() => {
+                current += increment;
+                obj.innerHTML = current;
+                if (current == end) clearInterval(timer);
+            }, stepTime);
+        }
+
+        // Initialize Charts
+        window.onload = () => {
+            // Circle animation
+            const circle = document.getElementById('impressionCircle');
+            const radius = circle.r.baseVal.value;
+            const circumference = radius * 2 * Math.PI;
+            circle.style.strokeDasharray = `${circumference} ${circumference}`;
+            const offset = circumference - (29 / 100 * circumference);
+            setTimeout(() => {
+                circle.style.strokeDashoffset = offset;
+            }, 500);
+
+            // Funnel Chart
+            const ctxFunnel = document.getElementById('funnelChart').getContext('2d');
+            new Chart(ctxFunnel, {
+                type: 'bar',
+                data: {
+                    labels: ['Impressões', 'Cliques', 'Conversões'],
+                    datasets: [{
+                        data: [2320, 259, 79],
+                        backgroundColor: ['#0A192F', '#C5A059', '#0F766E'],
+                        borderRadius: 5
+                    }]
+                },
+                options: {
+                    indexAxis: 'y',
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: { legend: { display: false } },
+                    scales: {
+                        x: { display: false },
+                        y: { grid: { display: false } }
+                    }
+                }
+            });
+
+            // Share Chart
+            const ctxShare = document.getElementById('shareChart').getContext('2d');
+            new Chart(ctxShare, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Especialista', 'Recurso', 'Reprovado'],
+                    datasets: [{
+                        data: [74, 3, 2],
+                        backgroundColor: ['#C5A059', '#0A192F', '#EEF2F6'],
+                        borderColor: '#FFFFFF',
+                        borderWidth: 2
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    cutout: '70%',
+                    plugins: {
+                        legend: { position: 'bottom', labels: { boxWidth: 10, font: { size: 10 } } }
+                    }
+                }
+            });
+
+            // Reveal animations on scroll
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('in-view');
+                        entry.target.style.opacity = 1;
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            document.querySelectorAll('.animate').forEach(el => observer.observe(el));
+        };
+    </script>
+</body>
+
+</html>

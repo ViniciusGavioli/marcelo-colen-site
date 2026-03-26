@@ -4,6 +4,7 @@ import Link from "next/link";
 import { Scale, Shield, Briefcase, BookOpen, ArrowRight, Check, MessageCircle } from "lucide-react";
 import { Container } from "@/components/layout";
 import { C, GrainOverlay, GoldDivider, SectionLabel, Cta, LinkButton, Reveal, renderBold } from "@/components/site/primitives";
+import { Breadcrumb } from "@/components/site/Breadcrumb";
 
 // ============================================================================
 // DATA
@@ -98,6 +99,7 @@ export default function AtuacaoPage() {
                     <div className="absolute inset-0" style={{ backgroundImage: "url('/texture-juridica.png')", backgroundRepeat: "repeat", backgroundSize: "1000px", opacity: 0.025 }} />
                 </div>
                 <Container className="relative z-10">
+                    <Breadcrumb items={[{ label: "Atuação" }]} />
                     <div className="max-w-3xl mx-auto text-center">
                         <SectionLabel>Áreas de Atuação</SectionLabel>
                         <h1 className="text-3xl md:text-5xl font-bold mb-4" style={{ color: C.white, fontFamily: C.serif }}>

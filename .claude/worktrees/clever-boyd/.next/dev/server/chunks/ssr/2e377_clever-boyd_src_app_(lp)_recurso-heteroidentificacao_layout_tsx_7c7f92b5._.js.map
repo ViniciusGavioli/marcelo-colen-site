@@ -1,0 +1,6 @@
+{
+  "version": 3,
+  "sources": [],
+  "sections": [
+    {"offset": {"line": 4, "column": 0}, "map": {"version":3,"sources":["file:///D:/Documents/Trabalho/08%20-%20Marcelo%20Colen/marcelo-colen-site/.claude/worktrees/clever-boyd/src/app/%28lp%29/recurso-heteroidentificacao/layout.tsx"],"sourcesContent":["import type { Metadata } from \"next\";\r\nimport { SITE_CONFIG } from \"@/lib/constants\";\r\n\r\nexport const metadata: Metadata = {\r\n    title: \"Recurso Contra Heteroidentificação - Marcelo Colen\",\r\n    description: \"Se sua autodeclaração foi indeferida na heteroidentificação, ainda pode ser possível recorrer. Análise rápida para verificar validade do recurso.\",\r\n    alternates: {\r\n        canonical: `${SITE_CONFIG.url}/recurso-heteroidentificacao`,\r\n    },\r\n};\r\n\r\nexport default function Layout({ children }: { children: React.ReactNode }) {\r\n    return <>{children}</>;\r\n}\r\n"],"names":[],"mappings":";;;;;;;AACA;;;AAEO,MAAM,WAAqB;IAC9B,OAAO;IACP,aAAa;IACb,YAAY;QACR,WAAW,GAAG,iLAAW,CAAC,GAAG,CAAC,4BAA4B,CAAC;IAC/D;AACJ;AAEe,SAAS,OAAO,EAAE,QAAQ,EAAiC;IACtE,qBAAO;kBAAG;;AACd"}}]
+}

@@ -1,0 +1,22 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(netstat -ano)",
+      "Bash(where.exe pnpm:*)",
+      "Bash(cmd /c \"where pnpm npm node\")",
+      "Bash(cmd /c \"where pnpm\")",
+      "Bash(cmd /c \"where pnpm 2>&1\")",
+      "Bash(pnpm dev:*)",
+      "Bash(npm run:*)",
+      "Bash(ls \"d:/Documents/Trabalho/08 - Marcelo Colen/marcelo-colen-site/src/app/\\(lp\\)/\")",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:3001/advogado-especialista)",
+      "Bash(npx next:*)",
+      "Bash(node node_modules/next/dist/bin/next dev -p 3002)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:3002/advogado-cotas-raciais)",
+      "Bash(taskkill //F //PID 5860)",
+      "Bash(taskkill //F //PID 1240)",
+      "Bash(node node_modules/next/dist/bin/next dev -p 3000)",
+      "Bash(curl -s http://localhost:3000/advogado-cotas-raciais)"
+    ]
+  }
+}

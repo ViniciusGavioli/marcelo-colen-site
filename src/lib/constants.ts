@@ -45,10 +45,7 @@ export const NAV_ITEMS = [
   { label: "Início", href: "/" },
   { label: "Sobre", href: "/sobre" },
   { label: "Atuação", href: "/atuacao" },
-  { label: "Conteúdos", href: "/conteudos" },
   { label: "Mídia", href: "/midia" },
-  { label: "Publicações", href: "/publicacoes" },
-  { label: "Contato", href: "/contato" },
 ] as const;
 
 // Links do footer
@@ -56,16 +53,12 @@ export const FOOTER_LINKS = {
   institucional: [
     { label: "Sobre o Escritório", href: "/sobre" },
     { label: "Áreas de Atuação", href: "/atuacao" },
-    { label: "Contato", href: "/contato" },
-  ],
-  conteudo: [
-    { label: "Artigos", href: "/conteudos" },
     { label: "Na Mídia", href: "/midia" },
-    { label: "Publicações", href: "/publicacoes" },
   ],
-  legal: [
-    { label: "Política de Privacidade", href: "/privacidade" },
-    { label: "Termos de Uso", href: "/termos" },
+  atendimento: [
+    { label: "Heteroidentificação e Cotas", href: "/recurso-heteroidentificacao" },
+    { label: "Advogado Cotas Raciais", href: "/advogado-cotas-raciais" },
+    { label: "Reprovado na Banca", href: "/reprovado-heteroidentificacao" },
   ],
 } as const;
 

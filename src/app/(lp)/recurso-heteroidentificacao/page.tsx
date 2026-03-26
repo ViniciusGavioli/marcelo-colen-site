@@ -272,7 +272,7 @@ function ProvasSocial() {
                 <div className="max-w-4xl mx-auto">
                     <SectionLabel>Depoimentos</SectionLabel>
                     <h2 className="text-2xl md:text-3xl font-bold text-center mb-2" style={{ color: C.white, fontFamily: "'Cormorant Garamond', Georgia, serif" }}>
-                        Candidatos que contestaram a eliminação injusta
+                        Candidatos que questionaram a eliminação injusta
                     </h2>
                     <GoldDivider />
                     <div className="grid md:grid-cols-3 gap-5 mt-10">
@@ -373,7 +373,7 @@ export default function RecursoHeteroidentificacaoPage() {
                         <div className="flex items-center gap-3 mb-6 md:mb-8">
                             <div className="h-px w-8 md:w-12" style={{ background: `linear-gradient(90deg, transparent, ${C.gold})` }} />
                             <span className="text-[10px] md:text-xs uppercase tracking-[0.15em] font-semibold" style={{ color: C.gold }}>
-                                Recurso Administrativo
+                                Recurso Administrativo e Mandado de Segurança
                             </span>
                             <div className="h-px w-8 md:w-12" style={{ background: `linear-gradient(90deg, ${C.gold}, transparent)` }} />
                         </div>
@@ -410,7 +410,7 @@ export default function RecursoHeteroidentificacaoPage() {
                         <div className="flex items-center gap-2.5 mt-8 md:mt-10 px-4 py-2 rounded-full" style={{ backgroundColor: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.08)" }}>
                             <Image src="/images/marcelo/marcelo-sem-fundo-.png" alt="Dr. Marcelo Colen" width={24} height={24} className="rounded-full object-cover w-6 h-6" />
                             <span className="text-[11px] md:text-xs uppercase tracking-wider font-semibold" style={{ color: C.gray2 }}>
-                                Dr. Marcelo Colen · Mestre UFMG · OAB/MG
+                                Dr. Marcelo Colen · Especialista · Mestre UFMG
                             </span>
                         </div>
 
@@ -442,10 +442,10 @@ export default function RecursoHeteroidentificacaoPage() {
                         <GoldDivider />
                         <div className="space-y-3 mt-8 mb-10">
                             {[
+                                "Está com medo de perder anos de estudo por uma análise subjetiva.",
+                                "Você sempre se identificou como pardo e foi pego de surpresa.",
                                 "A banca disse 'não atende ao fenótipo' sem explicar o motivo.",
                                 "A avaliação durou poucos minutos ou foi feita por vídeo.",
-                                "Você sempre se identificou como pardo e foi pego de surpresa.",
-                                "Está com medo de perder anos de estudo por uma análise subjetiva.",
                             ].map((item, i) => (
                                 <Reveal key={i} delay={i * 0.08}>
                                     <div
@@ -506,7 +506,7 @@ export default function RecursoHeteroidentificacaoPage() {
                 <Container className="relative z-10">
                     <div className="max-w-3xl mx-auto">
                         <div className="text-center mb-10 px-4">
-                            <SectionLabel>Por que você pode contestar</SectionLabel>
+                            <SectionLabel>Por que você pode recorrer</SectionLabel>
                             <h2 className="text-2xl md:text-3xl font-bold mb-2" style={{ color: C.white, fontFamily: "'Cormorant Garamond', Georgia, serif" }}>
                                 {D.erros.title}
                             </h2>
@@ -772,7 +772,7 @@ export default function RecursoHeteroidentificacaoPage() {
                             {D.hero.disclaimer}
                         </p>
                         <p className="text-xs mt-2" style={{ color: C.gray3 }}>
-                            © 2026 Marcelo Colen Advogados · OAB/MG
+                            © 2026 Marcelo Colen Advogados
                         </p>
                     </div>
                 </Container>
@@ -793,7 +793,7 @@ function VideoSection({ youtubeId, mp4Src }: { youtubeId?: string; mp4Src?: stri
             <div className="max-w-[720px] mx-auto px-6">
                 <SectionLabel>Mensagem do Especialista</SectionLabel>
                 <h2 className="text-2xl md:text-3xl font-bold text-center mb-2 leading-tight md:leading-snug" style={{ color: C.white, fontFamily: "'Cormorant Garamond', Georgia, serif" }}>
-                    Entenda em 2 minutos por que você ainda pode contestar.
+                    Entenda em 2 minutos por que você ainda pode recorrer.
                 </h2>
                 <GoldDivider />
                 <div className="relative w-full rounded-2xl overflow-hidden mt-10" style={{ boxShadow: "0 12px 60px rgba(0,0,0,0.65)", border: "1px solid rgba(255,255,255,0.1)" }}>

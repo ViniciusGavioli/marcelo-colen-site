@@ -4,7 +4,7 @@ import { SITE_CONFIG } from "@/lib/constants";
 export const metadata: Metadata = {
     title: "Recurso Contra Heteroidentificação | Dr. Marcelo Colen",
     description:
-        "Indeferido na heteroidentificação? Análise jurídica gratuita em horas. Atuação nacional, 100% online. Dr. Marcelo Colen, Mestre UFMG, Diretor de Diversidade OAB/MG.",
+        "Indeferido na heteroidentificação? Análise jurídica gratuita em horas. Atuação nacional, 100% online. Dr. Marcelo Colen, Especialista, Mestre UFMG.",
     alternates: {
         canonical: `${SITE_CONFIG.url}/recurso-heteroidentificacao`,
     },
