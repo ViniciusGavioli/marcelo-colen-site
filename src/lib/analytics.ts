@@ -9,21 +9,44 @@ export const FB_PIXEL_ID = "1269676835042138"; // Facebook Pixel ID
 
 // Event tracking functions
 export const trackEvent = (eventName: string, eventData?: Record<string, unknown>) => {
-  if (typeof window !== "undefined" && (window as unknown as { gtag?: (...args: unknown[]) => void }).gtag) {
-    (window as unknown as { gtag: (...args: unknown[]) => void }).gtag("event", eventName, eventData);
+  if (typeof window !== "undefined") {
+    const w = window as any;
+    w.dataLayer = w.dataLayer || [];
+    if (typeof w.gtag !== "function") {
+      w.gtag = function() { w.dataLayer.push(arguments); };
+    }
+    
+    // GA4/gtag format
+    w.gtag("event", eventName, eventData);
+    
+    // GTM format just in case they have GTM triggers
+    w.dataLayer.push({
+      event: eventName,
+      ...eventData
+    });
   }
 };
 
 // Track Google Ads WhatsApp conversion
 export const trackGoogleAdsWhatsAppConversion = () => {
-  if (typeof window !== "undefined" && (window as unknown as { gtag?: (...args: unknown[]) => void }).gtag) {
-    (window as unknown as { gtag: (...args: unknown[]) => void }).gtag(
-      "event",
-      "conversion",
-      {
-        "send_to": `${ADS_CONVERSION_ID}/${ADS_CONVERSION_LABEL}`
-      }
-    );
+  if (typeof window !== "undefined") {
+    const w = window as any;
+    w.dataLayer = w.dataLayer || [];
+    if (typeof w.gtag !== "function") {
+      w.gtag = function() { w.dataLayer.push(arguments); };
+    }
+
+    // Dispara para o Google Ads
+    w.gtag("event", "conversion", {
+      "send_to": `${ADS_CONVERSION_ID}/${ADS_CONVERSION_LABEL}`
+    });
+
+    // Evento paralelo no dataLayer para o Google Tag Manager (se houver gatilho lá)
+    w.dataLayer.push({
+      event: "conversion_whatsapp",
+      send_to: `${ADS_CONVERSION_ID}/${ADS_CONVERSION_LABEL}`
+    });
+
     return true;
   }
   return false;
