@@ -1,9 +1,0 @@
-export { CriminalHero } from './criminal-hero';
-export { CriminalIdentificacao } from './criminal-identificacao';
-export { CriminalSolucao } from './criminal-solucao';
-export { CriminalAutoridade } from './criminal-autoridade';
-export { CriminalEducacional } from './criminal-educacional';
-export { CriminalProvas } from './criminal-provas';
-export { CriminalFaq } from './criminal-faq';
-export { CriminalInstagram } from './criminal-instagram';
-export { CriminalFooter } from './criminal-footer';

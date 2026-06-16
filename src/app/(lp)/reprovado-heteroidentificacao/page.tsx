@@ -19,6 +19,7 @@ import { getDirectWhatsAppLink } from "@/lib/whatsapp";
 import { trackWhatsAppClick } from "@/lib/analytics";
 import { useState, useEffect, useRef } from "react";
 import { DrMarceloSection } from "@/components/sections/DrMarceloSection";
+import { QualificationQuiz, useQuiz } from "@/components/QualificationQuiz";
 
 // ============================================================================
 // CORES
@@ -144,11 +145,10 @@ function SectionLabel({ children }: { children: string }) {
 // ============================================================================
 // CTA BUTTON — dark gold border
 // ============================================================================
-function Cta({ text, full = false }: { text: string; full?: boolean }) {
+function Cta({ text, full = false, onOpenQuiz }: { text: string; full?: boolean; onOpenQuiz?: () => void }) {
     return (
-        <a
-            href={getDirectWhatsAppLink(D.wa)}
-            onClick={trackWhatsAppClick}
+        <button
+            onClick={onOpenQuiz}
             style={{
                 background: "linear-gradient(160deg, #1c0a0a 0%, #0a0a0a 55%, #0f0d00 100%)",
                 border: "2px solid #c9a227",
@@ -159,7 +159,7 @@ function Cta({ text, full = false }: { text: string; full?: boolean }) {
         >
             <MessageCircle className="w-5 h-5 opacity-70 group-hover:opacity-100 transition-opacity" />
             {text}
-        </a>
+        </button>
     );
 }
 
@@ -275,7 +275,7 @@ function Reveal({ children, delay = 0 }: { children: React.ReactNode; delay?: nu
 // ============================================================================
 // VIDEO SECTION
 // ============================================================================
-function VideoSection({ youtubeId }: { youtubeId: string }) {
+function VideoSection({ youtubeId, onOpenQuiz }: { youtubeId: string; onOpenQuiz?: () => void }) {
     return (
         <section className="py-16 md:py-28" style={{ backgroundColor: C.bg1 }}>
             <div className="max-w-[720px] mx-auto px-6">
@@ -289,7 +289,7 @@ function VideoSection({ youtubeId }: { youtubeId: string }) {
                     <LiteYouTubeEmbed id={youtubeId} title="Vídeo de Análise da Situação" poster="maxresdefault" wrapperClass="yt-lite" />
                 </div>
                 <div className="flex justify-center mt-8">
-                    <Cta text="Quero Analisar Meu Caso Agora" />
+                    <Cta text="Quero Analisar Meu Caso Agora" onOpenQuiz={onOpenQuiz} />
                 </div>
             </div>
         </section>
@@ -300,8 +300,14 @@ function VideoSection({ youtubeId }: { youtubeId: string }) {
 // PAGE
 // ============================================================================
 export default function ReprovadoPage() {
+    const quiz = useQuiz();
     return (
         <main style={{ backgroundColor: C.bg1, color: C.white }}>
+            <QualificationQuiz
+                isOpen={quiz.isOpen}
+                onClose={quiz.close}
+                config={{ defaultWaMessage: D.wa, variant: "dark" }}
+            />
             <GrainOverlay />
 
             {/* ══════════════════════════════════════════════════════════════ */}
@@ -344,7 +350,7 @@ export default function ReprovadoPage() {
                         </p>
 
                         <div className="w-full max-w-sm flex flex-col items-center gap-3">
-                            <Cta text={D.hero.cta} full />
+                            <Cta text={D.hero.cta} full onOpenQuiz={quiz.open} />
                             <p className="text-[11px] md:text-xs font-medium" style={{ color: C.gray3 }}>
                                 <Lock className="w-3 h-3 inline mr-1 mb-0.5" />
                                 Sigiloso · Sem compromisso · Resposta rápida
@@ -368,7 +374,7 @@ export default function ReprovadoPage() {
             {/* ══════════════════════════════════════════════════════════════ */}
             {/* VÍDEO                                                        */}
             {/* ══════════════════════════════════════════════════════════════ */}
-            <Reveal><VideoSection youtubeId="jAiQi4CgMN0" /></Reveal>
+            <Reveal><VideoSection youtubeId="jAiQi4CgMN0" onOpenQuiz={quiz.open} /></Reveal>
 
             {/* ══════════════════════════════════════════════════════════════ */}
             {/* PROVA SOCIAL                                                 */}
@@ -379,7 +385,7 @@ export default function ReprovadoPage() {
             <section className="py-8 md:py-12" style={{ backgroundColor: C.bg1 }}>
                 <Container>
                     <div className="flex justify-center">
-                        <Cta text="Quero Analisar Meu Caso" />
+                        <Cta text="Quero Analisar Meu Caso" onOpenQuiz={quiz.open} />
                     </div>
                 </Container>
             </section>
@@ -413,7 +419,7 @@ export default function ReprovadoPage() {
                             ))}
                         </div>
                         <div className="flex justify-center">
-                            <Cta text={D.analiseCaso.cta} />
+                            <Cta text={D.analiseCaso.cta} onOpenQuiz={quiz.open} />
                         </div>
                     </div>
                 </Container>
@@ -437,7 +443,7 @@ export default function ReprovadoPage() {
                         <p className="text-base md:text-lg leading-relaxed mb-8 font-medium" style={{ color: C.gray1 }}>
                             {renderBold(D.urg.text)}
                         </p>
-                        <Cta text={D.urg.cta} />
+                        <Cta text={D.urg.cta} onOpenQuiz={quiz.open} />
                     </div>
                 </Container>
             </section>
@@ -471,7 +477,7 @@ export default function ReprovadoPage() {
                         ))}
                     </div>
                     <div className="flex justify-center">
-                        <Cta text={D.steps.cta} />
+                        <Cta text={D.steps.cta} onOpenQuiz={quiz.open} />
                     </div>
                 </Container>
             </section>
@@ -539,7 +545,7 @@ export default function ReprovadoPage() {
                                 ))}
                             </div>
                         </div>
-                        <Cta text="Falar com Dr. Marcelo Agora" full />
+                        <Cta text="Falar com Dr. Marcelo Agora" full onOpenQuiz={quiz.open} />
                         <p className="text-xs mt-6 italic" style={{ color: C.gray3 }}>{D.hero.disclaimer}</p>
                         <p className="text-xs mt-2" style={{ color: C.gray3 }}>© 2026 Marcelo Colen Advogados · OAB/MG</p>
                     </div>

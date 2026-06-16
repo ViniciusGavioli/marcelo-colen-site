@@ -25,6 +25,7 @@ import { getDirectWhatsAppLink } from "@/lib/whatsapp";
 import { trackWhatsAppClick } from "@/lib/analytics";
 import { useState, useEffect, useRef } from "react";
 import { DrMarceloSection } from "@/components/sections/DrMarceloSection";
+import { QualificationQuiz, useQuiz } from "@/components/QualificationQuiz";
 
 // ============================================================================
 // CORES
@@ -175,11 +176,10 @@ function SectionLabel({ children }: { children: string }) {
 // ============================================================================
 // CTA BUTTON — dark gold border
 // ============================================================================
-function Cta({ text, full = false }: { text: string; full?: boolean; }) {
+function Cta({ text, full = false, onOpenQuiz }: { text: string; full?: boolean; onOpenQuiz?: () => void; }) {
     return (
-        <a
-            href={getDirectWhatsAppLink(D.wa)}
-            onClick={trackWhatsAppClick}
+        <button
+            onClick={onOpenQuiz}
             style={{
                 background: "linear-gradient(160deg, #1c0a0a 0%, #0a0a0a 55%, #0f0d00 100%)",
                 border: "2px solid #c9a227",
@@ -190,18 +190,17 @@ function Cta({ text, full = false }: { text: string; full?: boolean; }) {
         >
             <MessageCircle className="w-5 h-5 opacity-70 group-hover:opacity-100 transition-opacity" />
             {text}
-        </a>
+        </button>
     );
 }
 
 // ============================================================================
 // HERO CTA — botão discreto dourado
 // ============================================================================
-function HeroCta({ text, full = false }: { text: string; full?: boolean }) {
+function HeroCta({ text, full = false, onOpenQuiz }: { text: string; full?: boolean; onOpenQuiz?: () => void }) {
     return (
-        <a
-            href={getDirectWhatsAppLink(D.wa)}
-            onClick={trackWhatsAppClick}
+        <button
+            onClick={onOpenQuiz}
             style={{
                 background: "linear-gradient(160deg, #1c0a0a 0%, #0a0a0a 55%, #0f0d00 100%)",
                 border: "2px solid #c9a227",
@@ -212,7 +211,7 @@ function HeroCta({ text, full = false }: { text: string; full?: boolean }) {
         >
             {text}
             <ChevronDown className="w-4 h-4 rotate-[-90deg] opacity-60 group-hover:translate-x-0.5 transition-transform duration-200" />
-        </a>
+        </button>
     );
 }
 
@@ -346,8 +345,14 @@ function Reveal({ children, delay = 0 }: { children: React.ReactNode; delay?: nu
 // PAGE
 // ============================================================================
 export default function RecursoHeteroidentificacaoPage() {
+    const quiz = useQuiz();
     return (
         <main style={{ backgroundColor: C.bg1, color: C.white }}>
+            <QualificationQuiz
+                isOpen={quiz.isOpen}
+                onClose={quiz.close}
+                config={{ defaultWaMessage: D.wa, variant: "dark" }}
+            />
             <GrainOverlay />
 
             {/* ══════════════════════════════════════════════════════════════ */}
@@ -399,7 +404,7 @@ export default function RecursoHeteroidentificacaoPage() {
 
                         {/* CTA */}
                         <div className="w-full max-w-sm flex flex-col items-center gap-3">
-                            <HeroCta text={D.hero.cta} full />
+                            <HeroCta text={D.hero.cta} full onOpenQuiz={quiz.open} />
                             <p className="text-[11px] md:text-xs font-medium" style={{ color: C.gray3 }}>
                                 <Lock className="w-3 h-3 inline mr-1 mb-0.5" />
                                 Sigiloso · Sem compromisso · Resposta rápida
@@ -475,7 +480,7 @@ export default function RecursoHeteroidentificacaoPage() {
             <section className="py-8 md:py-12" style={{ backgroundColor: C.bg1 }}>
                 <Container>
                     <div className="flex justify-center">
-                        <Cta text="Quero Analisar Meu Caso" />
+                        <Cta text="Quero Analisar Meu Caso" onOpenQuiz={quiz.open} />
                     </div>
                 </Container>
             </section>
@@ -529,7 +534,7 @@ export default function RecursoHeteroidentificacaoPage() {
                             ))}
                         </div>
                         <div className="text-center">
-                            <Cta text="Analisar Se Meu Caso Tem Fundamento" />
+                            <Cta text="Analisar Se Meu Caso Tem Fundamento" onOpenQuiz={quiz.open} />
                         </div>
                     </div>
                 </Container>
@@ -615,7 +620,7 @@ export default function RecursoHeteroidentificacaoPage() {
                         <p className="text-base md:text-lg leading-relaxed mb-8 font-medium" style={{ color: C.gray1 }}>
                             {renderBold(D.urg.text)}
                         </p>
-                        <Cta text={D.urg.cta} />
+                        <Cta text={D.urg.cta} onOpenQuiz={quiz.open} />
                     </div>
                 </Container>
             </section>
@@ -767,7 +772,7 @@ export default function RecursoHeteroidentificacaoPage() {
                             </p>
                         </div>
 
-                        <Cta text="Quero Saber Se Posso Recorrer" full />
+                        <Cta text="Quero Saber Se Posso Recorrer" full onOpenQuiz={quiz.open} />
                         <p className="text-xs mt-6 italic" style={{ color: C.gray3 }}>
                             {D.hero.disclaimer}
                         </p>

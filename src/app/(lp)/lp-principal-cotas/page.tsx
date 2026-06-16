@@ -20,6 +20,7 @@ import { Container } from "@/components/layout";
 import { getDirectWhatsAppLink } from "@/lib/whatsapp";
 import { trackWhatsAppClick } from "@/lib/analytics";
 import { useState } from "react";
+import { QualificationQuiz, useQuiz } from "@/components/QualificationQuiz";
 
 // ============================================================================
 // CORES — referência central (inline styles para vencer globals.css)
@@ -127,13 +128,12 @@ const D = {
 // ============================================================================
 // CTA BUTTON
 // ============================================================================
-function Cta({ text, full = false }: {
-    text: string; full?: boolean;
+function Cta({ text, full = false, onOpenQuiz }: {
+    text: string; full?: boolean; onOpenQuiz?: () => void;
 }) {
     return (
-        <a
-            href={getDirectWhatsAppLink(D.wa)}
-            onClick={trackWhatsAppClick}
+        <button
+            onClick={onOpenQuiz}
             style={{
                 backgroundColor: C.cta,
                 color: C.white,
@@ -143,24 +143,23 @@ function Cta({ text, full = false }: {
         >
             <MessageCircle className="w-5 h-5 md:w-6 md:h-6 group-hover:animate-pulse" />
             {text}
-        </a>
+        </button>
     );
 }
 
 // ============================================================================
 // CTA LINK (secondary)
 // ============================================================================
-function CtaLink({ text }: { text: string }) {
+function CtaLink({ text, onOpenQuiz }: { text: string; onOpenQuiz?: () => void }) {
     return (
-        <a
-            href={getDirectWhatsAppLink(D.wa)}
-            onClick={trackWhatsAppClick}
+        <button
+            onClick={onOpenQuiz}
             style={{ color: C.gold, borderColor: C.gold }}
             className="inline-flex items-center gap-2 font-bold border-b-2 pb-0.5 hover:brightness-125 transition-all"
         >
             <MessageCircle className="w-4 h-4" />
             {text}
-        </a>
+        </button>
     );
 }
 
@@ -232,8 +231,14 @@ function SuggestedMessage() {
 // PAGE
 // ============================================================================
 export default function RecursoCotasPage() {
+    const quiz = useQuiz();
     return (
         <main style={{ backgroundColor: C.bg1, color: C.white }}>
+            <QualificationQuiz
+                isOpen={quiz.isOpen}
+                onClose={quiz.close}
+                config={{ defaultWaMessage: D.wa, variant: "dark" }}
+            />
 
             {/* ══════════════════════════════════════════════════════════════ */}
             {/* HERO — ESTRUTURA FINAL (SEM BURACOS / PROPORCIONAL)          */}
@@ -276,8 +281,8 @@ export default function RecursoCotasPage() {
                             </p>
 
                             {/* Bloco CTA + Trust Seal */}
-                            <div className="max-w-md w-full flex flex-col items-center space-y-4">
-                                <Cta text={D.hero.cta} full />
+                            <div className="max-w-md w-full flex flex-col items-center space-y-4" id="hero-cta">
+                                <Cta text={D.hero.cta} full onOpenQuiz={quiz.open} />
 
                                 <div className="space-y-1 opacity-90 text-center">
                                     <p className="text-[11px] md:text-sm font-bold" style={{ color: C.gray2 }}>
@@ -344,7 +349,7 @@ export default function RecursoCotasPage() {
                     </div>
 
                     <div className="text-center">
-                        <CtaLink text={D.check.cta} />
+                        <CtaLink text={D.check.cta} onOpenQuiz={quiz.open} />
                     </div>
                 </Container>
             </section>
@@ -379,7 +384,7 @@ export default function RecursoCotasPage() {
                             ))}
                         </div>
 
-                        <Cta text={D.hope.cta} full />
+                        <Cta text={D.hope.cta} full onOpenQuiz={quiz.open} />
                     </div>
                 </Container>
             </section>
@@ -407,7 +412,7 @@ export default function RecursoCotasPage() {
                         <p className="text-base md:text-lg leading-relaxed mb-8 font-medium" style={{ color: C.gray1 }}>
                             {D.urg.text}
                         </p>
-                        <Cta text={D.urg.cta} />
+                        <Cta text={D.urg.cta} onOpenQuiz={quiz.open} />
                     </div>
                 </Container>
             </section>
@@ -451,7 +456,7 @@ export default function RecursoCotasPage() {
                             ))}
                         </div>
 
-                        <Cta text={D.trigger.cta} full />
+                        <Cta text={D.trigger.cta} full onOpenQuiz={quiz.open} />
                     </div>
                 </Container>
             </section>
@@ -496,7 +501,7 @@ export default function RecursoCotasPage() {
                     </div>
 
                     <div className="text-center">
-                        <Cta text={D.steps.cta} />
+                        <Cta text={D.steps.cta} onOpenQuiz={quiz.open} />
                     </div>
                 </Container>
             </section>
@@ -589,7 +594,7 @@ export default function RecursoCotasPage() {
                         >
                             Não perca sua vaga por omissão.
                         </p>
-                        <Cta text="Falar com Dr. Marcelo Agora" full />
+                        <Cta text="Falar com Dr. Marcelo Agora" full onOpenQuiz={quiz.open} />
                         <p className="text-xs mt-6" style={{ color: C.gray3 }}>
                             © 2026 Marcelo Colen Advogados · OAB/MG
                         </p>

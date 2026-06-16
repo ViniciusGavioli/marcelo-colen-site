@@ -3,27 +3,56 @@
 import { useState, useEffect } from "react";
 import { MessageCircle, X } from "lucide-react";
 import { getDirectWhatsAppLink } from "@/lib/whatsapp";
+import { trackWhatsAppClick } from "@/lib/analytics";
 
 const WHATSAPP_NUMBER = "5531972206996";
+
+// Delay mínimo antes de mostrar (30s) OU scroll >= 40%
+const MIN_DELAY_MS = 30_000;
+const MIN_SCROLL_PCT = 0.40;
 
 export function WhatsAppFloat() {
     const [show, setShow] = useState(false);
     const [pulse, setPulse] = useState(true);
     const [tooltip, setTooltip] = useState(false);
 
-    // Aparece após 2s de scroll
     useEffect(() => {
-        const timer = setTimeout(() => setShow(true), 2000);
-        return () => clearTimeout(timer);
+        let revealed = false;
+
+        // Timer de 30 segundos
+        const timer = setTimeout(() => {
+            if (!revealed) {
+                revealed = true;
+                setShow(true);
+            }
+        }, MIN_DELAY_MS);
+
+        // Scroll listener — mostra se scrollou 40%+ da página
+        const handleScroll = () => {
+            if (revealed) return;
+            const scrollPct = window.scrollY / (document.documentElement.scrollHeight - window.innerHeight);
+            if (scrollPct >= MIN_SCROLL_PCT) {
+                revealed = true;
+                setShow(true);
+            }
+        };
+
+        window.addEventListener("scroll", handleScroll, { passive: true });
+
+        return () => {
+            clearTimeout(timer);
+            window.removeEventListener("scroll", handleScroll);
+        };
     }, []);
 
     // Pulse para por 8s depois ativa tooltip
     useEffect(() => {
+        if (!show) return;
         const t1 = setTimeout(() => setPulse(false), 8000);
-        const t2 = setTimeout(() => setTooltip(true), 5000);
-        const t3 = setTimeout(() => setTooltip(false), 12000);
+        const t2 = setTimeout(() => setTooltip(true), 3000);
+        const t3 = setTimeout(() => setTooltip(false), 10000);
         return () => { clearTimeout(t1); clearTimeout(t2); clearTimeout(t3); };
-    }, []);
+    }, [show]);
 
     const link = getDirectWhatsAppLink(
         "Olá Dr. Marcelo, vim pelo site e gostaria de tirar uma dúvida.",
@@ -89,6 +118,7 @@ export function WhatsAppFloat() {
                 href={link}
                 target="_blank"
                 rel="noopener noreferrer"
+                onClick={(e) => trackWhatsAppClick(e)}
                 aria-label="Fale conosco pelo WhatsApp"
                 className="fixed bottom-6 right-6 z-[9999] flex items-center justify-center w-[60px] h-[60px] rounded-full transition-transform hover:scale-110 active:scale-95"
                 style={{

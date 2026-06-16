@@ -14,66 +14,31 @@ export const trackEvent = (eventName: string, eventData?: Record<string, unknown
   }
 };
 
-// Track Google Ads WhatsApp conversion with callback (padrão recomendado pelo Google)
-export const trackGoogleAdsWhatsAppConversion = (url?: string) => {
+// Track Google Ads WhatsApp conversion
+export const trackGoogleAdsWhatsAppConversion = () => {
   if (typeof window !== "undefined" && (window as unknown as { gtag?: (...args: unknown[]) => void }).gtag) {
-    let navigated = false;
-
-    // Fallback de segurança: navega após 1 segundo se o callback da tag não disparar
-    const callback = () => {
-      if (!navigated && typeof url !== "undefined") {
-        navigated = true;
-        window.location.href = url;
-      }
-    };
-
-    const timeout = setTimeout(callback, 1000);
-
     (window as unknown as { gtag: (...args: unknown[]) => void }).gtag(
       "event",
       "conversion",
       {
-        "send_to": `${ADS_CONVERSION_ID}/${ADS_CONVERSION_LABEL}`,
-        "event_callback": () => {
-          clearTimeout(timeout);
-          callback();
-        }
+        "send_to": `${ADS_CONVERSION_ID}/${ADS_CONVERSION_LABEL}`
       }
     );
-    return true; // Indica que callback vai navegar
+    return true;
   }
   return false;
 };
 
 // Handler para clicks em botões WhatsApp
 export const trackWhatsAppClick = (e?: React.MouseEvent<HTMLAnchorElement>) => {
-  // Deduplicação: disparar apenas uma vez por sessão
-  if (typeof window !== "undefined" && sessionStorage.getItem("wa_fired")) {
-    console.log("[Analytics] WhatsApp conversion already fired in this session.");
-    return;
-  }
-
   // Google Analytics event
   trackEvent("whatsapp_click", {
     event_category: "engagement",
     event_label: "whatsapp_contact"
   });
 
-  // Marcar como disparado
-  if (typeof window !== "undefined") {
-    sessionStorage.setItem("wa_fired", "true");
-  }
-
-  // Google Ads conversion com callback
-  if (e) {
-    const url = e.currentTarget.href;
-    const handled = trackGoogleAdsWhatsAppConversion(url);
-    if (handled) {
-      e.preventDefault(); // Callback vai navegar após conversão
-    }
-  } else {
-    trackGoogleAdsWhatsAppConversion();
-  }
+  // Google Ads conversion
+  trackGoogleAdsWhatsAppConversion();
 };
 
 export const trackFormSubmission = (formType: string) => {

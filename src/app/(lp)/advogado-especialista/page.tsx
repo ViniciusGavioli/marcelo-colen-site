@@ -21,6 +21,7 @@ import {
 import { getDirectWhatsAppLink } from "@/lib/whatsapp";
 import { trackWhatsAppClick } from "@/lib/analytics";
 import { useState } from "react";
+import { QualificationQuiz, useQuiz } from "@/components/QualificationQuiz";
 
 /* ═══════════════════════════════════════════════════════════════════════════
    DESIGN TOKENS
@@ -111,12 +112,11 @@ function Wrap({ children, className = "" }: { children: React.ReactNode; classNa
     return <div className={`mx-auto px-5 sm:px-8 w-full ${className}`} style={{ maxWidth: 1120 }}>{children}</div>;
 }
 
-function Cta({ text = "Enviar Meu Caso no WhatsApp", full = false, variant = "green" }: { text?: string; full?: boolean; variant?: "green" | "white" }) {
+function Cta({ text = "Enviar Meu Caso no WhatsApp", full = false, variant = "green", onOpenQuiz }: { text?: string; full?: boolean; variant?: "green" | "white"; onOpenQuiz?: () => void }) {
     const isWhite = variant === "white";
     return (
-        <a
-            href={getDirectWhatsAppLink(WA_MSG)}
-            onClick={trackWhatsAppClick}
+        <button
+            onClick={onOpenQuiz}
             style={{
                 backgroundColor: isWhite ? T.white : T.green,
                 color: isWhite ? T.navy : T.white,
@@ -128,7 +128,7 @@ function Cta({ text = "Enviar Meu Caso no WhatsApp", full = false, variant = "gr
         >
             <MessageCircle className="w-5 h-5 md:w-[22px] md:h-[22px] opacity-90" />
             {text}
-        </a>
+        </button>
     );
 }
 
@@ -166,12 +166,18 @@ const secPad = "py-[clamp(56px,8vw,112px)]";
    PAGE
    ═══════════════════════════════════════════════════════════════════════════ */
 export default function AdvogadoEspecialistaPage() {
+    const quiz = useQuiz();
     return (
         <>
             {/* eslint-disable-next-line @next/next/no-page-custom-font */}
             <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@600;700;800;900&display=swap" />
 
             <main style={{ fontFamily: BODY }}>
+                <QualificationQuiz
+                    isOpen={quiz.isOpen}
+                    onClose={quiz.close}
+                    config={{ defaultWaMessage: WA_MSG, variant: "light" }}
+                />
 
                 {/* ══════════════════════════════════════════════════════════
                     HERO — split layout, navy background
@@ -204,7 +210,7 @@ export default function AdvogadoEspecialistaPage() {
 
                                 {/* CTA */}
                                 <div className="flex flex-col sm:flex-row items-start gap-4 mb-6">
-                                    <Cta />
+                                    <Cta onOpenQuiz={quiz.open} />
                                 </div>
                                 <div className="flex items-center gap-2 text-[11px] text-white/40 uppercase tracking-widest font-semibold">
                                     <Lock className="w-3 h-3" />
@@ -257,7 +263,7 @@ export default function AdvogadoEspecialistaPage() {
                                 <LiteYouTubeEmbed id="jAiQi4CgMN0" title="Mensagem do Dr. Marcelo Colen" poster="maxresdefault" wrapperClass="yt-lite" />
                             </div>
                             <div className="flex justify-center mt-8">
-                                <Cta />
+                                <Cta onOpenQuiz={quiz.open} />
                             </div>
                         </div>
                     </Wrap>
@@ -304,7 +310,7 @@ export default function AdvogadoEspecialistaPage() {
                                 ))}
                             </div>
                             <div className="text-center">
-                                <Cta />
+                                <Cta onOpenQuiz={quiz.open} />
                             </div>
                         </div>
                     </Wrap>
@@ -355,7 +361,7 @@ export default function AdvogadoEspecialistaPage() {
                                 <p className="text-base md:text-lg leading-[1.7] mb-8 text-white/50">
                                     Erros de procedimento podem fundamentar o recurso. Nós identificamos se houve falha e orientamos sua defesa técnica.
                                 </p>
-                                <Cta variant="white" />
+                                <Cta variant="white" onOpenQuiz={quiz.open} />
                             </div>
                             <div className="space-y-4">
                                 {["Motivação genérica sem detalhar fenótipo", "Tempo de avaliação insuficiente", "Composição irregular da comissão", "Critérios divergentes do edital"].map((item, i) => (
@@ -394,7 +400,7 @@ export default function AdvogadoEspecialistaPage() {
                                 ))}
                             </div>
                             <div className="text-center">
-                                <Cta />
+                                <Cta onOpenQuiz={quiz.open} />
                             </div>
                         </div>
                     </Wrap>
@@ -420,7 +426,7 @@ export default function AdvogadoEspecialistaPage() {
                                     <p className="text-base md:text-lg leading-[1.7] mb-8 text-white/70 max-w-[60ch]">
                                         Em muitos concursos, o prazo de recurso administrativo é de apenas 2 a 5 dias corridos após o resultado. Passado esse prazo, a via administrativa fecha. Resta apenas a judicial, mais longa e mais cara. Por isso a análise precisa acontecer agora.
                                     </p>
-                                    <Cta variant="white" />
+                                    <Cta variant="white" onOpenQuiz={quiz.open} />
                                 </div>
                             </div>
                         </div>
@@ -455,7 +461,7 @@ export default function AdvogadoEspecialistaPage() {
                         </div>
 
                         <div className="text-center">
-                            <Cta />
+                            <Cta onOpenQuiz={quiz.open} />
                         </div>
                     </Wrap>
                 </section>
@@ -548,7 +554,7 @@ export default function AdvogadoEspecialistaPage() {
                                 </p>
                             </div>
 
-                            <Cta full />
+                            <Cta full onOpenQuiz={quiz.open} />
 
                             <p className="text-[11px] mt-6 italic text-white/30">
                                 Cada caso é avaliado individualmente. Não fazemos promessa de resultado.
