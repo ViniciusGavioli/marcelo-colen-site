@@ -54,7 +54,20 @@ export const trackGoogleAdsWhatsAppConversion = () => {
 
 // Handler para clicks em botões WhatsApp
 export const trackWhatsAppClick = (e?: React.MouseEvent<HTMLAnchorElement>) => {
-  // Google Analytics event
+  // Evento padrão do Google Analytics para conversão (Lead)
+  trackEvent("generate_lead", {
+    event_category: "lead",
+    event_label: "whatsapp_contact",
+    method: "WhatsApp"
+  });
+
+  // Evento extra específico caso você tenha criado como "lead_whatsapp"
+  trackEvent("lead_whatsapp", {
+    event_category: "lead",
+    event_label: "whatsapp_contact"
+  });
+
+  // Mantém o antigo por garantia
   trackEvent("whatsapp_click", {
     event_category: "engagement",
     event_label: "whatsapp_contact"
