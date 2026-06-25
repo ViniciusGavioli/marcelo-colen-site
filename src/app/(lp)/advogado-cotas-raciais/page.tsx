@@ -226,16 +226,16 @@ function FaqItem({ q, a }: { q: string; a: string }) {
 function ProvasSocial() {
     const depoimentos = [
         {
-            nome: "Mariana Souza · Concurso Federal · Brasília/DF",
-            texto: "Fui eliminada na heteroidentificação do CNU depois de anos estudando. O Dr. Marcelo analisou meu caso em horas e identificou falha procedimental da banca. Consegui liminar e retornei ao certame.",
+            nome: "Melissa Rosadilla · avaliação no Google",
+            texto: "A equipe atuou de forma excepcional no meu caso. Desde o primeiro atendimento, extremamente claros e transparentes comigo, o que me gerou muita confiança. Para finalizar, obtive êxito. Muito obrigada a Marcelo e toda a equipe!",
         },
         {
-            nome: "Rafael Oliveira · Concurso Estadual · Belo Horizonte/MG",
-            texto: "A motivação da banca era genérica, três linhas apenas. Com o recurso bem fundamentado, a eliminação foi revertida administrativamente. Hoje estou no cargo.",
+            nome: "Juliy Ferreira · avaliação no Google",
+            texto: "Em um momento delicado da minha vida, encontrei não apenas competência jurídica, mas também acolhimento e humanidade. Todas as minhas dúvidas foram esclarecidas com transparência, e me senti segura durante todo o processo.",
         },
         {
-            nome: "Camila Andrade · Concurso Cebraspe · São Paulo/SP",
-            texto: "Não sabia nem que dava pra recorrer. Ele me explicou tudo, resolveu rápido. Recomendo demais.",
+            nome: "Sibele Rosadilla · avaliação no Google",
+            texto: "Escritório sério, competente, interessado, responsável, diferenciado! Nos atendeu de maneira ímpar, de forma muito clara e conseguindo sucesso na ação. Totalmente recomendável!",
         },
     ];
 
