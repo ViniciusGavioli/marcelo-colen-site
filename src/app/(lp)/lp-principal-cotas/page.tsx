@@ -355,6 +355,43 @@ export default function RecursoCotasPage() {
             </section>
 
             {/* ══════════════════════════════════════════════════════════════ */}
+            {/* AUTORIDADE — Dr. Marcelo                                     */}
+            {/* ══════════════════════════════════════════════════════════════ */}
+            <section className="py-16 md:py-20" style={{ backgroundColor: C.bg1 }}>
+                <Container>
+                    <div className="max-w-3xl mx-auto flex flex-col md:flex-row items-center gap-8 md:gap-12">
+                        <div className="relative flex-shrink-0">
+                            <div
+                                className="w-28 h-28 md:w-36 md:h-36 rounded-full overflow-hidden"
+                                style={{
+                                    border: `3px solid ${C.gold}`,
+                                    boxShadow: `0 0 30px ${C.gold}22`,
+                                }}
+                            >
+                                <Image
+                                    src="/images/marcelo/marcelo-hero.jpg"
+                                    alt="Dr. Marcelo Colen"
+                                    width={144}
+                                    height={144}
+                                    className="object-cover w-full h-full"
+                                />
+                            </div>
+                        </div>
+                        <div className="text-center md:text-left">
+                            <h3 className="text-2xl font-bold mb-1" style={{ color: C.white }}>{D.trust.name}</h3>
+                            <p className="font-medium text-sm mb-4 tracking-wide" style={{ color: C.gold }}>{D.trust.role}</p>
+                            <blockquote
+                                className="leading-relaxed italic pl-4"
+                                style={{ color: C.gray2, borderLeft: `2px solid ${C.gold}` }}
+                            >
+                                &ldquo;{D.trust.quote}&rdquo;
+                            </blockquote>
+                        </div>
+                    </div>
+                </Container>
+            </section>
+
+            {/* ══════════════════════════════════════════════════════════════ */}
             {/* ESPERANÇA — "A Banca Erra"                                  */}
             {/* ══════════════════════════════════════════════════════════════ */}
             <section className="py-12 md:py-20 relative" style={{ backgroundColor: C.bg1 }}>
@@ -512,43 +549,6 @@ export default function RecursoCotasPage() {
             <section className="py-12 md:py-16" style={{ backgroundColor: C.bg2 }}>
                 <Container>
                     <SuggestedMessage />
-                </Container>
-            </section>
-
-            {/* ══════════════════════════════════════════════════════════════ */}
-            {/* AUTORIDADE — Dr. Marcelo                                     */}
-            {/* ══════════════════════════════════════════════════════════════ */}
-            <section className="py-16 md:py-20" style={{ backgroundColor: C.bg1 }}>
-                <Container>
-                    <div className="max-w-3xl mx-auto flex flex-col md:flex-row items-center gap-8 md:gap-12">
-                        <div className="relative flex-shrink-0">
-                            <div
-                                className="w-28 h-28 md:w-36 md:h-36 rounded-full overflow-hidden"
-                                style={{
-                                    border: `3px solid ${C.gold}`,
-                                    boxShadow: `0 0 30px ${C.gold}22`,
-                                }}
-                            >
-                                <Image
-                                    src="/images/marcelo/marcelo-hero.jpg"
-                                    alt="Dr. Marcelo Colen"
-                                    width={144}
-                                    height={144}
-                                    className="object-cover w-full h-full"
-                                />
-                            </div>
-                        </div>
-                        <div className="text-center md:text-left">
-                            <h3 className="text-2xl font-bold mb-1" style={{ color: C.white }}>{D.trust.name}</h3>
-                            <p className="font-medium text-sm mb-4 tracking-wide" style={{ color: C.gold }}>{D.trust.role}</p>
-                            <blockquote
-                                className="leading-relaxed italic pl-4"
-                                style={{ color: C.gray2, borderLeft: `2px solid ${C.gold}` }}
-                            >
-                                &ldquo;{D.trust.quote}&rdquo;
-                            </blockquote>
-                        </div>
-                    </div>
                 </Container>
             </section>
 
