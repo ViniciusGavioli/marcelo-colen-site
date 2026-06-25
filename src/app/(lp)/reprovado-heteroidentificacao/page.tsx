@@ -381,6 +381,11 @@ export default function ReprovadoPage() {
             {/* ══════════════════════════════════════════════════════════════ */}
             <Reveal><ProvasSocial /></Reveal>
 
+            {/* ══════════════════════════════════════════════════════════════ */}
+            {/* DR. MARCELO — 4ª seção, logo após a prova social             */}
+            {/* ══════════════════════════════════════════════════════════════ */}
+            <DrMarceloSection />
+
             {/* CTA intermediário */}
             <section className="py-8 md:py-12" style={{ backgroundColor: C.bg1 }}>
                 <Container>
@@ -482,10 +487,6 @@ export default function ReprovadoPage() {
                 </Container>
             </section>
 
-            {/* ══════════════════════════════════════════════════════════════ */}
-            {/* DR. MARCELO                                                  */}
-            {/* ══════════════════════════════════════════════════════════════ */}
-            <DrMarceloSection />
 
             {/* ══════════════════════════════════════════════════════════════ */}
             {/* FAQ                                                          */}

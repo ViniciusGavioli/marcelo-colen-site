@@ -5,27 +5,21 @@ import LiteYouTubeEmbed from "react-lite-youtube-embed";
 import "react-lite-youtube-embed/dist/LiteYouTubeEmbed.css";
 import {
     MessageCircle,
-    AlertTriangle,
     XCircle,
-    ShieldCheck,
     Clock,
     Send,
     Search,
     Gavel,
     ChevronDown,
     Lock,
-    Copy,
     Check,
-    Zap,
     Scale,
-    FileText
 } from "lucide-react";
 import { Container } from "@/components/layout";
 import { getDirectWhatsAppLink } from "@/lib/whatsapp";
 import { trackWhatsAppClick } from "@/lib/analytics";
 import { useState, useEffect, useRef } from "react";
 import { DrMarceloSection } from "@/components/sections/DrMarceloSection";
-import { QualificationQuiz, useQuiz } from "@/components/QualificationQuiz";
 
 // ============================================================================
 // CORES
@@ -45,61 +39,86 @@ const C = {
     redBg: "rgba(239,68,68,0.08)",
     redBorder: "rgba(239,68,68,0.25)",
     cta: "#25D366",
-    ctaHover: "#2BE673",
-    ctaGlow: "rgba(37,211,102,0.25)",
     green: "#25D366",
-    greenGlow: "rgba(37,211,102,0.25)",
 };
 
-// SVG grain texture como data URL
 const GRAIN_URL = `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='320' height='320'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.72' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='320' height='320' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E")`;
 
 // ============================================================================
-// DADOS LP 1: ADVOGADO ESPECIALISTA
+// DADOS — MANDADO DE SEGURANÇA / HETEROIDENTIFICAÇÃO
 // ============================================================================
+const WA_MSG =
+    "Olá Dr. Marcelo, meu recurso na heteroidentificação foi negado e quero saber se cabe mandado de segurança no meu caso. Posso enviar o edital e a decisão da banca?";
+
 const D = {
     hero: {
-        badge: "⚠️ Prazo de recurso: entre 2 e 5 dias a partir do resultado. Cada hora conta.",
-        h1_1: "Passou em tudo e foi reprovado na banca?",
-        h1_2: "Isso tem contestação.",
-        sub: "Se a banca te indeferiu, **pode ter cometido um erro**. Esse erro **pode ser contestado** antes do prazo acabar.",
-        credentials: "Dr. Marcelo Colen · Mestre em Direito pela UFMG · Secretário da Comissão Nacional de Promoção da Igualdade da OAB Federal · Diretor de Diversidade da OAB/MG",
-        cta: "Ver se meu caso tem recurso",
-        ctaLine1: "Você pode enviar o resultado da heteroidentificação agora mesmo.",
-        ctaLine2: "Primeira análise gratuita e sigilosa.",
+        eyebrow: "Mandado de Segurança · Heteroidentificação",
+        h1_1: "Seu recurso na heteroidentificação foi negado?",
+        h1_2: "A decisão da banca ainda pode ser revista na Justiça.",
+        cta: "Falar com o Dr. Marcelo agora",
         disclaimer: "Cada caso é avaliado individualmente. Não fazemos promessa de resultado.",
+    },
+    situacao: {
+        items: [
+            "Você recorreu na via administrativa e o recurso foi negado.",
+            "A banca manteve a eliminação sem explicar quais critérios usou.",
+            "A comissão exigiu algo que não estava previsto no edital.",
+            "O concurso segue avançando e você teme perder a vaga conquistada na prova.",
+        ],
+    },
+    mecanismo: {
+        title: "Quando a banca erra, a Justiça pode corrigir",
+        subtitle:
+            "O mandado de segurança protege direito líquido e certo contra ato ilegal de autoridade. A decisão de uma comissão de heteroidentificação é um ato de autoridade pública.",
+        items: [
+            {
+                titulo: "Falta de fundamentação",
+                texto: "A decisão apenas afirma que você 'não atende ao fenótipo', sem dizer quais características foram avaliadas. **Decisão sem motivação é contestável.**",
+            },
+            {
+                titulo: "Critério fora do edital",
+                texto: "A comissão aplicou exigência que **não constava nas regras do concurso**. O que não está no edital não pode ser usado contra o candidato.",
+            },
+            {
+                titulo: "Procedimento irregular",
+                texto: "Avaliação em poucos minutos, comissão mal composta ou ausência de registro em vídeo podem **comprometer a validade do ato**.",
+            },
+            {
+                titulo: "Direito líquido e certo",
+                texto: "Quando os documentos provam a ilegalidade **de imediato, sem necessidade de perícia**, o caso tem o requisito central do mandado de segurança.",
+            },
+        ],
     },
     analiseCaso: {
         title: "O que analisamos no seu caso",
-        desc: "Avaliação do edital, da **motivação da banca** e da **viabilidade do recurso**.",
+        desc: "Leitura do edital, da decisão da banca e da viabilidade da via judicial.",
         items: [
-            "Edital do concurso",
-            "Resultado da heteroidentificação",
-            "Fundamentação apresentada pela banca",
-            "Prazo recursal disponível",
-        ]
+            "Edital e as regras da heteroidentificação",
+            "A decisão da comissão e sua fundamentação",
+            "O recurso administrativo já apresentado",
+            "O prazo de 120 dias e a fase atual do concurso",
+        ],
     },
     urg: {
-        title: "Por Que Agir Rápido?",
-        text: "Em muitos concursos, o prazo de recurso administrativo é de apenas **2 a 5 dias corridos** após o resultado. Passado esse prazo, a via administrativa **fecha**. Resta apenas a judicial, **mais longa e mais cara**. Por isso a análise **precisa acontecer agora**.",
-        cta: "Enviar Meu Caso no WhatsApp",
+        title: "O prazo de 120 dias corre contra você.",
+        text: "O mandado de segurança tem prazo legal de **120 dias** contados da ciência da decisão. Enquanto isso, o concurso não para: nomeações e posse seguem o cronograma. Quanto antes o caso for analisado, **mais caminhos existem**.",
+        cta: "Verificar Meu Prazo Agora",
     },
     steps: {
-        title: "Como Funciona o Atendimento",
+        title: "Como funciona a análise",
         items: [
-            { n: "01", t: "Você envia", d: "Manda o resultado e o edital pelo WhatsApp. **Print, PDF ou foto.** Quanto mais rápido, melhor.", Icon: Send },
-            { n: "02", t: "Analisamos", d: "O Dr. Marcelo analisa pessoalmente: edital, motivação da banca, prazo e **viabilidade do recurso**.", Icon: Search },
-            { n: "03", t: "Você decide", d: "Recebe a orientação técnica e decide como prosseguir. **Sem compromisso** na primeira análise.", Icon: Gavel },
+            { n: "01", t: "Você envia agora", d: "Manda a decisão da banca, o edital e o recurso já apresentado pelo WhatsApp. Print, PDF ou foto.", Icon: Send },
+            { n: "02", t: "Análise em horas", d: "O Dr. Marcelo avalia pessoalmente o cabimento do mandado de segurança, o prazo de 120 dias e a fase do concurso.", Icon: Search },
+            { n: "03", t: "Você decide informado", d: "Recebe orientação técnica clara sobre a viabilidade da via judicial e os próximos passos. Sem promessa fácil.", Icon: Gavel },
         ],
-        cta: "Enviar Meu Caso no WhatsApp",
     },
     faq: [
-        { q: "Tem custo essa primeira conversa?", a: "**Não.** A análise inicial do seu caso (edital, resultado e prazo) é feita **sem custo**. Se houver fundamento para recurso e você quiser contratar, apresentamos os honorários nesse momento." },
-        { q: "E se não houver fundamento para recurso?", a: "Informamos isso claramente, **sem enrolação**. Não cobramos para dizer que o caso não tem viabilidade. Preferimos ser **diretos** do que gerar expectativa falsa." },
-        { q: "A conversa é protegida por sigilo?", a: "**Sim.** Todo contato está protegido pelo **sigilo profissional** da advocacia. Nenhuma informação é compartilhada." },
-        { q: "A atuação abrange candidatos de qualquer estado?", a: "**Sim.** O atendimento é **100% online e nacional**. Já atuamos em concursos federais e estaduais em todo o Brasil." },
+        { q: "Já perdi o recurso administrativo. Ainda dá para fazer algo?", a: "Em muitos casos, sim. O mandado de segurança é uma via judicial e independe do resultado administrativo, desde que dentro do prazo de 120 dias e presentes os requisitos. A análise do seu caso confirma se cabe." },
+        { q: "Quanto tempo eu tenho para entrar com a ação?", a: "O prazo legal é de **120 dias** contados da ciência da decisão da banca. Quanto antes analisarmos, melhor, porque o concurso continua avançando enquanto o prazo corre." },
+        { q: "A primeira análise tem custo?", a: "Não. A análise inicial do seu caso é feita sem custo. Havendo fundamento e se você quiser contratar, os honorários são apresentados nesse momento." },
+        { q: "Vocês garantem que eu volto ao concurso?", a: "Não. Nenhum advogado sério garante resultado. O que fazemos é avaliar com honestidade se há fundamento e conduzir o caso tecnicamente, com transparência sobre riscos." },
+        { q: "O atendimento abrange candidatos de qualquer estado?", a: "Sim. O atendimento é 100% online e nacional, protegido pelo sigilo profissional da advocacia." },
     ],
-    wa: "Olá doutor, fui indeferido na heteroidentificação hoje. Posso te mandar meu resultado?",
 };
 
 // ============================================================================
@@ -114,7 +133,12 @@ function renderBold(text: string): React.ReactNode {
 }
 
 // ============================================================================
-// GRAIN OVERLAY — textura sutil em toda a página
+// LINK DIRETO DO WHATSAPP
+// ============================================================================
+const WA_LINK = getDirectWhatsAppLink(WA_MSG);
+
+// ============================================================================
+// GRAIN OVERLAY
 // ============================================================================
 function GrainOverlay() {
     return (
@@ -133,7 +157,7 @@ function GrainOverlay() {
 }
 
 // ============================================================================
-// DIVISOR DOURADO ornamental entre seções
+// DIVISOR DOURADO
 // ============================================================================
 function GoldDivider() {
     return (
@@ -146,7 +170,7 @@ function GoldDivider() {
 }
 
 // ============================================================================
-// LABEL DE SEÇÃO — eyebrow text dourado
+// LABEL DE SEÇÃO
 // ============================================================================
 function SectionLabel({ children }: { children: string }) {
     return (
@@ -157,12 +181,15 @@ function SectionLabel({ children }: { children: string }) {
 }
 
 // ============================================================================
-// CTA BUTTON — dark gold border (todas as seções)
+// CTA WHATSAPP DIRETO — dark gold border
 // ============================================================================
-function Cta({ text, full = false, onOpenQuiz }: { text: string; full?: boolean; onOpenQuiz?: () => void; }) {
+function CtaWhats({ text, full = false }: { text: string; full?: boolean }) {
     return (
-        <button
-            onClick={onOpenQuiz}
+        <a
+            href={WA_LINK}
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={(e) => trackWhatsAppClick(e)}
             style={{
                 background: "linear-gradient(160deg, #1c0a0a 0%, #0a0a0a 55%, #0f0d00 100%)",
                 border: "2px solid #c9a227",
@@ -173,33 +200,36 @@ function Cta({ text, full = false, onOpenQuiz }: { text: string; full?: boolean;
         >
             <MessageCircle className="w-5 h-5 opacity-70 group-hover:opacity-100 transition-opacity" />
             {text}
-        </button>
+        </a>
     );
 }
 
 // ============================================================================
-// HERO CTA — botão discreto dourado (hero, topo da página)
+// BOTÃO FLUTUANTE DO WHATSAPP (fixo, mobile e desktop)
 // ============================================================================
-function HeroCta({ text, full = false, onOpenQuiz }: { text: string; full?: boolean; onOpenQuiz?: () => void }) {
+function FloatingWhatsApp() {
     return (
-        <button
-            onClick={onOpenQuiz}
+        <a
+            href={WA_LINK}
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={(e) => trackWhatsAppClick(e)}
+            aria-label="Falar no WhatsApp"
+            className="fixed bottom-5 right-5 z-[9999] inline-flex items-center gap-2 rounded-full font-semibold px-4 py-3 md:px-5 md:py-3.5 transition-all duration-200 hover:scale-[1.04] active:scale-[0.97]"
             style={{
-                background: "linear-gradient(160deg, #1c0a0a 0%, #0a0a0a 55%, #0f0d00 100%)",
-                border: "2px solid #c9a227",
-                color: C.white,
-                boxShadow: "0 0 28px rgba(201,162,39,0.18), 0 1px 0 rgba(201,162,39,0.12) inset",
+                backgroundColor: C.cta,
+                color: "#06351c",
+                boxShadow: "0 8px 30px rgba(37,211,102,0.45)",
             }}
-            className={`group inline-flex items-center justify-center gap-2 font-semibold text-base md:text-lg px-8 py-4 rounded-full transition-all duration-200 hover:shadow-[0_0_40px_rgba(201,162,39,0.35)] hover:scale-[1.02] active:scale-[0.98] ${full ? "w-full" : ""}`}
         >
-            {text}
-            <ChevronDown className="w-4 h-4 rotate-[-90deg] opacity-60 group-hover:translate-x-0.5 transition-transform duration-200" />
-        </button>
+            <MessageCircle className="w-6 h-6" />
+            <span className="hidden sm:inline text-sm md:text-base">Falar no WhatsApp</span>
+        </a>
     );
 }
 
 // ============================================================================
-// FAQ ITEM (aberto por padrão)
+// FAQ ITEM
 // ============================================================================
 function FaqItem({ q, a }: { q: string; a: string }) {
     const [open, setOpen] = useState(false);
@@ -221,40 +251,36 @@ function FaqItem({ q, a }: { q: string; a: string }) {
 }
 
 // ============================================================================
-// PROVA SOCIAL
+// PROVA SOCIAL — depoimentos sobre o atendimento (sem promessa de resultado)
 // ============================================================================
 function ProvasSocial() {
     const depoimentos = [
         {
-            nome: "Mariana Souza · Concurso Federal · Brasília/DF",
-            texto: "Fui eliminada na heteroidentificação do CNU depois de anos estudando. O Dr. Marcelo analisou meu caso em horas e identificou falha procedimental da banca. Consegui liminar e retornei ao certame.",
+            nome: "Candidata · Concurso Federal · Recife/PE",
+            texto: "Eu já tinha perdido o recurso administrativo e achava que não havia mais saída. O Dr. Marcelo analisou a decisão da banca e me explicou, com clareza, o que dava para discutir na Justiça. Atendimento direto e honesto.",
         },
         {
-            nome: "Rafael Oliveira · Concurso Estadual · Belo Horizonte/MG",
-            texto: "A motivação da banca era genérica, três linhas apenas. Com o recurso bem fundamentado, a eliminação foi revertida administrativamente. Hoje estou no cargo.",
+            nome: "Aprovado · Concurso Estadual · Goiânia/GO",
+            texto: "Procurei depois de ser eliminado. Recebi uma orientação técnica clara sobre o cabimento do mandado de segurança no meu caso, sem promessa fácil. Isso me deu segurança para decidir.",
         },
         {
-            nome: "Camila Andrade · Concurso Cebraspe · São Paulo/SP",
-            texto: "Não sabia nem que dava pra recorrer. Ele me explicou tudo, resolveu rápido. Recomendo demais.",
+            nome: "Candidata · Concurso Cebraspe · Salvador/BA",
+            texto: "O que mais me marcou foi a rapidez da resposta e a transparência sobre prazos e riscos. Em poucas horas eu já sabia qual era a minha situação.",
         },
     ];
 
     return (
-        <section
-            className="py-14 md:py-20 relative overflow-hidden"
-            style={{ backgroundColor: C.bg2 }}
-        >
-            {/* textura grain local */}
+        <section className="py-16 md:py-28 relative overflow-hidden" style={{ backgroundColor: C.bg2 }}>
             <div
                 aria-hidden="true"
                 className="absolute inset-0 pointer-events-none"
-                style={{ backgroundImage: GRAIN_URL, backgroundRepeat: "repeat", backgroundSize: "320px 320px", opacity: 0.025 }}
+                style={{ backgroundImage: "url('/texture-juridica.png')", backgroundRepeat: "repeat", backgroundSize: "1200px 800px", opacity: 0.03 }}
             />
             <Container className="relative z-10">
                 <div className="max-w-4xl mx-auto">
                     <SectionLabel>Depoimentos</SectionLabel>
                     <h2 className="text-2xl md:text-3xl font-bold text-center mb-2" style={{ color: C.white, fontFamily: "'Cormorant Garamond', Georgia, serif" }}>
-                        Candidatos que contestaram a eliminação injusta
+                        Quem chegou sem saber se ainda havia o que fazer
                     </h2>
                     <GoldDivider />
                     <div className="grid md:grid-cols-3 gap-5 mt-10">
@@ -268,7 +294,6 @@ function ProvasSocial() {
                                     boxShadow: "0 4px 20px rgba(0,0,0,0.2)",
                                 }}
                             >
-                                {/* aspas decorativas */}
                                 <span
                                     aria-hidden="true"
                                     className="absolute top-3 right-4 text-5xl leading-none font-serif select-none"
@@ -282,6 +307,9 @@ function ProvasSocial() {
                             </div>
                         ))}
                     </div>
+                    <p className="text-center text-xs mt-8 italic" style={{ color: C.gray3 }}>
+                        Relatos de atendimento. Resultados variam conforme cada caso e não são garantidos.
+                    </p>
                 </div>
             </Container>
         </section>
@@ -315,108 +343,108 @@ function useScrollReveal() {
 function Reveal({ children, delay = 0 }: { children: React.ReactNode; delay?: number }) {
     const ref = useScrollReveal();
     return (
-        <div
-            ref={ref}
-            style={{
-                opacity: 0,
-                transform: "translateY(24px)",
-                transition: `opacity 0.7s cubic-bezier(0.16,1,0.3,1) ${delay}s, transform 0.7s cubic-bezier(0.16,1,0.3,1) ${delay}s`,
-            }}
-        >
+        <div ref={ref} style={{
+            opacity: 0,
+            transform: "translateY(24px)",
+            transition: `opacity 0.7s cubic-bezier(0.16,1,0.3,1) ${delay}s, transform 0.7s cubic-bezier(0.16,1,0.3,1) ${delay}s`,
+        }}>
             {children}
         </div>
     );
 }
 
 // ============================================================================
+// VIDEO SECTION
+// ============================================================================
+function VideoSection({ youtubeId }: { youtubeId?: string }) {
+    const YOUTUBE_ID = youtubeId ?? "jAiQi4CgMN0";
+    return (
+        <section className="py-16 md:py-28" style={{ backgroundColor: C.bg1 }}>
+            <div className="max-w-[720px] mx-auto px-6">
+                <SectionLabel>Mensagem do Especialista</SectionLabel>
+                <h2 className="text-2xl md:text-3xl font-bold text-center mb-2 leading-tight md:leading-snug" style={{ color: C.white, fontFamily: "'Cormorant Garamond', Georgia, serif" }}>
+                    Entenda em 2 minutos quando o mandado de segurança é o caminho.
+                </h2>
+                <GoldDivider />
+                <div className="relative w-full rounded-2xl overflow-hidden mt-10" style={{ boxShadow: "0 12px 60px rgba(0,0,0,0.65)", border: "1px solid rgba(255,255,255,0.1)" }}>
+                    <LiteYouTubeEmbed id={YOUTUBE_ID} title="Mandado de segurança contra heteroidentificação" poster="maxresdefault" wrapperClass="yt-lite" />
+                </div>
+                <div className="flex justify-center mt-8">
+                    <CtaWhats text="Quero Analisar Meu Caso" />
+                </div>
+            </div>
+        </section>
+    );
+}
+
+// ============================================================================
 // PAGE
 // ============================================================================
-export default function AdvogadoPage() {
-    const quiz = useQuiz();
+export default function MandadoSegurancaPage() {
     return (
         <main style={{ backgroundColor: C.bg1, color: C.white }}>
-            <QualificationQuiz
-                isOpen={quiz.isOpen}
-                onClose={quiz.close}
-                config={{ defaultWaMessage: D.wa, variant: "dark" }}
-            />
             <GrainOverlay />
+            <FloatingWhatsApp />
 
             {/* ══════════════════════════════════════════════════════════════ */}
             {/* HERO                                                         */}
             {/* ══════════════════════════════════════════════════════════════ */}
             <section className="relative flex items-center overflow-hidden py-14 md:py-28 lg:py-36" style={{ backgroundColor: C.bg1 }}>
-                {/* Fundo em camadas */}
                 <div className="absolute inset-0 z-0 select-none">
-                    {/* Ardósia sutil */}
                     <div className="absolute inset-0" style={{ backgroundImage: "url('/texture-pedra.png')", backgroundSize: "cover", backgroundPosition: "top center", opacity: 0.06 }} />
                     <Image src="/images/hero-scales.png" alt="" fill className="object-cover opacity-[0.04]" priority aria-hidden="true" />
-                    {/* Gold sutil por cima */}
                     <div className="absolute inset-0" style={{ background: `radial-gradient(ellipse 80% 60% at 50% 0%, rgba(201,162,39,0.05) 0%, transparent 70%)` }} />
-                    {/* Fade nas bordas para não vazar */}
                     <div className="absolute inset-0" style={{ background: `linear-gradient(180deg, ${C.bg1} 0%, transparent 25%, transparent 75%, ${C.bg1} 100%)` }} />
                     <div className="absolute inset-0" style={{ background: `radial-gradient(ellipse 100% 100% at 50% 50%, transparent 50%, ${C.bg1} 100%)` }} />
                 </div>
 
                 <Container className="relative z-10 w-full px-4 md:px-6">
                     <div className="flex flex-col items-center text-center max-w-3xl mx-auto">
-
-                        {/* Eyebrow com linhas douradas */}
                         <div className="flex items-center gap-3 mb-6 md:mb-8">
                             <div className="h-px w-8 md:w-12" style={{ background: `linear-gradient(90deg, transparent, ${C.gold})` }} />
                             <span className="text-[10px] md:text-xs uppercase tracking-[0.15em] font-semibold" style={{ color: C.gold }}>
-                                Recurso Administrativo
+                                {D.hero.eyebrow}
                             </span>
                             <div className="h-px w-8 md:w-12" style={{ background: `linear-gradient(90deg, ${C.gold}, transparent)` }} />
                         </div>
 
-                        {/* H1 com hierarquia */}
                         <h1 className="mb-5 md:mb-6" style={{ fontFamily: "'Cormorant Garamond', Georgia, serif" }}>
                             <span className="block text-[clamp(1.4rem,5.5vw,2.2rem)] font-medium italic leading-[1.25] tracking-tight" style={{ color: C.gray1, opacity: 0.85 }}>
                                 {D.hero.h1_1}
                             </span>
-                            <span className="block text-[clamp(2rem,8vw,4rem)] font-bold leading-[1.05] tracking-tight uppercase mt-1" style={{ color: C.gold }}>
+                            <span className="block text-[clamp(1.8rem,7vw,3.4rem)] font-bold leading-[1.08] tracking-tight mt-1" style={{ color: C.gold }}>
                                 {D.hero.h1_2}
                             </span>
                         </h1>
 
-                        {/* Linha fina de separação */}
                         <div className="h-px w-16 mb-5 md:mb-6 mx-auto" style={{ background: `linear-gradient(90deg, transparent, rgba(201,162,39,0.3), transparent)` }} />
 
-                        {/* Subtítulo */}
-                        <p className="text-base md:text-lg leading-relaxed mb-8 md:mb-10 max-w-[42ch]" style={{ color: C.gray2 }}>
-                            {renderBold(D.hero.sub)}
+                        <p className="text-base md:text-lg leading-relaxed mb-8 md:mb-10 max-w-[46ch]" style={{ color: C.gray2 }}>
+                            <strong style={{ color: C.gray1 }}>Quando a comissão elimina sem fundamentar ou contraria o próprio edital, cabe mandado de segurança.</strong>{" "}
+                            Análise do seu caso em horas, com atenção ao prazo de 120 dias.
                         </p>
 
-                        {/* CTA */}
                         <div className="w-full max-w-sm flex flex-col items-center gap-3">
-                            <HeroCta text={D.hero.cta} full onOpenQuiz={quiz.open} />
+                            <CtaWhats text={D.hero.cta} full />
                             <p className="text-[11px] md:text-xs font-medium" style={{ color: C.gray3 }}>
                                 <Lock className="w-3 h-3 inline mr-1 mb-0.5" />
                                 Sigiloso · Sem compromisso · Resposta rápida
                             </p>
                         </div>
 
-                        {/* Credencial inline com avatar */}
                         <div className="flex items-center gap-2.5 mt-8 md:mt-10 px-4 py-2 rounded-full" style={{ backgroundColor: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.08)" }}>
-                            <Image src="/images/marcelo/marcelo-hero.jpg" alt="Dr. Marcelo Colen" width={24} height={24} className="rounded-full object-cover w-6 h-6" />
+                            <Image src="/images/marcelo/marcelo-sem-fundo-.png" alt="Dr. Marcelo Colen" width={24} height={24} className="rounded-full object-cover w-6 h-6" />
                             <span className="text-[11px] md:text-xs uppercase tracking-wider font-semibold" style={{ color: C.gray2 }}>
-                                Dr. Marcelo Colen · Mestre UFMG · OAB/MG
+                                Dr. Marcelo Colen · Especialista · Mestre UFMG
                             </span>
                         </div>
-
                     </div>
                 </Container>
                 <div className="absolute bottom-0 left-0 right-0 h-px" style={{ background: `linear-gradient(to right, transparent, rgba(201,162,39,0.2), transparent)` }} />
             </section>
 
             {/* ══════════════════════════════════════════════════════════════ */}
-            {/* VÍDEO                                                        */}
-            {/* ══════════════════════════════════════════════════════════════ */}
-            <Reveal><VideoSection youtubeId="jAiQi4CgMN0" /></Reveal>
-
-            {/* ══════════════════════════════════════════════════════════════ */}
-            {/* ISSO ACONTECEU COM VOCÊ?                                     */}
+            {/* É A SUA SITUAÇÃO?                                            */}
             {/* ══════════════════════════════════════════════════════════════ */}
             <section className="py-12 md:py-16 relative overflow-hidden" style={{ backgroundColor: C.bg2 }}>
                 <div
@@ -428,29 +456,28 @@ export default function AdvogadoPage() {
                     <div className="max-w-2xl mx-auto">
                         <SectionLabel>Reconhece essa situação?</SectionLabel>
                         <h2 className="text-2xl md:text-3xl font-bold text-center mb-2" style={{ color: C.white, fontFamily: "'Cormorant Garamond', Georgia, serif" }}>
-                            Isso aconteceu com você?
+                            É a sua situação?
                         </h2>
                         <GoldDivider />
                         <div className="space-y-3 mt-8 mb-10">
-                            {[
-                                "A banca disse 'não atende ao fenótipo' sem explicar o motivo.",
-                                "A avaliação durou poucos minutos ou foi feita por vídeo.",
-                                "Você sempre se identificou como pardo e foi pego de surpresa.",
-                                "Está com medo de perder anos de estudo por uma análise subjetiva.",
-                            ].map((item, i) => (
-                                <div
-                                    key={i}
-                                    className="flex items-start gap-4 rounded-xl p-4"
-                                    style={{
-                                        backgroundColor: C.goldSoft,
-                                        border: "1px solid rgba(201,162,39,0.15)",
-                                        boxShadow: "0 2px 10px rgba(0,0,0,0.15)",
-                                    }}
-                                >
-                                    <div className="w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0 font-bold text-xs mt-0.5" style={{ backgroundColor: C.gold, color: C.bg1 }}>✓</div>
-                                    <p className="text-sm md:text-base font-medium" style={{ color: C.gray1 }}>{item}</p>
-                                </div>
+                            {D.situacao.items.map((item, i) => (
+                                <Reveal key={i} delay={i * 0.08}>
+                                    <div
+                                        className="flex items-start gap-4 rounded-xl p-4"
+                                        style={{
+                                            backgroundColor: C.goldSoft,
+                                            border: "1px solid rgba(201,162,39,0.15)",
+                                            boxShadow: "0 2px 10px rgba(0,0,0,0.15)",
+                                        }}
+                                    >
+                                        <div className="w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0 font-bold text-xs mt-0.5" style={{ backgroundColor: C.gold, color: C.bg1 }}>✓</div>
+                                        <p className="text-sm md:text-base font-medium" style={{ color: C.gray1 }}>{item}</p>
+                                    </div>
+                                </Reveal>
                             ))}
+                        </div>
+                        <div className="flex justify-center">
+                            <CtaWhats text="Quero Analisar Meu Caso" />
                         </div>
                     </div>
                 </Container>
@@ -466,17 +493,8 @@ export default function AdvogadoPage() {
             {/* ══════════════════════════════════════════════════════════════ */}
             <DrMarceloSection />
 
-            {/* CTA intermediário após depoimentos */}
-            <section className="py-8 md:py-12" style={{ backgroundColor: C.bg1 }}>
-                <Container>
-                    <div className="flex justify-center">
-                        <Cta text="Quero Analisar Meu Caso" onOpenQuiz={quiz.open} />
-                    </div>
-                </Container>
-            </section>
-
             {/* ══════════════════════════════════════════════════════════════ */}
-            {/* A BANCA ERRA                                                 */}
+            {/* MECANISMO — QUANDO CABE                                      */}
             {/* ══════════════════════════════════════════════════════════════ */}
             <section
                 className="py-16 md:py-28 relative overflow-hidden"
@@ -486,37 +504,50 @@ export default function AdvogadoPage() {
                     borderBottom: "1px solid rgba(255,255,255,0.05)",
                 }}
             >
-                {/* Símbolos jurídicos sutil */}
                 <div
                     aria-hidden="true"
                     className="absolute inset-0 pointer-events-none"
                     style={{ backgroundImage: "url('/texture-juridica.png')", backgroundRepeat: "repeat", backgroundSize: "1200px 800px", opacity: 0.035 }}
                 />
-                {/* glow central */}
                 <div
                     aria-hidden="true"
                     className="absolute inset-0 pointer-events-none"
                     style={{ background: "radial-gradient(ellipse at center, rgba(201,162,39,0.04) 0%, transparent 70%)" }}
                 />
                 <Container className="relative z-10">
-                    <div className="max-w-2xl mx-auto text-center px-4">
-                        <SectionLabel>Por que você pode contestar</SectionLabel>
-                        <h2 className="text-2xl md:text-3xl font-bold mb-2" style={{ color: C.white, fontFamily: "'Cormorant Garamond', Georgia, serif" }}>
-                            A Banca Erra. E Erra Muito.
-                        </h2>
-                        <GoldDivider />
-                        <p className="text-base md:text-lg leading-relaxed mb-4 mt-8" style={{ color: C.gray1 }}>
-                            O procedimento de heteroidentificação é subjetivo. Todos os dias, candidatos legítimos são eliminados por iluminação ruim, câmera de baixa qualidade ou despreparo dos avaliadores.
-                        </p>
-                        <p className="text-base md:text-lg leading-relaxed" style={{ color: C.gray2 }}>
-                            Erros de procedimento podem fundamentar o recurso. Nós identificamos se houve falha e orientamos sua defesa técnica.
-                        </p>
+                    <div className="max-w-3xl mx-auto">
+                        <div className="text-center mb-10 px-4">
+                            <SectionLabel>Por que cabe mandado de segurança</SectionLabel>
+                            <h2 className="text-2xl md:text-3xl font-bold mb-2" style={{ color: C.white, fontFamily: "'Cormorant Garamond', Georgia, serif" }}>
+                                {D.mecanismo.title}
+                            </h2>
+                            <GoldDivider />
+                            <p className="text-sm md:text-base mt-4" style={{ color: C.gray2 }}>
+                                {D.mecanismo.subtitle}
+                            </p>
+                        </div>
+                        <div className="grid md:grid-cols-2 gap-4 mb-10">
+                            {D.mecanismo.items.map((item, i) => (
+                                <Reveal key={i} delay={i * 0.1}>
+                                    <div className="rounded-2xl p-5 flex gap-4" style={{ backgroundColor: C.redBg, border: `1px solid ${C.redBorder}` }}>
+                                        <XCircle className="w-5 h-5 flex-shrink-0 mt-0.5" style={{ color: C.red }} />
+                                        <div>
+                                            <p className="font-bold text-sm mb-1" style={{ color: C.white }}>{item.titulo}</p>
+                                            <p className="text-xs md:text-sm leading-relaxed" style={{ color: C.gray2 }}>{renderBold(item.texto)}</p>
+                                        </div>
+                                    </div>
+                                </Reveal>
+                            ))}
+                        </div>
+                        <div className="text-center">
+                            <CtaWhats text="Analisar Se Meu Caso Tem Fundamento" />
+                        </div>
                     </div>
                 </Container>
             </section>
 
             {/* ══════════════════════════════════════════════════════════════ */}
-            {/* O QUE ANALISAMOS NO SEU CASO                                 */}
+            {/* O QUE ANALISAMOS                                             */}
             {/* ══════════════════════════════════════════════════════════════ */}
             <section className="py-16 md:py-28 relative overflow-hidden" style={{ backgroundColor: C.bg2 }}>
                 <div
@@ -537,34 +568,33 @@ export default function AdvogadoPage() {
                         <p className="text-sm md:text-base font-medium text-center mt-3 mb-8" style={{ color: C.gray2 }}>
                             {renderBold(D.analiseCaso.desc)}
                         </p>
-
                         <div className="space-y-3 mb-8">
                             {D.analiseCaso.items.map((item, i) => (
-                                <div
-                                    key={i}
-                                    className="flex items-center gap-4 rounded-xl p-4 transition-colors hover:bg-white/[0.03]"
-                                    style={{
-                                        border: `1px solid rgba(201,162,39,0.15)`,
-                                        backgroundColor: C.goldSoft,
-                                        boxShadow: "0 2px 10px rgba(0,0,0,0.15)",
-                                    }}
-                                >
-                                    <div className="w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0 font-bold text-xs" style={{ backgroundColor: C.gold, color: C.bg1 }}>
-                                        ✓
+                                <Reveal key={i} delay={i * 0.08}>
+                                    <div
+                                        className="flex items-center gap-4 rounded-xl p-4 transition-colors hover:bg-white/[0.03]"
+                                        style={{
+                                            border: `1px solid rgba(201,162,39,0.15)`,
+                                            backgroundColor: C.goldSoft,
+                                            boxShadow: "0 2px 10px rgba(0,0,0,0.15)",
+                                        }}
+                                    >
+                                        <div className="w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0 font-bold text-xs" style={{ backgroundColor: C.gold, color: C.bg1 }}>
+                                            ✓
+                                        </div>
+                                        <p className="font-medium text-sm md:text-base" style={{ color: C.gray1 }}>
+                                            {item}
+                                        </p>
                                     </div>
-                                    <p className="font-medium text-sm md:text-base" style={{ color: C.gray1 }}>
-                                        {item}
-                                    </p>
-                                </div>
+                                </Reveal>
                             ))}
                         </div>
-
                     </div>
                 </Container>
             </section>
 
             {/* ══════════════════════════════════════════════════════════════ */}
-            {/* POR QUE AGIR RÁPIDO                                         */}
+            {/* URGÊNCIA — PRAZO DE 120 DIAS                                 */}
             {/* ══════════════════════════════════════════════════════════════ */}
             <section
                 className="py-16 md:py-28 relative overflow-hidden"
@@ -579,7 +609,6 @@ export default function AdvogadoPage() {
                     className="absolute inset-0 pointer-events-none"
                     style={{ background: "radial-gradient(ellipse at center, rgba(239,68,68,0.04) 0%, transparent 70%)" }}
                 />
-                {/* Símbolos jurídicos */}
                 <div
                     aria-hidden="true"
                     className="absolute inset-0 pointer-events-none"
@@ -594,7 +623,7 @@ export default function AdvogadoPage() {
                         <p className="text-base md:text-lg leading-relaxed mb-8 font-medium" style={{ color: C.gray1 }}>
                             {renderBold(D.urg.text)}
                         </p>
-                        <Cta text={D.urg.cta} onOpenQuiz={quiz.open} />
+                        <CtaWhats text={D.urg.cta} />
                     </div>
                 </Container>
             </section>
@@ -603,7 +632,6 @@ export default function AdvogadoPage() {
             {/* COMO FUNCIONA                                                */}
             {/* ══════════════════════════════════════════════════════════════ */}
             <section className="py-16 md:py-28 relative overflow-hidden" style={{ backgroundColor: C.bg1 }}>
-                {/* Ardósia sutil */}
                 <div
                     aria-hidden="true"
                     className="absolute inset-0 pointer-events-none"
@@ -615,40 +643,45 @@ export default function AdvogadoPage() {
                         {D.steps.title}
                     </h2>
                     <GoldDivider />
-
                     <div className="grid md:grid-cols-3 gap-6 max-w-4xl mx-auto mb-10 mt-12">
-                        {D.steps.items.map((step) => (
-                            <div
-                                key={step.n}
-                                className="relative rounded-2xl p-6 text-center transition-all"
-                                style={{
-                                    backgroundColor: "rgba(255,255,255,0.03)",
-                                    border: "1px solid rgba(255,255,255,0.07)",
-                                    boxShadow: "0 8px 28px rgba(0,0,0,0.2)",
-                                }}
-                            >
+                        {D.steps.items.map((step, i) => (
+                            <Reveal key={step.n} delay={i * 0.12}>
                                 <div
-                                    className="absolute -top-4 left-1/2 -translate-x-1/2 w-8 h-8 rounded-full flex items-center justify-center font-extrabold text-sm"
-                                    style={{ backgroundColor: C.gold, color: C.bg1, boxShadow: `0 0 16px rgba(201,162,39,0.4)` }}
+                                    className="relative rounded-2xl p-6 text-center transition-all"
+                                    style={{
+                                        backgroundColor: "rgba(255,255,255,0.03)",
+                                        border: "1px solid rgba(255,255,255,0.07)",
+                                        boxShadow: "0 8px 28px rgba(0,0,0,0.2)",
+                                    }}
                                 >
-                                    {step.n}
+                                    <div
+                                        className="absolute -top-4 left-1/2 -translate-x-1/2 w-8 h-8 rounded-full flex items-center justify-center font-extrabold text-sm"
+                                        style={{ backgroundColor: C.gold, color: C.bg1, boxShadow: `0 0 16px rgba(201,162,39,0.4)` }}
+                                    >
+                                        {step.n}
+                                    </div>
+                                    <step.Icon className="w-8 h-8 mx-auto mb-4 mt-4" style={{ color: C.gold, opacity: 0.85 }} />
+                                    <h3 className="text-lg font-bold mb-2" style={{ color: C.white }}>{step.t}</h3>
+                                    <p className="text-sm leading-relaxed" style={{ color: C.gray2 }}>{renderBold(step.d)}</p>
                                 </div>
-                                <step.Icon className="w-8 h-8 mx-auto mb-4 mt-4" style={{ color: C.gold, opacity: 0.85 }} />
-                                <h3 className="text-lg font-bold mb-2" style={{ color: C.white }}>{step.t}</h3>
-                                <p className="text-sm leading-relaxed" style={{ color: C.gray2 }}>{renderBold(step.d)}</p>
-                            </div>
+                            </Reveal>
                         ))}
                     </div>
-
+                    <div className="flex justify-center">
+                        <CtaWhats text="Quero Analisar Meu Caso Agora" />
+                    </div>
                 </Container>
             </section>
 
+            {/* ══════════════════════════════════════════════════════════════ */}
+            {/* VÍDEO                                                        */}
+            {/* ══════════════════════════════════════════════════════════════ */}
+            <Reveal><VideoSection youtubeId="jAiQi4CgMN0" /></Reveal>
 
             {/* ══════════════════════════════════════════════════════════════ */}
             {/* FAQ                                                          */}
             {/* ══════════════════════════════════════════════════════════════ */}
             <section className="py-16 md:py-28 relative overflow-hidden" style={{ backgroundColor: C.bg1 }}>
-                {/* Símbolos jurídicos sutil */}
                 <div
                     aria-hidden="true"
                     className="absolute inset-0 pointer-events-none"
@@ -682,7 +715,6 @@ export default function AdvogadoPage() {
                 className="py-14 relative overflow-hidden"
                 style={{ backgroundColor: C.bg2, borderTop: "1px solid rgba(255,255,255,0.05)" }}
             >
-                {/* Ardósia sutil */}
                 <div
                     aria-hidden="true"
                     className="absolute inset-0 pointer-events-none"
@@ -696,10 +728,10 @@ export default function AdvogadoPage() {
                 <Container className="relative z-10">
                     <div className="max-w-lg mx-auto text-center">
                         <p className="text-xl md:text-2xl font-bold mb-3" style={{ color: C.white, fontFamily: "'Cormorant Garamond', Georgia, serif" }}>
-                            Não deixe o prazo passar.
+                            O prazo de 120 dias não espera.
                         </p>
                         <p className="text-sm md:text-base mb-8" style={{ color: C.gray2 }}>
-                            Manda o resultado e o edital agora. A análise é feita em horas.
+                            Manda a decisão da banca agora. A análise do seu caso é feita em horas.
                         </p>
 
                         <div
@@ -712,9 +744,9 @@ export default function AdvogadoPage() {
                         >
                             <div className="space-y-3 max-w-xs mx-auto">
                                 {[
-                                    "Print ou PDF do resultado da heteroidentificação",
+                                    "Decisão da comissão de heteroidentificação",
                                     "Edital do concurso",
-                                    "Prazo final para recurso (data e horário)",
+                                    "Recurso administrativo já apresentado",
                                 ].map((item, i) => (
                                     <div key={i} className="flex gap-3 items-center">
                                         <div className="w-5 h-5 rounded-full flex items-center justify-center flex-shrink-0" style={{ backgroundColor: C.gold, color: C.bg1 }}>
@@ -737,53 +769,20 @@ export default function AdvogadoPage() {
                                 Não sabe o que escrever? Copie e envie:
                             </p>
                             <p className="text-sm font-bold italic text-center" style={{ color: C.gray2 }}>
-                                &ldquo;Olá doutor, fui indeferido na heteroidentificação hoje. Posso te mandar meu resultado?&rdquo;
+                                &ldquo;{WA_MSG}&rdquo;
                             </p>
                         </div>
 
-                        <Cta text="Enviar Meu Caso no WhatsApp" full onOpenQuiz={quiz.open} />
+                        <CtaWhats text="Falar com o Dr. Marcelo no WhatsApp" full />
                         <p className="text-xs mt-6 italic" style={{ color: C.gray3 }}>
                             {D.hero.disclaimer}
                         </p>
                         <p className="text-xs mt-2" style={{ color: C.gray3 }}>
-                            © 2026 Marcelo Colen Advogados · OAB/MG
+                            © 2026 Marcelo Colen Advogados
                         </p>
                     </div>
                 </Container>
             </section>
         </main>
-    );
-}
-
-// ============================================================================
-// VIDEO SECTION
-// ============================================================================
-function VideoSection({ youtubeId, iframeSrc, mp4Src }: { youtubeId?: string; iframeSrc?: string; mp4Src?: string; } = {}) {
-    const YOUTUBE_ID = youtubeId ?? "COLE_O_ID_AQUI";
-    const MP4_SRC = mp4Src ?? "";
-
-    return (
-        <section className="py-16 md:py-28" style={{ backgroundColor: C.bg1 }}>
-            <div className="max-w-[720px] mx-auto px-6">
-                <SectionLabel>Mensagem do Especialista</SectionLabel>
-                <h2 className="text-2xl md:text-3xl font-bold text-center mb-2 leading-tight md:leading-snug" style={{ color: C.white, fontFamily: "'Cormorant Garamond', Georgia, serif" }}>
-                    Entenda em 2 minutos por que você ainda pode contestar.
-                </h2>
-                <GoldDivider />
-                <div
-                    className="relative w-full rounded-2xl overflow-hidden mt-10"
-                    style={{
-                        boxShadow: "0 12px 40px rgba(0,0,0,0.25)",
-                        border: "1px solid rgba(255,255,255,0.08)",
-                    }}
-                >
-                    {MP4_SRC ? (
-                        <video src={MP4_SRC} controls playsInline preload="none" className="w-full object-cover" />
-                    ) : (
-                        <LiteYouTubeEmbed id={YOUTUBE_ID} title="Vídeo de Análise da Situação" poster="maxresdefault" wrapperClass="yt-lite" />
-                    )}
-                </div>
-            </div>
-        </section>
     );
 }

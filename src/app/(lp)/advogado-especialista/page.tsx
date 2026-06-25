@@ -345,6 +345,36 @@ export default function AdvogadoEspecialistaPage() {
                 </section>
 
                 {/* ══════════════════════════════════════════════════════════
+                    DR. MARCELO — authority block
+                   ══════════════════════════════════════════════════════════ */}
+                <section className={secPad} style={{ backgroundColor: T.white }}>
+                    <Wrap>
+                        <div className="max-w-3xl mx-auto">
+                            <div className="grid md:grid-cols-[200px_1fr] gap-8 items-start rounded-2xl p-6 md:p-10" style={{ backgroundColor: T.bg, border: `2px solid ${T.line}` }}>
+                                <div className="flex flex-col items-center md:items-start">
+                                    <div className="relative">
+                                        <Image src="/images/marcelo/marcelo-hero.jpg" alt="Dr. Marcelo Colen" width={180} height={180} className="rounded-xl object-cover w-36 h-36 md:w-44 md:h-44" style={{ boxShadow: "0 8px 32px rgba(11,23,48,0.12)" }} />
+                                        <div className="absolute -bottom-2 -right-2 px-3 py-1 rounded-lg text-[10px] font-black uppercase tracking-widest" style={{ backgroundColor: T.navy, color: T.white, fontFamily: HEADING }}>OAB/MG</div>
+                                    </div>
+                                </div>
+                                <div className="text-center md:text-left">
+                                    <p className="text-xs font-bold uppercase tracking-[0.15em] mb-4" style={{ color: T.bronze }}>Quem analisa seu caso</p>
+                                    <span aria-hidden="true" className="text-5xl leading-none font-serif hidden md:inline-block mb-2" style={{ color: T.bronze, opacity: 0.15 }}>&ldquo;</span>
+                                    <p className="text-base md:text-lg leading-[1.65] italic mb-5" style={{ color: T.body }}>
+                                        Minha missão não é apenas escrever recursos. É garantir que a subjetividade de uma banca não destrua o mérito de quem realmente pertence às cotas.
+                                    </p>
+                                    <div className="h-px mb-4 max-w-[200px] md:mx-0 mx-auto" style={{ backgroundColor: T.line }} />
+                                    <p className="font-bold text-base" style={{ color: T.navy, fontFamily: HEADING }}>Dr. Marcelo Colen</p>
+                                    <p className="text-xs mt-1 font-medium" style={{ color: T.body, opacity: 0.5 }}>Mestre em Direito pela UFMG · Direito Antidiscriminatório e Concursos Públicos</p>
+                                </div>
+                            </div>
+                        </div>
+                    </Wrap>
+                </section>
+
+                <SectionDivider />
+
+                {/* ══════════════════════════════════════════════════════════
                     A BANCA ERRA — navy section
                    ══════════════════════════════════════════════════════════ */}
                 <section className={secPad} style={{ backgroundColor: T.navyMid }}>
@@ -466,35 +496,7 @@ export default function AdvogadoEspecialistaPage() {
                     </Wrap>
                 </section>
 
-                <SectionDivider />
-
-                {/* ══════════════════════════════════════════════════════════
-                    DR. MARCELO — authority block
-                   ══════════════════════════════════════════════════════════ */}
-                <section className={secPad} style={{ backgroundColor: T.white }}>
-                    <Wrap>
-                        <div className="max-w-3xl mx-auto">
-                            <div className="grid md:grid-cols-[200px_1fr] gap-8 items-start rounded-2xl p-6 md:p-10" style={{ backgroundColor: T.bg, border: `2px solid ${T.line}` }}>
-                                <div className="flex flex-col items-center md:items-start">
-                                    <div className="relative">
-                                        <Image src="/images/marcelo/marcelo-hero.jpg" alt="Dr. Marcelo Colen" width={180} height={180} className="rounded-xl object-cover w-36 h-36 md:w-44 md:h-44" style={{ boxShadow: "0 8px 32px rgba(11,23,48,0.12)" }} />
-                                        <div className="absolute -bottom-2 -right-2 px-3 py-1 rounded-lg text-[10px] font-black uppercase tracking-widest" style={{ backgroundColor: T.navy, color: T.white, fontFamily: HEADING }}>OAB/MG</div>
-                                    </div>
-                                </div>
-                                <div className="text-center md:text-left">
-                                    <p className="text-xs font-bold uppercase tracking-[0.15em] mb-4" style={{ color: T.bronze }}>Quem analisa seu caso</p>
-                                    <span aria-hidden="true" className="text-5xl leading-none font-serif hidden md:inline-block mb-2" style={{ color: T.bronze, opacity: 0.15 }}>&ldquo;</span>
-                                    <p className="text-base md:text-lg leading-[1.65] italic mb-5" style={{ color: T.body }}>
-                                        Minha missão não é apenas escrever recursos. É garantir que a subjetividade de uma banca não destrua o mérito de quem realmente pertence às cotas.
-                                    </p>
-                                    <div className="h-px mb-4 max-w-[200px] md:mx-0 mx-auto" style={{ backgroundColor: T.line }} />
-                                    <p className="font-bold text-base" style={{ color: T.navy, fontFamily: HEADING }}>Dr. Marcelo Colen</p>
-                                    <p className="text-xs mt-1 font-medium" style={{ color: T.body, opacity: 0.5 }}>Mestre em Direito pela UFMG · Direito Antidiscriminatório e Concursos Públicos</p>
-                                </div>
-                            </div>
-                        </div>
-                    </Wrap>
-                </section>
+                
 
                 <SectionDivider />
 
