@@ -101,7 +101,7 @@ const D = {
     },
     urg: {
         title: "O prazo de 120 dias corre contra você.",
-        text: "O mandado de segurança tem prazo legal de **120 dias** contados da ciência da decisão. Enquanto isso, o concurso não para: nomeações e posse seguem o cronograma. Quanto antes o caso for analisado, **mais caminhos existem**.",
+        text: "São **120 dias** corridos, contados da decisão da banca, para entrar com o mandado de segurança. Passado esse prazo, a via judicial se fecha. E o concurso não espera: convocações, nomeações e posse seguem o cronograma. Quando a vaga é ocupada por outro candidato, a discussão fica mais difícil. **Agir cedo é o que mantém suas opções abertas.**",
         cta: "Verificar Meu Prazo Agora",
     },
     steps: {
@@ -204,29 +204,6 @@ function CtaWhats({ text, full = false }: { text: string; full?: boolean }) {
     );
 }
 
-// ============================================================================
-// BOTÃO FLUTUANTE DO WHATSAPP (fixo, mobile e desktop)
-// ============================================================================
-function FloatingWhatsApp() {
-    return (
-        <a
-            href={WA_LINK}
-            target="_blank"
-            rel="noopener noreferrer"
-            onClick={(e) => trackWhatsAppClick(e)}
-            aria-label="Falar no WhatsApp"
-            className="fixed bottom-5 right-5 z-[9999] inline-flex items-center gap-2 rounded-full font-semibold px-4 py-3 md:px-5 md:py-3.5 transition-all duration-200 hover:scale-[1.04] active:scale-[0.97]"
-            style={{
-                backgroundColor: C.cta,
-                color: "#06351c",
-                boxShadow: "0 8px 30px rgba(37,211,102,0.45)",
-            }}
-        >
-            <MessageCircle className="w-6 h-6" />
-            <span className="hidden sm:inline text-sm md:text-base">Falar no WhatsApp</span>
-        </a>
-    );
-}
 
 // ============================================================================
 // FAQ ITEM
@@ -256,16 +233,16 @@ function FaqItem({ q, a }: { q: string; a: string }) {
 function ProvasSocial() {
     const depoimentos = [
         {
-            nome: "Candidata · Concurso Federal · Recife/PE",
-            texto: "Eu já tinha perdido o recurso administrativo e achava que não havia mais saída. O Dr. Marcelo analisou a decisão da banca e me explicou, com clareza, o que dava para discutir na Justiça. Atendimento direto e honesto.",
+            nome: "Melissa Rosadilla · avaliação no Google",
+            texto: "A equipe atuou de forma excepcional no meu caso. Desde o primeiro atendimento, extremamente claros e transparentes comigo, o que me gerou muita confiança. Para finalizar, obtive êxito. Muito obrigada a Marcelo e toda a equipe!",
         },
         {
-            nome: "Aprovado · Concurso Estadual · Goiânia/GO",
-            texto: "Procurei depois de ser eliminado. Recebi uma orientação técnica clara sobre o cabimento do mandado de segurança no meu caso, sem promessa fácil. Isso me deu segurança para decidir.",
+            nome: "Juliy Ferreira · avaliação no Google",
+            texto: "Em um momento delicado da minha vida, encontrei não apenas competência jurídica, mas também acolhimento e humanidade. Todas as minhas dúvidas foram esclarecidas com transparência, e me senti segura durante todo o processo.",
         },
         {
-            nome: "Candidata · Concurso Cebraspe · Salvador/BA",
-            texto: "O que mais me marcou foi a rapidez da resposta e a transparência sobre prazos e riscos. Em poucas horas eu já sabia qual era a minha situação.",
+            nome: "Sibele Rosadilla · avaliação no Google",
+            texto: "Escritório sério, competente, interessado, responsável, diferenciado! Nos atendeu de maneira ímpar, de forma muito clara e conseguindo sucesso na ação. Totalmente recomendável!",
         },
     ];
 
@@ -279,9 +256,12 @@ function ProvasSocial() {
             <Container className="relative z-10">
                 <div className="max-w-4xl mx-auto">
                     <SectionLabel>Depoimentos</SectionLabel>
-                    <h2 className="text-2xl md:text-3xl font-bold text-center mb-2" style={{ color: C.white, fontFamily: "'Cormorant Garamond', Georgia, serif" }}>
+                    <h2 className="text-2xl md:text-3xl font-bold text-center mb-3" style={{ color: C.white, fontFamily: "'Cormorant Garamond', Georgia, serif" }}>
                         Quem chegou sem saber se ainda havia o que fazer
                     </h2>
+                    <p className="text-sm md:text-base text-center max-w-2xl mx-auto" style={{ color: C.gray2 }}>
+                        Atendimento direto com o Dr. Marcelo, com a franqueza de dizer quando o caso não tem fundamento.
+                    </p>
                     <GoldDivider />
                     <div className="grid md:grid-cols-3 gap-5 mt-10">
                         {depoimentos.map((dep, i) => (
@@ -384,7 +364,6 @@ export default function MandadoSegurancaPage() {
     return (
         <main style={{ backgroundColor: C.bg1, color: C.white }}>
             <GrainOverlay />
-            <FloatingWhatsApp />
 
             {/* ══════════════════════════════════════════════════════════════ */}
             {/* HERO                                                         */}
