@@ -425,11 +425,6 @@ export default function RecursoHeteroidentificacaoPage() {
             </section>
 
             {/* ══════════════════════════════════════════════════════════════ */}
-            {/* VÍDEO                                                        */}
-            {/* ══════════════════════════════════════════════════════════════ */}
-            <Reveal><VideoSection youtubeId="jAiQi4CgMN0" /></Reveal>
-
-            {/* ══════════════════════════════════════════════════════════════ */}
             {/* ISSO ACONTECEU COM VOCÊ?                                     */}
             {/* ══════════════════════════════════════════════════════════════ */}
             <section className="py-12 md:py-16 relative overflow-hidden" style={{ backgroundColor: C.bg2 }}>
@@ -470,6 +465,11 @@ export default function RecursoHeteroidentificacaoPage() {
                     </div>
                 </Container>
             </section>
+
+            {/* ══════════════════════════════════════════════════════════════ */}
+            {/* VÍDEO                                                        */}
+            {/* ══════════════════════════════════════════════════════════════ */}
+            <Reveal><VideoSection youtubeId="jAiQi4CgMN0" /></Reveal>
 
             {/* ══════════════════════════════════════════════════════════════ */}
             {/* PROVA SOCIAL                                                 */}

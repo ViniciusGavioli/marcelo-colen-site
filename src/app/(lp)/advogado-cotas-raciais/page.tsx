@@ -411,11 +411,6 @@ export default function AdvogadoPage() {
             </section>
 
             {/* ══════════════════════════════════════════════════════════════ */}
-            {/* VÍDEO                                                        */}
-            {/* ══════════════════════════════════════════════════════════════ */}
-            <Reveal><VideoSection youtubeId="jAiQi4CgMN0" /></Reveal>
-
-            {/* ══════════════════════════════════════════════════════════════ */}
             {/* ISSO ACONTECEU COM VOCÊ?                                     */}
             {/* ══════════════════════════════════════════════════════════════ */}
             <section className="py-12 md:py-16 relative overflow-hidden" style={{ backgroundColor: C.bg2 }}>
@@ -460,6 +455,11 @@ export default function AdvogadoPage() {
             {/* PROVA SOCIAL                                                 */}
             {/* ══════════════════════════════════════════════════════════════ */}
             <Reveal><ProvasSocial /></Reveal>
+
+            {/* ══════════════════════════════════════════════════════════════ */}
+            {/* VÍDEO                                                        */}
+            {/* ══════════════════════════════════════════════════════════════ */}
+            <Reveal><VideoSection youtubeId="jAiQi4CgMN0" /></Reveal>
 
             {/* ══════════════════════════════════════════════════════════════ */}
             {/* DR. MARCELO — 4ª seção, logo após a prova social             */}

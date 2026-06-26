@@ -248,6 +248,23 @@ export default function AdvogadoEspecialistaPage() {
                 </section>
 
                 {/* ══════════════════════════════════════════════════════════
+                    STATS BAR
+                   ══════════════════════════════════════════════════════════ */}
+                <section style={{ backgroundColor: T.bgAlt, borderBottom: `1px solid ${T.line}` }}>
+                    <Wrap>
+                        <div className="grid grid-cols-2 md:grid-cols-4 divide-x" style={{ borderColor: T.line }}>
+                            {STATS.map((s, i) => (
+                                <div key={i} className="text-center py-6 md:py-8 px-3">
+                                    <s.Icon className="w-5 h-5 mx-auto mb-2" style={{ color: T.bronze }} strokeWidth={1.8} />
+                                    <p className="text-2xl md:text-3xl font-black tracking-tight" style={{ color: T.navy, fontFamily: HEADING }}>{s.n}</p>
+                                    <p className="text-[11px] md:text-xs mt-1 font-medium uppercase tracking-wider" style={{ color: T.body, opacity: 0.5 }}>{s.label}</p>
+                                </div>
+                            ))}
+                        </div>
+                    </Wrap>
+                </section>
+
+                {/* ══════════════════════════════════════════════════════════
                     VÍDEO
                    ══════════════════════════════════════════════════════════ */}
                 <section className={secPad} style={{ backgroundColor: T.bg }}>
@@ -265,23 +282,6 @@ export default function AdvogadoEspecialistaPage() {
                             <div className="flex justify-center mt-8">
                                 <Cta onOpenQuiz={quiz.open} />
                             </div>
-                        </div>
-                    </Wrap>
-                </section>
-
-                {/* ══════════════════════════════════════════════════════════
-                    STATS BAR
-                   ══════════════════════════════════════════════════════════ */}
-                <section style={{ backgroundColor: T.bgAlt, borderBottom: `1px solid ${T.line}` }}>
-                    <Wrap>
-                        <div className="grid grid-cols-2 md:grid-cols-4 divide-x" style={{ borderColor: T.line }}>
-                            {STATS.map((s, i) => (
-                                <div key={i} className="text-center py-6 md:py-8 px-3">
-                                    <s.Icon className="w-5 h-5 mx-auto mb-2" style={{ color: T.bronze }} strokeWidth={1.8} />
-                                    <p className="text-2xl md:text-3xl font-black tracking-tight" style={{ color: T.navy, fontFamily: HEADING }}>{s.n}</p>
-                                    <p className="text-[11px] md:text-xs mt-1 font-medium uppercase tracking-wider" style={{ color: T.body, opacity: 0.5 }}>{s.label}</p>
-                                </div>
-                            ))}
                         </div>
                     </Wrap>
                 </section>
