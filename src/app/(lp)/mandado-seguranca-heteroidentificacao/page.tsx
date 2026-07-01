@@ -1,6 +1,8 @@
 "use client";
 
 import Image from "next/image";
+import LiteYouTubeEmbed from "react-lite-youtube-embed";
+import "react-lite-youtube-embed/dist/LiteYouTubeEmbed.css";
 import {
     MessageCircle,
     XCircle,
@@ -346,20 +348,13 @@ function VideoSection({ youtubeId }: { youtubeId?: string }) {
                 <GoldDivider />
                 <div
                     className="relative w-full rounded-2xl overflow-hidden mt-10"
-                    style={{ paddingBottom: "56.25%", height: 0, boxShadow: "0 12px 60px rgba(0,0,0,0.65)", border: "1px solid rgba(255,255,255,0.1)" }}
+                    style={{ boxShadow: "0 12px 60px rgba(0,0,0,0.65)", border: "1px solid rgba(255,255,255,0.1)" }}
                 >
-                    <iframe
-                        src={`https://www.youtube-nocookie.com/embed/${YOUTUBE_ID}?rel=0&modestbranding=1&iv_load_policy=3`}
+                    <LiteYouTubeEmbed
+                        id={YOUTUBE_ID}
                         title="Mandado de segurança contra heteroidentificação"
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                        allowFullScreen
-                        loading="lazy"
-                        style={{ position: "absolute", top: 0, left: 0, width: "100%", height: "100%", border: "none" }}
-                    />
-                    {/* Bloqueia clique no título/logo do YouTube no topo */}
-                    <div
-                        aria-hidden="true"
-                        style={{ position: "absolute", top: 0, left: 0, right: 0, height: "42px", zIndex: 1 }}
+                        poster="maxresdefault"
+                        wrapperClass="yt-lite"
                     />
                 </div>
                 <div className="flex justify-center mt-8">
