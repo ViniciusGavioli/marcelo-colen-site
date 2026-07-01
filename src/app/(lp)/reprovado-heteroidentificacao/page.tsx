@@ -207,7 +207,7 @@ function ProvasSocial() {
     return (
         <section className="py-16 md:py-28 relative overflow-hidden" style={{ backgroundColor: C.bg2 }}>
             <div aria-hidden="true" className="absolute inset-0 pointer-events-none"
-                style={{ backgroundImage: "url('/texture-juridica.png')", backgroundRepeat: "repeat", backgroundSize: "1200px 800px", opacity: 0.03 }} />
+                style={{ backgroundImage: "url('/texture-juridica.webp')", backgroundRepeat: "repeat", backgroundSize: "1200px 800px", opacity: 0.03 }} />
             <Container className="relative z-10">
                 <div className="max-w-4xl mx-auto">
                     <SectionLabel>Depoimentos</SectionLabel>
@@ -315,7 +315,7 @@ export default function ReprovadoPage() {
             {/* ══════════════════════════════════════════════════════════════ */}
             <section className="relative flex items-center overflow-hidden py-14 md:py-28 lg:py-36" style={{ backgroundColor: C.bg1 }}>
                 <div className="absolute inset-0 z-0 select-none">
-                    <div className="absolute inset-0" style={{ backgroundImage: "url('/texture-pedra.png')", backgroundSize: "cover", backgroundPosition: "top center", opacity: 0.06 }} />
+                    <div className="absolute inset-0" style={{ backgroundImage: "url('/texture-pedra.webp')", backgroundSize: "cover", backgroundPosition: "top center", opacity: 0.06 }} />
                     <div className="absolute inset-0" style={{ background: `radial-gradient(ellipse 80% 60% at 50% 0%, rgba(201,162,39,0.05) 0%, transparent 70%)` }} />
                     <div className="absolute inset-0" style={{ background: `linear-gradient(180deg, ${C.bg1} 0%, transparent 25%, transparent 75%, ${C.bg1} 100%)` }} />
                     <div className="absolute inset-0" style={{ background: `radial-gradient(ellipse 100% 100% at 50% 50%, transparent 50%, ${C.bg1} 100%)` }} />
@@ -436,7 +436,7 @@ export default function ReprovadoPage() {
             <section className="py-16 md:py-28 relative overflow-hidden"
                 style={{ backgroundColor: "#0B1730", borderTop: "1px solid rgba(255,255,255,0.08)", borderBottom: "1px solid rgba(255,255,255,0.08)" }}>
                 <div aria-hidden="true" className="absolute inset-0 pointer-events-none"
-                    style={{ backgroundImage: "url('/texture-juridica.png')", backgroundRepeat: "repeat", backgroundSize: "1200px 800px", opacity: 0.04 }} />
+                    style={{ backgroundImage: "url('/texture-juridica.webp')", backgroundRepeat: "repeat", backgroundSize: "1200px 800px", opacity: 0.04 }} />
                 <div aria-hidden="true" className="absolute inset-0 pointer-events-none"
                     style={{ background: "radial-gradient(ellipse at center, rgba(239,68,68,0.04) 0%, transparent 70%)" }} />
                 <Container className="relative z-10">
@@ -458,7 +458,7 @@ export default function ReprovadoPage() {
             {/* ══════════════════════════════════════════════════════════════ */}
             <section className="py-16 md:py-28 relative overflow-hidden" style={{ backgroundColor: C.bg1 }}>
                 <div aria-hidden="true" className="absolute inset-0 pointer-events-none"
-                    style={{ backgroundImage: "url('/texture-pedra.png')", backgroundSize: "cover", backgroundPosition: "center bottom", opacity: 0.03 }} />
+                    style={{ backgroundImage: "url('/texture-pedra.webp')", backgroundSize: "cover", backgroundPosition: "center bottom", opacity: 0.03 }} />
                 <Container className="relative z-10">
                     <SectionLabel>Passo a passo</SectionLabel>
                     <h2 className="text-2xl md:text-4xl font-bold text-center mb-2 px-4" style={{ color: C.white, fontFamily: "'Cormorant Garamond', Georgia, serif" }}>
@@ -493,7 +493,7 @@ export default function ReprovadoPage() {
             {/* ══════════════════════════════════════════════════════════════ */}
             <section className="py-16 md:py-28 relative overflow-hidden" style={{ backgroundColor: C.bg1 }}>
                 <div aria-hidden="true" className="absolute inset-0 pointer-events-none"
-                    style={{ backgroundImage: "url('/texture-juridica.png')", backgroundRepeat: "repeat", backgroundSize: "1200px 800px", opacity: 0.025 }} />
+                    style={{ backgroundImage: "url('/texture-juridica.webp')", backgroundRepeat: "repeat", backgroundSize: "1200px 800px", opacity: 0.025 }} />
                 <Container className="relative z-10">
                     <div className="max-w-2xl mx-auto">
                         <SectionLabel>Tire suas dúvidas</SectionLabel>
@@ -517,7 +517,7 @@ export default function ReprovadoPage() {
             <section className="py-14 relative overflow-hidden"
                 style={{ backgroundColor: C.bg2, borderTop: "1px solid rgba(255,255,255,0.05)" }}>
                 <div aria-hidden="true" className="absolute inset-0 pointer-events-none"
-                    style={{ backgroundImage: "url('/texture-pedra.png')", backgroundSize: "cover", backgroundPosition: "bottom center", opacity: 0.035 }} />
+                    style={{ backgroundImage: "url('/texture-pedra.webp')", backgroundSize: "cover", backgroundPosition: "bottom center", opacity: 0.035 }} />
                 <div aria-hidden="true" className="absolute inset-0 pointer-events-none"
                     style={{ background: "radial-gradient(ellipse at center bottom, rgba(201,162,39,0.04) 0%, transparent 65%)" }} />
                 <Container className="relative z-10">

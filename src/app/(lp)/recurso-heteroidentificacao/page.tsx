@@ -265,7 +265,7 @@ function ProvasSocial() {
             <div
                 aria-hidden="true"
                 className="absolute inset-0 pointer-events-none"
-                style={{ backgroundImage: "url('/texture-juridica.png')", backgroundRepeat: "repeat", backgroundSize: "1200px 800px", opacity: 0.03 }}
+                style={{ backgroundImage: "url('/texture-juridica.webp')", backgroundRepeat: "repeat", backgroundSize: "1200px 800px", opacity: 0.03 }}
             />
             <Container className="relative z-10">
                 <div className="max-w-4xl mx-auto">
@@ -362,7 +362,7 @@ export default function RecursoHeteroidentificacaoPage() {
                 {/* Fundo em camadas */}
                 <div className="absolute inset-0 z-0 select-none">
                     {/* Ardósia sutil */}
-                    <div className="absolute inset-0" style={{ backgroundImage: "url('/texture-pedra.png')", backgroundSize: "cover", backgroundPosition: "top center", opacity: 0.06 }} />
+                    <div className="absolute inset-0" style={{ backgroundImage: "url('/texture-pedra.webp')", backgroundSize: "cover", backgroundPosition: "top center", opacity: 0.06 }} />
                     <Image src="/images/hero-scales.png" alt="" fill className="object-cover opacity-[0.04]" priority aria-hidden="true" />
                     {/* Gold sutil por cima */}
                     <div className="absolute inset-0" style={{ background: `radial-gradient(ellipse 80% 60% at 50% 0%, rgba(201,162,39,0.05) 0%, transparent 70%)` }} />
@@ -505,7 +505,7 @@ export default function RecursoHeteroidentificacaoPage() {
                 <div
                     aria-hidden="true"
                     className="absolute inset-0 pointer-events-none"
-                    style={{ backgroundImage: "url('/texture-juridica.png')", backgroundRepeat: "repeat", backgroundSize: "1200px 800px", opacity: 0.035 }}
+                    style={{ backgroundImage: "url('/texture-juridica.webp')", backgroundRepeat: "repeat", backgroundSize: "1200px 800px", opacity: 0.035 }}
                 />
                 {/* glow central */}
                 <div
@@ -614,7 +614,7 @@ export default function RecursoHeteroidentificacaoPage() {
                 <div
                     aria-hidden="true"
                     className="absolute inset-0 pointer-events-none"
-                    style={{ backgroundImage: "url('/texture-juridica.png')", backgroundRepeat: "repeat", backgroundSize: "1200px 800px", opacity: 0.04 }}
+                    style={{ backgroundImage: "url('/texture-juridica.webp')", backgroundRepeat: "repeat", backgroundSize: "1200px 800px", opacity: 0.04 }}
                 />
                 <Container className="relative z-10">
                     <div className="max-w-2xl mx-auto text-center px-4">
@@ -638,7 +638,7 @@ export default function RecursoHeteroidentificacaoPage() {
                 <div
                     aria-hidden="true"
                     className="absolute inset-0 pointer-events-none"
-                    style={{ backgroundImage: "url('/texture-pedra.png')", backgroundSize: "cover", backgroundPosition: "center bottom", opacity: 0.03 }}
+                    style={{ backgroundImage: "url('/texture-pedra.webp')", backgroundSize: "cover", backgroundPosition: "center bottom", opacity: 0.03 }}
                 />
                 <Container className="relative z-10">
                     <SectionLabel>Passo a passo</SectionLabel>
@@ -684,7 +684,7 @@ export default function RecursoHeteroidentificacaoPage() {
                 <div
                     aria-hidden="true"
                     className="absolute inset-0 pointer-events-none"
-                    style={{ backgroundImage: "url('/texture-juridica.png')", backgroundRepeat: "repeat", backgroundSize: "1200px 800px", opacity: 0.025 }}
+                    style={{ backgroundImage: "url('/texture-juridica.webp')", backgroundRepeat: "repeat", backgroundSize: "1200px 800px", opacity: 0.025 }}
                 />
                 <Container className="relative z-10">
                     <div className="max-w-2xl mx-auto">
@@ -718,7 +718,7 @@ export default function RecursoHeteroidentificacaoPage() {
                 <div
                     aria-hidden="true"
                     className="absolute inset-0 pointer-events-none"
-                    style={{ backgroundImage: "url('/texture-pedra.png')", backgroundSize: "cover", backgroundPosition: "bottom center", opacity: 0.035 }}
+                    style={{ backgroundImage: "url('/texture-pedra.webp')", backgroundSize: "cover", backgroundPosition: "bottom center", opacity: 0.035 }}
                 />
                 <div
                     aria-hidden="true"
@@ -806,7 +806,7 @@ function VideoSection({ youtubeId, mp4Src }: { youtubeId?: string; mp4Src?: stri
                     {MP4_SRC ? (
                         <video src={MP4_SRC} controls playsInline preload="none" className="w-full object-cover" />
                     ) : (
-                        <LiteYouTubeEmbed id={YOUTUBE_ID} title="Vídeo de Análise da Situação" poster="maxresdefault" wrapperClass="yt-lite" />
+                        <LiteYouTubeEmbed id={YOUTUBE_ID} title="Vídeo de Análise da Situação" poster="hqdefault" lazyLoad wrapperClass="yt-lite" />
                     )}
                 </div>
                 <div className="flex justify-center mt-8">

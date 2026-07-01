@@ -36,7 +36,7 @@ export function DrMarceloSection() {
             <div
                 aria-hidden="true"
                 className="absolute inset-0 pointer-events-none"
-                style={{ backgroundImage: "url('/texture-pedra.png')", backgroundSize: "cover", backgroundPosition: "center", opacity: 0.04 }}
+                style={{ backgroundImage: "url('/texture-pedra.webp')", backgroundSize: "cover", backgroundPosition: "center", opacity: 0.04 }}
             />
             {/* Glow dourado lateral esquerdo */}
             <div
@@ -55,6 +55,7 @@ export function DrMarceloSection() {
                             alt="Dr. Marcelo Colen"
                             width={553}
                             height={722}
+                            sizes="(min-width: 1024px) 288px, (min-width: 768px) 256px, 100vw"
                             className="w-full object-contain"
                             style={{ filter: "drop-shadow(0 8px 24px rgba(0,0,0,0.6))", display: "block" }}
                         />

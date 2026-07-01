@@ -356,7 +356,7 @@ export default function HomePage() {
             <section className="py-24 md:py-36 relative overflow-hidden" style={{ backgroundColor: C.bg2 }}>
                 {/* Texture */}
                 <div className="absolute inset-0" style={{
-                    backgroundImage: "url('/texture-pedra.png')",
+                    backgroundImage: "url('/texture-pedra.webp')",
                     backgroundSize: "cover",
                     backgroundPosition: "center",
                     opacity: 0.03,
@@ -457,7 +457,7 @@ export default function HomePage() {
             <section className="py-24 md:py-36 relative overflow-hidden" style={{ backgroundColor: C.bg1 }}>
                 {/* Textura */}
                 <div className="absolute inset-0" style={{
-                    backgroundImage: "url('/texture-juridica.png')",
+                    backgroundImage: "url('/texture-juridica.webp')",
                     backgroundRepeat: "repeat",
                     backgroundSize: "1200px",
                     opacity: 0.02,

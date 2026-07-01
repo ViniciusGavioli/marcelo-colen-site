@@ -251,7 +251,7 @@ function ProvasSocial() {
             <div
                 aria-hidden="true"
                 className="absolute inset-0 pointer-events-none"
-                style={{ backgroundImage: "url('/texture-juridica.png')", backgroundRepeat: "repeat", backgroundSize: "1200px 800px", opacity: 0.03 }}
+                style={{ backgroundImage: "url('/texture-juridica.webp')", backgroundRepeat: "repeat", backgroundSize: "1200px 800px", opacity: 0.03 }}
             />
             <Container className="relative z-10">
                 <div className="max-w-4xl mx-auto">
@@ -353,7 +353,8 @@ function VideoSection({ youtubeId }: { youtubeId?: string }) {
                     <LiteYouTubeEmbed
                         id={YOUTUBE_ID}
                         title="Mandado de segurança contra heteroidentificação"
-                        poster="maxresdefault"
+                        poster="hqdefault"
+                        lazyLoad
                         wrapperClass="yt-lite"
                     />
                 </div>
@@ -378,7 +379,7 @@ export default function MandadoSegurancaPage() {
             {/* ══════════════════════════════════════════════════════════════ */}
             <section className="relative flex items-center overflow-hidden py-14 md:py-28 lg:py-36" style={{ backgroundColor: C.bg1 }}>
                 <div className="absolute inset-0 z-0 select-none">
-                    <div className="absolute inset-0" style={{ backgroundImage: "url('/texture-pedra.png')", backgroundSize: "cover", backgroundPosition: "top center", opacity: 0.06 }} />
+                    <div className="absolute inset-0" style={{ backgroundImage: "url('/texture-pedra.webp')", backgroundSize: "cover", backgroundPosition: "top center", opacity: 0.06 }} />
                     <Image src="/images/hero-scales.png" alt="" fill className="object-cover opacity-[0.04]" priority aria-hidden="true" />
                     <div className="absolute inset-0" style={{ background: `radial-gradient(ellipse 80% 60% at 50% 0%, rgba(201,162,39,0.05) 0%, transparent 70%)` }} />
                     <div className="absolute inset-0" style={{ background: `linear-gradient(180deg, ${C.bg1} 0%, transparent 25%, transparent 75%, ${C.bg1} 100%)` }} />
@@ -499,7 +500,7 @@ export default function MandadoSegurancaPage() {
                 <div
                     aria-hidden="true"
                     className="absolute inset-0 pointer-events-none"
-                    style={{ backgroundImage: "url('/texture-juridica.png')", backgroundRepeat: "repeat", backgroundSize: "1200px 800px", opacity: 0.035 }}
+                    style={{ backgroundImage: "url('/texture-juridica.webp')", backgroundRepeat: "repeat", backgroundSize: "1200px 800px", opacity: 0.035 }}
                 />
                 <div
                     aria-hidden="true"
@@ -604,7 +605,7 @@ export default function MandadoSegurancaPage() {
                 <div
                     aria-hidden="true"
                     className="absolute inset-0 pointer-events-none"
-                    style={{ backgroundImage: "url('/texture-juridica.png')", backgroundRepeat: "repeat", backgroundSize: "1200px 800px", opacity: 0.04 }}
+                    style={{ backgroundImage: "url('/texture-juridica.webp')", backgroundRepeat: "repeat", backgroundSize: "1200px 800px", opacity: 0.04 }}
                 />
                 <Container className="relative z-10">
                     <div className="max-w-2xl mx-auto text-center px-4">
@@ -627,7 +628,7 @@ export default function MandadoSegurancaPage() {
                 <div
                     aria-hidden="true"
                     className="absolute inset-0 pointer-events-none"
-                    style={{ backgroundImage: "url('/texture-pedra.png')", backgroundSize: "cover", backgroundPosition: "center bottom", opacity: 0.03 }}
+                    style={{ backgroundImage: "url('/texture-pedra.webp')", backgroundSize: "cover", backgroundPosition: "center bottom", opacity: 0.03 }}
                 />
                 <Container className="relative z-10">
                     <SectionLabel>Passo a passo</SectionLabel>
@@ -677,7 +678,7 @@ export default function MandadoSegurancaPage() {
                 <div
                     aria-hidden="true"
                     className="absolute inset-0 pointer-events-none"
-                    style={{ backgroundImage: "url('/texture-juridica.png')", backgroundRepeat: "repeat", backgroundSize: "1200px 800px", opacity: 0.025 }}
+                    style={{ backgroundImage: "url('/texture-juridica.webp')", backgroundRepeat: "repeat", backgroundSize: "1200px 800px", opacity: 0.025 }}
                 />
                 <Container className="relative z-10">
                     <div className="max-w-2xl mx-auto">
@@ -710,7 +711,7 @@ export default function MandadoSegurancaPage() {
                 <div
                     aria-hidden="true"
                     className="absolute inset-0 pointer-events-none"
-                    style={{ backgroundImage: "url('/texture-pedra.png')", backgroundSize: "cover", backgroundPosition: "bottom center", opacity: 0.035 }}
+                    style={{ backgroundImage: "url('/texture-pedra.webp')", backgroundSize: "cover", backgroundPosition: "bottom center", opacity: 0.035 }}
                 />
                 <div
                     aria-hidden="true"

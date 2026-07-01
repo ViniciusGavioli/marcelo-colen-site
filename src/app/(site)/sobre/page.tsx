@@ -95,7 +95,7 @@ export default function SobrePage() {
             {/* ═══════════════════════════════════════════════════════════ */}
             <section className="relative overflow-hidden pt-4 pb-16 md:pt-12 md:pb-24" style={{ backgroundColor: C.bg1 }}>
                 <div className="absolute inset-0 z-0 select-none">
-                    <div className="absolute inset-0" style={{ backgroundImage: "url('/texture-pedra.png')", backgroundSize: "cover", opacity: 0.04 }} />
+                    <div className="absolute inset-0" style={{ backgroundImage: "url('/texture-pedra.webp')", backgroundSize: "cover", opacity: 0.04 }} />
                 </div>
 
                 <Container className="relative z-10">
@@ -145,7 +145,7 @@ export default function SobrePage() {
             {/* ═══════════════════════════════════════════════════════════ */}
             <section className="py-20 md:py-32 relative overflow-hidden" style={{ backgroundColor: C.bg2 }}>
                 <div aria-hidden="true" className="absolute inset-0 pointer-events-none"
-                    style={{ backgroundImage: "url('/texture-juridica.png')", backgroundRepeat: "repeat", backgroundSize: "1000px", opacity: 0.025 }} />
+                    style={{ backgroundImage: "url('/texture-juridica.webp')", backgroundRepeat: "repeat", backgroundSize: "1000px", opacity: 0.025 }} />
                 <Container className="relative z-10">
                     <SectionLabel>Trajetória</SectionLabel>
                     <h2 className="text-2xl md:text-3xl font-bold text-center mb-2" style={{ color: C.white, fontFamily: C.serif }}>
