@@ -25,7 +25,13 @@ import { getDirectWhatsAppLink } from "@/lib/whatsapp";
 import { trackWhatsAppClick } from "@/lib/analytics";
 import { useState, useEffect, useRef } from "react";
 import { DrMarceloSection } from "@/components/sections/DrMarceloSection";
-import { QualificationQuiz, useQuiz } from "@/components/QualificationQuiz";
+import dynamic from "next/dynamic";
+import { useQuiz } from "@/components/useQuiz";
+
+const QualificationQuiz = dynamic(
+    () => import("@/components/QualificationQuiz").then((m) => m.QualificationQuiz),
+    { ssr: false }
+);
 
 // ============================================================================
 // CORES
@@ -350,7 +356,7 @@ export default function AdvogadoPage() {
                 <div className="absolute inset-0 z-0 select-none">
                     {/* Ardósia sutil */}
                     <div className="absolute inset-0" style={{ backgroundImage: "url('/texture-pedra.webp')", backgroundSize: "cover", backgroundPosition: "top center", opacity: 0.06 }} />
-                    <Image src="/images/hero-scales.png" alt="" fill className="object-cover opacity-[0.04]" priority aria-hidden="true" />
+                    <Image src="/images/hero-scales.png" alt="" fill sizes="100vw" className="object-cover opacity-[0.04]" priority aria-hidden="true" />
                     {/* Gold sutil por cima */}
                     <div className="absolute inset-0" style={{ background: `radial-gradient(ellipse 80% 60% at 50% 0%, rgba(201,162,39,0.05) 0%, transparent 70%)` }} />
                     {/* Fade nas bordas para não vazar */}

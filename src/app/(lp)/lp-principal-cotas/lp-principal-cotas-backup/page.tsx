@@ -241,7 +241,7 @@ export default function RecursoCotasPage() {
             <section className="relative min-h-0 flex items-center overflow-hidden py-16 md:py-24 lg:py-32" style={{ backgroundColor: C.bg1 }}>
                 {/* Background Decorativo */}
                 <div className="absolute inset-0 z-0 select-none">
-                    <Image src="/images/hero-scales.png" alt="" fill className="object-cover opacity-[0.05] lg:opacity-10" priority aria-hidden="true" />
+                    <Image src="/images/hero-scales.png" alt="" fill sizes="100vw" className="object-cover opacity-[0.05] lg:opacity-10" priority aria-hidden="true" />
                     <div className="absolute inset-0 md:hidden bg-gradient-to-b from-black/80 via-black/30 to-black/80" />
                     <div className="absolute inset-0" style={{ background: `linear-gradient(180deg, ${C.bg1} 0%, transparent 50%, ${C.bg1} 100%)` }} />
                 </div>

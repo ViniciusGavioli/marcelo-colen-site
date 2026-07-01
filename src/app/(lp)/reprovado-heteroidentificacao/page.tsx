@@ -19,7 +19,13 @@ import { getDirectWhatsAppLink } from "@/lib/whatsapp";
 import { trackWhatsAppClick } from "@/lib/analytics";
 import { useState, useEffect, useRef } from "react";
 import { DrMarceloSection } from "@/components/sections/DrMarceloSection";
-import { QualificationQuiz, useQuiz } from "@/components/QualificationQuiz";
+import dynamic from "next/dynamic";
+import { useQuiz } from "@/components/useQuiz";
+
+const QualificationQuiz = dynamic(
+    () => import("@/components/QualificationQuiz").then((m) => m.QualificationQuiz),
+    { ssr: false }
+);
 
 // ============================================================================
 // CORES
