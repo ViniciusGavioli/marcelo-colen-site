@@ -368,7 +368,6 @@ export default function RecursoHeteroidentificacaoPage() {
                 {/* Fundo em camadas */}
                 <div className="absolute inset-0 z-0 select-none">
                     {/* Ardósia sutil */}
-                    <Image src="/images/hero-scales.png" alt="" fill sizes="100vw" className="object-cover opacity-[0.04]" priority aria-hidden="true" />
                     {/* Gold sutil por cima */}
                     <div className="absolute inset-0" style={{ background: `radial-gradient(ellipse 80% 60% at 50% 0%, rgba(201,162,39,0.05) 0%, transparent 70%)` }} />
                     {/* Fade nas bordas */}
