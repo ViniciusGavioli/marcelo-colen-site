@@ -2,7 +2,7 @@ import React from "react";
 
 // Analytics IDs - CONECTADO
 export const GTM_ID = "GTM-P4XVVVQM";
-export const GA_ID = "G-XHC2DVLZES";
+export const GA_ID = "G-8TL0KNPW9E"; // GA4 marcelocolen.com.br (tag nova, 02/07/2026; a antiga G-XHC2DVLZES foi desativada)
 export const ADS_CONVERSION_ID = "AW-17916516335"; // Google Ads - Heteroidentificação Campaign
 export const ADS_CONVERSION_LABEL = "wVSJCNbo_fAbEO-vod9C"; // WhatsApp conversion label
 export const FB_PIXEL_ID = "1269676835042138"; // Facebook Pixel ID
