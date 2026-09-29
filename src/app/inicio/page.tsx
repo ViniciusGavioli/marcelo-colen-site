@@ -570,7 +570,7 @@ export default function HomePage() {
                                 {[
                                     { icon: ShieldCheck, title: "Prevenção de Crises", desc: "Treinamento e estruturação de canais de denúncia evitam processos milionários." },
                                     { icon: BookOpen, title: "Educação Corporativa", desc: "Palestras e workshops baseados na produção literária do Dr. Marcelo." },
-                                    { icon: FileCheck, title: "Auditoria de Inclusão", desc: "Verificação técnica de processos seletivos para garantir diversidade sem riscos." }
+                                    { icon: FileCheck, title: "Auditoria de Inclusão", desc: "Verificação técnica de processos seletivos, com parecer sobre os pontos de exposição jurídica de cada etapa." }
                                 ].map((item, idx) => {
                                     const IconComponent = item.icon;
                                     return (

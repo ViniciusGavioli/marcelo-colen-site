@@ -598,7 +598,7 @@ export default function RecursoCotasPage() {
                             className="text-xl md:text-2xl font-bold mb-6"
                             style={{ color: C.white, fontFamily: "Georgia, serif" }}
                         >
-                            Não perca sua vaga por omissão.
+                            O prazo recursal corre a partir da publicação do resultado.
                         </p>
                         <Cta text="Falar com Dr. Marcelo Agora" full onOpenQuiz={quiz.open} />
                         <p className="text-xs mt-6" style={{ color: C.gray3 }}>
