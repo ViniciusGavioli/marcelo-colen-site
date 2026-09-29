@@ -1,9 +1,10 @@
 import type { Metadata, Viewport } from "next";
 import { Cormorant_Garamond, Inter } from "next/font/google";
 import "./globals.css";
-import { SITE_CONFIG, DEFAULT_SEO } from "@/lib/constants";
+import { SITE_CONFIG, DEFAULT_SEO, OG_IMAGES } from "@/lib/constants";
 import FacebookPixel from "@/components/FacebookPixel";
 import GoogleAdsTag from "@/components/GoogleAdsTag";
+import Analytics from "@/components/Analytics";
 import { WhatsAppFloat } from "@/components/WhatsAppFloat";
 
 const cormorantGaramond = Cormorant_Garamond({
@@ -38,6 +39,24 @@ export const metadata: Metadata = {
   creator: SITE_CONFIG.name,
   publisher: SITE_CONFIG.name,
   metadataBase: new URL(SITE_CONFIG.url),
+  // Default de preview social para toda rota. Um layout filho que declare
+  // openGraph substitui este objeto inteiro, então lá o `images` é repetido
+  // via OG_IMAGES — sem isso a imagem some, que era o caso em 10/10 rotas.
+  openGraph: {
+    type: "website",
+    locale: SITE_CONFIG.locale,
+    url: SITE_CONFIG.url,
+    siteName: SITE_CONFIG.fullName,
+    title: DEFAULT_SEO.title,
+    description: DEFAULT_SEO.description,
+    images: OG_IMAGES.institucional,
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: DEFAULT_SEO.title,
+    description: DEFAULT_SEO.description,
+    images: OG_IMAGES.institucional.map((i) => i.url),
+  },
   robots: {
     index: true,
     follow: true,
@@ -64,6 +83,7 @@ export default function RootLayout({
   return (
     <html lang="pt-BR" className={`${cormorantGaramond.variable} ${inter.variable}`}>
       <body className="min-h-screen flex flex-col antialiased">
+        <Analytics />
         <FacebookPixel />
         <GoogleAdsTag />
         {children}

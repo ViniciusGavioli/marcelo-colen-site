@@ -729,3 +729,28 @@ export const AREAS_TRACKS = AREAS_DATA.tracks.map((track) => ({
   highlights: track.highlights,
   services: track.scope.map((s) => s.title),
 }));
+
+// ============================================================================
+// OPEN GRAPH — imagens 1200x630 geradas por scripts/generate-og.mjs
+// Usar sempre um destes helpers ao declarar openGraph num layout: o Next
+// substitui o objeto openGraph do pai em vez de mesclá-lo, então um layout
+// filho que declara openGraph sem `images` derruba a imagem herdada.
+// ============================================================================
+function ogImage(file: string, alt: string) {
+  return [{ url: `${SITE_CONFIG.url}/${file}`, width: 1200, height: 630, alt }];
+}
+
+export const OG_IMAGES = {
+  hetero: ogImage(
+    "og-heteroidentificacao.jpg",
+    "Reprovado na banca de heteroidentificação? — Dr. Marcelo Colen, OAB/MG 167.463"
+  ),
+  cotas: ogImage(
+    "og-cotas.jpg",
+    "Cotas raciais e direito antidiscriminatório — Dr. Marcelo Colen, OAB/MG 167.463"
+  ),
+  institucional: ogImage(
+    "og-institucional.jpg",
+    "Marcelo Colen, advogado — Mestre em Direito pela UFMG, Diretor de Diversidade da OAB/MG"
+  ),
+} as const;

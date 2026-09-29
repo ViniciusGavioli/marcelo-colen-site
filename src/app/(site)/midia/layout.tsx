@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { SITE_CONFIG } from "@/lib/constants";
+import { SITE_CONFIG, OG_IMAGES } from "@/lib/constants";
 
 export const metadata: Metadata = {
     title: "Na Mídia | Marcelo Colen — Entrevistas, Palestras e Aparições",
@@ -13,6 +13,11 @@ export const metadata: Metadata = {
         description: "Entrevistas, palestras e aparições públicas sobre igualdade racial e direito antidiscriminatório.",
         url: `${SITE_CONFIG.url}/midia`,
         type: "website",
+        images: OG_IMAGES.institucional,
+    },
+    twitter: {
+        card: "summary_large_image",
+        images: OG_IMAGES.institucional.map((i) => i.url),
     },
 };
 

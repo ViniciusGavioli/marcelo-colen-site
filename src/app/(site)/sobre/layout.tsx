@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { SITE_CONFIG } from "@/lib/constants";
+import { SITE_CONFIG, OG_IMAGES } from "@/lib/constants";
 
 export const metadata: Metadata = {
     title: "Sobre Dr. Marcelo Colen | Mestre UFMG · Diretor OAB/MG",
@@ -13,6 +13,11 @@ export const metadata: Metadata = {
         description: "Mestre UFMG · Diretor de Diversidade OAB/MG · Secretário da Comissão Nacional da OAB Federal",
         url: `${SITE_CONFIG.url}/sobre`,
         type: "profile",
+        images: OG_IMAGES.institucional,
+    },
+    twitter: {
+        card: "summary_large_image",
+        images: OG_IMAGES.institucional.map((i) => i.url),
     },
 };
 

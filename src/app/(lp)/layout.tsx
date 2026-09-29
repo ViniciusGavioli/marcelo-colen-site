@@ -1,8 +1,9 @@
-import Script from "next/script";
-import { GTM_ID, GA_ID } from "@/lib/analytics";
+import { AttorneyJsonLd } from "@/components/site/JsonLd";
 
 // Layout limpo para Landing Pages - SEM Header/Footer
-// Foco total em conversão
+// Foco total em conversão.
+// GTM e GA4 saíram daqui para app/layout.tsx: montados só neste grupo,
+// deixavam as páginas institucionais sem GA4.
 
 export default function LandingPageLayout({
   children,
@@ -14,61 +15,9 @@ export default function LandingPageLayout({
       className="font-sans bg-[#3D2314]"
       style={{ fontFamily: "var(--font-sans)" }}
     >
-      {/* Google Tag Manager (noscript) */}
-      {GTM_ID && (
-        <noscript>
-          <iframe
-            src={`https://www.googletagmanager.com/ns.html?id=${GTM_ID}`}
-            height="0"
-            width="0"
-            style={{ display: "none", visibility: "hidden" }}
-          />
-        </noscript>
-      )}
-
-      {/* Google Tag Manager Script */}
-      {GTM_ID && (
-        <Script
-          id="gtm-script"
-          strategy="afterInteractive"
-          dangerouslySetInnerHTML={{
-            __html: `
-              (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-              new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-              j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-              'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-              })(window,document,'script','dataLayer','${GTM_ID}');
-            `,
-          }}
-        />
-      )}
-
-      {/* Google Analytics 4 */}
-      {GA_ID && (
-        <>
-          <Script
-            src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`}
-            strategy="afterInteractive"
-          />
-          <Script
-            id="ga-script"
-            strategy="afterInteractive"
-            dangerouslySetInnerHTML={{
-              __html: `
-                window.dataLayer = window.dataLayer || [];
-                function gtag(){dataLayer.push(arguments);}
-                gtag('js', new Date());
-                gtag('config', '${GA_ID}', {
-                  page_path: window.location.pathname,
-                  send_page_view: true,
-                  'conversion_linker': true
-                });
-              `,
-            }}
-          />
-        </>
-      )}
-
+      {/* E-E-A-T: identifica o advogado responsável, credenciais e OAB
+          para toda LP do grupo. Antes só /inicio tinha dado estruturado. */}
+      <AttorneyJsonLd />
       {children}
     </div>
   );

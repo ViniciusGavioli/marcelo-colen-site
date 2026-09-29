@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { SITE_CONFIG } from "@/lib/constants";
+import { SITE_CONFIG, OG_IMAGES } from "@/lib/constants";
 
 export const metadata: Metadata = {
     title: "Advogado Especialista em Cotas Raciais | Marcelo Colen",
@@ -14,6 +14,11 @@ export const metadata: Metadata = {
             "Especialista em defesa de candidatos cotistas. Recurso administrativo e judicial contra indeferimento em heteroidentificação.",
         url: `${SITE_CONFIG.url}/advogado-cotas-raciais`,
         type: "website",
+        images: OG_IMAGES.cotas,
+    },
+    twitter: {
+        card: "summary_large_image",
+        images: OG_IMAGES.cotas.map((i) => i.url),
     },
 };
 
