@@ -1,13 +1,10 @@
 import Link from "next/link";
 import { getDirectWhatsAppLink } from "@/lib/whatsapp";
 
-const C = {
-    bg: "#181818",
-    gold: "#c9a227",
-    white: "#ffffff",
-    gray2: "rgba(255,255,255,0.7)",
-    gray3: "rgba(255,255,255,0.45)",
-};
+import { SITE_COLORS } from "@/lib/site-theme";
+
+// bg era #181818, um terceiro degrau escuro que a LP não usa.
+const C = { ...SITE_COLORS, bg: SITE_COLORS.bg2 };
 
 const WA_MSG = "Olá Dr. Marcelo, vim pelo site e gostaria de uma análise do meu caso.";
 

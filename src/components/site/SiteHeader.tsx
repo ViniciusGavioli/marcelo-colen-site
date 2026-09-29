@@ -5,13 +5,11 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Menu, X, Phone, MessageCircle } from "lucide-react";
 import { getDirectWhatsAppLink } from "@/lib/whatsapp";
+import { SITE_COLORS } from "@/lib/site-theme";
 
 const C = {
-    bg: "rgba(10,10,10,0.88)",
-    gold: "#c9a227",
-    white: "#ffffff",
-    gray2: "rgba(255,255,255,0.7)",
-    gray3: "rgba(255,255,255,0.45)",
+    ...SITE_COLORS,
+    bg: SITE_COLORS.bg1Translucent,
 };
 
 const WA_MSG = "Olá Dr. Marcelo, vim pelo site e gostaria de uma análise do meu caso.";

@@ -4,25 +4,14 @@ import { useEffect, useRef } from "react";
 import { MessageCircle } from "lucide-react";
 import { getDirectWhatsAppLink } from "@/lib/whatsapp";
 import { trackWhatsAppClick } from "@/lib/analytics";
+import { SITE_COLORS } from "@/lib/site-theme";
 
 // ============================================================================
 // DESIGN TOKENS
+// Definidos em @/lib/site-theme (fonte única, alinhada à LP principal).
+// Reexportados aqui para não quebrar os imports existentes das páginas.
 // ============================================================================
-export const C = {
-    bg1: "#0a0a0a",
-    bg2: "#111111",
-    bg3: "#181818",
-    bg4: "#1e1e1e",
-    gold: "#c9a227",
-    goldSoft: "rgba(201,162,39,0.10)",
-    goldBorder: "rgba(201,162,39,0.2)",
-    white: "#ffffff",
-    gray1: "rgba(255,255,255,0.92)",
-    gray2: "rgba(255,255,255,0.7)",
-    gray3: "rgba(255,255,255,0.45)",
-    gray4: "rgba(255,255,255,0.25)",
-    serif: "'Cormorant Garamond', Georgia, serif",
-};
+export const C = SITE_COLORS;
 
 export const GRAIN_URL = `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='320' height='320'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.72' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='320' height='320' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E")`;
 
