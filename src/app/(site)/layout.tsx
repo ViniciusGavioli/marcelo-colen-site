@@ -4,6 +4,7 @@ import { SiteHeader } from "@/components/site/SiteHeader";
 import { SiteFooter } from "@/components/site/SiteFooter";
 import { AttorneyJsonLd } from "@/components/site/JsonLd";
 import { SITE_COLORS } from "@/lib/site-theme";
+import { SmoothScroll } from "@/components/home/SmoothScroll";
 
 export const metadata: Metadata = {
     title: DEFAULT_SEO.title,
@@ -45,6 +46,10 @@ export default function SiteLayout({
             className="flex flex-col min-h-screen"
             style={{ backgroundColor: SITE_COLORS.bg1, color: SITE_COLORS.white }}
         >
+            {/* Rolagem com inércia. Vive aqui e não no layout raiz de
+                propósito: as landing pages de campanha mantêm o scroll
+                nativo, onde a resposta imediata vale mais que o efeito. */}
+            <SmoothScroll />
             <AttorneyJsonLd />
             <SiteHeader />
             <main className="flex-1">{children}</main>

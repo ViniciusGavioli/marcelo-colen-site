@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Cormorant_Garamond, Inter } from "next/font/google";
+import { Cormorant_Garamond, Inter, Source_Serif_4, IBM_Plex_Sans } from "next/font/google";
 import "./globals.css";
 import { SITE_CONFIG, DEFAULT_SEO, OG_IMAGES } from "@/lib/constants";
 import FacebookPixel from "@/components/FacebookPixel";
@@ -19,6 +19,25 @@ const inter = Inter({
   subsets: ["latin"],
   weight: ["300", "400", "500", "600", "700"],
   variable: "--font-inter",
+  display: "swap",
+});
+
+// Par do site institucional. Adicionado, nao substitui: as landing pages
+// continuam em Cormorant/Inter e nao devem mudar de aparencia.
+// Source Serif nasceu para leitura longa e publicacao academica; IBM Plex Sans
+// da o registro institucional e tecnico sem o ar corporativo do Inter.
+const sourceSerif = Source_Serif_4({
+  subsets: ["latin", "latin-ext"],
+  weight: ["400", "600"],
+  style: ["normal", "italic"],
+  variable: "--font-source-serif",
+  display: "swap",
+});
+
+const plexSans = IBM_Plex_Sans({
+  subsets: ["latin", "latin-ext"],
+  weight: ["400", "500", "600"],
+  variable: "--font-plex-sans",
   display: "swap",
 });
 
@@ -81,7 +100,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="pt-BR" className={`${cormorantGaramond.variable} ${inter.variable}`}>
+    <html
+      lang="pt-BR"
+      className={`${cormorantGaramond.variable} ${inter.variable} ${sourceSerif.variable} ${plexSans.variable}`}
+    >
       <body className="min-h-screen flex flex-col antialiased">
         <Analytics />
         <FacebookPixel />

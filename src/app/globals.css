@@ -609,3 +609,52 @@ img {
   image-rendering: -webkit-optimize-contrast;
 }
 
+
+/* ============================================================================
+   MOVIMENTO DO SITE INSTITUCIONAL
+   Classes com prefixo `mc-`, usadas apenas pelo grupo (site). As landing
+   pages não as referenciam e seguem inalteradas.
+
+   Feito em CSS, e não em framer-motion, porque o framer não anima neste
+   projeto: medido no navegador, `animate` fica parado no valor inicial em
+   todos os componentes, enquanto JS puro (Lenis) roda normalmente. Em CSS a
+   revelação acontece mesmo antes do JavaScript hidratar.
+   ============================================================================ */
+
+@keyframes mc-sobe {
+  from { transform: translateY(110%); }
+  to   { transform: translateY(0); }
+}
+
+/* Linha de título que nasce atrás da borda da máscara. */
+.mc-linha {
+  display: block;
+  animation: mc-sobe 900ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@keyframes mc-entra {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: none; }
+}
+
+/* Bloco que entra ao aparecer em tela: o estado inicial fica aqui e a
+   animação só dispara quando o observador adiciona `.mc-visivel`. */
+.mc-reveal { opacity: 0; }
+.mc-reveal.mc-visivel {
+  animation: mc-entra 600ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* Troca suave da imagem do painel de áreas. */
+.mc-troca { animation: mc-fade 450ms ease-out both; }
+@keyframes mc-fade { from { opacity: 0; } to { opacity: 1; } }
+
+@media (prefers-reduced-motion: reduce) {
+  .mc-linha,
+  .mc-reveal,
+  .mc-reveal.mc-visivel,
+  .mc-troca {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+}

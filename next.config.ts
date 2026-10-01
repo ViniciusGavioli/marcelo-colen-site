@@ -13,15 +13,6 @@ const nextConfig: NextConfig = {
       },
     ];
   },
-  async redirects() {
-    return [
-      {
-        source: "/",
-        destination: "/recurso-heteroidentificacao",
-        permanent: false, // 307 — temporário, até a nova home ficar pronta
-      },
-    ];
-  },
 };
 
 export default nextConfig;
