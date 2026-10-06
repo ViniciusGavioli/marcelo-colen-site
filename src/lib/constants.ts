@@ -11,6 +11,10 @@ export const SITE_CONFIG = {
     "Advogado especialista em heteroidentificação, cotas raciais e recurso administrativo. Mestre em Direito pela UFMG, Diretor de Diversidade da OAB/MG. Atendimento em todo o Brasil.",
   url: process.env.NEXT_PUBLIC_SITE_URL || "https://marcelocolen.com.br",
   locale: "pt-BR",
+  // Endereço da home institucional. A raiz ainda redireciona para a LP de
+  // recurso (next.config.ts); quando a home assumir a raiz, troque para "/",
+  // mova (site)/site-oficial/page.tsx para (site)/page.tsx e tire o redirect.
+  homePath: "/site-oficial",
   
   // Informações de contato (use ENV em produção)
   contact: {

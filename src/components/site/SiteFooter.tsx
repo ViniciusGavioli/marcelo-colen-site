@@ -15,9 +15,9 @@ const ATUACAO = [
 
 const INSTITUCIONAL = [
     { label: "Trajetória", href: "/sobre" },
-    { label: "Artigos e análises", href: "/#artigos" },
+    { label: "Artigos e análises", href: `${SITE_CONFIG.homePath}#artigos` },
     { label: "Na mídia", href: "/midia" },
-    { label: "Contato", href: "/#contato" },
+    { label: "Contato", href: `${SITE_CONFIG.homePath}#contato` },
 ];
 
 function Coluna({ titulo, children }: { titulo: string; children: React.ReactNode }) {

@@ -5,6 +5,9 @@ import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { T, TYPE } from "@/lib/institutional-theme";
+import { SITE_CONFIG } from "@/lib/constants";
+
+const HOME = SITE_CONFIG.homePath;
 
 // Posição de scroll como estado externo, em vez de useEffect + setState,
 // que o lint do projeto trata como render em cascata.
@@ -20,9 +23,9 @@ const lerScrollNoServidor = () => false;
 const NAV = [
     { label: "Atuação", href: "/atuacao" },
     { label: "Trajetória", href: "/sobre" },
-    { label: "Artigos", href: "/#artigos" },
+    { label: "Artigos", href: `${HOME}#artigos` },
     { label: "Na mídia", href: "/midia" },
-    { label: "Contato", href: "/#contato" },
+    { label: "Contato", href: `${HOME}#contato` },
 ];
 
 export function SiteHeader() {
@@ -45,7 +48,7 @@ export function SiteHeader() {
         >
             <div className="mx-auto flex max-w-6xl items-center justify-between px-4 md:px-6">
                 <Link
-                    href="/"
+                    href={HOME}
                     className="flex items-center gap-3 py-3.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4"
                     style={{ outlineColor: T.copperOnInk }}
                 >
@@ -92,7 +95,7 @@ export function SiteHeader() {
                 <nav className="hidden items-center gap-8 md:flex" aria-label="Principal">
                     {NAV.map((item) => {
                         const ativo =
-                            item.href.startsWith("/#")
+                            item.href.includes("#")
                                 ? false
                                 : pathname === item.href;
                         return (

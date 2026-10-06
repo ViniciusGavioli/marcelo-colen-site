@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { ChevronRight } from "lucide-react";
+import { SITE_CONFIG } from "@/lib/constants";
 
 interface BreadcrumbItem {
     label: string;
@@ -18,7 +19,7 @@ export function Breadcrumb({ items, goldColor = "#c9a227", grayColor = "rgba(255
             <ol className="flex items-center gap-1.5 text-[10px] md:text-xs uppercase tracking-widest">
                 <li>
                     <Link
-                        href="/"
+                        href={SITE_CONFIG.homePath}
                         className="transition-colors hover:opacity-80"
                         style={{ color: grayColor }}
                     >

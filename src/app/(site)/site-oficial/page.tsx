@@ -1,4 +1,6 @@
+import type { Metadata } from "next";
 import { T } from "@/lib/institutional-theme";
+import { SITE_CONFIG } from "@/lib/constants";
 import { HomeHero } from "@/components/home/HomeHero";
 import { HomeCredentials } from "@/components/home/HomeCredentials";
 import { PracticeAreas } from "@/components/home/PracticeAreas";
@@ -9,6 +11,14 @@ import { MediaSection } from "@/components/home/MediaSection";
 import { InsightsSection } from "@/components/home/InsightsSection";
 import { MethodSection } from "@/components/home/MethodSection";
 import { ContactSection } from "@/components/home/ContactSection";
+
+// Endereço provisório enquanto a raiz redireciona para a LP de recurso.
+// Fora do índice para o Google não registrar uma URL que vai mudar; o
+// canonical herdado de (site)/layout.tsx apontaria para a raiz, que é a LP.
+export const metadata: Metadata = {
+    alternates: { canonical: `${SITE_CONFIG.url}${SITE_CONFIG.homePath}` },
+    robots: { index: false, follow: true },
+};
 
 // Server Component. Só PracticeAreas e SituationPaths rodam no cliente, por
 // causa do accordion e da camada de contexto; o resto é HTML estático.

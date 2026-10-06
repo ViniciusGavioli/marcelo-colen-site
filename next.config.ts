@@ -13,6 +13,17 @@ const nextConfig: NextConfig = {
       },
     ];
   },
+  async redirects() {
+    return [
+      {
+        source: "/",
+        destination: "/recurso-heteroidentificacao",
+        // 307, temporário: a home nova está em /site-oficial
+        // (SITE_CONFIG.homePath) até assumir a raiz.
+        permanent: false,
+      },
+    ];
+  },
 };
 
 export default nextConfig;
