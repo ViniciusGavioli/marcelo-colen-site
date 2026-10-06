@@ -17,7 +17,6 @@ import {
     Copy,
     Check,
     Zap,
-    Scale,
     FileText
 } from "lucide-react";
 import { Container } from "@/components/layout";
@@ -25,6 +24,8 @@ import { getDirectWhatsAppLink } from "@/lib/whatsapp";
 import { trackWhatsAppClick } from "@/lib/analytics";
 import { useState, useEffect, useRef } from "react";
 import { DrMarceloSection } from "@/components/sections/DrMarceloSection";
+import { HeteroAtuacaoPublica } from "@/components/landing/hetero/hetero-atuacao-publica";
+import { HeteroAtendimentoNacional } from "@/components/landing/hetero/hetero-atendimento-nacional";
 import dynamic from "next/dynamic";
 import { useQuiz } from "@/components/useQuiz";
 
@@ -91,16 +92,6 @@ const D = {
                 titulo: "Inconsistência com o edital",
                 texto: "A comissão adotou **critérios diferentes dos previstos no edital**. O que não está no edital **não pode ser usado contra o candidato**.",
             },
-        ],
-    },
-    analiseCaso: {
-        title: "O que analisamos no seu caso",
-        desc: "Avaliação do edital, da motivação da banca e da viabilidade do recurso.",
-        items: [
-            "Edital do concurso",
-            "Resultado da heteroidentificação",
-            "Fundamentação apresentada pela banca",
-            "Prazo recursal disponível",
         ],
     },
     urg: {
@@ -485,6 +476,11 @@ export default function RecursoHeteroidentificacaoPage() {
             {/* ══════════════════════════════════════════════════════════════ */}
             <DrMarceloSection />
 
+            {/* ══════════════════════════════════════════════════════════════ */}
+            {/* ATUAÇÃO PÚBLICA — prova externa, só do tema da LP             */}
+            {/* ══════════════════════════════════════════════════════════════ */}
+            <HeteroAtuacaoPublica />
+
             {/* CTA intermediário após depoimentos */}
             <section className="py-8 md:py-12" style={{ backgroundColor: C.bg1 }}>
                 <Container>
@@ -545,55 +541,6 @@ export default function RecursoHeteroidentificacaoPage() {
                         <div className="text-center">
                             <Cta text="Analisar Se Meu Caso Tem Fundamento" onOpenQuiz={quiz.open} />
                         </div>
-                    </div>
-                </Container>
-            </section>
-
-            {/* ══════════════════════════════════════════════════════════════ */}
-            {/* O QUE ANALISAMOS NO SEU CASO                                 */}
-            {/* ══════════════════════════════════════════════════════════════ */}
-            <section className="py-16 md:py-28 relative overflow-hidden" style={{ backgroundColor: C.bg2 }}>
-                <div
-                    aria-hidden="true"
-                    className="absolute inset-0 pointer-events-none"
-                    style={{ backgroundImage: GRAIN_URL, backgroundRepeat: "repeat", backgroundSize: "320px 320px", opacity: 0.025 }}
-                />
-                <Container className="relative z-10">
-                    <div className="max-w-2xl mx-auto">
-                        <div className="flex flex-col items-center justify-center gap-2 mb-2 text-center">
-                            <Scale className="w-9 h-9" style={{ color: C.gold, opacity: 0.85 }} />
-                            <SectionLabel>Análise técnica</SectionLabel>
-                            <h2 className="text-2xl md:text-4xl font-bold px-4" style={{ color: C.white, fontFamily: "'Cormorant Garamond', Georgia, serif" }}>
-                                {D.analiseCaso.title}
-                            </h2>
-                        </div>
-                        <GoldDivider />
-                        <p className="text-sm md:text-base font-medium text-center mt-3 mb-8" style={{ color: C.gray2 }}>
-                            {renderBold(D.analiseCaso.desc)}
-                        </p>
-
-                        <div className="space-y-3 mb-8">
-                            {D.analiseCaso.items.map((item, i) => (
-                                <Reveal key={i} delay={i * 0.08}>
-                                    <div
-                                        className="flex items-center gap-4 rounded-xl p-4 transition-colors hover:bg-white/[0.03]"
-                                        style={{
-                                            border: `1px solid rgba(201,162,39,0.15)`,
-                                            backgroundColor: C.goldSoft,
-                                            boxShadow: "0 2px 10px rgba(0,0,0,0.15)",
-                                        }}
-                                    >
-                                        <div className="w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0 font-bold text-xs" style={{ backgroundColor: C.gold, color: C.bg1 }}>
-                                            ✓
-                                        </div>
-                                        <p className="font-medium text-sm md:text-base" style={{ color: C.gray1 }}>
-                                            {item}
-                                        </p>
-                                    </div>
-                                </Reveal>
-                            ))}
-                        </div>
-
                     </div>
                 </Container>
             </section>
@@ -679,6 +626,11 @@ export default function RecursoHeteroidentificacaoPage() {
                 </Container>
             </section>
 
+            {/* ══════════════════════════════════════════════════════════════ */}
+            {/* ATENDIMENTO NACIONAL — mapa, escritório em BH, atendimento    */}
+            {/* online para todos os estados                                 */}
+            {/* ══════════════════════════════════════════════════════════════ */}
+            <HeteroAtendimentoNacional onOpenQuiz={quiz.open} />
 
             {/* ══════════════════════════════════════════════════════════════ */}
             {/* FAQ                                                          */}

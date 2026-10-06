@@ -3,6 +3,14 @@ import type { NextConfig } from "next";
 const nextConfig: NextConfig = {
   /* config options here */
   reactCompiler: true,
+  images: {
+    // Capas dos conteúdos da seção Atuação Pública da LP de recurso
+    // (components/landing/hetero/hetero-atuacao-publica.tsx).
+    remotePatterns: [
+      { protocol: "https", hostname: "i.ytimg.com", pathname: "/vi/**" },
+      { protocol: "https", hostname: "image-cdn-ak.spotifycdn.com", pathname: "/image/**" },
+    ],
+  },
   async headers() {
     return [
       {
