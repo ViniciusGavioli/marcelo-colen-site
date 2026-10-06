@@ -26,6 +26,8 @@ import { useState, useEffect, useRef } from "react";
 import { DrMarceloSection } from "@/components/sections/DrMarceloSection";
 import { HeteroAtuacaoPublica } from "@/components/landing/hetero/hetero-atuacao-publica";
 import { HeteroAtendimentoNacional } from "@/components/landing/hetero/hetero-atendimento-nacional";
+import { HeteroInstagramPerfil } from "@/components/landing/hetero/hetero-instagram-perfil";
+import { HeteroAvaliacoesGoogle } from "@/components/landing/hetero/hetero-avaliacoes-google";
 import dynamic from "next/dynamic";
 import { useQuiz } from "@/components/useQuiz";
 
@@ -235,73 +237,6 @@ function FaqItem({ q, a }: { q: string; a: string }) {
 }
 
 // ============================================================================
-// PROVA SOCIAL
-// ============================================================================
-function ProvasSocial() {
-    const depoimentos = [
-        {
-            nome: "Melissa Rosadilla · avaliação no Google",
-            texto: "A equipe atuou de forma excepcional no meu caso. Desde o primeiro atendimento, extremamente claros e transparentes comigo, o que me gerou muita confiança. Para finalizar, obtive êxito. Muito obrigada a Marcelo e toda a equipe!",
-        },
-        {
-            nome: "Juliy Ferreira · avaliação no Google",
-            texto: "Em um momento delicado da minha vida, encontrei não apenas competência jurídica, mas também acolhimento e humanidade. Todas as minhas dúvidas foram esclarecidas com transparência, e me senti segura durante todo o processo.",
-        },
-        {
-            nome: "Sibele Rosadilla · avaliação no Google",
-            texto: "Escritório sério, competente, interessado, responsável, diferenciado! Nos atendeu de maneira ímpar, de forma muito clara e conseguindo sucesso na ação. Totalmente recomendável!",
-        },
-    ];
-
-    return (
-        <section
-            className="py-16 md:py-28 relative overflow-hidden"
-            style={{ backgroundColor: C.bg2 }}
-        >
-            {/* textura jurídica sutil */}
-            <div
-                aria-hidden="true"
-                className="absolute inset-0 pointer-events-none"
-                style={{ backgroundImage: "url('/texture-juridica.webp')", backgroundRepeat: "repeat", backgroundSize: "1200px 800px", opacity: 0.03 }}
-            />
-            <Container className="relative z-10">
-                <div className="max-w-4xl mx-auto">
-                    <SectionLabel>Depoimentos</SectionLabel>
-                    <h2 className="text-2xl md:text-3xl font-bold text-center mb-2" style={{ color: C.white, fontFamily: "'Cormorant Garamond', Georgia, serif" }}>
-                        Candidatos que questionaram a eliminação injusta
-                    </h2>
-                    <GoldDivider />
-                    <div className="grid md:grid-cols-3 gap-5 mt-10">
-                        {depoimentos.map((dep, i) => (
-                            <div
-                                key={i}
-                                className="rounded-2xl p-6 flex flex-col relative overflow-hidden"
-                                style={{
-                                    backgroundColor: "rgba(255,255,255,0.03)",
-                                    border: "1px solid rgba(255,255,255,0.07)",
-                                    boxShadow: "0 4px 20px rgba(0,0,0,0.2)",
-                                }}
-                            >
-                                <span
-                                    aria-hidden="true"
-                                    className="absolute top-3 right-4 text-5xl leading-none font-serif select-none"
-                                    style={{ color: C.gold, opacity: 0.12 }}
-                                >&rdquo;</span>
-                                <p className="text-sm md:text-base leading-relaxed mb-5 flex-1 relative z-10" style={{ color: C.gray2, fontStyle: "italic" }}>
-                                    &ldquo;{dep.texto}&rdquo;
-                                </p>
-                                <div className="h-px mb-4" style={{ background: `linear-gradient(to right, ${C.gold}, transparent)`, opacity: 0.3 }} />
-                                <p className="text-xs font-bold uppercase tracking-widest" style={{ color: C.gold }}>{dep.nome}</p>
-                            </div>
-                        ))}
-                    </div>
-                </div>
-            </Container>
-        </section>
-    );
-}
-
-// ============================================================================
 // SCROLL REVEAL
 // ============================================================================
 function useScrollReveal() {
@@ -420,6 +355,11 @@ export default function RecursoHeteroidentificacaoPage() {
             </section>
 
             {/* ══════════════════════════════════════════════════════════════ */}
+            {/* VÍDEO                                                        */}
+            {/* ══════════════════════════════════════════════════════════════ */}
+            <Reveal><VideoSection youtubeId="jAiQi4CgMN0" onOpenQuiz={quiz.open} /></Reveal>
+
+            {/* ══════════════════════════════════════════════════════════════ */}
             {/* ISSO ACONTECEU COM VOCÊ?                                     */}
             {/* ══════════════════════════════════════════════════════════════ */}
             <section className="py-12 md:py-16 relative overflow-hidden" style={{ backgroundColor: C.bg2 }}>
@@ -457,35 +397,6 @@ export default function RecursoHeteroidentificacaoPage() {
                                 </Reveal>
                             ))}
                         </div>
-                    </div>
-                </Container>
-            </section>
-
-            {/* ══════════════════════════════════════════════════════════════ */}
-            {/* VÍDEO                                                        */}
-            {/* ══════════════════════════════════════════════════════════════ */}
-            <Reveal><VideoSection youtubeId="jAiQi4CgMN0" /></Reveal>
-
-            {/* ══════════════════════════════════════════════════════════════ */}
-            {/* PROVA SOCIAL                                                 */}
-            {/* ══════════════════════════════════════════════════════════════ */}
-            <Reveal><ProvasSocial /></Reveal>
-
-            {/* ══════════════════════════════════════════════════════════════ */}
-            {/* DR. MARCELO — 4ª seção, logo após a prova social             */}
-            {/* ══════════════════════════════════════════════════════════════ */}
-            <DrMarceloSection />
-
-            {/* ══════════════════════════════════════════════════════════════ */}
-            {/* ATUAÇÃO PÚBLICA — prova externa, só do tema da LP             */}
-            {/* ══════════════════════════════════════════════════════════════ */}
-            <HeteroAtuacaoPublica />
-
-            {/* CTA intermediário após depoimentos */}
-            <section className="py-8 md:py-12" style={{ backgroundColor: C.bg1 }}>
-                <Container>
-                    <div className="flex justify-center">
-                        <Cta text="Quero Analisar Meu Caso" onOpenQuiz={quiz.open} />
                     </div>
                 </Container>
             </section>
@@ -544,6 +455,33 @@ export default function RecursoHeteroidentificacaoPage() {
                     </div>
                 </Container>
             </section>
+
+            {/* ══════════════════════════════════════════════════════════════ */}
+            {/* PROVA SOCIAL                                                 */}
+            {/* ══════════════════════════════════════════════════════════════ */}
+            <Reveal><HeteroAvaliacoesGoogle /></Reveal>
+
+            {/* ══════════════════════════════════════════════════════════════ */}
+            {/* DR. MARCELO — 4ª seção, logo após a prova social             */}
+            {/* ══════════════════════════════════════════════════════════════ */}
+            <DrMarceloSection />
+
+            {/* ══════════════════════════════════════════════════════════════ */}
+            {/* ATUAÇÃO PÚBLICA — prova externa, só do tema da LP             */}
+            {/* ══════════════════════════════════════════════════════════════ */}
+            <HeteroAtuacaoPublica />
+
+            {/* ══════════════════════════════════════════════════════════════ */}
+            {/* INSTAGRAM — perfil em miniatura, prova de audiência           */}
+            {/* ══════════════════════════════════════════════════════════════ */}
+            <HeteroInstagramPerfil />
+
+            {/* ══════════════════════════════════════════════════════════════ */}
+            {/* ATENDIMENTO NACIONAL — mapa, escritório em BH, atendimento    */}
+            {/* online para todos os estados. O botão desta seção faz as      */}
+            {/* vezes do CTA intermediário que ficava aqui.                  */}
+            {/* ══════════════════════════════════════════════════════════════ */}
+            <HeteroAtendimentoNacional onOpenQuiz={quiz.open} />
 
             {/* ══════════════════════════════════════════════════════════════ */}
             {/* POR QUE AGIR RÁPIDO                                         */}
@@ -625,12 +563,6 @@ export default function RecursoHeteroidentificacaoPage() {
 
                 </Container>
             </section>
-
-            {/* ══════════════════════════════════════════════════════════════ */}
-            {/* ATENDIMENTO NACIONAL — mapa, escritório em BH, atendimento    */}
-            {/* online para todos os estados                                 */}
-            {/* ══════════════════════════════════════════════════════════════ */}
-            <HeteroAtendimentoNacional onOpenQuiz={quiz.open} />
 
             {/* ══════════════════════════════════════════════════════════════ */}
             {/* FAQ                                                          */}
@@ -746,29 +678,113 @@ export default function RecursoHeteroidentificacaoPage() {
 // ============================================================================
 // VIDEO SECTION
 // ============================================================================
-function VideoSection({ youtubeId, mp4Src }: { youtubeId?: string; mp4Src?: string; } = {}) {
+// Botão de play próprio, no dourado da LP, no lugar do botão cinza padrão do
+// YouTube. A biblioteca troca a classe do botão por playerClass, então o
+// estilo inteiro mora aqui, inclusive sumir quando o vídeo começa.
+const CSS_PLAY = `
+.mc-play { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 76px; height: 76px; border: 0; padding: 0; border-radius: 9999px; cursor: pointer; z-index: 2; background: #c9a227; box-shadow: 0 12px 32px rgba(0,0,0,0.5), 0 0 0 8px rgba(201,162,39,0.16); transition: transform 0.2s ease, background-color 0.2s ease; }
+.mc-play::before { content: ""; position: absolute; top: 50%; left: 54%; transform: translate(-50%, -50%); border-style: solid; border-width: 12px 0 12px 20px; border-color: transparent transparent transparent #0a0a0a; }
+.mc-play::after { content: ""; position: absolute; inset: -8px; border-radius: inherit; border: 1.5px solid rgba(201,162,39,0.6); animation: mc-play-pulso 2.8s ease-out infinite; }
+.yt-lite:hover > .mc-play { transform: translate(-50%, -50%) scale(1.06); background: #d9b740; }
+.mc-play:focus-visible { outline: 2px solid #ffffff; outline-offset: 6px; }
+.yt-lite.lyt-activated > .mc-play { opacity: 0; pointer-events: none; }
+@keyframes mc-play-pulso { from { transform: scale(1); opacity: 0.8; } to { transform: scale(1.45); opacity: 0; } }
+@media (max-width: 767px) { .mc-play { width: 62px; height: 62px; } .mc-play::before { border-width: 10px 0 10px 16px; } }
+@media (prefers-reduced-motion: reduce) { .mc-play::after { animation: none; opacity: 0.4; } }
+`;
+
+function VideoSection({ youtubeId, mp4Src, onOpenQuiz }: { youtubeId?: string; mp4Src?: string; onOpenQuiz?: () => void } = {}) {
     const YOUTUBE_ID = youtubeId ?? "COLE_O_ID_AQUI";
     const MP4_SRC = mp4Src ?? "";
+    // Nome e duração ficam sobre a capa só até o vídeo começar.
+    const [tocando, setTocando] = useState(false);
 
     return (
-        <section className="py-16 md:py-28" style={{ backgroundColor: C.bg1 }}>
-            <div className="max-w-[720px] mx-auto px-6">
+        <section className="py-16 md:py-24 relative overflow-hidden" style={{ backgroundColor: C.bg1 }}>
+            <div
+                aria-hidden="true"
+                className="absolute inset-0 pointer-events-none"
+                style={{ background: "radial-gradient(ellipse 60% 45% at 50% 62%, rgba(201,162,39,0.07) 0%, transparent 70%)" }}
+            />
+            <div className="relative max-w-[880px] mx-auto px-4 md:px-6">
                 <SectionLabel>Mensagem do Especialista</SectionLabel>
-                <h2 className="text-2xl md:text-3xl font-bold text-center mb-2 leading-tight md:leading-snug" style={{ color: C.white, fontFamily: "'Cormorant Garamond', Georgia, serif" }}>
-                    Entenda em 2 minutos por que você ainda pode recorrer.
+                {/* Mesmo jogo de dois tons do hero: abertura leve, conclusão em dourado. */}
+                <h2 className="text-center mb-3 text-balance" style={{ fontFamily: "'Cormorant Garamond', Georgia, serif" }}>
+                    <span className="block text-xl md:text-2xl font-medium italic" style={{ color: C.gray1, opacity: 0.85 }}>
+                        Entenda em 2 minutos
+                    </span>
+                    <span className="block text-[1.75rem] md:text-[2.5rem] font-bold leading-[1.1] mt-1" style={{ color: C.gold }}>
+                        por que você ainda pode recorrer.
+                    </span>
                 </h2>
                 <GoldDivider />
-                <div className="relative w-full rounded-2xl overflow-hidden mt-10" style={{ boxShadow: "0 12px 60px rgba(0,0,0,0.65)", border: "1px solid rgba(255,255,255,0.1)" }}>
-                    {MP4_SRC ? (
-                        <video src={MP4_SRC} controls playsInline preload="none" className="w-full object-cover" />
-                    ) : (
-                        <LiteYouTubeEmbed id={YOUTUBE_ID} title="Vídeo de Análise da Situação" poster="hqdefault" lazyLoad wrapperClass="yt-lite" />
-                    )}
+
+                {/* Moldura: fio dourado em degradê em volta do vídeo. */}
+                <div
+                    className="mt-10 rounded-[20px] p-px"
+                    style={{
+                        background: "linear-gradient(135deg, rgba(201,162,39,0.65), rgba(201,162,39,0.08) 40%, rgba(201,162,39,0.08) 60%, rgba(201,162,39,0.5))",
+                        boxShadow: "0 24px 70px rgba(0,0,0,0.7)",
+                    }}
+                >
+                    <div className="relative rounded-[19px] overflow-hidden" style={{ backgroundColor: "#000" }}>
+                        {MP4_SRC ? (
+                            <video src={MP4_SRC} controls playsInline preload="none" className="w-full object-cover" />
+                        ) : (
+                            <LiteYouTubeEmbed
+                                id={YOUTUBE_ID}
+                                title="Dr. Marcelo Colen explica por que você ainda pode recorrer"
+                                announce="Assistir:"
+                                poster="maxresdefault"
+                                webp
+                                lazyLoad
+                                noscriptFallback={false}
+                                wrapperClass="yt-lite"
+                                playerClass="mc-play"
+                                onIframeAdded={() => setTocando(true)}
+                            />
+                        )}
+                        {!MP4_SRC && !tocando && (
+                            <>
+                                <div
+                                    aria-hidden="true"
+                                    className="pointer-events-none absolute inset-0"
+                                    style={{ background: "linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0) 40%)" }}
+                                />
+                                <div
+                                    aria-hidden="true"
+                                    className="pointer-events-none absolute left-3 bottom-3 md:left-5 md:bottom-5 pl-3"
+                                    style={{ borderLeft: `2px solid ${C.gold}` }}
+                                >
+                                    <span className="block text-sm md:text-base font-semibold leading-tight" style={{ color: C.white }}>
+                                        Dr. Marcelo Colen
+                                    </span>
+                                    <span className="block text-[11px] md:text-xs mt-0.5" style={{ color: C.gray2 }}>
+                                        Mestre em Direito pela UFMG
+                                    </span>
+                                </div>
+                                {/* Duração real do vídeo no YouTube (85 s). */}
+                                <span
+                                    aria-hidden="true"
+                                    className="pointer-events-none absolute right-3 bottom-3 md:right-5 md:bottom-5 rounded-full px-2.5 py-1 text-xs font-semibold tabular-nums"
+                                    style={{ backgroundColor: "rgba(0,0,0,0.65)", color: C.white }}
+                                >
+                                    1:25
+                                </span>
+                            </>
+                        )}
+                    </div>
                 </div>
-                <div className="flex justify-center mt-8">
-                    <Cta text="Quero Analisar Meu Caso Agora" />
+
+                <div className="flex flex-col items-center gap-3 mt-9">
+                    <Cta text="Quero Analisar Meu Caso Agora" onOpenQuiz={onOpenQuiz} />
+                    <p className="text-[11px] md:text-xs font-medium" style={{ color: C.gray3 }}>
+                        <Lock className="w-3 h-3 inline mr-1 mb-0.5" />
+                        Sigiloso · Sem compromisso · Resposta rápida
+                    </p>
                 </div>
             </div>
+            <style>{CSS_PLAY}</style>
         </section>
     );
 }
