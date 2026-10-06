@@ -11,37 +11,40 @@ import { Grain, SectionRule } from "./Texture";
 // passar o cursor troca a imagem e o texto. No mobile vira accordion, para a
 // página não ficar interminável.
 //
-// As imagens são de ambiente, sem pessoa. Rosto inventado em site de advogado
-// tem o mesmo problema da foto de terceiros legendada como ele: documenta
-// alguém que não existe.
+// Um retrato dele por eixo, quatro fotografias diferentes entre si em fundo,
+// enquadramento e expressão. A versão anterior punha imagens de ambiente sem
+// pessoa, e o índice ficou com cara de catálogo de mobiliário.
+//
+// Painel em 4:5. A sessão fotográfica inteira é vertical, e em 4:3 o recorte
+// decepava queixo e topo da cabeça.
 const AREAS = [
     {
         n: "01",
         titulo: "Direito Antidiscriminatório",
         texto: "Atuação jurídica em questões relacionadas à discriminação, igualdade racial, direitos fundamentais e proteção contra práticas discriminatórias.",
-        imagem: "/images/home/area-01-v2.jpg",
-        alt: "Átrio de edifício público modernista brasileiro, com parede de cobogó e piso de granilite",
+        imagem: "/images/home/area-01-v3.jpg",
+        alt: "Marcelo Colen em retrato de estúdio, de camisa branca sem gravata",
     },
     {
         n: "02",
         titulo: "Heteroidentificação e Políticas Afirmativas",
         texto: "Orientação e atuação em procedimentos de heteroidentificação, recursos administrativos, concursos públicos, políticas de cotas raciais e medidas judiciais relacionadas.",
-        imagem: "/images/home/area-02-v2.jpg",
-        alt: "Documento oficial com clipe metálico sobre mesa escura, ao lado de pastas",
+        imagem: "/images/home/area-02-v4.jpg",
+        alt: "Marcelo Colen sentado no escritório, com a vista de Belo Horizonte ao fundo",
     },
     {
         n: "03",
         titulo: "Direito Criminal",
         texto: "Defesa técnica em investigações e processos criminais, habeas corpus, recursos, execução penal e questões de Direito Penal Empresarial.",
-        imagem: "/images/home/area-03-v2.jpg",
-        alt: "Corredor de edifício público em concreto aparente, com luz lateral e piso espelhado",
+        imagem: "/images/home/area-03-v3.jpg",
+        alt: "Marcelo Colen de corpo inteiro, de terno escuro, em retrato de estúdio",
     },
     {
         n: "04",
         titulo: "Consultoria e Atuação Institucional",
         texto: "Pareceres, consultoria, formação, palestras e projetos relacionados à igualdade racial, diversidade, integridade e políticas institucionais.",
-        imagem: "/images/home/area-04-v2.jpg",
-        alt: "Mesa de reunião em madeira escura com cadernos fechados e copo de água",
+        imagem: "/images/home/area-04-v3.jpg",
+        alt: "Marcelo Colen ao telefone junto à janela do escritório, com Belo Horizonte ao fundo",
     },
 ];
 
@@ -136,10 +139,10 @@ export function PracticeAreas() {
                                     <Image
                                         src={AREAS[ativo].imagem}
                                         alt={AREAS[ativo].alt}
-                                        width={1100}
-                                        height={825}
+                                        width={1000}
+                                        height={1250}
                                         sizes="36vw"
-                                        className="w-full object-cover aspect-[4/3]"
+                                        className="w-full object-cover aspect-[4/5]"
                                     />
                                 </div>
                                 <p

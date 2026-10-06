@@ -84,7 +84,7 @@ export function SituationPaths() {
                 aria-hidden
                 className="pointer-events-none absolute inset-0"
                 style={{
-                    backgroundImage: "url('/images/home/textura-situacoes-v2.jpg')",
+                    backgroundImage: "url('/images/home/textura-situacoes-v3.jpg')",
                     backgroundSize: "cover",
                     backgroundPosition: "center",
                     opacity: 0.1,

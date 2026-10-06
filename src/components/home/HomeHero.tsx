@@ -15,8 +15,14 @@ const WA = "Olá Dr. Marcelo, vim pelo site e gostaria de falar com o escritóri
 // Quebra manual: a linha cai onde o sentido permite, não onde a caixa
 // termina. O texto corrido vai no aria-label do h1, porque o <br> implícito
 // entre os spans não gera espaço no nome acessível.
+//
+// Quatro linhas, não três. Em três, a primeira pedia 811px num espaço de
+// 635px e requebrava dentro da própria máscara, empilhando sete linhas
+// desalinhadas com um "e" sozinho no meio. O corpo do texto que acompanha
+// esta medida está em .mc-h1-hero, no globals.css.
 const TITULO = [
-    "Advocacia em Direito Criminal,",
+    "Advocacia em",
+    "Direito Criminal,",
     "Direito Antidiscriminatório e",
     "Políticas de Igualdade Racial.",
 ];
@@ -36,7 +42,11 @@ export function HomeHero() {
             <HeroParallax retratoRef={retrato} textoRef={texto} />
 
             <Container>
-                <div ref={texto} className="relative grid md:grid-cols-12">
+                {/* z-10: retrato e degradê são absolutos e vêm depois no DOM.
+                    Entre 1024px e ~1500px a linha mais longa encosta na borda
+                    do retrato e sumia sob o início sólido do degradê. Por cima,
+                    ela fica sobre tinta escura e continua legível. */}
+                <div ref={texto} className="relative z-10 grid md:grid-cols-12">
                     <div className="py-[clamp(5rem,11vw,11rem)] md:col-span-7">
                         <p
                             className="uppercase"
@@ -66,15 +76,15 @@ export function HomeHero() {
                         <h1
                             id="hero-titulo"
                             aria-label={TITULO_CORRIDO}
-                            style={{ marginTop: "1.25rem", maxWidth: "19ch" }}
+                            style={{ marginTop: "1.25rem" }}
                         >
                             <span aria-hidden>
                                 <RevealLines
                                     linhas={TITULO}
                                     delayInicial={0.1}
+                                    className="mc-h1-hero"
                                     style={{
                                         fontFamily: T.serif,
-                                        fontSize: TYPE.h1,
                                         lineHeight: 1.15,
                                         letterSpacing: "-0.015em",
                                         fontWeight: 400,

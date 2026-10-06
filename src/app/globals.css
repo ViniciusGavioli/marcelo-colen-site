@@ -632,6 +632,28 @@ img {
   animation: mc-sobe 900ms cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
+/* Corpo do h1 do hero institucional.
+   O tamanho aqui não é gosto, é o que cabe. A frase tem 92 caracteres e é
+   quebrada à mão em quatro linhas; a maior mede 13,4em. Acima de 768px o
+   texto ocupa 7/12 do container, ou seja 635px no máximo, então 3,9vw com
+   teto de 2,875rem mantém a linha inteira dentro da caixa.
+   Isso importa porque cada linha vive dentro de uma máscara overflow:hidden
+   para a animação de subida: o que passa da largura não vaza, é decepado.
+   Era o que acontecia com max-width de 19ch, que rende 507px enquanto a
+   palavra "Antidiscriminatório" mede 517px e perdia a última letra.
+   Abaixo de 768px a coluna é inteira e 6,6vw é o maior corpo que ainda deixa
+   as quatro linhas sem requebrar. O piso é baixo de propósito: se ele subir,
+   a linha requebra em telas estreitas e sobra órfã, um "e" ou um "Racial."
+   sozinho no fim. Medido de 320px a 1440px, nenhuma linha requebra. */
+.mc-h1-hero {
+  font-size: clamp(1.3rem, 6.6vw, 2.75rem);
+}
+@media (min-width: 768px) {
+  .mc-h1-hero {
+    font-size: min(3.9vw, 2.875rem);
+  }
+}
+
 @keyframes mc-entra {
   from { opacity: 0; transform: translateY(12px); }
   to   { opacity: 1; transform: none; }

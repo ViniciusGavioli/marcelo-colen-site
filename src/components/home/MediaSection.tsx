@@ -20,8 +20,8 @@ const DESTAQUE = {
     veiculo: "TV Globo Minas",
     tipo: "Entrevista, MG1 e MG2",
     tema: "Participações nos telejornais sobre legislação antidiscriminatória.",
-    imagem: "/images/home/midia-destaque-v2.jpg",
-    alt: "Marcelo Colen durante participação em painel público",
+    imagem: "/images/home/midia-destaque-v3.jpg",
+    alt: "Marcelo Colen no escritório, em Belo Horizonte",
 };
 
 type Aparicao = {
