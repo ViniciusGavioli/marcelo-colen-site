@@ -48,17 +48,30 @@ export function DrMarceloSection() {
             <Container className="relative z-10">
                 <div className="max-w-4xl mx-auto flex flex-col md:flex-row items-stretch gap-0">
 
-                    {/* FOTO + TARJA — coluna esquerda */}
-                    <div className="flex-shrink-0 md:w-64 lg:w-72 -mx-4 md:mx-0 flex flex-col">
-                        <Image
-                            src="/images/marcelo/marcelo-sem-fundo-.png"
-                            alt="Dr. Marcelo Colen"
-                            width={553}
-                            height={722}
-                            sizes="(min-width: 1024px) 288px, (min-width: 768px) 256px, 100vw"
-                            className="w-full object-contain"
-                            style={{ filter: "drop-shadow(0 8px 24px rgba(0,0,0,0.6))", display: "block" }}
-                        />
+                    {/* FOTO + TARJA — coluna esquerda. A foto tem fundo (o
+                        escritório), então vai emoldurada como um card, com a
+                        tarja colada embaixo; no celular ocupa a largura toda. */}
+                    <div
+                        className="flex-shrink-0 md:w-64 lg:w-72 -mx-4 md:mx-0 flex flex-col md:self-center md:rounded-xl md:overflow-hidden md:border"
+                        style={{ borderColor: "rgba(201,162,39,0.22)", boxShadow: "0 18px 48px rgba(0,0,0,0.55)" }}
+                    >
+                        <div className="relative">
+                            <Image
+                                src="/images/marcelo/marcelo-colen-escritorio.webp"
+                                alt="Dr. Marcelo Colen no escritório Colen Advogados"
+                                width={1086}
+                                height={1448}
+                                sizes="(min-width: 1024px) 288px, (min-width: 768px) 256px, 100vw"
+                                className="block w-full h-auto"
+                            />
+                            {/* Base levemente escurecida: a madeira encontra a
+                                tarja azul sem corte seco. */}
+                            <div
+                                aria-hidden="true"
+                                className="absolute inset-x-0 bottom-0 h-1/4 pointer-events-none"
+                                style={{ background: "linear-gradient(to top, rgba(11,23,48,0.55), transparent)" }}
+                            />
+                        </div>
                         {/* Tarja credencial colada embaixo */}
                         <div style={{
                             backgroundColor: "#0B1730",
@@ -129,6 +142,10 @@ export function DrMarceloSection() {
 
                         {/* Bullets de autoridade */}
                         <div className="space-y-2 text-xs md:text-sm" style={{ color: gray2 }}>
+                            <div className="flex items-center gap-2">
+                                <Check className="w-3.5 h-3.5 flex-shrink-0" style={{ color: gold }} />
+                                Sócio fundador do Colen Advogados, escritório de atuação nacional
+                            </div>
                             <div className="flex items-center gap-2">
                                 <Check className="w-3.5 h-3.5 flex-shrink-0" style={{ color: gold }} />
                                 Mestre em Direito pela UFMG
