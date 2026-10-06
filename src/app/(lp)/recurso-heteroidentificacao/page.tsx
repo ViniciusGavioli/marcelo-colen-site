@@ -28,6 +28,7 @@ import { HeteroAtuacaoPublica } from "@/components/landing/hetero/hetero-atuacao
 import { HeteroAtendimentoNacional } from "@/components/landing/hetero/hetero-atendimento-nacional";
 import { HeteroInstagramPerfil } from "@/components/landing/hetero/hetero-instagram-perfil";
 import { HeteroAvaliacoesGoogle } from "@/components/landing/hetero/hetero-avaliacoes-google";
+import { HeteroDepoisDoIndeferimento } from "@/components/landing/hetero/hetero-depois-do-indeferimento";
 import dynamic from "next/dynamic";
 import { useQuiz } from "@/components/useQuiz";
 
@@ -360,46 +361,9 @@ export default function RecursoHeteroidentificacaoPage() {
             <Reveal><VideoSection youtubeId="jAiQi4CgMN0" onOpenQuiz={quiz.open} /></Reveal>
 
             {/* ══════════════════════════════════════════════════════════════ */}
-            {/* ISSO ACONTECEU COM VOCÊ?                                     */}
+            {/* DEPOIS DO INDEFERIMENTO — linha do tempo em 4 etapas          */}
             {/* ══════════════════════════════════════════════════════════════ */}
-            <section className="py-12 md:py-16 relative overflow-hidden" style={{ backgroundColor: C.bg2 }}>
-                <div
-                    aria-hidden="true"
-                    className="absolute inset-0 pointer-events-none"
-                    style={{ backgroundImage: GRAIN_URL, backgroundRepeat: "repeat", backgroundSize: "320px 320px", opacity: 0.025 }}
-                />
-                <Container className="relative z-10">
-                    <div className="max-w-2xl mx-auto">
-                        <SectionLabel>Reconhece essa situação?</SectionLabel>
-                        <h2 className="text-2xl md:text-3xl font-bold text-center mb-2" style={{ color: C.white, fontFamily: "'Cormorant Garamond', Georgia, serif" }}>
-                            Isso aconteceu com você?
-                        </h2>
-                        <GoldDivider />
-                        <div className="space-y-3 mt-8 mb-10">
-                            {[
-                                "Está com medo de perder anos de estudo por uma análise subjetiva.",
-                                "Você sempre se identificou como pardo e foi pego de surpresa.",
-                                "A banca disse 'não atende ao fenótipo' sem explicar o motivo.",
-                                "A avaliação durou poucos minutos ou foi feita por vídeo.",
-                            ].map((item, i) => (
-                                <Reveal key={i} delay={i * 0.08}>
-                                    <div
-                                        className="flex items-start gap-4 rounded-xl p-4"
-                                        style={{
-                                            backgroundColor: C.goldSoft,
-                                            border: "1px solid rgba(201,162,39,0.15)",
-                                            boxShadow: "0 2px 10px rgba(0,0,0,0.15)",
-                                        }}
-                                    >
-                                        <div className="w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0 font-bold text-xs mt-0.5" style={{ backgroundColor: C.gold, color: C.bg1 }}>✓</div>
-                                        <p className="text-sm md:text-base font-medium" style={{ color: C.gray1 }}>{item}</p>
-                                    </div>
-                                </Reveal>
-                            ))}
-                        </div>
-                    </div>
-                </Container>
-            </section>
+            <HeteroDepoisDoIndeferimento />
 
             {/* ══════════════════════════════════════════════════════════════ */}
             {/* ERROS DA BANCA                                               */}
@@ -457,14 +421,14 @@ export default function RecursoHeteroidentificacaoPage() {
             </section>
 
             {/* ══════════════════════════════════════════════════════════════ */}
-            {/* PROVA SOCIAL                                                 */}
-            {/* ══════════════════════════════════════════════════════════════ */}
-            <Reveal><HeteroAvaliacoesGoogle /></Reveal>
-
-            {/* ══════════════════════════════════════════════════════════════ */}
-            {/* DR. MARCELO — 4ª seção, logo após a prova social             */}
+            {/* DR. MARCELO — quem vai analisar o caso                       */}
             {/* ══════════════════════════════════════════════════════════════ */}
             <DrMarceloSection />
+
+            {/* ══════════════════════════════════════════════════════════════ */}
+            {/* PROVA SOCIAL — avaliações do Google, logo após o Dr. Marcelo  */}
+            {/* ══════════════════════════════════════════════════════════════ */}
+            <Reveal><HeteroAvaliacoesGoogle /></Reveal>
 
             {/* ══════════════════════════════════════════════════════════════ */}
             {/* ATUAÇÃO PÚBLICA — prova externa, só do tema da LP             */}
