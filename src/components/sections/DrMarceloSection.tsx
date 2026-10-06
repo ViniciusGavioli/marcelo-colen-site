@@ -144,10 +144,6 @@ export function DrMarceloSection() {
                         <div className="space-y-2 text-xs md:text-sm" style={{ color: gray2 }}>
                             <div className="flex items-center gap-2">
                                 <Check className="w-3.5 h-3.5 flex-shrink-0" style={{ color: gold }} />
-                                Sócio fundador do Colen Advogados, escritório de atuação nacional
-                            </div>
-                            <div className="flex items-center gap-2">
-                                <Check className="w-3.5 h-3.5 flex-shrink-0" style={{ color: gold }} />
                                 Mestre em Direito pela UFMG
                             </div>
                             <div className="flex items-center gap-2">
@@ -161,6 +157,10 @@ export function DrMarceloSection() {
                             <div className="flex items-center gap-2">
                                 <Check className="w-3.5 h-3.5 flex-shrink-0" style={{ color: gold }} />
                                 Professor, palestrante e escritor
+                            </div>
+                            <div className="flex items-center gap-2">
+                                <Check className="w-3.5 h-3.5 flex-shrink-0" style={{ color: gold }} />
+                                Sócio fundador do Colen Advogados, escritório de atuação nacional
                             </div>
                         </div>
                     </div>
