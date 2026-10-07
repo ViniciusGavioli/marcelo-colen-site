@@ -21,7 +21,9 @@ export type ItemMidia = {
     description: string;
     meta: string;
 } & (
-    | { type: "video"; youtubeId: string }
+    // inicio/fim em segundos: em transmissão longa, o player abre e para no
+    // trecho em que o Dr. Marcelo fala.
+    | { type: "video"; youtubeId: string; inicio?: number; fim?: number }
     | { type: "audio"; spotifyEpisodeId: string; cover: string }
     | { type: "registro"; registro: { kicker: string; texto: string; fonte: string } }
 );

@@ -217,7 +217,7 @@ function MediaModal({ item, onClose }: { item: Item; onClose: () => void }) {
                             id={item.youtubeId}
                             title={item.topic}
                             alwaysLoadIframe
-                            params="autoplay=1&rel=0"
+                            params={`autoplay=1&rel=0${item.inicio ? `&start=${item.inicio}` : ""}${item.fim ? `&end=${item.fim}` : ""}`}
                             noscriptFallback={false}
                             wrapperClass="yt-lite"
                         />
