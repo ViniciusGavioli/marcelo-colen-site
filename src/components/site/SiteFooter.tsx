@@ -1,11 +1,10 @@
 import Link from "next/link";
 import Image from "next/image";
-import { SITE_COLORS as C } from "@/lib/site-theme";
+import { SITE_COLORS as C, ESTILO_ROTULO } from "@/lib/site-theme";
 import { SITE_CONFIG } from "@/lib/constants";
 
 // Mapa final da presença institucional, na paleta da LP. As quatro áreas
-// aparecem no mesmo peso. "Artigos e análises" saiu: não há artigos
-// publicados.
+// aparecem no mesmo peso.
 const ATUACAO = [
     { label: "Direito Criminal", href: "/atuacao" },
     { label: "Direito Antidiscriminatório", href: "/atuacao" },
@@ -16,6 +15,7 @@ const ATUACAO = [
 const INSTITUCIONAL = [
     { label: "Trajetória", href: "/sobre" },
     { label: "Na mídia", href: "/midia" },
+    { label: "Blog", href: "/blog" },
     { label: "Contato", href: `${SITE_CONFIG.homePath}#contato` },
 ];
 
@@ -27,7 +27,7 @@ const estiloLink = { color: C.gray2, outlineColor: C.gold } as const;
 function Coluna({ titulo, children }: { titulo: string; children: React.ReactNode }) {
     return (
         <div>
-            <h2 className="text-xs uppercase tracking-[0.2em] font-semibold mb-5" style={{ color: C.gold }}>
+            <h2 className="uppercase mb-5" style={{ ...ESTILO_ROTULO, color: C.gold }}>
                 {titulo}
             </h2>
             {children}

@@ -43,3 +43,16 @@ export const SITE_COLORS = {
 
     serif: "'Cormorant Garamond', Georgia, serif",
 } as const;
+
+// globals.css estiliza h1, h2 e h3 fora de camada (fonte serifada, tamanho em
+// clamp, peso 500, tracking negativo), e no Tailwind v4 regra fora de camada
+// vence as classes utilitárias: text-xs, tracking-* e font-* num título não
+// pegam. Título com cara de rótulo (caixa alta, pequeno, espaçado) leva estes
+// valores inline.
+export const ESTILO_ROTULO = {
+    fontFamily: "inherit",
+    fontSize: "0.75rem",
+    lineHeight: 1.5,
+    letterSpacing: "0.2em",
+    fontWeight: 600,
+} as const;

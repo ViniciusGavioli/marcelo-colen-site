@@ -24,11 +24,12 @@ const lerScrollNoServidor = () => false;
 
 // Header do site na paleta da LP: transparente sobre o hero, preto
 // translúcido depois do scroll, acento dourado no item ativo e um único
-// botão de contato. "Artigos" saiu do menu: não há artigos publicados.
+// botão de contato.
 const NAV = [
     { label: "Atuação", href: "/atuacao" },
     { label: "Trajetória", href: "/sobre" },
     { label: "Na mídia", href: "/midia" },
+    { label: "Blog", href: "/blog" },
     { label: "Contato", href: `${HOME}#contato` },
 ];
 
@@ -75,11 +76,11 @@ export function SiteHeader() {
                 </Link>
 
                 {/* Navegação completa só a partir de 1024px: entre 768 e 1024 o
-                    nome, os quatro itens e o botão não cabem numa linha. */}
+                    nome, os cinco itens e o botão não cabem numa linha. */}
                 <div className="hidden lg:flex items-center gap-8">
                     <nav className="flex items-center gap-7" aria-label="Principal">
                         {NAV.map((item) => {
-                            const ativo = !item.href.includes("#") && pathname === item.href;
+                            const ativo = !item.href.includes("#") && (pathname === item.href || pathname.startsWith(`${item.href}/`));
                             return (
                                 <Link
                                     key={item.href}
