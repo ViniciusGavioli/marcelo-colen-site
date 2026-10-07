@@ -47,17 +47,29 @@ export function SiteTrajetoria() {
             <Container className="relative z-10">
                 <div className="max-w-5xl mx-auto grid gap-12 md:grid-cols-[0.85fr_1.15fr] md:gap-16">
                     <div>
-                        <div
-                            className="relative rounded-xl overflow-hidden max-w-[380px] mx-auto md:mx-0"
-                            style={{ border: "1px solid rgba(201,162,39,0.22)", boxShadow: "0 18px 48px rgba(0,0,0,0.55)" }}
-                        >
+                        {/* Retrato recortado: o painel começa abaixo do topo da foto, então a
+                            cabeça sai por cima dele, e o pé do painel se funde no fundo da seção. */}
+                        <div className="relative rounded-b-xl overflow-hidden max-w-[380px] mx-auto md:mx-0">
+                            <div
+                                aria-hidden="true"
+                                className="absolute inset-x-0 bottom-0 top-[18%] rounded-t-xl"
+                                style={{
+                                    background: "radial-gradient(ellipse 75% 55% at 50% 30%, rgba(201,162,39,0.18), transparent 70%), linear-gradient(to bottom, #161616, #0d0d0d)",
+                                    border: "1px solid rgba(201,162,39,0.22)",
+                                }}
+                            />
                             <Image
-                                src="/images/marcelo/marcelo-colen-escritorio-2.webp"
-                                alt="Marcelo Colen no escritório Colen Advogados"
-                                width={1122}
-                                height={1402}
+                                src="/images/marcelo/marcelo-colen-retrato.webp"
+                                alt="Retrato de Marcelo Colen"
+                                width={1024}
+                                height={1536}
                                 sizes="(min-width: 768px) 380px, 90vw"
-                                className="block w-full h-auto"
+                                className="relative block w-full h-auto"
+                            />
+                            <div
+                                aria-hidden="true"
+                                className="absolute inset-x-0 bottom-0 h-1/4 pointer-events-none"
+                                style={{ background: `linear-gradient(to top, ${C.bg1}, transparent)` }}
                             />
                         </div>
 

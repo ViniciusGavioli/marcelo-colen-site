@@ -77,10 +77,10 @@ export function SiteHero() {
                             style={{ border: "1px solid rgba(201,162,39,0.25)", boxShadow: "0 30px 80px rgba(0,0,0,0.6)" }}
                         >
                             <Image
-                                src="/images/marcelo/marcelo-colen-escritorio.webp"
+                                src="/images/marcelo/marcelo-colen-escritorio-2.webp"
                                 alt="Marcelo Colen no escritório Colen Advogados, em Belo Horizonte"
-                                width={1086}
-                                height={1448}
+                                width={1122}
+                                height={1402}
                                 priority
                                 sizes="(min-width: 768px) 440px, 92vw"
                                 className="block w-full h-auto"
