@@ -8,6 +8,7 @@ import "react-lite-youtube-embed/dist/LiteYouTubeEmbed.css";
 import { Headphones, Landmark, Play, X } from "lucide-react";
 import { Container } from "@/components/layout";
 import { trackEvent } from "@/lib/analytics";
+import { ITENS_ATUACAO_PUBLICA, type ItemMidia } from "./atuacao-publica-dados";
 
 // Mesma paleta da LP de recurso (page.tsx e DrMarceloSection).
 const gold = "#c9a227";
@@ -19,77 +20,7 @@ const gray3 = "rgba(255,255,255,0.45)";
 const hairline = "rgba(255,255,255,0.08)";
 const serif = "'Cormorant Garamond', Georgia, serif";
 
-// Prova externa só do tema da LP: cotas, heteroidentificação e igualdade
-// racial. As participações em telejornal sobre temas criminais ficam em
-// /midia e na home institucional, não aqui.
-//
-// Cada texto saiu da própria fonte, conferida em 06/10/2026:
-//   - os dois vídeos pelo título e pela descrição no YouTube;
-//   - o podcast pela página do episódio no Spotify;
-//   - a ALMG pela página da reunião, que registra a finalidade da audiência
-//     e o resultado "Reunião ocorrida".
-// Nenhum item leva para fora da LP: vídeo e áudio abrem no modal, e o
-// registro da ALMG é descrito no próprio modal, sem link.
-type Item = {
-    source: string;
-    name: string;
-    topic: string;
-    description: string;
-    meta: string;
-} & (
-    | { type: "video"; youtubeId: string }
-    | { type: "audio"; spotifyEpisodeId: string; cover: string }
-    | { type: "registro"; registro: { kicker: string; texto: string; fonte: string } }
-);
-
-const ITEMS: Item[] = [
-    {
-        source: "estudio-juridico",
-        name: "Estúdio Jurídico Brasil",
-        topic: "A genética pode definir as cotas raciais?",
-        description:
-            "Genética, miscigenação e a leitura de traços fenotípicos pelas bancas de heteroidentificação.",
-        meta: "Entrevista em vídeo · 2023",
-        type: "video",
-        youtubeId: "VEpQHW73GqI",
-    },
-    {
-        source: "itatiaia-oab",
-        name: "Itatiaia + OAB/MG",
-        topic: "Igualdade Racial em Foco",
-        description:
-            "Série Grandes Temas da Sociedade: combate à discriminação racial e o Estatuto da Igualdade Racial.",
-        meta: "Debate em vídeo · 2023",
-        type: "video",
-        youtubeId: "PwdKecnO7b0",
-    },
-    {
-        source: "almg",
-        name: "Assembleia Legislativa de Minas Gerais",
-        topic: "Reconhecimento institucional pela atuação na promoção da igualdade racial",
-        description: "Voto de congratulações da Comissão de Direitos Humanos, entregue em audiência pública.",
-        meta: "Comissão de Direitos Humanos · 2025",
-        type: "registro",
-        registro: {
-            kicker: "Comissão de Direitos Humanos · Audiência pública · 05/08/2025",
-            texto:
-                "Audiência pública realizada para a entrega do diploma referente ao voto de congratulações a Marcelo Colen, por sua atuação na promoção da igualdade racial voltada a prevenir, detectar e corrigir práticas discriminatórias.",
-            fonte:
-                "Registro da 39ª Reunião Extraordinária da Comissão de Direitos Humanos da ALMG, Requerimento de Comissão 15.484/2025.",
-        },
-    },
-    {
-        source: "inspirando-advocacia",
-        name: "Inspirando Advocacia",
-        topic: "Por um Judiciário Antirracista",
-        description: "Entrevista sobre advocacia, ativismo negro e o papel da OAB diante do racismo no Judiciário.",
-        meta: "Podcast · 2023",
-        type: "audio",
-        spotifyEpisodeId: "6gsY5gas8Rgw9LCE2s5iL7",
-        // Capa do episódio, do oEmbed do Spotify (300x300).
-        cover: "https://image-cdn-ak.spotifycdn.com/image/ab67656300005f1f02c48c2ea9e1a12f6a4b4ffe",
-    },
-];
+type Item = ItemMidia;
 
 const ACAO = {
     video: { label: "Assistir participação", Icon: Play },
@@ -330,7 +261,23 @@ function MediaModal({ item, onClose }: { item: Item; onClose: () => void }) {
 // ============================================================================
 // SEÇÃO
 // ============================================================================
-export function HeteroAtuacaoPublica() {
+// Sem props, é a seção da LP de recurso. A home institucional passa a própria
+// lista (com as participações em TV) e três colunas.
+export function HeteroAtuacaoPublica({
+    kicker = "Atuação pública",
+    titulo = "Uma trajetória ligada à igualdade racial e às políticas afirmativas",
+    texto = "Participações em debates, entrevistas e instituições sobre cotas raciais, heteroidentificação, igualdade racial e combate à discriminação.",
+    itens = ITENS_ATUACAO_PUBLICA,
+    colunas = 2,
+    rodape,
+}: {
+    kicker?: string;
+    titulo?: string;
+    texto?: string;
+    itens?: ItemMidia[];
+    colunas?: 2 | 3;
+    rodape?: React.ReactNode;
+} = {}) {
     const [aberto, setAberto] = useState<Item | null>(null);
     const gatilho = useRef<HTMLButtonElement | null>(null);
 
@@ -364,16 +311,16 @@ export function HeteroAtuacaoPublica() {
             />
 
             <Container className="relative z-10">
-                <div className="max-w-4xl mx-auto">
+                <div className={`${colunas === 3 ? "max-w-6xl" : "max-w-4xl"} mx-auto`}>
                     <p className="text-[10px] md:text-xs uppercase tracking-[0.22em] text-center mb-3 font-semibold" style={{ color: gold }}>
-                        Atuação pública
+                        {kicker}
                     </p>
                     <h2
                         id="atuacao-publica-titulo"
                         className="text-2xl md:text-3xl font-bold text-center mb-2 max-w-[26ch] mx-auto leading-tight"
                         style={{ color: white, fontFamily: serif }}
                     >
-                        Uma trajetória ligada à igualdade racial e às políticas afirmativas
+                        {titulo}
                     </h2>
                     <div className="flex items-center justify-center gap-3 py-1" aria-hidden="true">
                         <div className="h-px flex-1 max-w-[120px]" style={{ background: `linear-gradient(to right, transparent, ${gold})`, opacity: 0.35 }} />
@@ -381,12 +328,13 @@ export function HeteroAtuacaoPublica() {
                         <div className="h-px flex-1 max-w-[120px]" style={{ background: `linear-gradient(to left, transparent, ${gold})`, opacity: 0.35 }} />
                     </div>
                     <p className="text-sm md:text-base text-center mt-4 max-w-[52ch] mx-auto leading-relaxed" style={{ color: gray2 }}>
-                        Participações em debates, entrevistas e instituições sobre cotas raciais, heteroidentificação,
-                        igualdade racial e combate à discriminação.
+                        {texto}
                     </p>
 
-                    <ul className="mt-10 md:mt-14 grid gap-y-12 md:grid-cols-2 md:gap-x-10 md:gap-y-14">
-                        {ITEMS.map((item) => {
+                    <ul
+                        className={`mt-10 md:mt-14 grid gap-y-12 md:grid-cols-2 md:gap-x-10 md:gap-y-14 ${colunas === 3 ? "lg:grid-cols-3 lg:gap-x-8" : ""}`}
+                    >
+                        {itens.map((item) => {
                             const { label, Icon } = ACAO[item.type];
                             return (
                                 <li key={item.source}>
@@ -427,6 +375,7 @@ export function HeteroAtuacaoPublica() {
                             );
                         })}
                     </ul>
+                    {rodape}
                 </div>
             </Container>
 

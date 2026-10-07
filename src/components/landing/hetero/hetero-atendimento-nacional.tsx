@@ -158,7 +158,33 @@ function Mapa() {
     );
 }
 
-export function HeteroAtendimentoNacional({ onOpenQuiz }: { onOpenQuiz?: () => void }) {
+// Sem props além do quiz, é a seção da LP de recurso. A home institucional
+// troca título, texto e fatos e usa um link de WhatsApp no lugar do quiz.
+export function HeteroAtendimentoNacional({
+    onOpenQuiz,
+    titulo,
+    texto,
+    fatos,
+    cta,
+}: {
+    onOpenQuiz?: () => void;
+    titulo?: React.ReactNode;
+    texto?: React.ReactNode;
+    fatos?: string[];
+    cta?: { rotulo: string; href: string };
+}) {
+    const listaFatos = fatos
+        ? fatos.map((t, i) => ({ Icon: FATOS[i % FATOS.length].Icon, texto: t }))
+        : FATOS;
+    const estiloCta = {
+        background: "linear-gradient(160deg, #1c0a0a 0%, #0a0a0a 55%, #0f0d00 100%)",
+        border: `2px solid ${gold}`,
+        color: white,
+        boxShadow: "0 0 28px rgba(201,162,39,0.18), 0 1px 0 rgba(201,162,39,0.12) inset",
+    };
+    const classeCta =
+        "group mt-8 w-full max-w-sm md:w-auto inline-flex items-center justify-center gap-2 font-semibold text-base md:text-lg px-8 py-4 rounded-full transition-all duration-200 hover:shadow-[0_0_40px_rgba(201,162,39,0.35)] hover:scale-[1.02] active:scale-[0.98]";
+
     return (
         <section
             aria-labelledby="atendimento-nacional-titulo"
@@ -180,7 +206,11 @@ export function HeteroAtendimentoNacional({ onOpenQuiz }: { onOpenQuiz?: () => v
                             className="text-2xl md:text-4xl font-bold leading-tight"
                             style={{ color: white, fontFamily: serif }}
                         >
-                            Atendimento para candidatos de <span style={{ color: gold }}>todo o Brasil</span>
+                            {titulo ?? (
+                                <>
+                                    Atendimento para candidatos de <span style={{ color: gold }}>todo o Brasil</span>
+                                </>
+                            )}
                         </h2>
                         <div
                             aria-hidden="true"
@@ -188,9 +218,8 @@ export function HeteroAtendimentoNacional({ onOpenQuiz }: { onOpenQuiz?: () => v
                             style={{ background: `linear-gradient(90deg, transparent, rgba(201,162,39,0.5), transparent)` }}
                         />
                         <p className="text-sm md:text-base leading-relaxed mt-5 max-w-[46ch] mx-auto md:mx-0" style={{ color: gray2 }}>
-                            O escritório fica em Belo Horizonte e o atendimento é online: você envia o resultado da
-                            heteroidentificação e o edital pelo WhatsApp, de onde estiver, seja qual for o estado do
-                            seu concurso.
+                            {texto ??
+                                "O escritório fica em Belo Horizonte e o atendimento é online: você envia o resultado da heteroidentificação e o edital pelo WhatsApp, de onde estiver, seja qual for o estado do seu concurso."}
                         </p>
                     </div>
 
@@ -210,7 +239,7 @@ export function HeteroAtendimentoNacional({ onOpenQuiz }: { onOpenQuiz?: () => v
 
                     <div className="[grid-area:acao] md:self-start flex flex-col items-center md:items-start">
                         <ul className="space-y-3">
-                            {FATOS.map(({ Icon, texto }) => (
+                            {listaFatos.map(({ Icon, texto }) => (
                                 <li key={texto} className="flex items-center gap-3">
                                     <span
                                         className="w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0"
@@ -225,21 +254,18 @@ export function HeteroAtendimentoNacional({ onOpenQuiz }: { onOpenQuiz?: () => v
                             ))}
                         </ul>
 
-                        {/* Mesmo botão dos CTAs da LP: abre o quiz de qualificação. */}
-                        <button
-                            type="button"
-                            onClick={onOpenQuiz}
-                            style={{
-                                background: "linear-gradient(160deg, #1c0a0a 0%, #0a0a0a 55%, #0f0d00 100%)",
-                                border: `2px solid ${gold}`,
-                                color: white,
-                                boxShadow: "0 0 28px rgba(201,162,39,0.18), 0 1px 0 rgba(201,162,39,0.12) inset",
-                            }}
-                            className="group mt-8 w-full max-w-sm md:w-auto inline-flex items-center justify-center gap-2 font-semibold text-base md:text-lg px-8 py-4 rounded-full transition-all duration-200 hover:shadow-[0_0_40px_rgba(201,162,39,0.35)] hover:scale-[1.02] active:scale-[0.98]"
-                        >
-                            <MessageCircle className="w-5 h-5 opacity-70 group-hover:opacity-100 transition-opacity" />
-                            Quero Analisar Meu Caso
-                        </button>
+                        {cta ? (
+                            <a href={cta.href} target="_blank" rel="noopener noreferrer" style={estiloCta} className={classeCta}>
+                                <MessageCircle className="w-5 h-5 opacity-70 group-hover:opacity-100 transition-opacity" />
+                                {cta.rotulo}
+                            </a>
+                        ) : (
+                            // Mesmo botão dos CTAs da LP: abre o quiz de qualificação.
+                            <button type="button" onClick={onOpenQuiz} style={estiloCta} className={classeCta}>
+                                <MessageCircle className="w-5 h-5 opacity-70 group-hover:opacity-100 transition-opacity" />
+                                Quero Analisar Meu Caso
+                            </button>
+                        )}
                     </div>
                 </div>
             </Container>
