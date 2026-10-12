@@ -1,4 +1,4 @@
-import { AttorneyJsonLd } from "@/components/site/JsonLd";
+import { DadosEstruturadosBase } from "@/components/site/JsonLd";
 
 // Layout limpo para Landing Pages - SEM Header/Footer
 // Foco total em conversão.
@@ -17,7 +17,7 @@ export default function LandingPageLayout({
     >
       {/* E-E-A-T: identifica o advogado responsável, credenciais e OAB
           para toda LP do grupo. Antes só /inicio tinha dado estruturado. */}
-      <AttorneyJsonLd />
+      <DadosEstruturadosBase />
       {children}
     </div>
   );

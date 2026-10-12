@@ -33,10 +33,9 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
-  title: {
-    default: DEFAULT_SEO.title,
-    template: `%s | ${SITE_CONFIG.name}`,
-  },
+  // Sem template "%s | Marcelo Colen": todo título de LP já traz o nome, e o
+  // template duplicava ("... | Dr. Marcelo Colen | Marcelo Colen").
+  title: DEFAULT_SEO.title,
   description: DEFAULT_SEO.description,
   keywords: [...DEFAULT_SEO.keywords],
   authors: [{ name: SITE_CONFIG.name }],

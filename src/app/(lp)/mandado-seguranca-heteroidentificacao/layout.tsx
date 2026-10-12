@@ -4,7 +4,7 @@ import { SITE_CONFIG, OG_IMAGES } from "@/lib/constants";
 export const metadata: Metadata = {
     title: "Mandado de Segurança contra Heteroidentificação | Dr. Marcelo Colen",
     description:
-        "Recurso negado na heteroidentificação? A decisão da banca ainda pode ser revista na Justiça por mandado de segurança. Análise do seu caso em horas, dentro do prazo de 120 dias. Dr. Marcelo Colen, Mestre UFMG, atuação nacional.",
+        "Recurso negado na heteroidentificação? A decisão da banca ainda pode ser revista na Justiça por mandado de segurança, no prazo de 120 dias.",
     alternates: {
         canonical: `${SITE_CONFIG.url}/mandado-seguranca-heteroidentificacao`,
     },

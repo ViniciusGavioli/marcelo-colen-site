@@ -1,12 +1,13 @@
 import Link from "next/link";
-import { FileCheck, Landmark, Scale } from "lucide-react";
+import { FileCheck, Landmark, Scale, Users } from "lucide-react";
 import { SITE_COLORS as C } from "@/lib/site-theme";
-import type { Artigo } from "@/lib/blog";
+import { formatarData, type Artigo } from "@/lib/blog";
 
 // Peças do blog, no idioma da home: card em véu translúcido, área em selo
 // dourado, título em Cormorant. Os ícones são os mesmos das áreas na home.
 const ICONE_DA_AREA = {
     "Heteroidentificação": FileCheck,
+    "Cotas raciais": Users,
     "Direito Antidiscriminatório": Scale,
     Consultoria: Landmark,
 } as const;
@@ -74,7 +75,14 @@ export function CartaoArtigo({ artigo, nivelTitulo = "h2" }: { artigo: Artigo; n
                     <p className="text-xs" style={{ color: C.gray3 }}>
                         Marcelo Colen
                     </p>
-                    <SeloEmConstrucao />
+                    {artigo.publicadoEm ? (
+                        <p className="text-xs" style={{ color: C.gray3 }}>
+                            <time dateTime={artigo.publicadoEm}>{formatarData(artigo.publicadoEm)}</time>
+                            {artigo.leitura && <> · {artigo.leitura} min</>}
+                        </p>
+                    ) : (
+                        <SeloEmConstrucao />
+                    )}
                 </div>
             </div>
         </Link>

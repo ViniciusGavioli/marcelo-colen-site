@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { SITE_CONFIG, DEFAULT_SEO, OG_IMAGES } from "@/lib/constants";
 import { SiteHeader } from "@/components/site/SiteHeader";
 import { SiteFooter } from "@/components/site/SiteFooter";
-import { AttorneyJsonLd } from "@/components/site/JsonLd";
+import { DadosEstruturadosBase } from "@/components/site/JsonLd";
 import { SITE_COLORS } from "@/lib/site-theme";
 import { SmoothScroll } from "@/components/home/SmoothScroll";
 
@@ -50,7 +50,7 @@ export default function SiteLayout({
                 propósito: as landing pages de campanha mantêm o scroll
                 nativo, onde a resposta imediata vale mais que o efeito. */}
             <SmoothScroll />
-            <AttorneyJsonLd />
+            <DadosEstruturadosBase />
             <SiteHeader />
             <main className="flex-1">{children}</main>
             <SiteFooter />

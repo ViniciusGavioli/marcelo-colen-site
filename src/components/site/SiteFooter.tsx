@@ -93,8 +93,13 @@ export function SiteFooter() {
                                     @marcelocolen.adv
                                 </a>
                             </li>
-                            <li className="text-sm" style={{ color: C.gray2 }}>
-                                Belo Horizonte, MG
+                            {/* Mesmo endereço do perfil no Google e dos dados estruturados. */}
+                            <li className="text-sm leading-relaxed" style={{ color: C.gray2 }}>
+                                <address className="not-italic">
+                                    {SITE_CONFIG.address.street}, {SITE_CONFIG.address.complement.toLowerCase()}
+                                    <br />
+                                    {SITE_CONFIG.address.neighborhood}, {SITE_CONFIG.address.city} ({SITE_CONFIG.address.state})
+                                </address>
                             </li>
                         </ul>
                     </Coluna>

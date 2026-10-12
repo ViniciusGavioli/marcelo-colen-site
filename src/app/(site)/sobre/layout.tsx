@@ -2,9 +2,10 @@ import type { Metadata } from "next";
 import { SITE_CONFIG, OG_IMAGES } from "@/lib/constants";
 
 export const metadata: Metadata = {
-    title: "Sobre Dr. Marcelo Colen | Mestre UFMG · Diretor OAB/MG",
+    title: "Marcelo Colen, advogado | Mestre UFMG · Diretor OAB/MG",
+    // Até 155 caracteres, para não ser cortada na busca.
     description:
-        "Conheça a trajetória de Marcelo Colen: advogado criminalista, Mestre em Direito pela UFMG, Diretor de Diversidade da OAB/MG e Secretário da Comissão Nacional de Igualdade Racial da OAB Federal.",
+        "Trajetória de Marcelo Colen, advogado (OAB/MG 167.463): Mestre em Direito pela UFMG, Diretor de Diversidade e Inclusão da OAB/MG e conselheiro seccional.",
     alternates: {
         canonical: `${SITE_CONFIG.url}/sobre`,
     },

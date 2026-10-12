@@ -29,11 +29,6 @@ export function getLegalServiceSchema() {
       postalCode: SITE_CONFIG.address.zip,
       addressCountry: "BR",
     },
-    geo: {
-      "@type": "GeoCoordinates",
-      latitude: -19.9191,
-      longitude: -43.9386,
-    },
     areaServed: [
       {
         "@type": "City",

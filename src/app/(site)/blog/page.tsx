@@ -1,30 +1,56 @@
 import type { Metadata } from "next";
 import { Container } from "@/components/layout";
 import { Breadcrumb } from "@/components/site/Breadcrumb";
+import { JsonLd } from "@/components/site/JsonLd";
 import { Divisor } from "@/components/site/home/primitivos";
 import { CartaoArtigo } from "@/components/site/blog/pecas";
 import { SITE_CONFIG, OG_IMAGES } from "@/lib/constants";
 import { SITE_COLORS as C } from "@/lib/site-theme";
-import { ARTIGOS } from "@/lib/blog";
+import { ARTIGOS, ARTIGOS_PUBLICADOS } from "@/lib/blog";
+import { ID } from "@/lib/dados-estruturados";
 
-// noindex enquanto os artigos estiverem em construção (ver lib/blog.ts).
+const URL_BLOG = `${SITE_CONFIG.url}/blog`;
+const DESCRICAO =
+    "Artigos de Marcelo Colen sobre heteroidentificação, cotas raciais em concursos e direito antidiscriminatório, com base na lei e no texto oficial.";
+
 export const metadata: Metadata = {
-    title: "Blog | Marcelo Colen",
-    description:
-        "Artigos de Marcelo Colen sobre heteroidentificação, direito antidiscriminatório e as demais áreas de atuação do escritório.",
-    alternates: { canonical: `${SITE_CONFIG.url}/blog` },
-    robots: { index: false, follow: true },
+    title: "Blog: heteroidentificação e cotas raciais | Marcelo Colen",
+    description: DESCRICAO,
+    alternates: { canonical: URL_BLOG },
     openGraph: {
         title: "Blog | Marcelo Colen",
-        url: `${SITE_CONFIG.url}/blog`,
+        description: DESCRICAO,
+        url: URL_BLOG,
         type: "website",
         images: OG_IMAGES.institucional,
     },
 };
 
+// Publicados primeiro; os em construção ficam no fim da lista.
+const LISTA = [...ARTIGOS_PUBLICADOS, ...ARTIGOS.filter((a) => !a.publicadoEm)];
+
+const DADOS = {
+    "@context": "https://schema.org",
+    "@type": "Blog",
+    "@id": `${URL_BLOG}#blog`,
+    name: "Blog de Marcelo Colen",
+    description: DESCRICAO,
+    url: URL_BLOG,
+    inLanguage: "pt-BR",
+    publisher: { "@id": ID.escritorio },
+    blogPost: ARTIGOS_PUBLICADOS.map((a) => ({
+        "@type": "BlogPosting",
+        headline: a.titulo,
+        url: `${URL_BLOG}/${a.slug}`,
+        datePublished: a.publicadoEm,
+        author: { "@id": ID.marcelo },
+    })),
+};
+
 export default function BlogPage() {
     return (
         <section aria-labelledby="blog-titulo" className="relative overflow-hidden pt-28 pb-20 md:pt-36 md:pb-28" style={{ backgroundColor: C.bg1 }}>
+            <JsonLd data={DADOS} />
             <div
                 aria-hidden="true"
                 className="absolute inset-x-0 top-0 h-[480px] pointer-events-none"
@@ -43,13 +69,13 @@ export default function BlogPage() {
                         </h1>
                         <Divisor />
                         <p className="text-sm md:text-base mt-5 max-w-[56ch] mx-auto leading-relaxed text-pretty" style={{ color: C.gray2 }}>
-                            Textos sobre heteroidentificação, direito antidiscriminatório e as demais áreas em que o
-                            escritório atua. Os primeiros artigos estão em construção.
+                            Heteroidentificação, cotas raciais em concursos e direito antidiscriminatório, explicados a partir da lei
+                            e do texto oficial de cada norma.
                         </p>
                     </div>
 
                     <ul className="mt-14 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
-                        {ARTIGOS.map((artigo) => (
+                        {LISTA.map((artigo) => (
                             <li key={artigo.slug}>
                                 <CartaoArtigo artigo={artigo} />
                             </li>

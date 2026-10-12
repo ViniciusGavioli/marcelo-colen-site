@@ -26,14 +26,17 @@ export const SITE_CONFIG = {
   // OAB
   oab: process.env.NEXT_PUBLIC_OAB || "OAB/MG 167.463",
   
-  // Endereço
+  // Endereço: o mesmo do perfil "Colen Advogados" no Google (conferido em
+  // outubro de 2026). Fixo no código, sem variável de ambiente: o Google
+  // compara o endereço do site com o do perfil, e o antigo (Av. Afonso Pena,
+  // 1500) não batia. CEP conferido pelo logradouro.
   address: {
-    street: process.env.NEXT_PUBLIC_ADDRESS_STREET || "Av. Afonso Pena, 1500",
-    complement: process.env.NEXT_PUBLIC_ADDRESS_COMPLEMENT || "Sala 1201",
-    neighborhood: process.env.NEXT_PUBLIC_ADDRESS_NEIGHBORHOOD || "Funcionários",
-    city: process.env.NEXT_PUBLIC_ADDRESS_CITY || "Belo Horizonte",
-    state: process.env.NEXT_PUBLIC_ADDRESS_STATE || "MG",
-    zip: process.env.NEXT_PUBLIC_ADDRESS_ZIP || "30130-001",
+    street: "Rua Desembargador Jorge Fontana, 80",
+    complement: "Sala 1301",
+    neighborhood: "Belvedere",
+    city: "Belo Horizonte",
+    state: "MG",
+    zip: "30320-670",
   },
   
   // Redes sociais
@@ -739,22 +742,28 @@ export const AREAS_TRACKS = AREAS_DATA.tracks.map((track) => ({
 // Usar sempre um destes helpers ao declarar openGraph num layout: o Next
 // substitui o objeto openGraph do pai em vez de mesclá-lo, então um layout
 // filho que declara openGraph sem `images` derruba a imagem herdada.
+//
+// OG_VERSAO vai na URL: WhatsApp e Facebook guardam a imagem pelo endereço
+// e, sem mudar a URL, continuam mostrando a peça antiga. Subir sempre que o
+// script regerar as imagens.
 // ============================================================================
+const OG_VERSAO = 2;
+
 function ogImage(file: string, alt: string) {
-  return [{ url: `${SITE_CONFIG.url}/${file}`, width: 1200, height: 630, alt }];
+  return [{ url: `${SITE_CONFIG.url}/${file}?v=${OG_VERSAO}`, width: 1200, height: 630, alt }];
 }
 
 export const OG_IMAGES = {
   hetero: ogImage(
     "og-heteroidentificacao.jpg",
-    "Reprovado na banca de heteroidentificação? — Dr. Marcelo Colen, OAB/MG 167.463"
+    "Dr. Marcelo Colen, OAB/MG 167.463, ao lado do título Reprovado na banca de heteroidentificação?"
   ),
   cotas: ogImage(
     "og-cotas.jpg",
-    "Cotas raciais e direito antidiscriminatório — Dr. Marcelo Colen, OAB/MG 167.463"
+    "Dr. Marcelo Colen, OAB/MG 167.463, ao lado do título Passou nas provas. A banca eliminou."
   ),
   institucional: ogImage(
     "og-institucional.jpg",
-    "Marcelo Colen, advogado — Mestre em Direito pela UFMG, Diretor de Diversidade da OAB/MG"
+    "Retrato de Marcelo Colen, advogado, Mestre em Direito pela UFMG e Diretor de Diversidade e Inclusão da OAB/MG"
   ),
 } as const;
