@@ -94,7 +94,7 @@ export default function AtuacaoPage() {
             {/* ═══════════════════════════════════════════════════════════ */}
             {/* HERO                                                       */}
             {/* ═══════════════════════════════════════════════════════════ */}
-            <section className="pt-4 pb-16 md:pt-12 md:pb-24 relative overflow-hidden" style={{ backgroundColor: C.bg1 }}>
+            <section className="pt-20 pb-16 md:pt-24 md:pb-24 relative overflow-hidden" style={{ backgroundColor: C.bg1 }}>
                 <div className="absolute inset-0 z-0 select-none">
                     <div className="absolute inset-0" style={{ backgroundImage: "url('/texture-juridica.webp')", backgroundRepeat: "repeat", backgroundSize: "1000px", opacity: 0.025 }} />
                 </div>

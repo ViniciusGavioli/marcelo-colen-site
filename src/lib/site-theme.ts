@@ -42,6 +42,10 @@ export const SITE_COLORS = {
     gray4: "rgba(255,255,255,0.25)",
 
     serif: "'Cormorant Garamond', Georgia, serif",
+
+    /** logo em assinatura: nome em marfim, sublinhado e linha da OAB em ouro */
+    marfim: "#f2eee6",
+    assinatura: "var(--font-assinatura), cursive",
 } as const;
 
 // globals.css estiliza h1, h2 e h3 fora de camada (fonte serifada, tamanho em

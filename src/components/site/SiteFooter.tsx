@@ -1,7 +1,7 @@
 import Link from "next/link";
-import Image from "next/image";
 import { SITE_COLORS as C, ESTILO_ROTULO } from "@/lib/site-theme";
 import { SITE_CONFIG } from "@/lib/constants";
+import { MarcaAssinatura } from "@/components/site/MarcaAssinatura";
 
 // Mapa final da presença institucional, na paleta da LP. As quatro áreas
 // aparecem no mesmo peso.
@@ -44,8 +44,7 @@ export function SiteFooter() {
             <div className="mx-auto max-w-6xl px-4 py-16 md:px-6 md:py-20">
                 <div className="grid gap-12 sm:grid-cols-2 lg:grid-cols-4 lg:gap-10">
                     <div>
-                        {/* No rodapé cabe o lockup inteiro, na versão clara. */}
-                        <Image src="/marca/logo-lockup-claro.png" alt="Marcelo Colen" width={1138} height={605} className="h-auto w-[180px]" />
+                        <MarcaAssinatura completa tamanho={46} />
                         <p className="mt-6 text-sm leading-relaxed max-w-[32ch]" style={{ color: C.gray2 }}>
                             Atuação em Direito Criminal, Direito Antidiscriminatório, políticas de igualdade racial e
                             consultoria institucional.

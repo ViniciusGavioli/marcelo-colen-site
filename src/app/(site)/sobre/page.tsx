@@ -113,7 +113,7 @@ export default function SobrePage() {
             {/* ABERTURA — o único momento alto da página.                    */}
             {/* Retrato recortado sangrando por baixo, nome em escala real.   */}
             {/* ───────────────────────────────────────────────────────────── */}
-            <section className="relative overflow-hidden" style={{ backgroundColor: C.bg1 }}>
+            <section className="relative overflow-hidden pt-20 md:pt-24" style={{ backgroundColor: C.bg1 }}>
                 <div
                     aria-hidden
                     className="absolute inset-0 z-0"

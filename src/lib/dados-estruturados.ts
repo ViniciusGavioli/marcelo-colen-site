@@ -34,7 +34,8 @@ const ESCRITORIO = {
     "@id": ID.escritorio,
     name: "Colen Advogados",
     url: URL,
-    logo: `${URL}/marca/logo-lockup-escuro.png`,
+    // Versão escura da logo em assinatura: o Google mostra logos sobre branco.
+    logo: `${URL}/marca/logo-assinatura-escura.png`,
     image: `${URL}/images/marcelo/marcelo-colen-escritorio-2.webp`,
     telephone: "+55 31 97220-6996",
     email: SITE_CONFIG.contact.email,

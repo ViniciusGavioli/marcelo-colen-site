@@ -17,7 +17,6 @@ export function getLegalServiceSchema() {
     telephone: SITE_CONFIG.contact.phone,
     email: SITE_CONFIG.contact.email,
     image: `${SITE_CONFIG.url}/images/marcelo/hero.jpg`,
-    logo: `${SITE_CONFIG.url}/images/marcelo/logo.svg`,
     priceRange: "$$",
     currenciesAccepted: "BRL",
     paymentAccepted: "Transferência, Pix, Boleto",

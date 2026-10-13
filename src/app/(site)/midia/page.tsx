@@ -97,7 +97,7 @@ export default function MidiaPage() {
             {/* ═══════════════════════════════════════════════════════════ */}
             {/* HERO                                                       */}
             {/* ═══════════════════════════════════════════════════════════ */}
-            <section className="pt-4 pb-16 md:pt-12 md:pb-20 relative overflow-hidden" style={{ backgroundColor: C.bg1 }}>
+            <section className="pt-20 pb-16 md:pt-24 md:pb-20 relative overflow-hidden" style={{ backgroundColor: C.bg1 }}>
                 <div className="absolute inset-0 z-0 select-none">
                     <div className="absolute inset-0" style={{ backgroundImage: "url('/texture-pedra.webp')", backgroundSize: "cover", opacity: 0.035 }} />
                 </div>

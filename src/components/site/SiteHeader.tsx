@@ -2,12 +2,12 @@
 
 import { useState, useSyncExternalStore } from "react";
 import Link from "next/link";
-import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { SITE_COLORS as C } from "@/lib/site-theme";
 import { SITE_CONFIG } from "@/lib/constants";
 import { getDirectWhatsAppLink } from "@/lib/whatsapp";
 import { MENSAGEM_WHATSAPP_SITE } from "@/components/site/home/primitivos";
+import { MarcaAssinatura } from "@/components/site/MarcaAssinatura";
 
 const HOME = SITE_CONFIG.homePath;
 const WHATSAPP = getDirectWhatsAppLink(MENSAGEM_WHATSAPP_SITE);
@@ -55,24 +55,7 @@ export function SiteHeader() {
                     className="flex items-center gap-3 py-3.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4"
                     style={{ outlineColor: C.gold }}
                 >
-                    {/* Símbolo da marca, versão clara, e o nome em texto: o
-                        lockup completo é vertical e ficaria ilegível na altura
-                        do header. */}
-                    <Image
-                        src="/marca/logo-simbolo-claro.png"
-                        alt=""
-                        aria-hidden
-                        width={1138}
-                        height={514}
-                        priority
-                        className="h-7 w-auto shrink-0"
-                    />
-                    <span className="uppercase whitespace-nowrap text-[0.9375rem] tracking-[0.18em] font-semibold" style={{ fontFamily: C.serif, color: C.white }}>
-                        Marcelo Colen
-                    </span>
-                    <span className="hidden sm:inline whitespace-nowrap uppercase text-[0.625rem] tracking-[0.22em]" style={{ color: C.gray3 }}>
-                        Advocacia
-                    </span>
+                    <MarcaAssinatura tamanho={32} />
                 </Link>
 
                 {/* Navegação completa só a partir de 1024px: entre 768 e 1024 o

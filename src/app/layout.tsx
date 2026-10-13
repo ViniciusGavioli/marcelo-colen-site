@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Cormorant_Garamond, Inter } from "next/font/google";
+import { Cormorant_Garamond, Herr_Von_Muellerhoff, Inter } from "next/font/google";
 import "./globals.css";
 import { SITE_CONFIG, DEFAULT_SEO, OG_IMAGES } from "@/lib/constants";
 import FacebookPixel from "@/components/FacebookPixel";
@@ -19,6 +19,14 @@ const inter = Inter({
   subsets: ["latin"],
   weight: ["300", "400", "500", "600", "700"],
   variable: "--font-inter",
+  display: "swap",
+});
+
+// Fonte da logo em assinatura (components/site/MarcaAssinatura.tsx).
+const assinatura = Herr_Von_Muellerhoff({
+  subsets: ["latin"],
+  weight: "400",
+  variable: "--font-assinatura",
   display: "swap",
 });
 
@@ -86,7 +94,7 @@ export default function RootLayout({
   return (
     <html
       lang="pt-BR"
-      className={`${cormorantGaramond.variable} ${inter.variable}`}
+      className={`${cormorantGaramond.variable} ${inter.variable} ${assinatura.variable}`}
     >
       <body className="min-h-screen flex flex-col antialiased">
         <Analytics />
