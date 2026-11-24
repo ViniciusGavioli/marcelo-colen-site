@@ -127,13 +127,30 @@ export function grafoBase() {
     return { "@context": "https://schema.org", "@graph": [ESCRITORIO, MARCELO, SITE] };
 }
 
-export function grafoArtigo(artigo: Artigo & { publicadoEm: string }) {
-    const url = `${URL}/blog/${artigo.slug}`;
+type OpcoesArtigo = {
+    /** caminho da página; padrão /blog/<slug> */
+    caminho?: string;
+    /** artigo solto (fora do blog) é Article e não leva a trilha do blog */
+    solto?: boolean;
+};
+
+export function grafoArtigo(artigo: Artigo & { publicadoEm: string }, { caminho, solto = false }: OpcoesArtigo = {}) {
+    const url = `${URL}${caminho ?? `/blog/${artigo.slug}`}`;
+    const imagens = artigo.imagem
+        ? [`${URL}${artigo.imagem.src}`, `${URL}/${artigo.imagem.og}`]
+        : `${URL}/og-heteroidentificacao.jpg`;
+    const trilha = {
+        "@type": "BreadcrumbList",
+        itemListElement: [
+            { "@type": "ListItem", position: 1, name: "Blog", item: `${URL}/blog` },
+            { "@type": "ListItem", position: 2, name: artigo.titulo, item: url },
+        ],
+    };
     return {
         "@context": "https://schema.org",
         "@graph": [
             {
-                "@type": "BlogPosting",
+                "@type": solto ? "Article" : "BlogPosting",
                 "@id": `${url}#artigo`,
                 headline: artigo.titulo,
                 description: artigo.descricao,
@@ -143,7 +160,7 @@ export function grafoArtigo(artigo: Artigo & { publicadoEm: string }) {
                 dateModified: artigo.atualizadoEm ?? artigo.publicadoEm,
                 inLanguage: "pt-BR",
                 articleSection: artigo.area,
-                image: `${URL}/og-heteroidentificacao.jpg`,
+                image: imagens,
                 // Nome e URL repetidos junto do @id: o grafo base fica em outro
                 // bloco JSON-LD da página.
                 author: { "@type": "Person", "@id": ID.marcelo, name: MARCELO.name, url: MARCELO.url },
@@ -151,13 +168,7 @@ export function grafoArtigo(artigo: Artigo & { publicadoEm: string }) {
                 isPartOf: { "@id": ID.site },
                 citation: artigo.fontes?.map((f) => f.href ?? f.rotulo),
             },
-            {
-                "@type": "BreadcrumbList",
-                itemListElement: [
-                    { "@type": "ListItem", position: 1, name: "Blog", item: `${URL}/blog` },
-                    { "@type": "ListItem", position: 2, name: artigo.titulo, item: url },
-                ],
-            },
+            ...(solto ? [] : [trilha]),
         ],
     };
 }

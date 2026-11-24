@@ -22,9 +22,11 @@ export type Artigo = {
     /** ISO 8601 (AAAA-MM-DD). Sem data, o artigo está em construção. */
     publicadoEm?: string;
     atualizadoEm?: string;
-    /** minutos de leitura */
-    leitura?: number;
+    /** minutos de leitura; texto quando o autor deu uma faixa ("3 a 4") */
+    leitura?: number | string;
     fontes?: Fonte[];
+    /** imagem de abertura; `og` é a versão 1200x630 em public/ */
+    imagem?: { src: string; largura: number; altura: number; alt: string; legenda?: string; og: string };
 };
 
 const PLANALTO = "https://www.planalto.gov.br/ccivil_03";
@@ -34,6 +36,10 @@ export const FONTES = {
     lei12990: { rotulo: "Lei nº 12.990, de 9 de junho de 2014", href: `${PLANALTO}/_ato2011-2014/2014/lei/l12990.htm` },
     lei12016: { rotulo: "Lei nº 12.016, de 7 de agosto de 2009 (mandado de segurança)", href: `${PLANALTO}/_ato2007-2010/2009/lei/l12016.htm` },
     adc41: { rotulo: "STF, ADC 41, rel. Min. Luís Roberto Barroso, julgada em 8 de junho de 2017" },
+    stfNoticiaBanca: {
+        rotulo: "STF, notícia de 12 de setembro de 2025: decisão de banca de heteroidentificação de cota racial pode ser discutida na Justiça",
+        href: "https://noticias.stf.jus.br/postsnoticias/decisao-de-banca-de-heteroidentificacao-de-cota-racial-pode-ser-discutida-na-justica-diz-stf/",
+    },
 } satisfies Record<string, Fonte>;
 
 export const ARTIGOS: Artigo[] = [
@@ -98,6 +104,37 @@ export const ARTIGOS_PUBLICADOS = ARTIGOS.filter((artigo) => artigo.publicadoEm)
 
 export function buscarArtigo(slug: string) {
     return ARTIGOS.find((artigo) => artigo.slug === slug);
+}
+
+// Artigos soltos: publicados em /artigos/<slug>, fora do blog e da navegação
+// do site, enquanto o site institucional não é lançado. Texto como o autor
+// entregou (Word em "artigos seo/"); o que mudou de SEO está no relatório de
+// 24/11/2026 em _cerebro/Entregas.
+export const ARTIGOS_SOLTOS: (Artigo & { publicadoEm: string })[] = [
+    {
+        slug: "reprovado-na-heteroidentificacao",
+        titulo: "Reprovado na heteroidentificação: o que fazer antes de apresentar recurso?",
+        tituloSeo: "Reprovado na heteroidentificação: o que fazer antes do recurso?",
+        descricao:
+            "Foi reprovado na heteroidentificação? Entenda como conferir o prazo, acessar a decisão e organizar as informações para avaliar um recurso.",
+        area: "Heteroidentificação",
+        resumo: "Prazo e canal do recurso, motivo do indeferimento, documentos do procedimento e o que fazer se o recurso for negado.",
+        publicadoEm: "2026-11-24",
+        leitura: "3 a 4",
+        fontes: [FONTES.stfNoticiaBanca],
+        imagem: {
+            src: "/images/artigos/reprovado-na-heteroidentificacao.webp",
+            largura: 1600,
+            altura: 900,
+            alt: "Mulher negra sentada à mesa organiza o edital, documentos impressos e um calendário",
+            legenda: "Imagem ilustrativa criada com inteligência artificial.",
+            og: "og-reprovado-na-heteroidentificacao.jpg",
+        },
+    },
+];
+
+export function buscarArtigoSolto(slug: string) {
+    return ARTIGOS_SOLTOS.find((artigo) => artigo.slug === slug);
 }
 
 export function formatarData(iso: string) {

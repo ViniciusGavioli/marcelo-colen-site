@@ -1,6 +1,6 @@
 import { MetadataRoute } from "next";
 import { SITE_CONFIG } from "@/lib/constants";
-import { ARTIGOS_PUBLICADOS } from "@/lib/blog";
+import { ARTIGOS_PUBLICADOS, ARTIGOS_SOLTOS } from "@/lib/blog";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = SITE_CONFIG.url;
@@ -72,6 +72,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
     ...ARTIGOS_PUBLICADOS.map((artigo) => ({
       url: `${baseUrl}/blog/${artigo.slug}`,
+      lastModified: new Date(`${artigo.atualizadoEm ?? artigo.publicadoEm}T12:00:00Z`),
+      changeFrequency: "monthly" as const,
+      priority: 0.8,
+    })),
+    // Artigos soltos: no ar antes do lançamento do site institucional.
+    ...ARTIGOS_SOLTOS.map((artigo) => ({
+      url: `${baseUrl}/artigos/${artigo.slug}`,
       lastModified: new Date(`${artigo.atualizadoEm ?? artigo.publicadoEm}T12:00:00Z`),
       changeFrequency: "monthly" as const,
       priority: 0.8,

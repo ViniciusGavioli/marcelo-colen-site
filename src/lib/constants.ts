@@ -749,7 +749,7 @@ export const AREAS_TRACKS = AREAS_DATA.tracks.map((track) => ({
 // ============================================================================
 const OG_VERSAO = 2;
 
-function ogImage(file: string, alt: string) {
+export function ogImage(file: string, alt: string) {
   return [{ url: `${SITE_CONFIG.url}/${file}?v=${OG_VERSAO}`, width: 1200, height: 630, alt }];
 }
 
