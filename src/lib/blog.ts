@@ -124,9 +124,9 @@ export const ARTIGOS_SOLTOS: (Artigo & { publicadoEm: string })[] = [
         fontes: [FONTES.stfNoticiaBanca],
         imagem: {
             src: "/images/artigos/reprovado-na-heteroidentificacao.webp",
-            largura: 1600,
-            altura: 900,
-            alt: "Mulher negra sentada à mesa organiza o edital, documentos impressos e um calendário",
+            largura: 1536,
+            altura: 864,
+            alt: "Mulher negra de cabelo crespo, sentada à mesa à noite, lê documentos impressos com uma caneta na mão, ao lado de um notebook e de um abajur aceso",
             legenda: "Imagem ilustrativa criada com inteligência artificial.",
             og: "og-reprovado-na-heteroidentificacao.jpg",
         },
