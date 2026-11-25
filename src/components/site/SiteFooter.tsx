@@ -44,7 +44,7 @@ export function SiteFooter() {
             <div className="mx-auto max-w-6xl px-4 py-16 md:px-6 md:py-20">
                 <div className="grid gap-12 sm:grid-cols-2 lg:grid-cols-4 lg:gap-10">
                     <div>
-                        <MarcaAssinatura completa tamanho={46} />
+                        <MarcaAssinatura completa altura={92} />
                         <p className="mt-6 text-sm leading-relaxed max-w-[32ch]" style={{ color: C.gray2 }}>
                             Atuação em Direito Criminal, Direito Antidiscriminatório, políticas de igualdade racial e
                             consultoria institucional.
