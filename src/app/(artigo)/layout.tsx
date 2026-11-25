@@ -18,7 +18,7 @@ export default function ArtigoSoltoLayout({ children }: { children: React.ReactN
 
             <header style={{ borderBottom: `1px solid ${FIO}` }}>
                 <div className="mx-auto max-w-3xl px-4 py-5 md:px-6 md:py-6">
-                    <MarcaAssinatura tamanho={30} />
+                    <MarcaAssinatura altura={32} prioridade />
                 </div>
             </header>
 
@@ -26,7 +26,7 @@ export default function ArtigoSoltoLayout({ children }: { children: React.ReactN
 
             <footer style={{ borderTop: `1px solid ${FIO}` }}>
                 <div className="mx-auto max-w-3xl px-4 py-12 md:px-6 md:py-14">
-                    <MarcaAssinatura completa tamanho={40} />
+                    <MarcaAssinatura completa altura={80} />
                     <address className="mt-8 not-italic text-sm leading-relaxed" style={{ color: C.gray2 }}>
                         {SITE_CONFIG.address.street}, {SITE_CONFIG.address.complement.toLowerCase()}
                         <br />

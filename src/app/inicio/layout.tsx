@@ -1,4 +1,6 @@
 import type { Metadata } from "next";
+import { notFound } from "next/navigation";
+import { SITE_VISIVEL } from "@/lib/lancamento";
 import { Header, Footer } from "@/components/layout";
 import { SITE_CONFIG } from "@/lib/constants";
 
@@ -17,6 +19,9 @@ export default function MainLayout({
 }: {
     children: React.ReactNode;
 }) {
+    // Fora do ar em produção até a aprovação do site (lib/lancamento.ts).
+    if (!SITE_VISIVEL) notFound();
+
     return (
         <>
             <Header />

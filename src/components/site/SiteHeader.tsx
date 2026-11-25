@@ -55,7 +55,7 @@ export function SiteHeader() {
                     className="flex items-center gap-3 py-3.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4"
                     style={{ outlineColor: C.gold }}
                 >
-                    <MarcaAssinatura tamanho={32} />
+                    <MarcaAssinatura altura={34} prioridade />
                 </Link>
 
                 {/* Navegação completa só a partir de 1024px: entre 768 e 1024 o

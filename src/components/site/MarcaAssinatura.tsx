@@ -1,44 +1,34 @@
-import { SITE_COLORS as C } from "@/lib/site-theme";
+import Image from "next/image";
 import { SITE_CONFIG } from "@/lib/constants";
 
-// Logo em assinatura, aprovada em outubro de 2026 no lugar do monograma MC.
-// A versão compacta (cabeçalho) é só o nome; a completa (rodapé) leva o
-// sublinhado dourado e a linha "Advogado · OAB".
+// Logo nova (out/2026), a mesma do vídeo dos 60 mil: arquivos em
+// public/marca/, recortados de "08 - Marcelo Colen/Logo nova/".
+// A versão compacta (cabeçalho) é só a assinatura; a completa (rodapé) é a
+// logo inteira, a mesma imagem da cartela final do vídeo.
+const COMPACTA = { src: "/marca/assinatura-so-nome-clara.png", largura: 900, altura: 256 };
+const COMPLETA = { src: "/marca/logo-assinatura-clara.png", largura: 1200, altura: 430 };
+
 type Props = {
     completa?: boolean;
-    /** tamanho da assinatura em px */
-    tamanho?: number;
+    /** altura da logo em px */
+    altura?: number;
+    /** logo do cabeçalho: carrega com prioridade */
+    prioridade?: boolean;
 };
 
-export function MarcaAssinatura({ completa = false, tamanho = 34 }: Props) {
-    const nome = (
-        <span
-            className="whitespace-nowrap"
-            style={{ fontFamily: C.assinatura, fontSize: tamanho, lineHeight: 1, color: C.marfim }}
-        >
-            Marcelo Colen
-        </span>
-    );
-
-    if (!completa) return nome;
+export function MarcaAssinatura({ completa = false, altura = 36, prioridade = false }: Props) {
+    const img = completa ? COMPLETA : COMPACTA;
+    const largura = Math.round((altura * img.largura) / img.altura);
 
     return (
-        <span className="inline-flex flex-col items-center" aria-label={`Marcelo Colen, advogado, ${SITE_CONFIG.oab}`} role="img">
-            {nome}
-            <svg
-                aria-hidden="true"
-                viewBox="0 0 300 18"
-                preserveAspectRatio="none"
-                style={{ width: "78%", height: tamanho * 0.25, marginTop: -tamanho * 0.14, overflow: "visible" }}
-            >
-                <path d="M4 12 C 70 2, 160 4, 296 9" fill="none" stroke={C.gold} strokeWidth={1.6} strokeLinecap="round" vectorEffect="non-scaling-stroke" />
-            </svg>
-            <span
-                className="uppercase whitespace-nowrap font-semibold"
-                style={{ fontSize: Math.max(10, tamanho * 0.2), letterSpacing: "0.36em", paddingLeft: "0.36em", color: C.gold, marginTop: tamanho * 0.12 }}
-            >
-                Advogado · {SITE_CONFIG.oab}
-            </span>
-        </span>
+        <Image
+            src={img.src}
+            width={largura}
+            height={altura}
+            alt={completa ? `Marcelo Colen, advogado, ${SITE_CONFIG.oab}` : "Marcelo Colen"}
+            priority={prioridade}
+            sizes={`${largura}px`}
+            style={{ width: largura, height: altura, maxWidth: "100%", objectFit: "contain" }}
+        />
     );
 }
