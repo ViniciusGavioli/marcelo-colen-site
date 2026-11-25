@@ -1,4 +1,6 @@
 import type { Metadata } from "next";
+import { notFound } from "next/navigation";
+import { SITE_VISIVEL } from "@/lib/lancamento";
 import { SITE_CONFIG, DEFAULT_SEO, OG_IMAGES } from "@/lib/constants";
 import { SiteHeader } from "@/components/site/SiteHeader";
 import { SiteFooter } from "@/components/site/SiteFooter";
@@ -37,6 +39,9 @@ export default function SiteLayout({
 }: {
     children: React.ReactNode;
 }) {
+    // Fora do ar em produção até a aprovação do site (lib/lancamento.ts).
+    if (!SITE_VISIVEL) notFound();
+
     return (
         // globals.css define body como tema claro (#F8F9FA sobre #0A192F),
         // herdado por todo o site escuro: aparecia como faixa clara em
