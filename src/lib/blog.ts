@@ -131,6 +131,26 @@ export const ARTIGOS_SOLTOS: (Artigo & { publicadoEm: string })[] = [
             og: "og-reprovado-na-heteroidentificacao.jpg",
         },
     },
+    {
+        slug: "banca-de-heteroidentificacao",
+        titulo: "Banca de heteroidentificação: como funciona e o que é avaliado?",
+        tituloSeo: "Banca de heteroidentificação: como funciona e o que avalia?",
+        descricao:
+            "Entenda o que é a banca de heteroidentificação, quais critérios são avaliados e como conferir as regras do seu concurso ou processo seletivo.",
+        area: "Heteroidentificação",
+        resumo: "O que é a comissão, o critério do fenótipo, como acontece o procedimento, regras de concurso e universidade e recurso.",
+        publicadoEm: "2026-11-27",
+        leitura: "3 a 4",
+        fontes: [FONTES.stfNoticiaBanca, FONTES.decreto12536, FONTES.lei15142],
+        imagem: {
+            src: "/images/artigos/banca-de-heteroidentificacao.webp",
+            largura: 1536,
+            altura: 864,
+            alt: "Homem negro de cabelo crespo, sentado à mesa à noite, lê folhas impressas com uma caneta na mão, diante de um notebook aberto e de um abajur aceso",
+            legenda: "Imagem ilustrativa criada com inteligência artificial.",
+            og: "og-banca-de-heteroidentificacao.jpg",
+        },
+    },
 ];
 
 export function buscarArtigoSolto(slug: string) {
