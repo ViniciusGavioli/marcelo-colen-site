@@ -123,12 +123,12 @@ export const ARTIGOS_SOLTOS: (Artigo & { publicadoEm: string })[] = [
         leitura: "3 a 4",
         fontes: [FONTES.stfNoticiaBanca],
         imagem: {
-            src: "/images/artigos/reprovado-na-heteroidentificacao.webp",
+            src: "/images/artigos/reprovado-na-heteroidentificacao-foto.webp",
             largura: 1536,
             altura: 864,
-            alt: "Mulher negra de cabelo crespo, sentada à mesa à noite, lê documentos impressos com uma caneta na mão, ao lado de um notebook e de um abajur aceso",
-            legenda: "Imagem ilustrativa criada com inteligência artificial.",
-            og: "og-reprovado-na-heteroidentificacao.jpg",
+            alt: "Mulher negra de blazer listrado, sentada à mesa com um notebook aberto, lê um maço de folhas escritas",
+            legenda: "Foto ilustrativa: Tima Miroshnichenko / Pexels.",
+            og: "og-reprovado-na-heteroidentificacao-foto.jpg",
         },
     },
     {
@@ -143,12 +143,12 @@ export const ARTIGOS_SOLTOS: (Artigo & { publicadoEm: string })[] = [
         leitura: "3 a 4",
         fontes: [FONTES.stfNoticiaBanca, FONTES.decreto12536, FONTES.lei15142],
         imagem: {
-            src: "/images/artigos/banca-de-heteroidentificacao.webp",
+            src: "/images/artigos/banca-de-heteroidentificacao-foto.webp",
             largura: 1536,
             altura: 864,
-            alt: "Homem negro de cabelo crespo, sentado à mesa à noite, lê folhas impressas com uma caneta na mão, diante de um notebook aberto e de um abajur aceso",
-            legenda: "Imagem ilustrativa criada com inteligência artificial.",
-            og: "og-banca-de-heteroidentificacao.jpg",
+            alt: "Homem negro de óculos e camisa preta, sentado à mesa, folheia um maço de documentos presos por clipes",
+            legenda: "Foto ilustrativa: Tima Miroshnichenko / Pexels.",
+            og: "og-banca-de-heteroidentificacao-foto.jpg",
         },
     },
 ];
